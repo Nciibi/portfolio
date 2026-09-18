@@ -26,8 +26,62 @@
   <!-- Ambient CRT Scanline & Phosphor Overlay -->
   <div class="crt-overlay" id="crt-screen-overlay" aria-hidden="true"></div>
 
-  <!-- Interactive 3D Holographic Swimming Koi Fish (Blue & Orange) -->
-  <canvas id="koi-canvas" aria-label="Interactive blue and orange holographic koi fish"></canvas>
+  <!-- 3D Three.js Japantown Parade & Holographic Blue and Orange Koi -->
+  <div id="three-canvas-container" aria-label="3D Night City Japantown Parade with Holographic Koi Fish"></div>
+
+  <!-- ========================================================================
+       TOP HUD: COMPASS TAPE
+       ======================================================================== -->
+  <div class="hud-compass-tape" id="hud-compass">
+    <div class="compass-needle"></div>
+    <div class="compass-track" id="hud-compass-track">
+      <span class="compass-node">15°</span>
+      <span class="compass-node">30°</span>
+      <span class="compass-node cardinal">NE</span>
+      <span class="compass-node">60°</span>
+      <span class="compass-node">75°</span>
+      <span class="compass-node cardinal">E</span>
+      <span class="compass-node">105°</span>
+      <span class="compass-node">120°</span>
+      <span class="compass-node cardinal">SE</span>
+      <span class="compass-node">150°</span>
+      <span class="compass-node cardinal">S</span>
+      <span class="compass-node">210°</span>
+      <span class="compass-node cardinal">SW</span>
+      <span class="compass-node">240°</span>
+      <span class="compass-node cardinal">W</span>
+      <span class="compass-node">300°</span>
+      <span class="compass-node cardinal">NW</span>
+      <span class="compass-node">330°</span>
+      <span class="compass-node cardinal">N</span>
+    </div>
+  </div>
+
+  <!-- ========================================================================
+       TOP-LEFT HUD: VITALS & RAM BAR
+       ======================================================================== -->
+  <div class="hud-status-vitals">
+    <div class="vital-row">
+      <span class="vital-label" style="color: var(--cyber-red);">HP</span>
+      <div class="vital-bar"><div class="vital-fill-hp"></div></div>
+      <span class="vital-val">450 / 450</span>
+    </div>
+    <div class="vital-row">
+      <span class="vital-label" style="color: var(--cyber-cyan);">RAM</span>
+      <div class="vital-bar"><div class="vital-fill-ram"></div></div>
+      <span class="vital-val">16 / 16</span>
+    </div>
+  </div>
+
+  <!-- ========================================================================
+       TOP-RIGHT HUD: TACTICAL MINIMAP RADAR
+       ======================================================================== -->
+  <div class="hud-minimap-widget" title="Tactical Radar // Japantown Sector 04">
+    <div class="minimap-grid"></div>
+    <div class="minimap-sweep"></div>
+    <div class="minimap-player"></div>
+    <div class="minimap-badge">NC // RADAR</div>
+  </div>
 
   <!-- ========================================================================
        TOP HUD STATUS BAR (SYSTEM TELEMETRY & CONTROLS)
