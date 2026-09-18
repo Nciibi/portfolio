@@ -30,92 +30,55 @@
   <div id="three-canvas-container" aria-label="3D Night City Japantown Parade with Holographic Koi Fish"></div>
 
   <!-- ========================================================================
-       TOP HUD: COMPASS TAPE
-       ======================================================================== -->
-  <div class="hud-compass-tape" id="hud-compass">
-    <div class="compass-needle"></div>
-    <div class="compass-track" id="hud-compass-track">
-      <span class="compass-node">15°</span>
-      <span class="compass-node">30°</span>
-      <span class="compass-node cardinal">NE</span>
-      <span class="compass-node">60°</span>
-      <span class="compass-node">75°</span>
-      <span class="compass-node cardinal">E</span>
-      <span class="compass-node">105°</span>
-      <span class="compass-node">120°</span>
-      <span class="compass-node cardinal">SE</span>
-      <span class="compass-node">150°</span>
-      <span class="compass-node cardinal">S</span>
-      <span class="compass-node">210°</span>
-      <span class="compass-node cardinal">SW</span>
-      <span class="compass-node">240°</span>
-      <span class="compass-node cardinal">W</span>
-      <span class="compass-node">300°</span>
-      <span class="compass-node cardinal">NW</span>
-      <span class="compass-node">330°</span>
-      <span class="compass-node cardinal">N</span>
-    </div>
-  </div>
-
-  <!-- ========================================================================
-       TOP-LEFT HUD: VITALS & RAM BAR
-       ======================================================================== -->
-  <div class="hud-status-vitals">
-    <div class="vital-row">
-      <span class="vital-label" style="color: var(--cyber-red);">HP</span>
-      <div class="vital-bar"><div class="vital-fill-hp"></div></div>
-      <span class="vital-val">450 / 450</span>
-    </div>
-    <div class="vital-row">
-      <span class="vital-label" style="color: var(--cyber-cyan);">RAM</span>
-      <div class="vital-bar"><div class="vital-fill-ram"></div></div>
-      <span class="vital-val">16 / 16</span>
-    </div>
-  </div>
-
-  <!-- ========================================================================
-       TOP-RIGHT HUD: TACTICAL MINIMAP RADAR
-       ======================================================================== -->
-  <div class="hud-minimap-widget" title="Tactical Radar // Japantown Sector 04">
-    <div class="minimap-grid"></div>
-    <div class="minimap-sweep"></div>
-    <div class="minimap-player"></div>
-    <div class="minimap-badge">NC // RADAR</div>
-  </div>
-
-  <!-- ========================================================================
-       TOP HUD STATUS BAR (SYSTEM TELEMETRY & CONTROLS)
+       CYBERPUNK 2077 IN-GAME MENU HEADER
        ======================================================================== -->
   <header class="hud-header" id="hud-top-bar">
     <div class="hud-left">
       <a href="#hero" class="brand-badge" id="hud-brand-link">
-        <span class="icon-chip"></span>
-        <span>NETRUNNER // V.2.0.77</span>
+        <span class="brand-samurai-icon">★</span>
+        <span>V // 2077</span>
       </a>
       <div class="telemetry-item">
         <span class="status-dot"></span>
-        <span>ICE: <span class="accent">SECURE</span></span>
+        <span>ICE: <span class="accent">ACTIVE</span></span>
       </div>
       <div class="telemetry-item" id="hud-clock-item">
         <span>NC TIME: <span class="accent" id="hud-clock">2077.10.24 // 00:00:00</span></span>
       </div>
     </div>
 
-    <!-- HUD Navigation Links -->
+    <!-- Authentic In-Game Cyberpunk Hub Nav Tabs -->
     <nav class="hud-nav" aria-label="Main Navigation">
-      <a href="#hero" class="nav-link active">[01. PROTOCOL]</a>
-      <a href="#attributes" class="nav-link">[02. ATTRIBUTES]</a>
-      <a href="#cyberware" class="nav-link">[03. CYBERWARE]</a>
-      <a href="#gigs" class="nav-link">[04. GIGS]</a>
-      <a href="#braindance" class="nav-link">[05. BRAINDANCE]</a>
-      <a href="#jack-in" class="nav-link">[06. JACK_IN]</a>
+      <span class="nav-bracket nav-bracket-left">[ ◄ Q ]</span>
+      <a href="#hero" class="nav-link active" data-tab="protocol">
+        <span class="nav-arrow">▶</span>
+        <span class="nav-text">PROTOCOL</span>
+      </a>
+      <a href="#attributes" class="nav-link" data-tab="attributes">
+        <span class="nav-arrow">▶</span>
+        <span class="nav-text">ATTRIBUTES</span>
+      </a>
+      <a href="#cyberware" class="nav-link" data-tab="cyberware">
+        <span class="nav-arrow">▶</span>
+        <span class="nav-text">CYBERWARE</span>
+      </a>
+      <a href="#gigs" class="nav-link" data-tab="gigs">
+        <span class="nav-arrow">▶</span>
+        <span class="nav-text">JOURNAL // GIGS</span>
+      </a>
+      <a href="#braindance" class="nav-link" data-tab="braindance">
+        <span class="nav-arrow">▶</span>
+        <span class="nav-text">BRAINDANCE</span>
+      </a>
+      <a href="#jack-in" class="nav-link" data-tab="jackin">
+        <span class="nav-arrow">▶</span>
+        <span class="nav-text">JACK_IN</span>
+      </a>
+      <span class="nav-bracket nav-bracket-right">[ E ► ]</span>
     </nav>
 
-    <!-- HUD Action Controls (Audio SFX, CRT Filter, Eddies) -->
+    <!-- HUD Action Controls (Audio SFX, CRT Filter) -->
     <div class="hud-right">
-      <div class="eddie-counter" id="eddie-balance" title="Night City Currency">
-        <span>€$ 142,850</span>
-      </div>
       <button class="hud-ctrl-btn" id="btn-toggle-audio" title="Toggle Synthesized Cyber SFX">
         SFX: ON
       </button>
