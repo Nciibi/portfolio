@@ -356,3 +356,57 @@ function initTerminalTransmission() {
     }, 1000);
   });
 }
+
+/* --------------------------------------------------------------------------
+   11. IN-GAME HUD SCROLL SPY & KEYBOARD [Q / E] TAB CYCLING
+   -------------------------------------------------------------------------- */
+function initScrollSpy() {
+  const sections = document.querySelectorAll("section[id]");
+  const navLinks = document.querySelectorAll(".hud-nav .nav-link");
+
+  // Update active tab on scroll
+  window.addEventListener("scroll", () => {
+    let currentId = "";
+    const scrollPos = window.scrollY + 120;
+
+    sections.forEach(sec => {
+      const top = sec.offsetTop;
+      const height = sec.offsetHeight;
+      if (scrollPos >= top && scrollPos < top + height) {
+        currentId = sec.getAttribute("id");
+      }
+    });
+
+    if (currentId) {
+      navLinks.forEach(link => {
+        const href = link.getAttribute("href").replace("#", "");
+        if (href === currentId) {
+          if (!link.classList.contains("active")) {
+            navLinks.forEach(l => l.classList.remove("active"));
+            link.classList.add("active");
+          }
+        }
+      });
+    }
+  });
+
+  // Keyboard Q and E to cycle in-game menu tabs
+  document.addEventListener("keydown", (e) => {
+    // Ignore when typing inside input or textarea
+    if (e.target.tagName === "INPUT" || e.target.tagName === "TEXTAREA") return;
+
+    const linksArray = Array.from(navLinks);
+    const currentIndex = linksArray.findIndex(l => l.classList.contains("active"));
+    if (currentIndex === -1) return;
+
+    if (e.key === "q" || e.key === "Q") {
+      const prevIndex = (currentIndex - 1 + linksArray.length) % linksArray.length;
+      linksArray[prevIndex].click();
+      cyberAudio.playTab();
+    } else if (e.key === "e" || e.key === "E") {
+      const nextIndex = (currentIndex + 1) % linksArray.length;
+      linksArray[nextIndex].click();
+      cyberAudio.playTab();
+    }
+  });
+}
