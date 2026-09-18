@@ -29,6 +29,9 @@
   <!-- Interactive 3D Holographic Swimming Koi Fish (Blue & Orange) -->
   <canvas id="koi-canvas" aria-label="Interactive blue and orange holographic koi fish"></canvas>
 
+  <!-- Three.js 3D Real Koi Fish Container (loads real GLB model) -->
+  <div id="three-canvas-container" aria-label="3D holographic koi fish scene"></div>
+
   <!-- ========================================================================
        TOP HUD STATUS BAR (SYSTEM TELEMETRY & CONTROLS)
        ======================================================================== -->
@@ -339,10 +342,15 @@
     </div>
   </footer>
 
+  <!-- Three.js Vendor Libraries -->
+  <script src="js/vendor/three.min.js"></script>
+  <script src="js/vendor/GLTFLoader.js"></script>
+
   <!-- Scripts -->
   <script src="js/portfolio-data.js"></script>
   <script src="js/cyber-audio.js"></script>
   <script src="js/koi-hologram.js"></script>
+  <script src="js/three-real-koi.js"></script>
   <script src="js/main.js"></script>
 </body>
 </html>
