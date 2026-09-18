@@ -1,37 +1,41 @@
 /* ==========================================================================
    CYBERPUNK 2077 MASTER DESIGN SYSTEM & HUD STYLES
-   Inspired by Vladimír Vilimovský's UI Art Bible & Figma PPT Template
+   Authentic In-Game HUD, Police (Typography), & Shape-Shifting Buttons
+   Inspired by Vladimír Vilimovský's Behance Art Bible & CD Projekt Red
    ========================================================================== */
 
-@import url('https://fonts.googleapis.com/css2?family=Chakra+Petch:ital,wght@0,300;0,500;0,700;1,700&family=Orbitron:wght@400;600;800;900&family=Rajdhani:wght@500;600;700&family=Share+Tech+Mono&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Chakra+Petch:ital,wght@0,300;0,500;0,600;0,700;1,700&family=Orbitron:wght@400;600;700;800;900&family=Rajdhani:wght@500;600;700&family=Share+Tech+Mono&display=swap');
 
 :root {
   /* Core Cyberpunk Palette */
   --cyber-yellow: #FCEE0A;
-  --cyber-yellow-glow: rgba(252, 238, 10, 0.45);
+  --cyber-yellow-dark: #C4B905;
+  --cyber-yellow-glow: rgba(252, 238, 10, 0.55);
   --cyber-red: #FF003C;
-  --cyber-red-glow: rgba(255, 0, 60, 0.5);
+  --cyber-red-dark: #B3002A;
+  --cyber-red-glow: rgba(255, 0, 60, 0.6);
   --cyber-cyan: #00F0FF;
-  --cyber-cyan-glow: rgba(0, 240, 255, 0.45);
+  --cyber-cyan-glow: rgba(0, 240, 255, 0.55);
   --cyber-blue-koi: #0077FE;
   --cyber-orange-koi: #FF7700;
-  --cyber-orange-glow: rgba(255, 119, 0, 0.45);
+  --cyber-orange-glow: rgba(255, 119, 0, 0.55);
   --cyber-green: #00FF66;
   --cyber-purple: #BD00FF;
 
   /* Surfaces & Dark Substrates */
-  --bg-darkest: #050608;
-  --bg-dark: #0A0C10;
-  --bg-surface: #10131A;
-  --bg-panel: rgba(16, 19, 26, 0.88);
-  --bg-card: rgba(20, 24, 33, 0.92);
+  --bg-darkest: #040507;
+  --bg-dark: #090B10;
+  --bg-surface: #0E121A;
+  --bg-panel: rgba(14, 18, 25, 0.88);
+  --bg-card: rgba(18, 23, 33, 0.92);
   --border-subtle: rgba(255, 255, 255, 0.08);
-  --border-cyan: rgba(0, 240, 255, 0.3);
-  --border-yellow: rgba(252, 238, 10, 0.4);
+  --border-cyan: rgba(0, 240, 255, 0.35);
+  --border-yellow: rgba(252, 238, 10, 0.45);
+  --border-red: rgba(255, 0, 60, 0.45);
 
-  /* Typography */
-  --font-display: 'Orbitron', 'Chakra Petch', sans-serif;
-  --font-heading: 'Chakra Petch', 'Orbitron', sans-serif;
+  /* Typography / Police */
+  --font-display: 'Orbitron', sans-serif;
+  --font-heading: 'Chakra Petch', sans-serif;
   --font-body: 'Rajdhani', sans-serif;
   --font-mono: 'Share Tech Mono', monospace;
 
@@ -61,11 +65,11 @@ body {
   min-height: 100vh;
   background-color: var(--bg-darkest);
   background-image: 
-    radial-gradient(circle at 15% 20%, rgba(0, 240, 255, 0.04) 0%, transparent 45%),
-    radial-gradient(circle at 85% 65%, rgba(255, 119, 0, 0.04) 0%, transparent 45%),
+    radial-gradient(circle at 15% 20%, rgba(0, 240, 255, 0.05) 0%, transparent 45%),
+    radial-gradient(circle at 85% 65%, rgba(255, 119, 0, 0.05) 0%, transparent 45%),
     linear-gradient(rgba(255, 255, 255, 0.015) 1px, transparent 1px),
     linear-gradient(90deg, rgba(255, 255, 255, 0.015) 1px, transparent 1px);
-  background-size: 100% 100%, 100% 100%, 40px 40px, 40px 40px;
+  background-size: 100% 100%, 100% 100%, 36px 36px, 36px 36px;
   overflow-x: hidden;
 }
 
@@ -77,9 +81,9 @@ body {
 }
 
 /* ==========================================================================
-   HOLOGRAPHIC CANVAS (BLUE & ORANGE KOI FISH)
+   3D THREE.JS CANVAS CONTAINER (NIGHT CITY SKYLINE & 3D HOLOGRAPHIC KOI)
    ========================================================================== */
-#koi-canvas {
+#three-canvas-container {
   position: fixed;
   top: 0;
   left: 0;
@@ -87,7 +91,13 @@ body {
   height: 100vh;
   pointer-events: none;
   z-index: 1;
-  opacity: 0.88;
+  opacity: 0.95;
+}
+
+#three-canvas-container canvas {
+  width: 100%;
+  height: 100%;
+  display: block;
 }
 
 /* ==========================================================================
@@ -101,9 +111,9 @@ body {
   height: 100vh;
   pointer-events: none;
   z-index: 9999;
-  background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%);
+  background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.28) 50%);
   background-size: 100% 3px;
-  opacity: 0.35;
+  opacity: 0.38;
   transition: opacity 0.3s ease;
 }
 
@@ -113,17 +123,202 @@ body.crt-disabled .crt-overlay {
 }
 
 /* ==========================================================================
-   HUD TOP BAR (SYSTEM TELEMETRY & CONTROLS)
+   GAME HUD: TOP COMPASS HUD STRIP
+   ========================================================================== */
+.hud-compass-tape {
+  position: fixed;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 520px;
+  max-width: 90vw;
+  height: 24px;
+  z-index: 1001;
+  background: rgba(10, 13, 18, 0.82);
+  border-bottom: 1px solid var(--border-cyan);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  clip-path: polygon(0 0, 100% 0, calc(100% - 14px) 100%, 14px 100%);
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  color: #64748B;
+  letter-spacing: 2px;
+}
+
+.compass-track {
+  display: flex;
+  align-items: center;
+  gap: 1.8rem;
+  white-space: nowrap;
+  transition: transform 0.1s ease-out;
+}
+
+.compass-node {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.compass-node.cardinal {
+  color: var(--cyber-yellow);
+  font-weight: bold;
+}
+
+.compass-needle {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 2px;
+  height: 100%;
+  background: var(--cyber-yellow);
+  box-shadow: 0 0 6px var(--cyber-yellow);
+}
+
+/* ==========================================================================
+   GAME HUD: HEALTH / RAM STATUS BAR (TOP-LEFT)
+   ========================================================================== */
+.hud-status-vitals {
+  position: fixed;
+  top: 36px;
+  left: 2rem;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  background: rgba(10, 12, 17, 0.9);
+  padding: 8px 14px;
+  border-left: 3px solid var(--cyber-red);
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  border-right: 1px solid rgba(255, 255, 255, 0.08);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 0 100%);
+}
+
+.vital-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+}
+
+.vital-label {
+  color: #94A3B8;
+  width: 32px;
+  font-weight: bold;
+}
+
+.vital-bar {
+  width: 130px;
+  height: 6px;
+  background: rgba(255, 255, 255, 0.1);
+  position: relative;
+  overflow: hidden;
+}
+
+.vital-fill-hp {
+  height: 100%;
+  width: 100%;
+  background: var(--cyber-red);
+  box-shadow: 0 0 6px var(--cyber-red);
+}
+
+.vital-fill-ram {
+  height: 100%;
+  width: 88%;
+  background: var(--cyber-cyan);
+  box-shadow: 0 0 6px var(--cyber-cyan);
+}
+
+.vital-val {
+  color: #FFFFFF;
+  font-weight: bold;
+  font-size: 0.7rem;
+}
+
+/* ==========================================================================
+   GAME HUD: TACTICAL MINIMAP RADAR (TOP-RIGHT)
+   ========================================================================== */
+.hud-minimap-widget {
+  position: fixed;
+  top: 36px;
+  right: 2rem;
+  z-index: 1000;
+  width: 130px;
+  height: 130px;
+  background: rgba(10, 13, 19, 0.88);
+  border: 1px solid var(--border-cyan);
+  border-radius: 50%;
+  box-shadow: 0 0 18px rgba(0, 240, 255, 0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.minimap-grid {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: 
+    radial-gradient(circle, transparent 40%, rgba(0, 240, 255, 0.1) 41%, transparent 42%),
+    radial-gradient(circle, transparent 75%, rgba(0, 240, 255, 0.15) 76%, transparent 77%),
+    linear-gradient(rgba(0, 240, 255, 0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 240, 255, 0.08) 1px, transparent 1px);
+  background-size: 100% 100%, 100% 100%, 20px 20px, 20px 20px;
+}
+
+.minimap-sweep {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: conic-gradient(from 0deg, rgba(0, 240, 255, 0.35) 0deg, transparent 60deg);
+  animation: radar-sweep 3s linear infinite;
+}
+
+.minimap-player {
+  position: relative;
+  z-index: 2;
+  width: 0;
+  height: 0;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-bottom: 9px solid var(--cyber-yellow);
+  box-shadow: 0 0 8px var(--cyber-yellow);
+}
+
+.minimap-badge {
+  position: absolute;
+  bottom: 4px;
+  font-family: var(--font-mono);
+  font-size: 0.58rem;
+  color: var(--cyber-cyan);
+  z-index: 2;
+  letter-spacing: 1px;
+}
+
+@keyframes radar-sweep {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* ==========================================================================
+   HUD MAIN HEADER BAR
    ========================================================================== */
 .hud-header {
   position: fixed;
-  top: 0;
+  top: 24px;
   left: 0;
   width: 100%;
-  height: 52px;
-  z-index: 1000;
-  background: rgba(10, 12, 16, 0.88);
-  backdrop-filter: blur(12px);
+  height: 54px;
+  z-index: 999;
+  background: rgba(10, 12, 16, 0.85);
+  backdrop-filter: blur(14px);
   border-bottom: 1px solid var(--border-cyan);
   display: flex;
   align-items: center;
@@ -135,17 +330,18 @@ body.crt-disabled .crt-overlay {
   content: '';
   position: absolute;
   bottom: -2px;
-  left: 15%;
-  width: 140px;
+  left: 18%;
+  width: 160px;
   height: 3px;
   background: var(--cyber-yellow);
-  box-shadow: 0 0 10px var(--cyber-yellow);
+  box-shadow: 0 0 12px var(--cyber-yellow);
 }
 
 .hud-left {
   display: flex;
   align-items: center;
   gap: 1.5rem;
+  margin-left: 210px; /* offset vitals bar */
 }
 
 .brand-badge {
@@ -200,7 +396,7 @@ body.crt-disabled .crt-overlay {
 .hud-nav {
   display: flex;
   align-items: center;
-  gap: 1.5rem;
+  gap: 1.25rem;
 }
 
 .nav-link {
@@ -211,33 +407,29 @@ body.crt-disabled .crt-overlay {
   color: #CBD5E1;
   text-decoration: none;
   position: relative;
-  padding: 6px 4px;
-  transition: color 0.2s ease;
+  padding: 6px 6px;
+  transition: color 0.2s ease, text-shadow 0.2s ease;
 }
 
 .nav-link::before {
-  content: '[';
+  content: '▶';
   color: var(--cyber-yellow);
+  font-size: 0.65rem;
   opacity: 0;
-  margin-right: 2px;
-  transition: opacity 0.2s ease;
-}
-
-.nav-link::after {
-  content: ']';
-  color: var(--cyber-yellow);
-  opacity: 0;
-  margin-left: 2px;
-  transition: opacity 0.2s ease;
+  margin-right: 4px;
+  transform: translateX(-4px);
+  display: inline-block;
+  transition: all 0.2s ease;
 }
 
 .nav-link:hover, .nav-link.active {
   color: var(--cyber-yellow);
+  text-shadow: 0 0 10px rgba(252, 238, 10, 0.6);
 }
 
-.nav-link:hover::before, .nav-link:hover::after,
-.nav-link.active::before, .nav-link.active::after {
+.nav-link:hover::before, .nav-link.active::before {
   opacity: 1;
+  transform: translateX(0);
 }
 
 /* HUD Right Controls (Audio, Scanlines, Eddies) */
@@ -245,6 +437,7 @@ body.crt-disabled .crt-overlay {
   display: flex;
   align-items: center;
   gap: 1rem;
+  margin-right: 150px; /* offset minimap */
 }
 
 .eddie-counter {
@@ -277,49 +470,116 @@ body.crt-disabled .crt-overlay {
 }
 
 /* ==========================================================================
-   CYBERPUNK ASYMMETRICAL CHAMFERED BUTTONS
-   (Directly modeled on Cyberpunk 2077 game HUD buttons & Behance Art Bible)
+   CYBERPUNK SHAPE-SHIFTING BUTTONS
+   (Morphing clip-paths, sliding slivers, expanding brackets, and chromatic split)
    ========================================================================== */
 .btn-cyber {
   position: relative;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 0.6rem;
+  gap: 0.75rem;
   font-family: var(--font-display);
-  font-size: 0.85rem;
+  font-size: 0.88rem;
   font-weight: 800;
   letter-spacing: 2px;
   text-transform: uppercase;
   text-decoration: none;
-  padding: 12px 28px;
+  padding: 14px 32px;
   border: none;
   cursor: pointer;
-  transition: transform 0.15s ease, box-shadow 0.2s ease;
   outline: none;
   user-select: none;
-  /* Asymmetric 45-degree angle cuts */
+  overflow: hidden;
+  z-index: 1;
+
+  /* Shape-Shifting Clip-Path (Default: asymmetric chamfered top-right & bottom-left) */
   clip-path: polygon(
     0 0,
-    calc(100% - 15px) 0,
-    100% 15px,
+    calc(100% - 16px) 0,
+    100% 16px,
     100% 100%,
-    15px 100%,
-    0 calc(100% - 15px)
+    16px 100%,
+    0 calc(100% - 16px)
   );
+
+  /* Smooth shape-shift transition */
+  transition: 
+    clip-path 0.25s var(--ease-cyber),
+    transform 0.15s ease,
+    box-shadow 0.25s ease,
+    background-color 0.2s ease,
+    color 0.2s ease;
 }
 
-.btn-cyber .btn-glitch-layer {
-  display: none;
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
+/* Shape-Shift on Hover: Inverts cut angles from top-right to top-left & bottom-right */
+.btn-cyber:hover {
+  clip-path: polygon(
+    16px 0,
+    100% 0,
+    100% calc(100% - 16px),
+    calc(100% - 16px) 100%,
+    0 100%,
+    0 16px
+  );
+  transform: translateY(-2px);
 }
 
 .btn-cyber:active {
-  transform: scale(0.97);
+  transform: scale(0.96) translateY(0);
+}
+
+/* Internal Sliding Shifter Background */
+.btn-cyber::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.25);
+  transform: skewX(-25deg);
+  transition: transform 0.4s var(--ease-cyber), left 0.4s var(--ease-cyber);
+  z-index: -1;
+  pointer-events: none;
+}
+
+.btn-cyber:hover::before {
+  left: 110%;
+}
+
+/* Outer Expanding Corner Registration Brackets */
+.btn-cyber .corner-bracket-tl,
+.btn-cyber .corner-bracket-br {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  pointer-events: none;
+  transition: transform 0.25s var(--ease-cyber), opacity 0.25s ease;
+}
+
+.btn-cyber .corner-bracket-tl {
+  top: 3px;
+  left: 3px;
+  border-top: 2px solid currentColor;
+  border-left: 2px solid currentColor;
+}
+
+.btn-cyber .corner-bracket-br {
+  bottom: 3px;
+  right: 3px;
+  border-bottom: 2px solid currentColor;
+  border-right: 2px solid currentColor;
+}
+
+.btn-cyber:hover .corner-bracket-tl {
+  transform: translate(-3px, -3px);
+  opacity: 0.9;
+}
+
+.btn-cyber:hover .corner-bracket-br {
+  transform: translate(3px, 3px);
+  opacity: 0.9;
 }
 
 /* Cyber Yellow Primary Button */
@@ -334,58 +594,98 @@ body.crt-disabled .crt-overlay {
   font-family: var(--font-mono);
   font-size: 0.75rem;
   letter-spacing: -2px;
-  opacity: 0.6;
+  opacity: 0.7;
 }
 
 .btn-cyber-yellow:hover {
-  background: #FFF033;
-  box-shadow: 0 0 25px rgba(252, 238, 10, 0.7), inset 0 0 10px rgba(0,0,0,0.2);
-  animation: glitch-skew 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+  background: #FFF133;
+  color: #000000;
+  box-shadow: 0 0 30px rgba(252, 238, 10, 0.8), inset 0 0 12px rgba(0,0,0,0.15);
+  animation: glitch-jitter 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
 }
 
-/* Arasaka Red Danger Button */
+/* Arasaka Red Danger Hostile Button */
 .btn-cyber-red {
   background: var(--cyber-red);
   color: #FFFFFF;
-  box-shadow: 0 0 15px rgba(255, 0, 60, 0.4);
+  box-shadow: 0 0 18px rgba(255, 0, 60, 0.45);
 }
 
 .btn-cyber-red::after {
   content: '▶';
   font-size: 0.75rem;
+  transition: transform 0.2s ease;
 }
 
 .btn-cyber-red:hover {
-  background: #FF2A54;
-  box-shadow: 0 0 25px rgba(255, 0, 60, 0.75);
-  animation: glitch-skew 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+  background: #FF1A4C;
+  box-shadow: 0 0 30px rgba(255, 0, 60, 0.85);
+  animation: glitch-jitter 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+}
+
+.btn-cyber-red:hover::after {
+  transform: translateX(4px);
 }
 
 /* Hologram Cyan Button */
 .btn-cyber-cyan {
   background: var(--cyber-cyan);
   color: #000000;
-  box-shadow: 0 0 15px rgba(0, 240, 255, 0.35);
+  box-shadow: 0 0 18px rgba(0, 240, 255, 0.4);
 }
 
 .btn-cyber-cyan:hover {
-  background: #5CF6FF;
-  box-shadow: 0 0 25px rgba(0, 240, 255, 0.7);
-  animation: glitch-skew 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+  background: #4DF5FF;
+  box-shadow: 0 0 30px rgba(0, 240, 255, 0.8);
+  animation: glitch-jitter 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
 }
 
-/* Wireframe Ghost Outline Button */
+/* Wireframe Tactical Ghost Button */
 .btn-cyber-ghost {
-  background: rgba(14, 18, 25, 0.85);
+  background: rgba(14, 18, 25, 0.88);
   color: #E2E8F0;
   border: 1px solid var(--border-cyan);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 }
 
 .btn-cyber-ghost:hover {
-  background: rgba(0, 240, 255, 0.15);
+  background: rgba(0, 240, 255, 0.18);
   color: var(--cyber-cyan);
   border-color: var(--cyber-cyan);
-  box-shadow: 0 0 15px rgba(0, 240, 255, 0.35);
+  box-shadow: 0 0 20px rgba(0, 240, 255, 0.4);
+}
+
+/* Small Button Variant */
+.btn-cyber-sm {
+  padding: 8px 18px;
+  font-size: 0.76rem;
+  clip-path: polygon(
+    0 0,
+    calc(100% - 10px) 0,
+    100% 10px,
+    100% 100%,
+    10px 100%,
+    0 calc(100% - 10px)
+  );
+}
+
+.btn-cyber-sm:hover {
+  clip-path: polygon(
+    10px 0,
+    100% 0,
+    100% calc(100% - 10px),
+    calc(100% - 10px) 100%,
+    0 100%,
+    0 10px
+  );
+}
+
+@keyframes glitch-jitter {
+  0% { transform: translate(0, -2px) skew(0deg); }
+  25% { transform: translate(-3px, -2px) skew(-2deg); }
+  50% { transform: translate(3px, -2px) skew(2deg); }
+  75% { transform: translate(-1px, -2px) skew(-1deg); }
+  100% { transform: translate(0, -2px) skew(0deg); }
 }
 
 /* Small Variant */
