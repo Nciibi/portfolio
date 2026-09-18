@@ -1,0 +1,1535 @@
+/* ==========================================================================
+   CYBERPUNK 2077 MASTER DESIGN SYSTEM & HUD STYLES
+   Inspired by Vladimír Vilimovský's UI Art Bible & Figma PPT Template
+   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Chakra+Petch:ital,wght@0,300;0,500;0,700;1,700&family=Orbitron:wght@400;600;800;900&family=Rajdhani:wght@500;600;700&family=Share+Tech+Mono&display=swap');
+
+:root {
+  /* Core Cyberpunk Palette */
+  --cyber-yellow: #FCEE0A;
+  --cyber-yellow-glow: rgba(252, 238, 10, 0.45);
+  --cyber-red: #FF003C;
+  --cyber-red-glow: rgba(255, 0, 60, 0.5);
+  --cyber-cyan: #00F0FF;
+  --cyber-cyan-glow: rgba(0, 240, 255, 0.45);
+  --cyber-blue-koi: #0077FE;
+  --cyber-orange-koi: #FF7700;
+  --cyber-orange-glow: rgba(255, 119, 0, 0.45);
+  --cyber-green: #00FF66;
+  --cyber-purple: #BD00FF;
+
+  /* Surfaces & Dark Substrates */
+  --bg-darkest: #050608;
+  --bg-dark: #0A0C10;
+  --bg-surface: #10131A;
+  --bg-panel: rgba(16, 19, 26, 0.88);
+  --bg-card: rgba(20, 24, 33, 0.92);
+  --border-subtle: rgba(255, 255, 255, 0.08);
+  --border-cyan: rgba(0, 240, 255, 0.3);
+  --border-yellow: rgba(252, 238, 10, 0.4);
+
+  /* Typography */
+  --font-display: 'Orbitron', 'Chakra Petch', sans-serif;
+  --font-heading: 'Chakra Petch', 'Orbitron', sans-serif;
+  --font-body: 'Rajdhani', sans-serif;
+  --font-mono: 'Share Tech Mono', monospace;
+
+  /* Motion */
+  --ease-cyber: cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+/* Reset & Box Sizing */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  background-color: var(--bg-darkest);
+  color: #E2E8F0;
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.5;
+  overflow-x: hidden;
+}
+
+body {
+  position: relative;
+  min-height: 100vh;
+  background-color: var(--bg-darkest);
+  background-image: 
+    radial-gradient(circle at 15% 20%, rgba(0, 240, 255, 0.04) 0%, transparent 45%),
+    radial-gradient(circle at 85% 65%, rgba(255, 119, 0, 0.04) 0%, transparent 45%),
+    linear-gradient(rgba(255, 255, 255, 0.015) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.015) 1px, transparent 1px);
+  background-size: 100% 100%, 100% 100%, 40px 40px, 40px 40px;
+  overflow-x: hidden;
+}
+
+/* Custom Cyber Selection */
+::selection {
+  background: var(--cyber-yellow);
+  color: #000000;
+  text-shadow: none;
+}
+
+/* ==========================================================================
+   HOLOGRAPHIC CANVAS (BLUE & ORANGE KOI FISH)
+   ========================================================================== */
+#koi-canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0.88;
+}
+
+/* ==========================================================================
+   CRT SCANLINE & NOISE OVERLAY
+   ========================================================================== */
+.crt-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 9999;
+  background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%);
+  background-size: 100% 3px;
+  opacity: 0.35;
+  transition: opacity 0.3s ease;
+}
+
+body.crt-disabled .crt-overlay {
+  opacity: 0;
+  display: none;
+}
+
+/* ==========================================================================
+   HUD TOP BAR (SYSTEM TELEMETRY & CONTROLS)
+   ========================================================================== */
+.hud-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 52px;
+  z-index: 1000;
+  background: rgba(10, 12, 16, 0.88);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border-cyan);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 2rem;
+}
+
+.hud-header::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 15%;
+  width: 140px;
+  height: 3px;
+  background: var(--cyber-yellow);
+  box-shadow: 0 0 10px var(--cyber-yellow);
+}
+
+.hud-left {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.brand-badge {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-display);
+  font-size: 0.85rem;
+  font-weight: 800;
+  letter-spacing: 2px;
+  color: var(--cyber-yellow);
+  text-decoration: none;
+  padding: 4px 10px;
+  background: rgba(252, 238, 10, 0.08);
+  border-left: 3px solid var(--cyber-yellow);
+  clip-path: polygon(0 0, calc(100% - 8px) 0, 100% 8px, 100% 100%, 0 100%);
+}
+
+.brand-badge .icon-chip {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  background: var(--cyber-yellow);
+  box-shadow: 0 0 6px var(--cyber-yellow);
+  animation: pulse-chip 2s infinite;
+}
+
+.telemetry-item {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: #94A3B8;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.telemetry-item .accent {
+  color: var(--cyber-cyan);
+  font-weight: bold;
+}
+
+.telemetry-item .status-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--cyber-green);
+  box-shadow: 0 0 6px var(--cyber-green);
+  display: inline-block;
+}
+
+/* Nav Menu Links */
+.hud-nav {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.nav-link {
+  font-family: var(--font-heading);
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  color: #CBD5E1;
+  text-decoration: none;
+  position: relative;
+  padding: 6px 4px;
+  transition: color 0.2s ease;
+}
+
+.nav-link::before {
+  content: '[';
+  color: var(--cyber-yellow);
+  opacity: 0;
+  margin-right: 2px;
+  transition: opacity 0.2s ease;
+}
+
+.nav-link::after {
+  content: ']';
+  color: var(--cyber-yellow);
+  opacity: 0;
+  margin-left: 2px;
+  transition: opacity 0.2s ease;
+}
+
+.nav-link:hover, .nav-link.active {
+  color: var(--cyber-yellow);
+}
+
+.nav-link:hover::before, .nav-link:hover::after,
+.nav-link.active::before, .nav-link.active::after {
+  opacity: 1;
+}
+
+/* HUD Right Controls (Audio, Scanlines, Eddies) */
+.hud-right {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.eddie-counter {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  font-weight: bold;
+  color: var(--cyber-yellow);
+  background: rgba(252, 238, 10, 0.1);
+  border: 1px solid rgba(252, 238, 10, 0.3);
+  padding: 3px 10px;
+  letter-spacing: 1px;
+}
+
+.hud-ctrl-btn {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--cyber-cyan);
+  background: rgba(0, 240, 255, 0.08);
+  border: 1px solid var(--border-cyan);
+  padding: 4px 10px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  clip-path: polygon(0 0, calc(100% - 6px) 0, 100% 6px, 100% 100%, 0 100%);
+}
+
+.hud-ctrl-btn:hover {
+  background: var(--cyber-cyan);
+  color: #000000;
+  box-shadow: 0 0 10px var(--cyber-cyan);
+}
+
+/* ==========================================================================
+   CYBERPUNK ASYMMETRICAL CHAMFERED BUTTONS
+   (Directly modeled on Cyberpunk 2077 game HUD buttons & Behance Art Bible)
+   ========================================================================== */
+.btn-cyber {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  font-family: var(--font-display);
+  font-size: 0.85rem;
+  font-weight: 800;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  text-decoration: none;
+  padding: 12px 28px;
+  border: none;
+  cursor: pointer;
+  transition: transform 0.15s ease, box-shadow 0.2s ease;
+  outline: none;
+  user-select: none;
+  /* Asymmetric 45-degree angle cuts */
+  clip-path: polygon(
+    0 0,
+    calc(100% - 15px) 0,
+    100% 15px,
+    100% 100%,
+    15px 100%,
+    0 calc(100% - 15px)
+  );
+}
+
+.btn-cyber .btn-glitch-layer {
+  display: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.btn-cyber:active {
+  transform: scale(0.97);
+}
+
+/* Cyber Yellow Primary Button */
+.btn-cyber-yellow {
+  background: var(--cyber-yellow);
+  color: #000000;
+  box-shadow: 0 0 15px rgba(252, 238, 10, 0.35);
+}
+
+.btn-cyber-yellow::after {
+  content: '///';
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: -2px;
+  opacity: 0.6;
+}
+
+.btn-cyber-yellow:hover {
+  background: #FFF033;
+  box-shadow: 0 0 25px rgba(252, 238, 10, 0.7), inset 0 0 10px rgba(0,0,0,0.2);
+  animation: glitch-skew 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+}
+
+/* Arasaka Red Danger Button */
+.btn-cyber-red {
+  background: var(--cyber-red);
+  color: #FFFFFF;
+  box-shadow: 0 0 15px rgba(255, 0, 60, 0.4);
+}
+
+.btn-cyber-red::after {
+  content: '▶';
+  font-size: 0.75rem;
+}
+
+.btn-cyber-red:hover {
+  background: #FF2A54;
+  box-shadow: 0 0 25px rgba(255, 0, 60, 0.75);
+  animation: glitch-skew 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+}
+
+/* Hologram Cyan Button */
+.btn-cyber-cyan {
+  background: var(--cyber-cyan);
+  color: #000000;
+  box-shadow: 0 0 15px rgba(0, 240, 255, 0.35);
+}
+
+.btn-cyber-cyan:hover {
+  background: #5CF6FF;
+  box-shadow: 0 0 25px rgba(0, 240, 255, 0.7);
+  animation: glitch-skew 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+}
+
+/* Wireframe Ghost Outline Button */
+.btn-cyber-ghost {
+  background: rgba(14, 18, 25, 0.85);
+  color: #E2E8F0;
+  border: 1px solid var(--border-cyan);
+}
+
+.btn-cyber-ghost:hover {
+  background: rgba(0, 240, 255, 0.15);
+  color: var(--cyber-cyan);
+  border-color: var(--cyber-cyan);
+  box-shadow: 0 0 15px rgba(0, 240, 255, 0.35);
+}
+
+/* Small Variant */
+.btn-cyber-sm {
+  padding: 7px 16px;
+  font-size: 0.75rem;
+  clip-path: polygon(
+    0 0,
+    calc(100% - 10px) 0,
+    100% 10px,
+    100% 100%,
+    10px 100%,
+    0 calc(100% - 10px)
+  );
+}
+
+/* ==========================================================================
+   LAYOUT CONTAINERS & CYBER CARDS
+   ========================================================================== */
+.container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  position: relative;
+  z-index: 2;
+}
+
+section {
+  padding: 6rem 0;
+  position: relative;
+}
+
+/* Section Headers with Cyber Bracket Styling */
+.section-header {
+  margin-bottom: 3.5rem;
+  position: relative;
+}
+
+.section-tag {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--cyber-cyan);
+  letter-spacing: 2px;
+  margin-bottom: 0.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.section-tag::before {
+  content: '//';
+  color: var(--cyber-yellow);
+}
+
+.section-title {
+  font-family: var(--font-display);
+  font-size: 2.4rem;
+  font-weight: 900;
+  letter-spacing: 2px;
+  color: #FFFFFF;
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.section-title .title-accent {
+  color: var(--cyber-yellow);
+}
+
+.section-line {
+  height: 2px;
+  background: linear-gradient(90deg, var(--cyber-yellow) 0%, var(--cyber-cyan) 30%, transparent 100%);
+  margin-top: 0.8rem;
+  position: relative;
+}
+
+.section-line::before {
+  content: '';
+  position: absolute;
+  top: -3px;
+  left: 0;
+  width: 8px;
+  height: 8px;
+  background: var(--cyber-yellow);
+}
+
+/* Cyber Card with Chamfered Framing & Corner Marks */
+.cyber-panel {
+  position: relative;
+  background: var(--bg-panel);
+  border: 1px solid var(--border-cyan);
+  padding: 2rem;
+  backdrop-filter: blur(10px);
+  clip-path: polygon(
+    0 0,
+    calc(100% - 20px) 0,
+    100% 20px,
+    100% 100%,
+    20px 100%,
+    0 calc(100% - 20px)
+  );
+}
+
+.cyber-panel::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 40px;
+  height: 3px;
+  background: var(--cyber-cyan);
+}
+
+.cyber-panel::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 40px;
+  height: 3px;
+  background: var(--cyber-yellow);
+}
+
+/* Hazard Stripe Decor */
+.hazard-tape {
+  height: 6px;
+  background: repeating-linear-gradient(
+    -45deg,
+    var(--cyber-yellow),
+    var(--cyber-yellow) 10px,
+    #000000 10px,
+    #000000 20px
+  );
+}
+
+/* ==========================================================================
+   HERO SECTION ("WAKE UP, SAMURAI")
+   ========================================================================== */
+.hero-section {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  padding-top: 80px;
+  position: relative;
+}
+
+.hero-grid {
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: 3.5rem;
+  align-items: center;
+}
+
+.hero-meta-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 5px 14px;
+  background: rgba(255, 0, 60, 0.12);
+  border: 1px solid var(--cyber-red);
+  color: var(--cyber-red);
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  font-weight: bold;
+  letter-spacing: 2px;
+  margin-bottom: 1.5rem;
+  clip-path: polygon(0 0, calc(100% - 8px) 0, 100% 8px, 100% 100%, 0 100%);
+}
+
+.hero-meta-badge .blink-dot {
+  width: 8px;
+  height: 8px;
+  background: var(--cyber-red);
+  border-radius: 50%;
+  animation: pulse-chip 1.2s infinite;
+}
+
+.hero-glitch-title {
+  font-family: var(--font-display);
+  font-size: 3.8rem;
+  font-weight: 900;
+  line-height: 1.08;
+  letter-spacing: 3px;
+  color: #FFFFFF;
+  text-transform: uppercase;
+  margin-bottom: 1rem;
+  text-shadow: 0 0 20px rgba(0, 240, 255, 0.4);
+}
+
+.hero-glitch-title .text-yellow {
+  color: var(--cyber-yellow);
+  text-shadow: 0 0 25px rgba(252, 238, 10, 0.6);
+}
+
+.hero-quote {
+  font-family: var(--font-heading);
+  font-size: 1.35rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  color: var(--cyber-cyan);
+  margin-bottom: 1.25rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.hero-bio {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  color: #94A3B8;
+  max-width: 580px;
+  margin-bottom: 2.25rem;
+}
+
+.hero-actions {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  flex-wrap: wrap;
+}
+
+/* Hero Cyberdeck Dossier Card (Right Column) */
+.cyberdeck-card {
+  position: relative;
+  background: rgba(14, 18, 25, 0.94);
+  border: 1px solid var(--border-cyan);
+  padding: 1.75rem;
+  backdrop-filter: blur(14px);
+  clip-path: polygon(
+    0 0,
+    calc(100% - 25px) 0,
+    100% 25px,
+    100% 100%,
+    25px 100%,
+    0 calc(100% - 25px)
+  );
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6), 0 0 30px rgba(0, 240, 255, 0.08);
+}
+
+.deck-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--border-subtle);
+  padding-bottom: 0.75rem;
+  margin-bottom: 1.25rem;
+}
+
+.deck-title {
+  font-family: var(--font-display);
+  font-size: 0.85rem;
+  font-weight: 800;
+  color: var(--cyber-yellow);
+  letter-spacing: 1.5px;
+}
+
+.deck-id {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--cyber-cyan);
+}
+
+.avatar-wrapper {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1/1;
+  overflow: hidden;
+  border: 1px solid rgba(0, 240, 255, 0.4);
+  margin-bottom: 1.25rem;
+  clip-path: polygon(0 0, calc(100% - 15px) 0, 100% 15px, 100% 100%, 0 100%);
+}
+
+.avatar-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: contrast(1.08) brightness(0.96);
+  transition: transform 0.4s ease, filter 0.4s ease;
+}
+
+.avatar-wrapper:hover img {
+  transform: scale(1.04);
+  filter: contrast(1.15) brightness(1.05);
+}
+
+.avatar-overlay-brackets {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: var(--cyber-yellow);
+  background: rgba(0, 0, 0, 0.7);
+  padding: 2px 8px;
+  border: 1px solid var(--cyber-yellow);
+}
+
+.deck-stats-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75rem;
+}
+
+.stat-cell {
+  background: rgba(8, 10, 14, 0.8);
+  border-left: 2px solid var(--cyber-cyan);
+  padding: 0.5rem 0.75rem;
+}
+
+.stat-label {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: #64748B;
+  text-transform: uppercase;
+}
+
+.stat-val {
+  font-family: var(--font-heading);
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #FFFFFF;
+}
+
+/* ==========================================================================
+   ATTRIBUTES & CHARACTER SHEET (MODELED ON IN-GAME PERKS)
+   ========================================================================== */
+.attributes-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.5rem;
+}
+
+.attribute-card {
+  position: relative;
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-top: 3px solid var(--cyber-yellow);
+  padding: 1.5rem;
+  transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+  clip-path: polygon(0 0, calc(100% - 12px) 0, 100% 12px, 100% 100%, 0 100%);
+}
+
+.attribute-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--cyber-yellow);
+  box-shadow: 0 10px 25px rgba(252, 238, 10, 0.12);
+}
+
+.attribute-top {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: 0.75rem;
+}
+
+.attr-name {
+  font-family: var(--font-display);
+  font-size: 0.95rem;
+  font-weight: 800;
+  color: #FFFFFF;
+  letter-spacing: 1px;
+}
+
+.attr-lvl {
+  font-family: var(--font-mono);
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: var(--cyber-yellow);
+}
+
+.attr-spec {
+  font-family: var(--font-heading);
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--cyber-cyan);
+  margin-bottom: 0.5rem;
+}
+
+.attr-desc {
+  font-size: 0.85rem;
+  color: #94A3B8;
+  line-height: 1.4;
+  margin-bottom: 1rem;
+}
+
+.attr-bar-wrap {
+  height: 5px;
+  background: rgba(255, 255, 255, 0.08);
+  position: relative;
+  overflow: hidden;
+}
+
+.attr-bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--cyber-cyan), var(--cyber-yellow));
+  box-shadow: 0 0 8px var(--cyber-yellow);
+}
+
+/* ==========================================================================
+   CYBERWARE IMPLANTS & SKILLS MATRIX (INVENTORY RARITY TIERS)
+   ========================================================================== */
+.cyberware-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.75rem;
+}
+
+.cyberware-card {
+  position: relative;
+  background: var(--bg-card);
+  padding: 1.75rem;
+  backdrop-filter: blur(12px);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  clip-path: polygon(
+    0 0,
+    calc(100% - 16px) 0,
+    100% 16px,
+    100% 100%,
+    16px 100%,
+    0 calc(100% - 16px)
+  );
+}
+
+/* Rarity Accents */
+.cyberware-card.rarity-iconic {
+  border: 1px solid rgba(252, 238, 10, 0.35);
+  border-left: 4px solid var(--cyber-yellow);
+}
+.cyberware-card.rarity-iconic:hover {
+  box-shadow: 0 10px 30px rgba(252, 238, 10, 0.2);
+}
+
+.cyberware-card.rarity-epic {
+  border: 1px solid rgba(189, 0, 255, 0.35);
+  border-left: 4px solid var(--cyber-purple);
+}
+.cyberware-card.rarity-epic:hover {
+  box-shadow: 0 10px 30px rgba(189, 0, 255, 0.2);
+}
+
+.cyberware-card.rarity-rare {
+  border: 1px solid rgba(0, 240, 255, 0.35);
+  border-left: 4px solid var(--cyber-cyan);
+}
+.cyberware-card.rarity-rare:hover {
+  box-shadow: 0 10px 30px rgba(0, 240, 255, 0.2);
+}
+
+.cw-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.5rem;
+}
+
+.cw-category {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: #64748B;
+  letter-spacing: 1px;
+}
+
+.cw-rarity-badge {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  font-weight: bold;
+  padding: 2px 6px;
+  text-transform: uppercase;
+}
+
+.rarity-iconic .cw-rarity-badge {
+  background: rgba(252, 238, 10, 0.15);
+  color: var(--cyber-yellow);
+  border: 1px solid var(--cyber-yellow);
+}
+
+.rarity-epic .cw-rarity-badge {
+  background: rgba(189, 0, 255, 0.15);
+  color: var(--cyber-purple);
+  border: 1px solid var(--cyber-purple);
+}
+
+.rarity-rare .cw-rarity-badge {
+  background: rgba(0, 240, 255, 0.15);
+  color: var(--cyber-cyan);
+  border: 1px solid var(--cyber-cyan);
+}
+
+.cw-name {
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: #FFFFFF;
+  margin-bottom: 0.5rem;
+}
+
+.cw-desc {
+  font-size: 0.85rem;
+  color: #94A3B8;
+  margin-bottom: 1.25rem;
+  line-height: 1.45;
+}
+
+.cw-skills-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+}
+
+.skill-tag {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: #CBD5E1;
+  padding: 3px 8px;
+  transition: all 0.2s ease;
+}
+
+.skill-tag:hover {
+  background: rgba(0, 240, 255, 0.15);
+  border-color: var(--cyber-cyan);
+  color: var(--cyber-cyan);
+}
+
+/* ==========================================================================
+   FIXER GIG CONTRACTS (PROJECT ARCHIVES)
+   ========================================================================== */
+.gigs-filter-bar {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 2.5rem;
+  flex-wrap: wrap;
+}
+
+.filter-btn {
+  font-family: var(--font-heading);
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  background: rgba(14, 18, 25, 0.85);
+  border: 1px solid var(--border-subtle);
+  color: #94A3B8;
+  padding: 8px 18px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  clip-path: polygon(0 0, calc(100% - 8px) 0, 100% 8px, 100% 100%, 0 100%);
+}
+
+.filter-btn:hover {
+  color: #FFFFFF;
+  border-color: var(--border-cyan);
+}
+
+.filter-btn.active {
+  background: var(--cyber-yellow);
+  color: #000000;
+  border-color: var(--cyber-yellow);
+  box-shadow: 0 0 12px rgba(252, 238, 10, 0.4);
+}
+
+.gigs-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 2.25rem;
+}
+
+.gig-card {
+  position: relative;
+  background: var(--bg-card);
+  border: 1px solid var(--border-cyan);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  clip-path: polygon(
+    0 0,
+    calc(100% - 20px) 0,
+    100% 20px,
+    100% 100%,
+    20px 100%,
+    0 calc(100% - 20px)
+  );
+}
+
+.gig-card:hover {
+  transform: translateY(-6px);
+  border-color: var(--cyber-yellow);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.7), 0 0 25px rgba(252, 238, 10, 0.15);
+}
+
+.gig-image-wrap {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16/9;
+  overflow: hidden;
+  border-bottom: 1px solid var(--border-cyan);
+}
+
+.gig-image-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+.gig-card:hover .gig-image-wrap img {
+  transform: scale(1.05);
+}
+
+.gig-danger-badge {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: bold;
+  letter-spacing: 1px;
+  padding: 3px 10px;
+  background: rgba(0, 0, 0, 0.8);
+  border: 1px solid var(--cyber-red);
+  color: var(--cyber-red);
+}
+
+.gig-content {
+  padding: 1.75rem;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.gig-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.75rem;
+}
+
+.gig-fixer {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--cyber-cyan);
+}
+
+.gig-reward {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  font-weight: bold;
+  color: var(--cyber-yellow);
+}
+
+.gig-title {
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: #FFFFFF;
+  margin-bottom: 0.75rem;
+  line-height: 1.3;
+}
+
+.gig-summary {
+  font-size: 0.9rem;
+  color: #94A3B8;
+  line-height: 1.5;
+  margin-bottom: 1.25rem;
+  flex-grow: 1;
+}
+
+.gig-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-bottom: 1.5rem;
+}
+
+.gig-tag {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  background: rgba(0, 240, 255, 0.08);
+  border: 1px solid rgba(0, 240, 255, 0.2);
+  color: var(--cyber-cyan);
+  padding: 2px 7px;
+}
+
+.gig-card-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+/* ==========================================================================
+   BRAINDANCE EXPERIENCE & CAREER TRACKS
+   ========================================================================== */
+.bd-track-timeline {
+  position: relative;
+  padding-left: 2.5rem;
+}
+
+.bd-track-timeline::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 12px;
+  width: 2px;
+  height: 100%;
+  background: linear-gradient(180deg, var(--cyber-yellow), var(--cyber-cyan), transparent);
+}
+
+.bd-track-item {
+  position: relative;
+  margin-bottom: 3rem;
+}
+
+.bd-track-dot {
+  position: absolute;
+  top: 4px;
+  left: -2.5rem;
+  width: 26px;
+  height: 26px;
+  background: var(--bg-dark);
+  border: 2px solid var(--cyber-yellow);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: bold;
+  color: var(--cyber-yellow);
+  box-shadow: 0 0 10px rgba(252, 238, 10, 0.3);
+}
+
+.bd-item-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-left: 3px solid var(--cyber-cyan);
+  padding: 1.75rem;
+  clip-path: polygon(0 0, calc(100% - 15px) 0, 100% 15px, 100% 100%, 0 100%);
+}
+
+.bd-item-meta {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: 0.5rem;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.bd-period {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--cyber-yellow);
+  font-weight: bold;
+}
+
+.bd-track-id {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: #64748B;
+}
+
+.bd-role {
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  font-weight: 800;
+  color: #FFFFFF;
+  margin-bottom: 0.25rem;
+}
+
+.bd-org {
+  font-family: var(--font-heading);
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--cyber-cyan);
+  margin-bottom: 1rem;
+}
+
+.bd-highlights {
+  list-style: none;
+}
+
+.bd-highlights li {
+  position: relative;
+  padding-left: 1.25rem;
+  font-size: 0.9rem;
+  color: #94A3B8;
+  margin-bottom: 0.5rem;
+  line-height: 1.45;
+}
+
+.bd-highlights li::before {
+  content: '>';
+  position: absolute;
+  left: 0;
+  color: var(--cyber-yellow);
+  font-family: var(--font-mono);
+}
+
+/* ==========================================================================
+   NETWATCH JACK-IN / CONTACT TERMINAL
+   ========================================================================== */
+.terminal-wrapper {
+  background: rgba(8, 10, 14, 0.95);
+  border: 1px solid var(--border-cyan);
+  clip-path: polygon(
+    0 0,
+    calc(100% - 20px) 0,
+    100% 20px,
+    100% 100%,
+    20px 100%,
+    0 calc(100% - 20px)
+  );
+  box-shadow: 0 0 35px rgba(0, 240, 255, 0.08);
+}
+
+.terminal-header {
+  background: rgba(14, 18, 25, 0.9);
+  padding: 0.75rem 1.5rem;
+  border-bottom: 1px solid var(--border-cyan);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.terminal-title {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--cyber-cyan);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.terminal-status-badge {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  background: rgba(0, 255, 102, 0.15);
+  color: var(--cyber-green);
+  border: 1px solid var(--cyber-green);
+  padding: 2px 8px;
+}
+
+.terminal-body {
+  padding: 2.5rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+}
+
+.terminal-info h3 {
+  font-family: var(--font-display);
+  font-size: 1.6rem;
+  font-weight: 800;
+  color: #FFFFFF;
+  margin-bottom: 1rem;
+}
+
+.terminal-info p {
+  color: #94A3B8;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  margin-bottom: 2rem;
+}
+
+.netlinks-list {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.85rem;
+}
+
+.netlink-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-family: var(--font-heading);
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  color: #CBD5E1;
+  background: rgba(16, 20, 28, 0.8);
+  border: 1px solid var(--border-subtle);
+  padding: 10px 14px;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  clip-path: polygon(0 0, calc(100% - 6px) 0, 100% 6px, 100% 100%, 0 100%);
+}
+
+.netlink-btn:hover {
+  background: rgba(0, 240, 255, 0.12);
+  border-color: var(--cyber-cyan);
+  color: var(--cyber-cyan);
+  box-shadow: 0 0 10px rgba(0, 240, 255, 0.2);
+}
+
+/* Contact Transmission Form */
+.terminal-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.form-group label {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--cyber-yellow);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.form-group input,
+.form-group textarea {
+  background: rgba(12, 14, 19, 0.9);
+  border: 1px solid rgba(0, 240, 255, 0.25);
+  color: #FFFFFF;
+  font-family: var(--font-mono);
+  font-size: 0.9rem;
+  padding: 10px 14px;
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  border-color: var(--cyber-yellow);
+  box-shadow: 0 0 12px rgba(252, 238, 10, 0.25);
+}
+
+.form-group textarea {
+  resize: vertical;
+  min-height: 110px;
+}
+
+/* Interactive Terminal Live Output Log */
+.terminal-console-log {
+  margin-top: 1rem;
+  padding: 1rem;
+  background: rgba(0, 0, 0, 0.85);
+  border-left: 2px solid var(--cyber-yellow);
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--cyber-green);
+  min-height: 50px;
+  display: none;
+}
+
+.terminal-console-log.active {
+  display: block;
+}
+
+/* ==========================================================================
+   MODAL PREVIEW WINDOW FOR FIXER GIGS
+   ========================================================================== */
+.cyber-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(5, 6, 8, 0.88);
+  backdrop-filter: blur(12px);
+  z-index: 10000;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+}
+
+.cyber-modal.active {
+  display: flex;
+}
+
+.modal-container {
+  max-width: 780px;
+  width: 100%;
+  background: var(--bg-card);
+  border: 1px solid var(--cyber-yellow);
+  box-shadow: 0 0 40px rgba(252, 238, 10, 0.25);
+  position: relative;
+  clip-path: polygon(
+    0 0,
+    calc(100% - 25px) 0,
+    100% 25px,
+    100% 100%,
+    25px 100%,
+    0 calc(100% - 25px)
+  );
+  animation: modal-enter 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.modal-header {
+  background: rgba(12, 15, 21, 0.95);
+  padding: 1rem 1.5rem;
+  border-bottom: 1px solid var(--border-yellow);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.modal-title {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  font-weight: 800;
+  color: var(--cyber-yellow);
+}
+
+.modal-close-btn {
+  background: transparent;
+  border: none;
+  font-family: var(--font-mono);
+  font-size: 1.2rem;
+  color: var(--cyber-red);
+  cursor: pointer;
+}
+
+.modal-body {
+  padding: 2rem;
+  max-height: 80vh;
+  overflow-y: auto;
+}
+
+.modal-img-wrap {
+  width: 100%;
+  aspect-ratio: 16/9;
+  overflow: hidden;
+  border: 1px solid var(--border-cyan);
+  margin-bottom: 1.5rem;
+}
+
+.modal-img-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* ==========================================================================
+   FOOTER (ARASAKA // NIGHT CITY ARCHIVE)
+   ========================================================================== */
+.footer-section {
+  padding: 4rem 0 2rem;
+  border-top: 1px solid var(--border-subtle);
+  background: rgba(6, 8, 11, 0.95);
+  position: relative;
+  z-index: 2;
+}
+
+.footer-grid {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+
+.footer-brand {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  font-weight: 900;
+  color: var(--cyber-yellow);
+  letter-spacing: 2px;
+}
+
+.footer-intel {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: #64748B;
+}
+
+.footer-copy {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: #475569;
+  text-align: center;
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* ==========================================================================
+   KEYFRAME ANIMATIONS
+   ========================================================================== */
+@keyframes pulse-chip {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.4; transform: scale(0.85); }
+}
+
+@keyframes glitch-skew {
+  0% { transform: skew(0deg); }
+  20% { transform: skew(-3deg); }
+  40% { transform: skew(2deg); }
+  60% { transform: skew(-1deg); }
+  80% { transform: skew(1deg); }
+  100% { transform: skew(0deg); }
+}
+
+@keyframes modal-enter {
+  0% { opacity: 0; transform: scale(0.92) translateY(20px); }
+  100% { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+/* ==========================================================================
+   RESPONSIVE DESIGN (TABLET & MOBILE)
+   ========================================================================== */
+@media (max-width: 992px) {
+  .hero-grid {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+  }
+  .hero-glitch-title {
+    font-size: 2.8rem;
+  }
+  .terminal-body {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+  .hud-nav {
+    display: none; /* Collapsible or streamlined on mobile */
+  }
+}
+
+@media (max-width: 640px) {
+  .hud-header {
+    padding: 0 1rem;
+  }
+  .section-title {
+    font-size: 1.8rem;
+  }
+  .hero-glitch-title {
+    font-size: 2.2rem;
+  }
+  .gigs-grid {
+    grid-template-columns: 1fr;
+  }
+  .netlinks-list {
+    grid-template-columns: 1fr;
+  }
+  .btn-cyber {
+    width: 100%;
+  }
+}
