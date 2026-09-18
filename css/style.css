@@ -123,215 +123,31 @@ body.crt-disabled .crt-overlay {
 }
 
 /* ==========================================================================
-   GAME HUD: TOP COMPASS HUD STRIP
-   ========================================================================== */
-.hud-compass-tape {
-  position: fixed;
-  top: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 520px;
-  max-width: 90vw;
-  height: 24px;
-  z-index: 1001;
-  background: rgba(10, 13, 18, 0.82);
-  border-bottom: 1px solid var(--border-cyan);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
-  clip-path: polygon(0 0, 100% 0, calc(100% - 14px) 100%, 14px 100%);
-  font-family: var(--font-mono);
-  font-size: 0.68rem;
-  color: #64748B;
-  letter-spacing: 2px;
-}
-
-.compass-track {
-  display: flex;
-  align-items: center;
-  gap: 1.8rem;
-  white-space: nowrap;
-  transition: transform 0.1s ease-out;
-}
-
-.compass-node {
-  display: inline-flex;
-  align-items: center;
-  gap: 4px;
-}
-
-.compass-node.cardinal {
-  color: var(--cyber-yellow);
-  font-weight: bold;
-}
-
-.compass-needle {
-  position: absolute;
-  top: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 2px;
-  height: 100%;
-  background: var(--cyber-yellow);
-  box-shadow: 0 0 6px var(--cyber-yellow);
-}
-
-/* ==========================================================================
-   GAME HUD: HEALTH / RAM STATUS BAR (TOP-LEFT)
-   ========================================================================== */
-.hud-status-vitals {
-  position: fixed;
-  top: 36px;
-  left: 2rem;
-  z-index: 1000;
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-  background: rgba(10, 12, 17, 0.9);
-  padding: 8px 14px;
-  border-left: 3px solid var(--cyber-red);
-  border-top: 1px solid rgba(255, 255, 255, 0.08);
-  border-right: 1px solid rgba(255, 255, 255, 0.08);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-  clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 0 100%);
-}
-
-.vital-row {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  font-family: var(--font-mono);
-  font-size: 0.7rem;
-}
-
-.vital-label {
-  color: #94A3B8;
-  width: 32px;
-  font-weight: bold;
-}
-
-.vital-bar {
-  width: 130px;
-  height: 6px;
-  background: rgba(255, 255, 255, 0.1);
-  position: relative;
-  overflow: hidden;
-}
-
-.vital-fill-hp {
-  height: 100%;
-  width: 100%;
-  background: var(--cyber-red);
-  box-shadow: 0 0 6px var(--cyber-red);
-}
-
-.vital-fill-ram {
-  height: 100%;
-  width: 88%;
-  background: var(--cyber-cyan);
-  box-shadow: 0 0 6px var(--cyber-cyan);
-}
-
-.vital-val {
-  color: #FFFFFF;
-  font-weight: bold;
-  font-size: 0.7rem;
-}
-
-/* ==========================================================================
-   GAME HUD: TACTICAL MINIMAP RADAR (TOP-RIGHT)
-   ========================================================================== */
-.hud-minimap-widget {
-  position: fixed;
-  top: 36px;
-  right: 2rem;
-  z-index: 1000;
-  width: 130px;
-  height: 130px;
-  background: rgba(10, 13, 19, 0.88);
-  border: 1px solid var(--border-cyan);
-  border-radius: 50%;
-  box-shadow: 0 0 18px rgba(0, 240, 255, 0.15);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
-}
-
-.minimap-grid {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  border-radius: 50%;
-  background: 
-    radial-gradient(circle, transparent 40%, rgba(0, 240, 255, 0.1) 41%, transparent 42%),
-    radial-gradient(circle, transparent 75%, rgba(0, 240, 255, 0.15) 76%, transparent 77%),
-    linear-gradient(rgba(0, 240, 255, 0.08) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(0, 240, 255, 0.08) 1px, transparent 1px);
-  background-size: 100% 100%, 100% 100%, 20px 20px, 20px 20px;
-}
-
-.minimap-sweep {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  border-radius: 50%;
-  background: conic-gradient(from 0deg, rgba(0, 240, 255, 0.35) 0deg, transparent 60deg);
-  animation: radar-sweep 3s linear infinite;
-}
-
-.minimap-player {
-  position: relative;
-  z-index: 2;
-  width: 0;
-  height: 0;
-  border-left: 5px solid transparent;
-  border-right: 5px solid transparent;
-  border-bottom: 9px solid var(--cyber-yellow);
-  box-shadow: 0 0 8px var(--cyber-yellow);
-}
-
-.minimap-badge {
-  position: absolute;
-  bottom: 4px;
-  font-family: var(--font-mono);
-  font-size: 0.58rem;
-  color: var(--cyber-cyan);
-  z-index: 2;
-  letter-spacing: 1px;
-}
-
-@keyframes radar-sweep {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
-}
-
-/* ==========================================================================
-   HUD MAIN HEADER BAR
+   CYBERPUNK 2077 IN-GAME MENU HEADER BAR
    ========================================================================== */
 .hud-header {
   position: fixed;
-  top: 24px;
+  top: 0;
   left: 0;
   width: 100%;
-  height: 54px;
-  z-index: 999;
-  background: rgba(10, 12, 16, 0.85);
-  backdrop-filter: blur(14px);
-  border-bottom: 1px solid var(--border-cyan);
+  height: 56px;
+  z-index: 1000;
+  background: rgba(8, 10, 15, 0.92);
+  backdrop-filter: blur(16px);
+  border-bottom: 2px solid var(--cyber-red);
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 0 2rem;
+  box-shadow: 0 4px 25px rgba(0, 0, 0, 0.8), 0 1px 15px rgba(255, 0, 60, 0.25);
 }
 
 .hud-header::after {
   content: '';
   position: absolute;
   bottom: -2px;
-  left: 18%;
-  width: 160px;
+  left: 30%;
+  width: 140px;
   height: 3px;
   background: var(--cyber-yellow);
   box-shadow: 0 0 12px var(--cyber-yellow);
@@ -340,33 +156,29 @@ body.crt-disabled .crt-overlay {
 .hud-left {
   display: flex;
   align-items: center;
-  gap: 1.5rem;
-  margin-left: 210px; /* offset vitals bar */
+  gap: 1.25rem;
 }
 
 .brand-badge {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
-  font-family: var(--font-display);
-  font-size: 0.85rem;
+  gap: 0.6rem;
+  font-family: var(--font-heading);
+  font-size: 1.05rem;
   font-weight: 800;
-  letter-spacing: 2px;
-  color: var(--cyber-yellow);
+  font-style: italic;
+  letter-spacing: 2.5px;
+  color: #FFFFFF;
   text-decoration: none;
-  padding: 4px 10px;
-  background: rgba(252, 238, 10, 0.08);
-  border-left: 3px solid var(--cyber-yellow);
-  clip-path: polygon(0 0, calc(100% - 8px) 0, 100% 8px, 100% 100%, 0 100%);
+  padding: 5px 14px;
+  background: var(--cyber-red);
+  clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 0 100%);
+  box-shadow: 0 0 12px rgba(255, 0, 60, 0.4);
 }
 
-.brand-badge .icon-chip {
-  display: inline-block;
-  width: 8px;
-  height: 8px;
-  background: var(--cyber-yellow);
-  box-shadow: 0 0 6px var(--cyber-yellow);
-  animation: pulse-chip 2s infinite;
+.brand-samurai-icon {
+  color: var(--cyber-yellow);
+  font-size: 0.95rem;
 }
 
 .telemetry-item {
@@ -379,85 +191,99 @@ body.crt-disabled .crt-overlay {
 }
 
 .telemetry-item .accent {
-  color: var(--cyber-cyan);
+  color: var(--cyber-yellow);
   font-weight: bold;
 }
 
 .telemetry-item .status-dot {
-  width: 6px;
-  height: 6px;
+  width: 7px;
+  height: 7px;
   border-radius: 50%;
   background: var(--cyber-green);
-  box-shadow: 0 0 6px var(--cyber-green);
+  box-shadow: 0 0 8px var(--cyber-green);
   display: inline-block;
 }
 
-/* Nav Menu Links */
+/* ==========================================================================
+   IN-GAME CYBERPUNK HUB NAVIGATION TABS (Q / E STYLE)
+   ========================================================================== */
 .hud-nav {
   display: flex;
   align-items: center;
-  gap: 1.25rem;
+  gap: 0.5rem;
+}
+
+.nav-bracket {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: #64748B;
+  letter-spacing: 1px;
+  padding: 0 4px;
 }
 
 .nav-link {
   font-family: var(--font-heading);
-  font-size: 0.85rem;
+  font-size: 0.88rem;
   font-weight: 700;
-  letter-spacing: 1px;
-  color: #CBD5E1;
+  font-style: italic;
+  letter-spacing: 1.5px;
+  color: #94A3B8;
   text-decoration: none;
   position: relative;
-  padding: 6px 6px;
-  transition: color 0.2s ease, text-shadow 0.2s ease;
+  padding: 8px 14px;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  transition: all 0.2s ease;
+  clip-path: polygon(6px 0, 100% 0, calc(100% - 6px) 100%, 0 100%);
 }
 
-.nav-link::before {
-  content: '▶';
+.nav-arrow {
   color: var(--cyber-yellow);
   font-size: 0.65rem;
   opacity: 0;
-  margin-right: 4px;
   transform: translateX(-4px);
-  display: inline-block;
   transition: all 0.2s ease;
 }
 
-.nav-link:hover, .nav-link.active {
-  color: var(--cyber-yellow);
-  text-shadow: 0 0 10px rgba(252, 238, 10, 0.6);
+.nav-link:hover {
+  color: #FFFFFF;
+  background: rgba(255, 255, 255, 0.05);
 }
 
-.nav-link:hover::before, .nav-link.active::before {
+.nav-link.active {
+  color: #000000;
+  background: var(--cyber-yellow);
+  box-shadow: 0 0 15px rgba(252, 238, 10, 0.5);
+  font-weight: 800;
+}
+
+.nav-link.active .nav-arrow {
+  opacity: 1;
+  color: #000000;
+  transform: translateX(0);
+}
+
+.nav-link:hover .nav-arrow {
   opacity: 1;
   transform: translateX(0);
 }
 
-/* HUD Right Controls (Audio, Scanlines, Eddies) */
+/* HUD Right Controls (Audio, Scanlines) */
 .hud-right {
   display: flex;
   align-items: center;
-  gap: 1rem;
-  margin-right: 150px; /* offset minimap */
-}
-
-.eddie-counter {
-  font-family: var(--font-mono);
-  font-size: 0.8rem;
-  font-weight: bold;
-  color: var(--cyber-yellow);
-  background: rgba(252, 238, 10, 0.1);
-  border: 1px solid rgba(252, 238, 10, 0.3);
-  padding: 3px 10px;
-  letter-spacing: 1px;
+  gap: 0.75rem;
 }
 
 .hud-ctrl-btn {
   font-family: var(--font-mono);
   font-size: 0.75rem;
+  font-weight: bold;
   color: var(--cyber-cyan);
   background: rgba(0, 240, 255, 0.08);
   border: 1px solid var(--border-cyan);
-  padding: 4px 10px;
+  padding: 6px 14px;
   cursor: pointer;
   transition: all 0.2s ease;
   clip-path: polygon(0 0, calc(100% - 6px) 0, 100% 6px, 100% 100%, 0 100%);
@@ -466,7 +292,7 @@ body.crt-disabled .crt-overlay {
 .hud-ctrl-btn:hover {
   background: var(--cyber-cyan);
   color: #000000;
-  box-shadow: 0 0 10px var(--cyber-cyan);
+  box-shadow: 0 0 12px var(--cyber-cyan);
 }
 
 /* ==========================================================================
@@ -478,14 +304,15 @@ body.crt-disabled .crt-overlay {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 0.75rem;
-  font-family: var(--font-display);
-  font-size: 0.88rem;
-  font-weight: 800;
+  gap: 0.85rem;
+  font-family: var(--font-heading);
+  font-size: 0.92rem;
+  font-weight: 700;
+  font-style: italic;
   letter-spacing: 2px;
   text-transform: uppercase;
   text-decoration: none;
-  padding: 14px 32px;
+  padding: 14px 34px;
   border: none;
   cursor: pointer;
   outline: none;
@@ -493,67 +320,68 @@ body.crt-disabled .crt-overlay {
   overflow: hidden;
   z-index: 1;
 
-  /* Shape-Shifting Clip-Path (Default: asymmetric chamfered top-right & bottom-left) */
+  /* Asymmetric 45° cut on top-right and bottom-left */
   clip-path: polygon(
     0 0,
-    calc(100% - 16px) 0,
-    100% 16px,
+    calc(100% - 18px) 0,
+    100% 18px,
     100% 100%,
-    16px 100%,
-    0 calc(100% - 16px)
+    18px 100%,
+    0 calc(100% - 18px)
   );
 
   /* Smooth shape-shift transition */
   transition: 
     clip-path 0.25s var(--ease-cyber),
-    transform 0.15s ease,
+    transform 0.18s var(--ease-cyber),
     box-shadow 0.25s ease,
     background-color 0.2s ease,
     color 0.2s ease;
 }
 
-/* Shape-Shift on Hover: Inverts cut angles from top-right to top-left & bottom-right */
+/* SHAPE-SHIFTING MOVEMENT ON HOVER:
+   Cuts invert to top-left and bottom-right, button kicks right and scales! */
 .btn-cyber:hover {
   clip-path: polygon(
-    16px 0,
+    18px 0,
     100% 0,
-    100% calc(100% - 16px),
-    calc(100% - 16px) 100%,
+    100% calc(100% - 18px),
+    calc(100% - 18px) 100%,
     0 100%,
-    0 16px
+    0 18px
   );
-  transform: translateY(-2px);
+  transform: translateX(4px) translateY(-2px) scale(1.02);
 }
 
 .btn-cyber:active {
-  transform: scale(0.96) translateY(0);
+  transform: scale(0.97) translateY(0);
 }
 
-/* Internal Sliding Shifter Background */
+/* Internal Sliding Shifter Background Plate */
 .btn-cyber::before {
   content: '';
   position: absolute;
   top: 0;
-  left: -100%;
-  width: 100%;
+  left: -120%;
+  width: 120%;
   height: 100%;
-  background: rgba(255, 255, 255, 0.25);
+  background: rgba(255, 255, 255, 0.3);
   transform: skewX(-25deg);
-  transition: transform 0.4s var(--ease-cyber), left 0.4s var(--ease-cyber);
+  transition: left 0.35s var(--ease-cyber);
   z-index: -1;
   pointer-events: none;
 }
 
 .btn-cyber:hover::before {
-  left: 110%;
+  left: 120%;
 }
 
 /* Outer Expanding Corner Registration Brackets */
 .btn-cyber .corner-bracket-tl,
 .btn-cyber .corner-bracket-br {
   position: absolute;
-  width: 6px;
-  height: 6px;
+  width: 7px;
+  height: 7px;
   pointer-events: none;
   transition: transform 0.25s var(--ease-cyber), opacity 0.25s ease;
 }
@@ -573,13 +401,13 @@ body.crt-disabled .crt-overlay {
 }
 
 .btn-cyber:hover .corner-bracket-tl {
-  transform: translate(-3px, -3px);
-  opacity: 0.9;
+  transform: translate(-4px, -4px);
+  opacity: 1;
 }
 
 .btn-cyber:hover .corner-bracket-br {
-  transform: translate(3px, 3px);
-  opacity: 0.9;
+  transform: translate(4px, 4px);
+  opacity: 1;
 }
 
 /* Cyber Yellow Primary Button */
@@ -594,10 +422,99 @@ body.crt-disabled .crt-overlay {
   font-family: var(--font-mono);
   font-size: 0.75rem;
   letter-spacing: -2px;
-  opacity: 0.7;
+  opacity: 0.8;
 }
 
 .btn-cyber-yellow:hover {
+  background: #FFF233;
+  color: #000000;
+  box-shadow: 0 0 35px rgba(252, 238, 10, 0.85), inset 0 0 14px rgba(0,0,0,0.2);
+  animation: glitch-jitter 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+}
+
+/* Arasaka Red Danger Hostile Button */
+.btn-cyber-red {
+  background: var(--cyber-red);
+  color: #FFFFFF;
+  box-shadow: 0 0 18px rgba(255, 0, 60, 0.45);
+}
+
+.btn-cyber-red::after {
+  content: '▶';
+  font-size: 0.75rem;
+  transition: transform 0.2s ease;
+}
+
+.btn-cyber-red:hover {
+  background: #FF1A4C;
+  box-shadow: 0 0 35px rgba(255, 0, 60, 0.9);
+  animation: glitch-jitter 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+}
+
+.btn-cyber-red:hover::after {
+  transform: translateX(5px);
+}
+
+/* Hologram Cyan Button */
+.btn-cyber-cyan {
+  background: var(--cyber-cyan);
+  color: #000000;
+  box-shadow: 0 0 18px rgba(0, 240, 255, 0.4);
+}
+
+.btn-cyber-cyan:hover {
+  background: #52F6FF;
+  box-shadow: 0 0 35px rgba(0, 240, 255, 0.85);
+  animation: glitch-jitter 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+}
+
+/* Wireframe Tactical Ghost Button */
+.btn-cyber-ghost {
+  background: rgba(12, 16, 24, 0.9);
+  color: #E2E8F0;
+  border: 1px solid var(--border-cyan);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.6);
+}
+
+.btn-cyber-ghost:hover {
+  background: rgba(0, 240, 255, 0.18);
+  color: var(--cyber-cyan);
+  border-color: var(--cyber-cyan);
+  box-shadow: 0 0 22px rgba(0, 240, 255, 0.45);
+}
+
+/* Small Button Variant */
+.btn-cyber-sm {
+  padding: 8px 18px;
+  font-size: 0.78rem;
+  clip-path: polygon(
+    0 0,
+    calc(100% - 12px) 0,
+    100% 12px,
+    100% 100%,
+    12px 100%,
+    0 calc(100% - 12px)
+  );
+}
+
+.btn-cyber-sm:hover {
+  clip-path: polygon(
+    12px 0,
+    100% 0,
+    100% calc(100% - 12px),
+    calc(100% - 12px) 100%,
+    0 100%,
+    0 12px
+  );
+}
+
+@keyframes glitch-jitter {
+  0% { transform: translateX(4px) translateY(-2px) skew(0deg); }
+  25% { transform: translateX(1px) translateY(-2px) skew(-2deg); }
+  50% { transform: translateX(7px) translateY(-2px) skew(2deg); }
+  75% { transform: translateX(3px) translateY(-2px) skew(-1deg); }
+  100% { transform: translateX(4px) translateY(-2px) skew(0deg); }
+}
   background: #FFF133;
   color: #000000;
   box-shadow: 0 0 30px rgba(252, 238, 10, 0.8), inset 0 0 12px rgba(0,0,0,0.15);
