@@ -1,41 +1,37 @@
 /* ==========================================================================
    CYBERPUNK 2077 MASTER DESIGN SYSTEM & HUD STYLES
-   Authentic In-Game HUD, Police (Typography), & Shape-Shifting Buttons
-   Inspired by Vladimír Vilimovský's Behance Art Bible & CD Projekt Red
+   Inspired by Vladimír Vilimovský's UI Art Bible & Figma PPT Template
    ========================================================================== */
 
-@import url('https://fonts.googleapis.com/css2?family=Chakra+Petch:ital,wght@0,300;0,500;0,600;0,700;1,700&family=Orbitron:wght@400;600;700;800;900&family=Rajdhani:wght@500;600;700&family=Share+Tech+Mono&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Chakra+Petch:ital,wght@0,300;0,500;0,700;1,700&family=Orbitron:wght@400;600;800;900&family=Rajdhani:wght@500;600;700&family=Share+Tech+Mono&display=swap');
 
 :root {
   /* Core Cyberpunk Palette */
   --cyber-yellow: #FCEE0A;
-  --cyber-yellow-dark: #C4B905;
-  --cyber-yellow-glow: rgba(252, 238, 10, 0.55);
+  --cyber-yellow-glow: rgba(252, 238, 10, 0.45);
   --cyber-red: #FF003C;
-  --cyber-red-dark: #B3002A;
-  --cyber-red-glow: rgba(255, 0, 60, 0.6);
+  --cyber-red-glow: rgba(255, 0, 60, 0.5);
   --cyber-cyan: #00F0FF;
-  --cyber-cyan-glow: rgba(0, 240, 255, 0.55);
+  --cyber-cyan-glow: rgba(0, 240, 255, 0.45);
   --cyber-blue-koi: #0077FE;
   --cyber-orange-koi: #FF7700;
-  --cyber-orange-glow: rgba(255, 119, 0, 0.55);
+  --cyber-orange-glow: rgba(255, 119, 0, 0.45);
   --cyber-green: #00FF66;
   --cyber-purple: #BD00FF;
 
   /* Surfaces & Dark Substrates */
-  --bg-darkest: #040507;
-  --bg-dark: #090B10;
-  --bg-surface: #0E121A;
-  --bg-panel: rgba(14, 18, 25, 0.88);
-  --bg-card: rgba(18, 23, 33, 0.92);
+  --bg-darkest: #050608;
+  --bg-dark: #0A0C10;
+  --bg-surface: #10131A;
+  --bg-panel: rgba(16, 19, 26, 0.88);
+  --bg-card: rgba(20, 24, 33, 0.92);
   --border-subtle: rgba(255, 255, 255, 0.08);
-  --border-cyan: rgba(0, 240, 255, 0.35);
-  --border-yellow: rgba(252, 238, 10, 0.45);
-  --border-red: rgba(255, 0, 60, 0.45);
+  --border-cyan: rgba(0, 240, 255, 0.3);
+  --border-yellow: rgba(252, 238, 10, 0.4);
 
-  /* Typography / Police */
-  --font-display: 'Orbitron', sans-serif;
-  --font-heading: 'Chakra Petch', sans-serif;
+  /* Typography */
+  --font-display: 'Orbitron', 'Chakra Petch', sans-serif;
+  --font-heading: 'Chakra Petch', 'Orbitron', sans-serif;
   --font-body: 'Rajdhani', sans-serif;
   --font-mono: 'Share Tech Mono', monospace;
 
@@ -65,11 +61,11 @@ body {
   min-height: 100vh;
   background-color: var(--bg-darkest);
   background-image: 
-    radial-gradient(circle at 15% 20%, rgba(0, 240, 255, 0.05) 0%, transparent 45%),
-    radial-gradient(circle at 85% 65%, rgba(255, 119, 0, 0.05) 0%, transparent 45%),
+    radial-gradient(circle at 15% 20%, rgba(0, 240, 255, 0.04) 0%, transparent 45%),
+    radial-gradient(circle at 85% 65%, rgba(255, 119, 0, 0.04) 0%, transparent 45%),
     linear-gradient(rgba(255, 255, 255, 0.015) 1px, transparent 1px),
     linear-gradient(90deg, rgba(255, 255, 255, 0.015) 1px, transparent 1px);
-  background-size: 100% 100%, 100% 100%, 36px 36px, 36px 36px;
+  background-size: 100% 100%, 100% 100%, 40px 40px, 40px 40px;
   overflow-x: hidden;
 }
 
@@ -81,9 +77,9 @@ body {
 }
 
 /* ==========================================================================
-   3D THREE.JS CANVAS CONTAINER (NIGHT CITY SKYLINE & 3D HOLOGRAPHIC KOI)
+   HOLOGRAPHIC CANVAS (BLUE & ORANGE KOI FISH)
    ========================================================================== */
-#three-canvas-container {
+#koi-canvas {
   position: fixed;
   top: 0;
   left: 0;
@@ -91,13 +87,7 @@ body {
   height: 100vh;
   pointer-events: none;
   z-index: 1;
-  opacity: 0.95;
-}
-
-#three-canvas-container canvas {
-  width: 100%;
-  height: 100%;
-  display: block;
+  opacity: 0.88;
 }
 
 /* ==========================================================================
@@ -111,9 +101,9 @@ body {
   height: 100vh;
   pointer-events: none;
   z-index: 9999;
-  background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.28) 50%);
+  background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%);
   background-size: 100% 3px;
-  opacity: 0.38;
+  opacity: 0.35;
   transition: opacity 0.3s ease;
 }
 
@@ -123,62 +113,64 @@ body.crt-disabled .crt-overlay {
 }
 
 /* ==========================================================================
-   CYBERPUNK 2077 IN-GAME MENU HEADER BAR
+   HUD TOP BAR (SYSTEM TELEMETRY & CONTROLS)
    ========================================================================== */
 .hud-header {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
-  height: 56px;
+  height: 52px;
   z-index: 1000;
-  background: rgba(8, 10, 15, 0.92);
-  backdrop-filter: blur(16px);
-  border-bottom: 2px solid var(--cyber-red);
+  background: rgba(10, 12, 16, 0.88);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border-cyan);
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 0 2rem;
-  box-shadow: 0 4px 25px rgba(0, 0, 0, 0.8), 0 1px 15px rgba(255, 0, 60, 0.25);
 }
 
 .hud-header::after {
   content: '';
   position: absolute;
   bottom: -2px;
-  left: 30%;
+  left: 15%;
   width: 140px;
   height: 3px;
   background: var(--cyber-yellow);
-  box-shadow: 0 0 12px var(--cyber-yellow);
+  box-shadow: 0 0 10px var(--cyber-yellow);
 }
 
 .hud-left {
   display: flex;
   align-items: center;
-  gap: 1.25rem;
+  gap: 1.5rem;
 }
 
 .brand-badge {
   display: flex;
   align-items: center;
-  gap: 0.6rem;
-  font-family: var(--font-heading);
-  font-size: 1.05rem;
+  gap: 0.5rem;
+  font-family: var(--font-display);
+  font-size: 0.85rem;
   font-weight: 800;
-  font-style: italic;
-  letter-spacing: 2.5px;
-  color: #FFFFFF;
+  letter-spacing: 2px;
+  color: var(--cyber-yellow);
   text-decoration: none;
-  padding: 5px 14px;
-  background: var(--cyber-red);
-  clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 0 100%);
-  box-shadow: 0 0 12px rgba(255, 0, 60, 0.4);
+  padding: 4px 10px;
+  background: rgba(252, 238, 10, 0.08);
+  border-left: 3px solid var(--cyber-yellow);
+  clip-path: polygon(0 0, calc(100% - 8px) 0, 100% 8px, 100% 100%, 0 100%);
 }
 
-.brand-samurai-icon {
-  color: var(--cyber-yellow);
-  font-size: 0.95rem;
+.brand-badge .icon-chip {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  background: var(--cyber-yellow);
+  box-shadow: 0 0 6px var(--cyber-yellow);
+  animation: pulse-chip 2s infinite;
 }
 
 .telemetry-item {
@@ -191,99 +183,88 @@ body.crt-disabled .crt-overlay {
 }
 
 .telemetry-item .accent {
-  color: var(--cyber-yellow);
+  color: var(--cyber-cyan);
   font-weight: bold;
 }
 
 .telemetry-item .status-dot {
-  width: 7px;
-  height: 7px;
+  width: 6px;
+  height: 6px;
   border-radius: 50%;
   background: var(--cyber-green);
-  box-shadow: 0 0 8px var(--cyber-green);
+  box-shadow: 0 0 6px var(--cyber-green);
   display: inline-block;
 }
 
-/* ==========================================================================
-   IN-GAME CYBERPUNK HUB NAVIGATION TABS (Q / E STYLE)
-   ========================================================================== */
+/* Nav Menu Links */
 .hud-nav {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
-}
-
-.nav-bracket {
-  font-family: var(--font-mono);
-  font-size: 0.72rem;
-  color: #64748B;
-  letter-spacing: 1px;
-  padding: 0 4px;
+  gap: 1.5rem;
 }
 
 .nav-link {
   font-family: var(--font-heading);
-  font-size: 0.88rem;
+  font-size: 0.85rem;
   font-weight: 700;
-  font-style: italic;
-  letter-spacing: 1.5px;
-  color: #94A3B8;
+  letter-spacing: 1px;
+  color: #CBD5E1;
   text-decoration: none;
   position: relative;
-  padding: 8px 14px;
-  display: inline-flex;
-  align-items: center;
-  gap: 0.4rem;
-  transition: all 0.2s ease;
-  clip-path: polygon(6px 0, 100% 0, calc(100% - 6px) 100%, 0 100%);
+  padding: 6px 4px;
+  transition: color 0.2s ease;
 }
 
-.nav-arrow {
+.nav-link::before {
+  content: '[';
   color: var(--cyber-yellow);
-  font-size: 0.65rem;
   opacity: 0;
-  transform: translateX(-4px);
-  transition: all 0.2s ease;
+  margin-right: 2px;
+  transition: opacity 0.2s ease;
 }
 
-.nav-link:hover {
-  color: #FFFFFF;
-  background: rgba(255, 255, 255, 0.05);
+.nav-link::after {
+  content: ']';
+  color: var(--cyber-yellow);
+  opacity: 0;
+  margin-left: 2px;
+  transition: opacity 0.2s ease;
 }
 
-.nav-link.active {
-  color: #000000;
-  background: var(--cyber-yellow);
-  box-shadow: 0 0 15px rgba(252, 238, 10, 0.5);
-  font-weight: 800;
+.nav-link:hover, .nav-link.active {
+  color: var(--cyber-yellow);
 }
 
-.nav-link.active .nav-arrow {
+.nav-link:hover::before, .nav-link:hover::after,
+.nav-link.active::before, .nav-link.active::after {
   opacity: 1;
-  color: #000000;
-  transform: translateX(0);
 }
 
-.nav-link:hover .nav-arrow {
-  opacity: 1;
-  transform: translateX(0);
-}
-
-/* HUD Right Controls (Audio, Scanlines) */
+/* HUD Right Controls (Audio, Scanlines, Eddies) */
 .hud-right {
   display: flex;
   align-items: center;
-  gap: 0.75rem;
+  gap: 1rem;
+}
+
+.eddie-counter {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  font-weight: bold;
+  color: var(--cyber-yellow);
+  background: rgba(252, 238, 10, 0.1);
+  border: 1px solid rgba(252, 238, 10, 0.3);
+  padding: 3px 10px;
+  letter-spacing: 1px;
 }
 
 .hud-ctrl-btn {
   font-family: var(--font-mono);
   font-size: 0.75rem;
-  font-weight: bold;
   color: var(--cyber-cyan);
   background: rgba(0, 240, 255, 0.08);
   border: 1px solid var(--border-cyan);
-  padding: 6px 14px;
+  padding: 4px 10px;
   cursor: pointer;
   transition: all 0.2s ease;
   clip-path: polygon(0 0, calc(100% - 6px) 0, 100% 6px, 100% 100%, 0 100%);
@@ -292,122 +273,53 @@ body.crt-disabled .crt-overlay {
 .hud-ctrl-btn:hover {
   background: var(--cyber-cyan);
   color: #000000;
-  box-shadow: 0 0 12px var(--cyber-cyan);
+  box-shadow: 0 0 10px var(--cyber-cyan);
 }
 
 /* ==========================================================================
-   CYBERPUNK SHAPE-SHIFTING BUTTONS
-   (Morphing clip-paths, sliding slivers, expanding brackets, and chromatic split)
+   CYBERPUNK ASYMMETRICAL CHAMFERED BUTTONS
+   (Directly modeled on Cyberpunk 2077 game HUD buttons & Behance Art Bible)
    ========================================================================== */
 .btn-cyber {
   position: relative;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 0.85rem;
-  font-family: var(--font-heading);
-  font-size: 0.92rem;
-  font-weight: 700;
-  font-style: italic;
+  gap: 0.6rem;
+  font-family: var(--font-display);
+  font-size: 0.85rem;
+  font-weight: 800;
   letter-spacing: 2px;
   text-transform: uppercase;
   text-decoration: none;
-  padding: 14px 34px;
+  padding: 12px 28px;
   border: none;
   cursor: pointer;
+  transition: transform 0.15s ease, box-shadow 0.2s ease;
   outline: none;
   user-select: none;
-  overflow: hidden;
-  z-index: 1;
-
-  /* Asymmetric 45° cut on top-right and bottom-left */
+  /* Asymmetric 45-degree angle cuts */
   clip-path: polygon(
     0 0,
-    calc(100% - 18px) 0,
-    100% 18px,
+    calc(100% - 15px) 0,
+    100% 15px,
     100% 100%,
-    18px 100%,
-    0 calc(100% - 18px)
+    15px 100%,
+    0 calc(100% - 15px)
   );
-
-  /* Smooth shape-shift transition */
-  transition: 
-    clip-path 0.25s var(--ease-cyber),
-    transform 0.18s var(--ease-cyber),
-    box-shadow 0.25s ease,
-    background-color 0.2s ease,
-    color 0.2s ease;
 }
 
-/* SHAPE-SHIFTING MOVEMENT ON HOVER:
-   Cuts invert to top-left and bottom-right, button kicks right and scales! */
-.btn-cyber:hover {
-  clip-path: polygon(
-    18px 0,
-    100% 0,
-    100% calc(100% - 18px),
-    calc(100% - 18px) 100%,
-    0 100%,
-    0 18px
-  );
-  transform: translateX(4px) translateY(-2px) scale(1.02);
+.btn-cyber .btn-glitch-layer {
+  display: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
 }
 
 .btn-cyber:active {
-  transform: scale(0.97) translateY(0);
-}
-
-/* Internal Sliding Shifter Background Plate */
-.btn-cyber::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -120%;
-  width: 120%;
-  height: 100%;
-  background: rgba(255, 255, 255, 0.3);
-  transform: skewX(-25deg);
-  transition: left 0.35s var(--ease-cyber);
-  z-index: -1;
-  pointer-events: none;
-}
-
-.btn-cyber:hover::before {
-  left: 120%;
-}
-
-/* Outer Expanding Corner Registration Brackets */
-.btn-cyber .corner-bracket-tl,
-.btn-cyber .corner-bracket-br {
-  position: absolute;
-  width: 7px;
-  height: 7px;
-  pointer-events: none;
-  transition: transform 0.25s var(--ease-cyber), opacity 0.25s ease;
-}
-
-.btn-cyber .corner-bracket-tl {
-  top: 3px;
-  left: 3px;
-  border-top: 2px solid currentColor;
-  border-left: 2px solid currentColor;
-}
-
-.btn-cyber .corner-bracket-br {
-  bottom: 3px;
-  right: 3px;
-  border-bottom: 2px solid currentColor;
-  border-right: 2px solid currentColor;
-}
-
-.btn-cyber:hover .corner-bracket-tl {
-  transform: translate(-4px, -4px);
-  opacity: 1;
-}
-
-.btn-cyber:hover .corner-bracket-br {
-  transform: translate(4px, 4px);
-  opacity: 1;
+  transform: scale(0.97);
 }
 
 /* Cyber Yellow Primary Button */
@@ -422,126 +334,73 @@ body.crt-disabled .crt-overlay {
   font-family: var(--font-mono);
   font-size: 0.75rem;
   letter-spacing: -2px;
-  opacity: 0.8;
+  opacity: 0.6;
 }
 
 .btn-cyber-yellow:hover {
-  background: #FFF233;
-  color: #000000;
-  box-shadow: 0 0 35px rgba(252, 238, 10, 0.85), inset 0 0 14px rgba(0,0,0,0.2);
-  animation: glitch-jitter 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+  background: #FFF033;
+  box-shadow: 0 0 25px rgba(252, 238, 10, 0.7), inset 0 0 10px rgba(0,0,0,0.2);
+  animation: glitch-skew 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
 }
 
-/* Arasaka Red Danger Hostile Button */
+/* Arasaka Red Danger Button */
 .btn-cyber-red {
   background: var(--cyber-red);
   color: #FFFFFF;
-  box-shadow: 0 0 18px rgba(255, 0, 60, 0.45);
+  box-shadow: 0 0 15px rgba(255, 0, 60, 0.4);
 }
 
 .btn-cyber-red::after {
   content: '▶';
   font-size: 0.75rem;
-  transition: transform 0.2s ease;
 }
 
 .btn-cyber-red:hover {
-  background: #FF1A4C;
-  box-shadow: 0 0 35px rgba(255, 0, 60, 0.9);
-  animation: glitch-jitter 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
-}
-
-.btn-cyber-red:hover::after {
-  transform: translateX(5px);
+  background: #FF2A54;
+  box-shadow: 0 0 25px rgba(255, 0, 60, 0.75);
+  animation: glitch-skew 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
 }
 
 /* Hologram Cyan Button */
 .btn-cyber-cyan {
   background: var(--cyber-cyan);
   color: #000000;
-  box-shadow: 0 0 18px rgba(0, 240, 255, 0.4);
+  box-shadow: 0 0 15px rgba(0, 240, 255, 0.35);
 }
 
 .btn-cyber-cyan:hover {
-  background: #52F6FF;
-  box-shadow: 0 0 35px rgba(0, 240, 255, 0.85);
-  animation: glitch-jitter 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+  background: #5CF6FF;
+  box-shadow: 0 0 25px rgba(0, 240, 255, 0.7);
+  animation: glitch-skew 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
 }
 
-/* Wireframe Tactical Ghost Button */
+/* Wireframe Ghost Outline Button */
 .btn-cyber-ghost {
-  background: rgba(12, 16, 24, 0.9);
+  background: rgba(14, 18, 25, 0.85);
   color: #E2E8F0;
   border: 1px solid var(--border-cyan);
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.6);
 }
 
 .btn-cyber-ghost:hover {
-  background: rgba(0, 240, 255, 0.18);
+  background: rgba(0, 240, 255, 0.15);
   color: var(--cyber-cyan);
   border-color: var(--cyber-cyan);
-  box-shadow: 0 0 22px rgba(0, 240, 255, 0.45);
+  box-shadow: 0 0 15px rgba(0, 240, 255, 0.35);
 }
 
-/* Small Button Variant */
+/* Small Variant */
 .btn-cyber-sm {
-  padding: 8px 18px;
-  font-size: 0.78rem;
+  padding: 7px 16px;
+  font-size: 0.75rem;
   clip-path: polygon(
     0 0,
-    calc(100% - 12px) 0,
-    100% 12px,
+    calc(100% - 10px) 0,
+    100% 10px,
     100% 100%,
-    12px 100%,
-    0 calc(100% - 12px)
+    10px 100%,
+    0 calc(100% - 10px)
   );
 }
-
-.btn-cyber-sm:hover {
-  clip-path: polygon(
-    12px 0,
-    100% 0,
-    100% calc(100% - 12px),
-    calc(100% - 12px) 100%,
-    0 100%,
-    0 12px
-  );
-}
-
-@keyframes glitch-jitter {
-  0% { transform: translateX(4px) translateY(-2px) skew(0deg); }
-  25% { transform: translateX(1px) translateY(-2px) skew(-2deg); }
-  50% { transform: translateX(7px) translateY(-2px) skew(2deg); }
-  75% { transform: translateX(3px) translateY(-2px) skew(-1deg); }
-  100% { transform: translateX(4px) translateY(-2px) skew(0deg); }
-}
-  background: #FFF133;
-  color: #000000;
-  box-shadow: 0 0 30px rgba(252, 238, 10, 0.8), inset 0 0 12px rgba(0,0,0,0.15);
-  animation: glitch-jitter 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
-}
-
-/* Arasaka Red Danger Hostile Button */
-.btn-cyber-red {
-  background: var(--cyber-red);
-  color: #FFFFFF;
-  box-shadow: 0 0 18px rgba(255, 0, 60, 0.45);
-}
-
-.btn-cyber-red::after {
-  content: '▶';
-  font-size: 0.75rem;
-  transition: transform 0.2s ease;
-}
-
-.btn-cyber-red:hover {
-  background: #FF1A4C;
-  box-shadow: 0 0 30px rgba(255, 0, 60, 0.85);
-  animation: glitch-jitter 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
-}
-
-.btn-cyber-red:hover::after {
-  transform: translateX(4px);
 
 /* ==========================================================================
    LAYOUT CONTAINERS & CYBER CARDS

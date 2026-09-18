@@ -26,59 +26,42 @@
   <!-- Ambient CRT Scanline & Phosphor Overlay -->
   <div class="crt-overlay" id="crt-screen-overlay" aria-hidden="true"></div>
 
-  <!-- 3D Three.js Japantown Parade & Holographic Blue and Orange Koi -->
-  <div id="three-canvas-container" aria-label="3D Night City Japantown Parade with Holographic Koi Fish"></div>
+  <!-- Interactive 3D Holographic Swimming Koi Fish (Blue & Orange) -->
+  <canvas id="koi-canvas" aria-label="Interactive blue and orange holographic koi fish"></canvas>
 
   <!-- ========================================================================
-       CYBERPUNK 2077 IN-GAME MENU HEADER
+       TOP HUD STATUS BAR (SYSTEM TELEMETRY & CONTROLS)
        ======================================================================== -->
   <header class="hud-header" id="hud-top-bar">
     <div class="hud-left">
       <a href="#hero" class="brand-badge" id="hud-brand-link">
-        <span class="brand-samurai-icon">★</span>
-        <span>V // 2077</span>
+        <span class="icon-chip"></span>
+        <span>NETRUNNER // V.2.0.77</span>
       </a>
       <div class="telemetry-item">
         <span class="status-dot"></span>
-        <span>ICE: <span class="accent">ACTIVE</span></span>
+        <span>ICE: <span class="accent">SECURE</span></span>
       </div>
       <div class="telemetry-item" id="hud-clock-item">
         <span>NC TIME: <span class="accent" id="hud-clock">2077.10.24 // 00:00:00</span></span>
       </div>
     </div>
 
-    <!-- Authentic In-Game Cyberpunk Hub Nav Tabs -->
+    <!-- HUD Navigation Links -->
     <nav class="hud-nav" aria-label="Main Navigation">
-      <span class="nav-bracket nav-bracket-left">[ ◄ Q ]</span>
-      <a href="#hero" class="nav-link active" data-tab="protocol">
-        <span class="nav-arrow">▶</span>
-        <span class="nav-text">PROTOCOL</span>
-      </a>
-      <a href="#attributes" class="nav-link" data-tab="attributes">
-        <span class="nav-arrow">▶</span>
-        <span class="nav-text">ATTRIBUTES</span>
-      </a>
-      <a href="#cyberware" class="nav-link" data-tab="cyberware">
-        <span class="nav-arrow">▶</span>
-        <span class="nav-text">CYBERWARE</span>
-      </a>
-      <a href="#gigs" class="nav-link" data-tab="gigs">
-        <span class="nav-arrow">▶</span>
-        <span class="nav-text">JOURNAL // GIGS</span>
-      </a>
-      <a href="#braindance" class="nav-link" data-tab="braindance">
-        <span class="nav-arrow">▶</span>
-        <span class="nav-text">BRAINDANCE</span>
-      </a>
-      <a href="#jack-in" class="nav-link" data-tab="jackin">
-        <span class="nav-arrow">▶</span>
-        <span class="nav-text">JACK_IN</span>
-      </a>
-      <span class="nav-bracket nav-bracket-right">[ E ► ]</span>
+      <a href="#hero" class="nav-link active">[01. PROTOCOL]</a>
+      <a href="#attributes" class="nav-link">[02. ATTRIBUTES]</a>
+      <a href="#cyberware" class="nav-link">[03. CYBERWARE]</a>
+      <a href="#gigs" class="nav-link">[04. GIGS]</a>
+      <a href="#braindance" class="nav-link">[05. BRAINDANCE]</a>
+      <a href="#jack-in" class="nav-link">[06. JACK_IN]</a>
     </nav>
 
-    <!-- HUD Action Controls (Audio SFX, CRT Filter) -->
+    <!-- HUD Action Controls (Audio SFX, CRT Filter, Eddies) -->
     <div class="hud-right">
+      <div class="eddie-counter" id="eddie-balance" title="Night City Currency">
+        <span>€$ 142,850</span>
+      </div>
       <button class="hud-ctrl-btn" id="btn-toggle-audio" title="Toggle Synthesized Cyber SFX">
         SFX: ON
       </button>
@@ -119,18 +102,12 @@
 
             <div class="hero-actions">
               <a href="#gigs" class="btn-cyber btn-cyber-yellow" id="btn-hero-explore">
-                <span class="corner-bracket-tl"></span>
-                <span class="corner-bracket-br"></span>
                 EXPLORE FIXER GIGS
               </a>
               <a href="#jack-in" class="btn-cyber btn-cyber-red" id="btn-hero-jackin">
-                <span class="corner-bracket-tl"></span>
-                <span class="corner-bracket-br"></span>
                 JACK IN // CONTACT
               </a>
               <a href="#cyberware" class="btn-cyber btn-cyber-ghost" id="btn-hero-cyberware">
-                <span class="corner-bracket-tl"></span>
-                <span class="corner-bracket-br"></span>
                 INSPECT CYBERWARE
               </a>
             </div>
@@ -362,11 +339,10 @@
     </div>
   </footer>
 
-  <!-- Three.js 3D Engine & Scripts -->
-  <script src="js/vendor/three.min.js"></script>
+  <!-- Scripts -->
   <script src="js/portfolio-data.js"></script>
   <script src="js/cyber-audio.js"></script>
-  <script src="js/three-koi-scene.js"></script>
+  <script src="js/koi-hologram.js"></script>
   <script src="js/main.js"></script>
 </body>
 </html>
