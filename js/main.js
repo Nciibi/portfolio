@@ -108,9 +108,13 @@ function renderGigs(filterCategory = "all") {
         </div>
         <div class="gig-card-actions">
           <button class="btn-cyber btn-cyber-yellow btn-cyber-sm gig-modal-trigger" data-id="${gig.id}">
+            <span class="corner-bracket-tl"></span>
+            <span class="corner-bracket-br"></span>
             VIEW DOSSIER
           </button>
           <a href="${gig.repoUrl}" target="_blank" rel="noopener" class="btn-cyber btn-cyber-ghost btn-cyber-sm">
+            <span class="corner-bracket-tl"></span>
+            <span class="corner-bracket-br"></span>
             SOURCE CODE
           </a>
         </div>
@@ -223,9 +227,13 @@ function openGigModal(gigId) {
     </div>
     <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
       <a href="${gig.demoUrl}" target="_blank" rel="noopener" class="btn-cyber btn-cyber-yellow">
+        <span class="corner-bracket-tl"></span>
+        <span class="corner-bracket-br"></span>
         LAUNCH LIVE INTERFACE
       </a>
       <a href="${gig.repoUrl}" target="_blank" rel="noopener" class="btn-cyber btn-cyber-ghost">
+        <span class="corner-bracket-tl"></span>
+        <span class="corner-bracket-br"></span>
         ACCESS SOURCE CODE
       </a>
     </div>
