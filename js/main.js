@@ -15,6 +15,7 @@ document.addEventListener("DOMContentLoaded", () => {
   initHUDControls();
   initModalEvents();
   initTerminalTransmission();
+  initScrollSpy();
 });
 
 /* --------------------------------------------------------------------------
