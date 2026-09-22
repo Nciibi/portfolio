@@ -246,7 +246,7 @@ function renderProjects() {
           <div class="gig-tags">${tags}</div>
           <div class="pc-actions">
             <span class="pc-likes">♥ ${p.likes}</span>
-            <a href="${p.url}" target="_blank" rel="noopener" class="btn-cyber btn-cyber-sm btn-cyber-ghost">LEARN MORE →</a>
+            <a href="${p.url}" target="_blank" rel="noopener" class="btn-cyber btn-cyber-sm btn-cyber-ghost">OPEN REPO ↗</a>
           </div>
         </div>
       </article>`;

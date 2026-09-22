@@ -158,97 +158,97 @@ const PORTFOLIO_DATA = {
     }
   ],
 
-  /* Projects — sourced from kartavya-singh.com structure/content */
+  /* Projects — real repositories from github.com/Nciibi */
   projects: [
     {
-      id: "proj-01",
-      period: "February 2026 — March 2026",
-      category: "Full-Stack Multi-Agentic Career System",
-      title: "CareerSignal — Agentic Career Platform",
-      summary: "Semi-autonomous multi-agent career intelligence platform — 36 specialised AI agents and one local brain for job analysis, company research, contact discovery, and personalised application assistance. Zero data leaves your machine.",
-      likes: 19,
-      tags: ["Next.js", "TypeScript", "Python", "AI"],
-      url: "https://github.com"
+      id: "gh-image-investigator",
+      period: "SEP 2026",
+      category: "SECURITY · OSINT",
+      title: "Image Investigator",
+      summary: "High-performance desktop app for cybersecurity investigators and OSINT analysts — EXIF metadata analysis, GPT-4o vision geolocation and multi-engine reverse image search in one professional dashboard.",
+      likes: 3,
+      tags: ["Python", "OSINT", "Desktop"],
+      url: "https://github.com/Nciibi/image_investigator"
     },
     {
-      id: "proj-02",
-      period: "November 2025",
-      category: "MakeUC Hackathon 2025",
-      title: "PersonaForge: Where Voice Meets AI",
-      summary: "Windows desktop voice assistant (Electron, React/TS, Node, Web Audio) with ElevenLabs STT/TTS + Gemini/OpenAI — 4-stage real-time loop and executor framework for 8 core OS actions. Best Use of AI Using ElevenLabs.",
-      likes: 12,
-      tags: ["Electron", "React", "ElevenLabs", "OpenAI"],
-      url: "https://github.com"
+      id: "gh-aidup",
+      period: "AUG 2026",
+      category: "CHARITY PLATFORM",
+      title: "AidUp Platform",
+      summary: "Production-grade full-stack charitable platform connecting donors with verified campaign organizers — built for transparency, security and scale across web and mobile with a single shared API.",
+      likes: 2,
+      tags: ["Kotlin", "Full-Stack", "Mobile"],
+      url: "https://github.com/Nciibi/aidup-platform"
     },
     {
-      id: "proj-03",
-      period: "January 2025 — April 2025",
-      category: "Full-Stack AI Development",
-      title: "My AI Companion — Interactive Portfolio",
-      summary: "Transformed a personal portfolio into an interactive AI experience — a companion that knows the whole journey and loves to share it.",
-      likes: 24,
-      tags: ["Next.js", "AI", "TypeScript"],
-      url: "https://github.com"
+      id: "gh-seagles",
+      period: "SEP 2026",
+      category: "IOT SECURITY",
+      title: "Seagles",
+      summary: "Discovers every IoT device on your network, scans them for real CVEs, tests default credentials botnets use, analyzes firmware for malware indicators and scores each device risk 0–10.",
+      likes: 1,
+      tags: ["Go", "IoT", "CVE"],
+      url: "https://github.com/Nciibi/seagles"
     },
     {
-      id: "proj-04",
-      period: "August 2024 — January 2025",
-      category: "Full-Stack Development",
-      title: "Personal MERN Stack Portfolio Website",
-      summary: "Fully revamped, feature-rich MERN portfolio showcasing projects, experience and honours — a significant evolution in full-stack craft.",
-      likes: 23,
-      tags: ["MongoDB", "Express", "React", "Node.js"],
-      url: "https://github.com"
+      id: "gh-m2m",
+      period: "SEP 2026",
+      category: "P2P MESSAGING",
+      title: "M2M Messenger",
+      summary: "Modern open-source peer-to-peer messaging focused on privacy, security and performance — end-to-end encrypted messaging, secure key management and NAT traversal with no central servers.",
+      likes: 1,
+      tags: ["Rust", "P2P", "E2EE"],
+      url: "https://github.com/Nciibi/m2m"
     },
     {
-      id: "proj-05",
-      period: "August 2024 — September 2024",
-      category: "Future of Data Hackathon 2024",
-      title: "FinVest: Budget Smart, Invest Sharp",
-      summary: "Dynamic financial platform unifying budgeting, spending and investment tracking with real-time 3D visualisations. Best Finance Software — MidwestCon 2024.",
-      likes: 33,
-      tags: ["React", "Python", "D3"],
-      url: "https://github.com"
+      id: "gh-aios",
+      period: "AUG 2026",
+      category: "AI SYSTEMS",
+      title: "AIOS",
+      summary: "AIOS (Artificial Intelligence Operating System) — a constitutional operating system for autonomous AI agents.",
+      likes: 1,
+      tags: ["Rust", "AI", "Agents"],
+      url: "https://github.com/Nciibi/AIOS"
     },
     {
-      id: "proj-06",
-      period: "February 2024",
-      category: "RevUC Hackathon 2024",
-      title: "HealthSphere: Data-Driven Wellness Solutions",
-      summary: "Holistic health platform with real-time data analysis and personalised insights. Winner — Best Digital Solution (Medpace) & Best Use of Taipy.",
-      likes: 25,
-      tags: ["React", "Python", "Taipy"],
-      url: "https://github.com"
+      id: "gh-secretscan",
+      period: "AUG 2026",
+      category: "APPSEC TOOLING",
+      title: "SecretScan",
+      summary: "Defensive security tool scanning local codebases and Git history for accidentally committed secrets — API keys, tokens, private keys and passwords that should never be in source code.",
+      likes: 1,
+      tags: ["Go", "Git", "Security"],
+      url: "https://github.com/Nciibi/secretscan"
     },
     {
-      id: "proj-07",
-      period: "October 2023",
-      category: "MakeUC Hackathon 2023",
-      title: "FaunaFinder: AI-Powered Animal Breed Recognition",
-      summary: "Award-winning recognition platform integrating Google Cloud Vision, Wikipedia and GBIF APIs. Winner — Best Use of AI in Education.",
-      likes: 32,
-      tags: ["Google Cloud", "Python", "AI"],
-      url: "https://github.com"
+      id: "gh-cloud-cracker",
+      period: "AUG 2026",
+      category: "CLOUD SECURITY",
+      title: "Cloud Cracker v2",
+      summary: "Professional offensive multi-cloud security auditing and exploitation framework.",
+      likes: 1,
+      tags: ["Python", "Cloud", "Pentest"],
+      url: "https://github.com/Nciibi/cloud-cracker-v2"
     },
     {
-      id: "proj-08",
-      period: "June 2023 — August 2023",
-      category: "FARM Stack Self-Learning",
-      title: "First Personal Portfolio Website",
-      summary: "First large-scale full-stack project in year 2 — FARM stack, showcasing growth across projects and involvements.",
-      likes: 18,
-      tags: ["Flask", "React", "MongoDB"],
-      url: "https://github.com"
+      id: "gh-hider",
+      period: "AUG 2026",
+      category: "OFFENSIVE SECURITY",
+      title: "Hider",
+      summary: "Unified CLI, web dashboard and C2 framework for metadata manipulation, steganography, payload delivery and post-exploitation — built for penetration testers and security researchers.",
+      likes: 1,
+      tags: ["Python", "C2", "Stego"],
+      url: "https://github.com/Nciibi/hider"
     },
     {
-      id: "proj-09",
-      period: "February 2023",
-      category: "RevUC Hackathon 2023",
-      title: "BearChat: YUCY AI ChatBot",
-      summary: "Offline full-stack AI chatbot for campus support with 99% query accuracy. Best Use of Google Cloud (MLH).",
-      likes: 26,
-      tags: ["Google Cloud", "Python", "AI"],
-      url: "https://github.com"
+      id: "gh-phisher-hunter",
+      period: "AUG 2026",
+      category: "PHISHING DEFENSE",
+      title: "Phisher Hunter",
+      summary: "Phishing detection through novel, never-before-seen techniques.",
+      likes: 1,
+      tags: ["TypeScript", "Detection", "Security"],
+      url: "https://github.com/Nciibi/phisher-hunter"
     }
   ],
 
