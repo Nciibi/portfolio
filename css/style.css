@@ -2671,18 +2671,17 @@ section {
    RESPONSIVE
    ========================================================================== */
 @media (max-width: 1180px) {
-  .attributes-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-  .attr-detail-inner { grid-template-columns: auto 1fr; }
-  .attr-detail-meta { grid-column: 1 / -1; text-align: left; }
+  .bento-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .bento-card.span-wide { grid-column: span 2; }
+  .bento-card.span-tall { grid-row: span 1; }
 }
 
 @media (max-width: 1024px) {
   :root { --w-rail: 0px; }
   .rail { display: none; }
   .container { padding-right: clamp(1.25rem, 4vw, 3rem); }
-  .gigs-layout { grid-template-columns: 1fr; }
-  .gig-detail { min-height: 0; }
   .dialogue-wrap { grid-template-columns: 1fr; }
+  .stat-strip { grid-template-columns: repeat(2, 1fr); }
 }
 
 @media (max-width: 992px) {
@@ -2692,25 +2691,33 @@ section {
   .hero-grid { grid-template-columns: 1fr; gap: 2.5rem; }
   .cyberdeck-card { max-width: 460px; }
   .legend .hide-sm { display: none; }
+  .hero-card-col { order: -1; }
+  .cyberdeck-card { margin: 0 auto; }
 }
 
 @media (max-width: 760px) {
-  .attributes-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .hero-chips { flex-direction: column; align-items: stretch; }
   .netlinks-list { grid-template-columns: 1fr; }
   .legend .legend-tail { display: none; }
   .eddie-counter { display: none; }
+  .edu-row { grid-template-columns: 1fr; }
+  .skills-grid { grid-template-columns: 1fr; }
+  .exp-track { grid-template-columns: 1fr; }
+  .pc-footer { flex-direction: column; align-items: flex-start; }
 }
 
 @media (max-width: 560px) {
-  .attributes-grid { grid-template-columns: 1fr; }
-  .attr-name, .attr-spec { min-height: 0; }
   .hero-actions { flex-direction: column; align-items: stretch; }
   .hero-actions .btn-cyber { width: 100%; }
   .brand-badge span:not(.mark) { display: none; }
-  .gig-meta { gap: 1rem; }
   .cyberware-grid { grid-template-columns: 1fr; }
   .avatar-tags .callsign { font-size: 0.62rem; }
+  .bento-grid { grid-template-columns: 1fr; }
+  .bento-card.span-wide, .bento-card.span-normal, .bento-card.span-tall { grid-column: span 1; grid-row: span 1; }
+  .stat-strip { grid-template-columns: 1fr 1fr; }
+  .skill-levels, .exp-tabs { gap: 0.3rem; }
+  .skill-levels .lvl, .exp-tab { padding: 7px 11px; font-size: 0.66rem; }
+  .section-title { font-size: clamp(1.45rem, 7vw, 2.1rem); }
 }
 
 /* ==========================================================================
