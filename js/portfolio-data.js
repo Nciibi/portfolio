@@ -161,26 +161,6 @@ const PORTFOLIO_DATA = {
   /* Projects — real repositories from github.com/Nciibi */
   projects: [
     {
-      id: "gh-image-investigator",
-      period: "SEP 2026",
-      category: "SECURITY · OSINT",
-      title: "Image Investigator",
-      summary: "High-performance desktop app for cybersecurity investigators and OSINT analysts — EXIF metadata analysis, GPT-4o vision geolocation and multi-engine reverse image search in one professional dashboard.",
-      likes: 3,
-      tags: ["Python", "OSINT", "Desktop"],
-      url: "https://github.com/Nciibi/image_investigator"
-    },
-    {
-      id: "gh-aidup",
-      period: "AUG 2026",
-      category: "CHARITY PLATFORM",
-      title: "AidUp Platform",
-      summary: "Production-grade full-stack charitable platform connecting donors with verified campaign organizers — built for transparency, security and scale across web and mobile with a single shared API.",
-      likes: 2,
-      tags: ["Kotlin", "Full-Stack", "Mobile"],
-      url: "https://github.com/Nciibi/aidup-platform"
-    },
-    {
       id: "gh-seagles",
       period: "SEP 2026",
       category: "IOT SECURITY",
