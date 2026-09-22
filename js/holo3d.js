@@ -227,6 +227,16 @@
     renderer.render(scene, camera);
   }
 
+  if ('IntersectionObserver' in window) {
+    new IntersectionObserver(
+      (entries) => {
+        stageVisible = entries[0].isIntersecting;
+        if (stageVisible && !stageRaf && !reduceMotion) frame();
+      },
+      { rootMargin: '15% 0px 15% 0px' }
+    ).observe(mount);
+  }
+
   if (reduceMotion) {
     resize();
     renderer.render(scene, camera);
