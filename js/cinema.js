@@ -170,6 +170,13 @@
   let rafId = 0;
   let t = 0;
 
+  /* Synchronous update: keeps state exact even when frames stall. */
+  function updateNow() {
+    readProgress();
+    applyState(t);
+    renderer.render(scene, camera);
+  }
+
   function frame() {
     rafId = 0;
     if (!visible) return;
@@ -192,7 +199,7 @@
       { rootMargin: '20% 0px 20% 0px' }
     ).observe(track);
   }
-  window.addEventListener('scroll', kick, { passive: true });
+  window.addEventListener('scroll', () => { updateNow(); kick(); }, { passive: true });
 
   if (reduceMotion) {
     resize();
