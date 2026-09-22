@@ -613,33 +613,46 @@ section {
   pointer-events: none;
 }
 .btn-cyber:hover::before { transform: translateX(120%) skewX(-12deg); }
-/* calm premium hover: light sweep + glow + tracking only, no 3D transforms */
+/* game hover: sheen sweep + hard offset echo + one-shot slice glitch + tracking */
 .btn-cyber:hover {
   letter-spacing: 0.2em;
+  animation: btn-slice 0.24s steps(2, end) 1;
 }
-.btn-cyber:active { filter: brightness(1.1); }
+.btn-cyber:active { filter: brightness(1.15); }
 .btn-cyber:focus-visible { outline: 2px solid var(--c-cyan); outline-offset: 3px; }
+/* horizontal slice displacement — clip-only, no transforms */
+@keyframes btn-slice {
+  0%, 100% {
+    clip-path: polygon(0 0, calc(100% - var(--cut)) 0, 100% var(--cut), 100% 100%, 0 100%);
+  }
+  30% {
+    clip-path: polygon(0 0, calc(100% - var(--cut)) 0, 100% var(--cut), 100% 36%, 93% 36%, 93% 43%, 100% 43%, 100% 100%, 0 100%);
+  }
+  60% {
+    clip-path: polygon(4% 0, calc(100% - var(--cut)) 0, 100% var(--cut), 100% 100%, 0 100%, 0 66%, 5% 66%, 5% 60%, 0 60%);
+  }
+}
 
 .btn-cyber-yellow {
   background: var(--c-yellow);
   color: #0E0E17;
-  box-shadow: 0 0 18px rgba(240,181,55,0.30);
+  filter: drop-shadow(0 0 12px rgba(240,181,55,0.28));
 }
 .btn-cyber-yellow::after { content: '///'; font-family: var(--font-mono); font-size: 0.7rem; letter-spacing: -0.1em; opacity: 0.55; }
 .btn-cyber-yellow:hover {
   background: #FFC84F;
-  box-shadow: 0 0 34px rgba(240,181,55,0.55);
+  filter: drop-shadow(4px 4px 0 rgba(0,0,0,0.65)) drop-shadow(0 0 22px rgba(240,181,55,0.5));
 }
 
 .btn-cyber-red {
   background: var(--c-red);
   color: #FFFFFF;
-  box-shadow: 0 0 18px rgba(247,80,73,0.34);
+  filter: drop-shadow(0 0 12px rgba(247,80,73,0.3));
 }
 .btn-cyber-red::after { content: '▶'; font-size: 0.68rem; opacity: 0.85; }
 .btn-cyber-red:hover {
   background: #FF6B63;
-  box-shadow: 0 0 34px rgba(247,80,73,0.55);
+  filter: drop-shadow(4px 4px 0 rgba(0,0,0,0.65)) drop-shadow(0 0 22px rgba(247,80,73,0.5));
 }
 
 .btn-cyber-ghost {
