@@ -4,25 +4,27 @@
    (Neo-Militarism: red primary / cyan selection / yellow legendary)
    ========================================================================== */
 
-@import url('https://fonts.googleapis.com/css2?family=Chakra+Petch:ital,wght@0,400;0,500;0,600;0,700;1,600;1,700&family=Rajdhani:wght@400;500;600;700&family=Share+Tech+Mono&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Orbitron:wght@500;700;900&family=Share+Tech+Mono&display=swap');
 
-:root {
-  /* ---- Signal accents ------------------------------------------------- */
-  --c-red:        #FF3D3D;   /* structural primary: tabs, headers, danger  */
-  --c-red-deep:   #E8112D;
-  --c-red-dim:    rgba(255, 61, 61, 0.14);
-  --c-cyan:       #00F0FF;   /* selection / interactive / hologram         */
-  --c-cyan-soft:  #5CE1FF;
-  --c-cyan-dim:   rgba(0, 240, 255, 0.12);
-  --c-yellow:     #FCEE0A;   /* brand + legendary rarity                   */
-  --c-yellow-dim: rgba(252, 238, 10, 0.12);
-  --c-green:      #22E06B;
-  --c-purple:     #C15CFF;
-  --c-blue:       #1E90FF;
-  --c-orange:     #FF9D00;
+  :root {
+  /* ---- Signal accents (Behance palette) --------------------------------- */
+  --c-red:        #F75049;   /* structural primary: tabs, headers, danger  */
+  --c-red-deep:   #E0392F;
+  --c-red-dim:    rgba(247, 80, 73, 0.14);
+  --c-cyan:       #5EF6FF;   /* selection / interactive / hologram         */
+  --c-cyan-soft:  #9BFAFF;
+  --c-cyan-dim:   rgba(94, 246, 255, 0.12);
+  --c-yellow:     #F0B537;   /* gold — currency / quests                  */
+  --c-yellow-dim: rgba(240, 181, 55, 0.14);
+  --c-green:      #10DE83;   /* mint jungle — positive states             */
+  --c-purple:     #9D2BF5;
+  --c-blue:       #2570D4;
+  --c-orange:     #FB932E;
+  --c-white:      #FFFFFF;
+  --c-grey:       #D6D0D0;
 
   /* ---- Substrate ------------------------------------------------------- */
-  --bg-0:    #05060A;
+  --bg-0:    #0E0E17;   /* darkest blue — official UI ground            */
   --bg-1:    #090B11;
   --bg-2:    #0E1118;
   --bg-3:    #141824;
@@ -32,17 +34,17 @@
 
   --line:        rgba(255, 255, 255, 0.10);
   --line-strong: rgba(255, 255, 255, 0.20);
-  --line-red:    rgba(255, 61, 61, 0.45);
-  --line-cyan:   rgba(0, 240, 255, 0.35);
+  --line-red:    rgba(247, 80, 73, 0.45);
+  --line-cyan:   rgba(94, 246, 255, 0.35);
 
   --txt:      #E9EEF7;
   --txt-2:    #A8B4C7;
   --txt-3:    #6E7C92;
   --txt-4:    #4A5568;
 
-  /* ---- Typography ------------------------------------------------------ */
-  --font-display: 'Chakra Petch', 'Rajdhani', sans-serif;
-  --font-body:    'Rajdhani', 'Chakra Petch', sans-serif;
+  /* ---- Typography (Rajdhani main + Orbitron complementary, per game) --- */
+  --font-display: 'Orbitron', 'Rajdhani', sans-serif;
+  --font-body:    'Rajdhani', 'Orbitron', sans-serif;
   --font-mono:    'Share Tech Mono', ui-monospace, monospace;
 
   /* ---- Geometry: the chamfer language ---------------------------------- */
@@ -82,8 +84,8 @@ body {
   min-height: 100vh;
   background-color: var(--bg-0);
   background-image:
-    radial-gradient(ellipse 70% 55% at 12% 8%,  rgba(255, 61, 61, 0.07), transparent 60%),
-    radial-gradient(ellipse 60% 50% at 88% 92%, rgba(0, 240, 255, 0.05), transparent 60%),
+    radial-gradient(ellipse 70% 55% at 12% 8%,  rgba(247, 80, 73, 0.07), transparent 60%),
+    radial-gradient(ellipse 60% 50% at 88% 92%, rgba(94, 246, 255, 0.05), transparent 60%),
     linear-gradient(rgba(255, 255, 255, 0.016) 1px, transparent 1px),
     linear-gradient(90deg, rgba(255, 255, 255, 0.016) 1px, transparent 1px);
   background-size: 100% 100%, 100% 100%, 46px 46px, 46px 46px;
@@ -116,20 +118,22 @@ button, input, textarea, select { font: inherit; color: inherit; }
 }
 
 /* ==========================================================================
-   3D HOLOGRAPHIC KOI (background layer)
+   INTERACTIVE 3D NEURAL LATTICE (background layer — pointer passes through)
    ========================================================================== */
-#koi-canvas { display: none; }
-
-#three-canvas-container {
+#lattice-mount {
   position: fixed;
   inset: 0;
   width: 100vw;
   height: 100vh;
   pointer-events: none;
   z-index: 0;
-  opacity: 0.55;
+  opacity: 0.5;
 }
-#three-canvas-container canvas { width: 100% !important; height: 100% !important; display: block; }
+#lattice-mount canvas {
+  width: 100% !important;
+  height: 100% !important;
+  display: block;
+}
 
 /* Legibility scrim above the WebGL layer, below the UI */
 .scrim {
@@ -138,8 +142,8 @@ button, input, textarea, select { font: inherit; color: inherit; }
   z-index: 1;
   pointer-events: none;
   background:
-    linear-gradient(180deg, rgba(5,6,10,0.90) 0%, rgba(5,6,10,0.62) 26%, rgba(5,6,10,0.74) 70%, rgba(5,6,10,0.95) 100%),
-    radial-gradient(ellipse 90% 70% at 50% 50%, transparent 35%, rgba(5,6,10,0.75) 100%);
+    linear-gradient(180deg, rgba(14,14,23,0.90) 0%, rgba(14,14,23,0.58) 26%, rgba(14,14,23,0.72) 70%, rgba(14,14,23,0.96) 100%),
+    radial-gradient(ellipse 90% 70% at 50% 50%, transparent 30%, rgba(14,14,23,0.78) 100%);
 }
 
 /* ==========================================================================
@@ -365,17 +369,7 @@ body.crt-disabled .crt-overlay { opacity: 0; display: none; }
   margin-left: auto;
 }
 
-.eddie-counter {
-  display: flex; align-items: center; gap: 0.4rem;
-  font-family: var(--font-mono);
-  font-size: 0.72rem;
-  color: var(--c-yellow);
-  background: var(--c-yellow-dim);
-  border: 1px solid rgba(252,238,10,0.28);
-  padding: 4px 9px;
-  letter-spacing: 0.06em;
-}
-.eddie-counter .sym { color: var(--c-yellow); }
+.eddie-counter { display: none; }
 
 .hud-ctrl-btn {
   font-family: var(--font-mono);
