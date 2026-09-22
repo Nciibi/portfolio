@@ -2585,9 +2585,6 @@ section {
 /* ---- tilt targets (JS-driven, transform isolated from reveals) ----------- */
 .project-card, .bento-card, .exp-card, .edu-card { will-change: transform; }
 
-@media (max-width: 760px) {
-}
-
 /* ==========================================================================
    FOOTER
    ========================================================================== */
