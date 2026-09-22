@@ -301,7 +301,7 @@ const PORTFOLIO_DATA = {
     netFrequency: "tyrel@nightcity.net",
     commChannels: [
       { name: "GITHUB", url: "https://github.com", icon: "github", hint: "REPOSITORIES" },
-      { name: "LINKEDIN", url: "https://linkedin.com", icon: "github", hint: "PROFESSIONAL" },
+      { name: "LINKEDIN", url: "https://linkedin.com", icon: "linkedin", hint: "PROFESSIONAL" },
       { name: "TWITTER_X", url: "https://twitter.com", icon: "x", hint: "BROADCAST" },
       { name: "DISCORD", url: "https://discord.com", icon: "discord", hint: "VOICE CHANNEL" }
     ]
