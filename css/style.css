@@ -2140,6 +2140,7 @@ section {
 }
 .skill-group:hover { border-color: var(--line-cyan); }
 .skill-group.dimmed { opacity: 0.38; filter: grayscale(0.7); }
+.skill-group.hidden { display: none; }
 
 .sg-head { margin-bottom: 0.65rem; }
 .sg-level {

@@ -182,11 +182,11 @@ function initSkillLevels() {
       document.querySelectorAll(".skill-levels .lvl").forEach((b) => b.classList.remove("active"));
       btn.classList.add("active");
       activeSkillLevel = btn.getAttribute("data-level") || "PROFICIENT";
-      cyberAudio.playTab();
       document.querySelectorAll(".skill-group").forEach((g) => {
         const lvl = g.getAttribute("data-level") || activeSkillLevel;
-        g.classList.toggle("dimmed", lvl !== activeSkillLevel);
+        g.classList.toggle("hidden", lvl !== activeSkillLevel);
       });
+      try { cyberAudio.playTab(); } catch (e) {}
     });
   });
 }
@@ -204,7 +204,7 @@ function renderSkills() {
           return `<span class="skill-chip" style="--d:${delay}s" data-level="${grp.level}">${ic}${s}</span>`;
         })
         .join("");
-      const dimmed = grp.level !== activeSkillLevel ? " dimmed" : "";
+      const dimmed = grp.level !== activeSkillLevel ? " hidden" : "";
       return `
       <article class="skill-group${dimmed}" data-level="${grp.level}" data-reveal style="--d:${gi * 0.08}s">
         <div class="sg-head">
@@ -267,8 +267,8 @@ function initExpTabs() {
       btn.classList.add("active");
       btn.setAttribute("aria-selected", "true");
       activeExpTab = btn.getAttribute("data-tab") || "CAREER";
-      cyberAudio.playTab();
       renderExperience(activeExpTab);
+      try { cyberAudio.playTab(); } catch (e) {}
       document.dispatchEvent(new Event("portfolio:rendered"));
     });
   });
