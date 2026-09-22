@@ -18,6 +18,9 @@ document.addEventListener("DOMContentLoaded", () => {
   initModalEvents();
   initTerminalTransmission();
   initDialogueOptions();
+
+  /* Let the motion layer scan freshly-rendered nodes. */
+  document.dispatchEvent(new Event("portfolio:rendered"));
 });
 
 /* ---------------------------------------------------------------------------
