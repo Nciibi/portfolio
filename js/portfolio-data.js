@@ -21,6 +21,8 @@ const ICON_SLUGS = {
   "C": "c",
   "Java": "java",
   "Go": "go",
+  "Rust": "rust",
+  "Kotlin": "kotlin",
   "Next.js": "nextdotjs",
   "PostgreSQL": "postgresql",
   "Tailwind": "tailwindcss",
