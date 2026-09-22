@@ -612,18 +612,12 @@ section {
   pointer-events: none;
 }
 .btn-cyber:hover::before { transform: translateX(120%) skewX(-12deg); }
+/* calm premium hover: light sweep + glow + tracking only, no 3D transforms */
 .btn-cyber:hover {
-  transform: translate(-2px, -2px) skewX(-2deg);
   letter-spacing: 0.2em;
-  animation: btn-rgb 0.3s steps(2, end) 1;
 }
-.btn-cyber:active { transform: translate(0, 0) scale(0.968); }
+.btn-cyber:active { filter: brightness(1.1); }
 .btn-cyber:focus-visible { outline: 2px solid var(--c-cyan); outline-offset: 3px; }
-@keyframes btn-rgb {
-  0% { text-shadow: -2px 0 var(--c-red), 2px 0 var(--c-cyan); }
-  50% { text-shadow: 2px 0 var(--c-red), -2px 0 var(--c-cyan); }
-  100% { text-shadow: none; }
-}
 
 .btn-cyber-yellow {
   background: var(--c-yellow);
@@ -633,7 +627,7 @@ section {
 .btn-cyber-yellow::after { content: '///'; font-family: var(--font-mono); font-size: 0.7rem; letter-spacing: -0.1em; opacity: 0.55; }
 .btn-cyber-yellow:hover {
   background: #FFC84F;
-  box-shadow: 5px 5px 0 rgba(0,0,0,0.6), 0 0 30px rgba(240,181,55,0.6);
+  box-shadow: 0 0 34px rgba(240,181,55,0.55);
 }
 
 .btn-cyber-red {
@@ -644,7 +638,7 @@ section {
 .btn-cyber-red::after { content: '▶'; font-size: 0.68rem; opacity: 0.85; }
 .btn-cyber-red:hover {
   background: #FF6B63;
-  box-shadow: 5px 5px 0 rgba(0,0,0,0.6), 0 0 30px rgba(247,80,73,0.6);
+  box-shadow: 0 0 34px rgba(247,80,73,0.55);
 }
 
 .btn-cyber-ghost {
@@ -658,7 +652,7 @@ section {
   color: var(--c-cyan);
   border-color: var(--line-cyan);
   border-left: 3px solid var(--c-cyan);
-  box-shadow: 5px 5px 0 rgba(0,0,0,0.45), 0 0 16px rgba(94,246,255,0.22);
+  box-shadow: 0 0 18px rgba(94,246,255,0.25);
 }
 
 .btn-cyber-sm { padding: 9px 17px; font-size: 0.68rem; --cut: 10px; }
