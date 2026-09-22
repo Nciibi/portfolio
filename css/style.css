@@ -2539,6 +2539,133 @@ section {
 #home { border-top: none; }
 
 /* ==========================================================================
+   REDESIGN LAYER — cinematic splash hero + interactive 3D stage.
+   Shell chrome (rail / legend / dossier card / fullscreen 3D) removed;
+   page keeps the static grid substrate.
+   ========================================================================== */
+/* ---- splash typography -------------------------------------------------- */
+.hero-kicker {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.24em;
+  color: var(--c-cyan);
+  text-transform: uppercase;
+  margin-bottom: 1.1rem;
+}
+.hero-kicker .k-dot {
+  width: 8px; height: 8px; flex: none;
+  background: var(--c-red);
+  box-shadow: 0 0 10px var(--c-red);
+  animation: pulse-chip 1.4s infinite;
+}
+.hero-title {
+  font-family: var(--font-head);
+  text-transform: uppercase;
+  line-height: 0.94;
+  margin-bottom: 1rem;
+}
+.ht-hello {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: clamp(0.72rem, 1.4vw, 0.9rem);
+  letter-spacing: 0.5em;
+  color: var(--txt-2);
+  margin-bottom: 0.6rem;
+}
+.ht-name {
+  display: block;
+  font-size: clamp(3rem, 9vw, 7rem);
+  font-weight: 700;
+  letter-spacing: 0.015em;
+  color: #FFFFFF;
+  cursor: default;
+}
+.ht-name em { font-style: normal; color: var(--c-yellow); }
+.hero-bio { max-width: 62ch; }
+.hero-actions { margin-top: 1.6rem; }
+.hero-socials { margin-bottom: 0.5rem; }
+
+/* ---- interactive 3D stage ------------------------------------------------ */
+.hero-stage { margin-top: clamp(1.75rem, 3.5vw, 2.75rem); }
+.stage-frame {
+  position: relative;
+  height: clamp(300px, 42vw, 440px);
+  background:
+    radial-gradient(ellipse 60% 70% at 50% 55%, rgba(94,246,255,0.07), transparent 70%),
+    radial-gradient(ellipse 40% 50% at 50% 50%, rgba(247,80,73,0.05), transparent 70%),
+    rgba(9,11,17,0.92);
+  border: 1px solid var(--line);
+  --cut: 18px;
+  clip-path: polygon(0 0, calc(100% - var(--cut)) 0, 100% var(--cut),
+    100% 100%, var(--cut) 100%, 0 calc(100% - var(--cut)));
+  overflow: hidden;
+  cursor: grab;
+  touch-action: pan-y;
+}
+.stage-frame:active { cursor: grabbing; }
+.stage-canvas {
+  position: absolute; inset: 0;
+  width: 100% !important; height: 100% !important;
+  display: block;
+}
+.stage-tag {
+  position: absolute;
+  z-index: 2;
+  pointer-events: none;
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.2em;
+  color: var(--txt-3);
+  text-transform: uppercase;
+  background: rgba(9,11,17,0.72);
+  padding: 5px 10px;
+  border: 1px solid rgba(255,255,255,0.08);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.tag-tl { top: 12px; left: 14px; color: var(--c-cyan); }
+.tag-tr { top: 12px; right: 14px; }
+.tag-bl { bottom: 12px; left: 14px; }
+.tag-br { bottom: 12px; right: 14px; }
+.live-dot {
+  width: 7px; height: 7px; border-radius: 50%;
+  background: var(--c-red);
+  box-shadow: 0 0 8px var(--c-red);
+  animation: pulse-chip 1.2s infinite;
+}
+.stage-frame::before,
+.stage-frame::after {
+  content: '';
+  position: absolute;
+  z-index: 2;
+  width: 24px; height: 24px;
+  pointer-events: none;
+}
+.stage-frame::before {
+  top: 8px; left: 8px;
+  border-top: 2px solid var(--c-cyan);
+  border-left: 2px solid var(--c-cyan);
+}
+.stage-frame::after {
+  bottom: 8px; right: 8px;
+  border-bottom: 2px solid var(--c-red);
+  border-right: 2px solid var(--c-red);
+}
+
+/* ---- tilt targets (JS-driven, transform isolated from reveals) ----------- */
+.project-card, .bento-card, .exp-card, .edu-card { will-change: transform; }
+
+@media (max-width: 760px) {
+  .stage-frame { height: 260px; }
+  .tag-br { display: none; }
+  .stage-tag { font-size: 0.56rem; letter-spacing: 0.14em; }
+}
+
+/* ==========================================================================
    FOOTER
    ========================================================================== */
 .footer-section {
