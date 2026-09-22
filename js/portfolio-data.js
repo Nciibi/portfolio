@@ -200,16 +200,6 @@ const PORTFOLIO_DATA = {
       tags: ["Python", "C2", "Stego"],
       url: "https://github.com/Nciibi/hider"
     },
-    {
-      id: "gh-phisher-hunter",
-      period: "AUG 2026",
-      category: "PHISHING DEFENSE",
-      title: "Phisher Hunter",
-      summary: "Phishing detection through novel, never-before-seen techniques.",
-      likes: 1,
-      tags: ["TypeScript", "Detection", "Security"],
-      url: "https://github.com/Nciibi/phisher-hunter"
-    }
   ],
 
   /* Experience — kartavya career track + radna role cards */
