@@ -191,26 +191,6 @@ const PORTFOLIO_DATA = {
       url: "https://github.com/Nciibi/AIOS"
     },
     {
-      id: "gh-secretscan",
-      period: "AUG 2026",
-      category: "APPSEC TOOLING",
-      title: "SecretScan",
-      summary: "Defensive security tool scanning local codebases and Git history for accidentally committed secrets — API keys, tokens, private keys and passwords that should never be in source code.",
-      likes: 1,
-      tags: ["Go", "Git", "Security"],
-      url: "https://github.com/Nciibi/secretscan"
-    },
-    {
-      id: "gh-cloud-cracker",
-      period: "AUG 2026",
-      category: "CLOUD SECURITY",
-      title: "Cloud Cracker v2",
-      summary: "Professional offensive multi-cloud security auditing and exploitation framework.",
-      likes: 1,
-      tags: ["Python", "Cloud", "Pentest"],
-      url: "https://github.com/Nciibi/cloud-cracker-v2"
-    },
-    {
       id: "gh-hider",
       period: "AUG 2026",
       category: "OFFENSIVE SECURITY",
