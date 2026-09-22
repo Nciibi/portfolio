@@ -166,7 +166,7 @@
     const spyLinks = Array.from(document.querySelectorAll("[data-spy]"));
     if (!spyLinks.length) return;
 
-    let current = "hero";
+    let current = "home";
     const setActive = (id) => {
       if (id === current) return;
       current = id;
