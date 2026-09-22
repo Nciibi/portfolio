@@ -2117,11 +2117,12 @@ section {
   --cut: 8px;
   clip-path: polygon(0 0, calc(100% - var(--cut)) 0, 100% var(--cut), 100% 100%, 0 100%);
 }
-.skill-levels .lvl:hover { color: var(--txt); background: rgba(255,255,255,0.045); }
+.skill-levels .lvl:hover { color: var(--txt); background: rgba(255,255,255,0.045); border-left: 3px solid var(--line-strong); }
 .skill-levels .lvl.active {
   background: var(--c-red);
   color: #fff;
-  box-shadow: 0 0 16px rgba(247,80,73,0.35);
+  border-left: 3px solid #fff;
+  filter: drop-shadow(0 0 14px rgba(247,80,73,0.35));
 }
 
 .skills-grid {
