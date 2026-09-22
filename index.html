@@ -32,9 +32,7 @@
     <span class="rm-bl"></span><span class="rm-br"></span>
   </div>
 
-  <!-- 3D hologram background -->
-  <div id="three-canvas-container" aria-label="Interactive 3D neural hologram"></div>
-  <div class="scrim" aria-hidden="true"></div>
+  <!-- 3D mount removed: hero owns a contained interactive viewport now -->
 
   <!-- HEADER -->
   <header class="hud-header" id="hud-top-bar">
@@ -43,16 +41,10 @@
         <span class="mark">V</span>
         <span>TYREL<em>//</em>2077</span>
       </a>
-      <div class="telemetry-item hide-sm">
-        <span class="status-dot"></span>
-        <span>ICE: <span class="accent">SECURE</span></span>
-      </div>
-      <div class="telemetry-item" id="hud-clock-item">
-        <span class="accent" id="hud-clock">2077.10.24 // 00:00:00</span>
-      </div>
+      <div class="hud-right">
+      <button class="hud-ctrl-btn on" id="btn-toggle-audio" title="Toggle Synthesized Cyber SFX" aria-pressed="true">SFX</button>
+      <button class="hud-ctrl-btn on" id="btn-toggle-crt" title="Toggle CRT Scanlines" aria-pressed="true">CRT</button>
     </div>
-
-    <nav class="hud-nav" aria-label="Main Navigation">
       <a href="#home" class="nav-link active" data-spy="home"><span class="idx">01</span> HOME</a>
       <a href="#about" class="nav-link" data-spy="about"><span class="idx">02</span> ABOUT</a>
       <a href="#skills" class="nav-link" data-spy="skills"><span class="idx">03</span> SKILLS</a>
