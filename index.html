@@ -49,7 +49,7 @@
       <a href="#about" class="nav-link" data-spy="about"><span class="idx">02</span> ABOUT</a>
       <a href="#skills" class="nav-link" data-spy="skills"><span class="idx">03</span> SKILLS</a>
       <a href="#projects" class="nav-link" data-spy="projects"><span class="idx">04</span> PROJECTS</a>
-      <a href="#archive" class="nav-link" data-spy="archive"><span class="idx">05</span> ARCHIVE</a>
+      <a href="#github" class="nav-link" data-spy="github"><span class="idx">05</span> GITHUB</a>
       <a href="#experience" class="nav-link" data-spy="experience"><span class="idx">06</span> CAREER</a>
       <a href="#journey" class="nav-link" data-spy="journey"><span class="idx">07</span> JOURNEY</a>
       <a href="#contact" class="nav-link" data-spy="contact"><span class="idx">08</span> CONTACT</a>
@@ -70,7 +70,7 @@
     <a href="#about"><span class="idx">02</span> ABOUT</a>
     <a href="#skills"><span class="idx">03</span> SKILLS</a>
     <a href="#projects"><span class="idx">04</span> PROJECTS</a>
-    <a href="#archive"><span class="idx">05</span> ARCHIVE</a>
+    <a href="#github"><span class="idx">05</span> GITHUB</a>
     <a href="#experience"><span class="idx">06</span> CAREER</a>
     <a href="#journey"><span class="idx">07</span> JOURNEY</a>
     <a href="#contact"><span class="idx">08</span> CONTACT</a>
@@ -199,44 +199,51 @@
       </div>
     </section>
 
-    <!-- ========== 05 ARCHIVE / ORBITAL CASE FILES (interactive 3D navigator) ========== -->
-    <section class="archive-section" id="archive">
+    <!-- ========== 05 OPEN SOURCE / GITHUB (live Nciibi data) ========== -->
+    <section class="github-section" id="github">
       <div class="container">
         <div class="section-header" data-reveal>
           <div class="section-eyebrow">
             <span class="num">05</span>
-            <span>CASE FILES</span>
+            <span>OPEN SOURCE</span>
             <span class="sep">//</span>
-            <span>ORBITAL ARCHIVE</span>
+            <span>GITHUB LIVE</span>
           </div>
-          <h2 class="section-title">PROJECT <span class="title-accent">UNIVERSE</span></h2>
-          <div class="section-sub">DRAG TO ROTATE · CLICK A NODE TO INSPECT · FILTER BY TRACK</div>
+          <h2 class="section-title">CODE IN <span class="title-accent">THE WILD</span></h2>
+          <div class="section-sub">REAL REPOS · REAL STARS · SYNCED FROM GITHUB</div>
           <div class="section-rule"></div>
         </div>
 
-        <div class="archive-filters" data-reveal>
-          <button class="arch-filter active" data-filter="ALL" type="button">ALL // 09</button>
-          <button class="arch-filter" data-filter="HACKATHON" type="button">HACKATHONS // 05</button>
-          <button class="arch-filter" data-filter="BUILD" type="button">BUILDS // 02</button>
-          <button class="arch-filter" data-filter="AI" type="button">AI SYSTEMS // 02</button>
+        <div class="gh-status" data-reveal>
+          <span class="gh-live-dot" id="gh-live-dot"></span>
+          <span id="gh-live-text">SYNCING WITH GITHUB…</span>
+          <button class="gh-refresh" id="gh-refresh" type="button">↻ RESYNC</button>
         </div>
 
-        <div class="archive-grid" data-reveal="wipe">
-          <div class="archive-view" id="archive-view" role="img" aria-label="Interactive 3D map of 9 projects. Use the index list to inspect each case file.">
-            <div class="archive-tip" id="archive-tip" aria-hidden="true"></div>
-            <div class="archive-zoom">
-              <button id="arch-zoom-in" type="button" aria-label="Zoom in">+</button>
-              <button id="arch-zoom-out" type="button" aria-label="Zoom out">−</button>
-            </div>
-            <div class="archive-legend" aria-hidden="true">
-              <span><i class="dot d-hack"></i>HACKATHON</span>
-              <span><i class="dot d-build"></i>BUILD</span>
-              <span><i class="dot d-ai"></i>AI SYSTEM</span>
-            </div>
+        <div class="gh-profile" data-reveal="wipe">
+          <a class="gh-avatar" href="https://github.com/Nciibi" target="_blank" rel="noopener" aria-label="Nciibi on GitHub">
+            <img src="https://avatars.githubusercontent.com/u/214894921?v=4" alt="Nciibi GitHub avatar" loading="lazy" onerror="this.style.display='none'" />
+            <span class="gh-handle">@Nciibi</span>
+          </a>
+          <div class="gh-counters">
+            <div class="gh-counter"><span class="gh-num" data-count="0" id="gh-c-repos">0</span><span class="gh-label">PUBLIC REPOS</span></div>
+            <div class="gh-counter"><span class="gh-num" data-count="0" id="gh-c-stars">0</span><span class="gh-label">TOTAL STARS</span></div>
+            <div class="gh-counter"><span class="gh-num" data-count="0" id="gh-c-followers">0</span><span class="gh-label">FOLLOWERS</span></div>
+            <div class="gh-counter"><span class="gh-num" data-count="0" id="gh-c-following">0</span><span class="gh-label">FOLLOWING</span></div>
           </div>
-          <aside class="archive-panel" aria-live="polite">
-            <div class="arch-detail" id="archive-detail"><!-- filled by archive.js --></div>
-            <div class="archive-index" id="archive-index"><!-- filled by archive.js --></div>
+        </div>
+
+        <div class="github-grid">
+          <div class="github-main">
+            <h3 class="gh-h" data-reveal>TOP REPOS <span>// BY STARS</span></h3>
+            <div class="gh-repos" id="gh-repos"><!-- filled by github.js --></div>
+            <h3 class="gh-h" data-reveal>LANGUAGES <span>// BY REPOSITORY</span></h3>
+            <div class="gh-langs" id="gh-langs"><!-- filled by github.js --></div>
+          </div>
+          <aside class="github-side">
+            <h3 class="gh-h" data-reveal>RECENT ACTIVITY <span>// PUSHES</span></h3>
+            <div class="gh-feed" id="gh-feed"><!-- filled by github.js --></div>
+            <a class="btn-cyber btn-cyber-sm btn-cyber-ghost gh-all" href="https://github.com/Nciibi?tab=repositories" target="_blank" rel="noopener" data-reveal>ALL REPOSITORIES →</a>
           </aside>
         </div>
       </div>
@@ -403,11 +410,10 @@
     </div>
   </footer>
 
-  <script src="js/vendor/three.min.js?v=2"></script>
   <script src="js/icon-pack.js?v=2"></script>
   <script src="js/portfolio-data.js?v=2"></script>
   <script src="js/cyber-audio.js?v=2"></script>
-  <script src="js/archive.js?v=2"></script>
+  <script src="js/github.js?v=2"></script>
   <script src="js/effects.js?v=2"></script>
   <script src="js/main.js?v=2"></script>
 </body>
