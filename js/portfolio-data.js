@@ -142,16 +142,16 @@ const PORTFOLIO_DATA = {
 
   skills: [
     {
-      category: "CORE LANGUAGES",
+      category: "CORE STACK",
       level: "PROFICIENT",
-      desc: "Daily drivers — the languages I design and ship in.",
-      items: ["Python", "C", "JavaScript"]
+      desc: "Daily drivers — the languages and backend I design and ship in.",
+      items: ["Python", "C", "JavaScript", "Express"]
     },
     {
-      category: "APP DEVELOPMENT",
+      category: "SOFTWARE DEVELOPMENT",
       level: "INTERMEDIATE",
-      desc: "Mobile and web apps beyond the core stack.",
-      items: ["Kotlin", "TypeScript", "Dart"]
+      desc: "Programming across mobile, web and systems.",
+      items: ["Kotlin", "TypeScript", "Dart", "Rust", "C++"]
     },
     {
       category: "SYSTEMS & NETWORKS",
