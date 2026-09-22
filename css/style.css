@@ -3108,7 +3108,7 @@ section {
   margin-bottom: 0.4rem;
 }
 .cin-chapter[data-ch="1"] .cin-ch-num { -webkit-text-stroke-color: rgba(240,181,55,0.85); }
-.cin-chapter[data-ch="2"] .cin-chapter-num, .cin-chapter[data-ch="2"] .cin-ch-num { -webkit-text-stroke-color: rgba(247,80,73,0.85); }
+.cin-chapter[data-ch="2"] .cin-ch-num { -webkit-text-stroke-color: rgba(247,80,73,0.85); }
 .cin-ch-title {
   font-family: var(--font-head);
   font-size: clamp(2.4rem, 6.5vw, 4.4rem);

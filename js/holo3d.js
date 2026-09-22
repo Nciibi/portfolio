@@ -176,10 +176,15 @@
     }
   });
 
-  /* ---- animate --------------------------------------------------------------- */
+  /* ---- animate (paused while offscreen) -------------------------------------- */
   let t = 0;
+  let stageVisible = true;
+  let stageRaf = 0;
   function frame() {
+    stageRaf = 0;
+    if (!stageVisible) return;
     requestAnimationFrame(frame);
+    stageRaf = 1;
     t += 0.016;
 
     if (!reduceMotion) {
