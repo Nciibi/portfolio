@@ -160,7 +160,7 @@
   /* -------------------------------------------------------------------------
      SCROLL-SPY + SECTION RAIL + PROGRESS
      ---------------------------------------------------------------------- */
-  const SECTION_IDS = ["hero", "attributes", "cyberware", "gigs", "braindance", "jack-in"];
+  const SECTION_IDS = ["home", "about", "skills", "projects", "experience", "journey", "contact"];
 
   function initSpy() {
     const spyLinks = Array.from(document.querySelectorAll("[data-spy]"));
@@ -259,7 +259,7 @@
       if (e.key !== "ArrowDown" && e.key !== "ArrowUp" && e.key !== "PageDown" && e.key !== "PageUp")
         return;
 
-      const modal = document.getElementById("gig-modal");
+      const modal = document.getElementById("gig-modal") || document.getElementById("netlinks");
       if (modal && modal.classList.contains("active")) return;
       const boot = document.getElementById("boot-screen");
       if (boot && !boot.classList.contains("is-done")) return;
