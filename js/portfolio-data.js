@@ -53,35 +53,32 @@ const ICON_SLUGS = {
 
 const PORTFOLIO_DATA = {
   profile: {
-    alias: "V // TYREL",
-    name: "RADNAABAZAR BULGAN",
-    title: "FULLSTACK DEVELOPER",
+    alias: "Nciibi",
+    name: "AHMED NCIBI",
+    title: "IOT & COMPUTER ENGINEERING — FINAL YEAR",
     taglines: [
-      "Developing with curiosity and expertise",
-      "Fintech, cloud & AI engineering",
-      "Always learning & innovating",
-      "Pragmatic. Delivery-oriented."
+      "IoT & embedded systems",
+      "Final year @ ISTIC",
+      "Firmware to cloud",
+      "Always learning & shipping"
     ],
-    subHeadline: "Pragmatic, delivery-oriented | Fintech, Cloud & AI Engineering | Mongolia",
-    status: "OPEN TO WORK // NIGHT CITY",
-    location: "MONGOLIA // REMOTE-READY",
-    bio: "I build clean, reliable cloud and fintech systems — from real-time exchanges to AI agents. Graduating soon, exploring what's next, and always shipping.",
-    email: "radnaa@example.com",
+    subHeadline: "Final-year IoT & Computer Engineering @ ISTIC",
+    status: "OPEN TO WORK",
+    location: "TUNISIA // REMOTE-READY",
+    bio: "Final-year IoT & Computer Engineering student at ISTIC — building connected systems from firmware to cloud. Always learning, always shipping.",
+    email: "ncibiahmed2017@gmail.com",
     avatarImage: "assets/avatar.jpg",
     resumeUrl: "#",
     socials: [
-      { name: "GITHUB", url: "https://github.com/Nciibi", icon: "github" },
-      { name: "LINKEDIN", url: "https://www.linkedin.com/in/radnaa2015", icon: "linkedin" },
-      { name: "X", url: "https://twitter.com", icon: "x" },
-      { name: "DISCORD", url: "https://discord.com", icon: "discord" }
+      { name: "GITHUB", url: "https://github.com/Nciibi", icon: "github" }
     ]
   },
 
   stats: [
-    { value: 22, suffix: "", label: "AGE" },
-    { value: 3, suffix: "+", label: "YEARS EXPERIENCE" },
-    { value: 25, suffix: "+", label: "PROJECTS WORKED ON" },
-    { value: 15, suffix: "", label: "PROJECTS DEPLOYED" }
+    { value: 21, suffix: "", label: "AGE" },
+    { value: 1, suffix: "+", label: "YEAR EXPERIENCE" },
+    { value: 12, suffix: "", label: "PROJECTS" },
+    { value: 3, suffix: "", label: "DEPLOYED" }
   ],
 
   education: [
@@ -362,13 +359,10 @@ const PORTFOLIO_DATA = {
   contact: {
     headline: "Let's Talk",
     blurb: "What led you here? What are you looking for? I would love to hear from you over a virtual coffee chat!",
-    email: "hello@radnaabazar.dev",
+    email: "ncibiahmed2017@gmail.com",
     phone: "",
     channels: [
-      { name: "GITHUB", url: "https://github.com/Nciibi", icon: "github", hint: "CODE" },
-      { name: "LINKEDIN", url: "https://www.linkedin.com/in/radnaa2015", icon: "linkedin", hint: "NETWORK" },
-      { name: "X", url: "https://twitter.com", icon: "x", hint: "BROADCAST" },
-      { name: "DISCORD", url: "https://discord.com", icon: "discord", hint: "VOICE" }
+      { name: "GITHUB", url: "https://github.com/Nciibi", icon: "github", hint: "CODE" }
     ]
   }
 };
