@@ -583,16 +583,16 @@ section {
   align-items: center;
   justify-content: center;
   gap: 0.6rem;
-  font-family: var(--font-display);
-  font-size: 0.78rem;
-  font-weight: 700;
+  font-family: var(--font-head);
+  font-size: 0.92rem;
+  font-weight: 600;
   letter-spacing: 0.14em;
   text-transform: uppercase;
   text-decoration: none;
-  padding: 14px 28px;
+  padding: 13px 28px 12px;
   border: 1px solid transparent;
   cursor: pointer;
-  transition: transform 0.14s ease, box-shadow 0.2s ease, background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+  transition: transform 0.12s ease, box-shadow 0.16s ease, background 0.16s ease, color 0.16s ease, border-color 0.16s ease, letter-spacing 0.16s ease;
   outline: none;
   user-select: none;
   --cut: 14px;
@@ -600,19 +600,30 @@ section {
     100% 100%, var(--cut) 100%, 0 calc(100% - var(--cut)));
   overflow: hidden;
 }
-/* fast directional sweep on hover */
+/* in-game hover language: skewed light sweep + hard offset frame + one-shot
+   RGB-split jitter + 2px skew nudge + tracked-out lettering */
 .btn-cyber::before {
   content: '';
   position: absolute;
-  inset: 0;
-  background: linear-gradient(105deg, transparent 30%, rgba(255,255,255,0.28) 50%, transparent 70%);
-  transform: translateX(-130%);
-  transition: transform 0.42s var(--ease-ui);
+  inset: -10% -30%;
+  background: linear-gradient(105deg, transparent 35%, rgba(255,255,255,0.34) 50%, transparent 65%);
+  transform: translateX(-120%) skewX(-12deg);
+  transition: transform 0.26s var(--ease-ui);
   pointer-events: none;
 }
-.btn-cyber:hover::before { transform: translateX(130%); }
-.btn-cyber:active { transform: scale(0.975); }
+.btn-cyber:hover::before { transform: translateX(120%) skewX(-12deg); }
+.btn-cyber:hover {
+  transform: translate(-2px, -2px) skewX(-2deg);
+  letter-spacing: 0.2em;
+  animation: btn-rgb 0.3s steps(2, end) 1;
+}
+.btn-cyber:active { transform: translate(0, 0) scale(0.968); }
 .btn-cyber:focus-visible { outline: 2px solid var(--c-cyan); outline-offset: 3px; }
+@keyframes btn-rgb {
+  0% { text-shadow: -2px 0 var(--c-red), 2px 0 var(--c-cyan); }
+  50% { text-shadow: 2px 0 var(--c-red), -2px 0 var(--c-cyan); }
+  100% { text-shadow: none; }
+}
 
 .btn-cyber-yellow {
   background: var(--c-yellow);
@@ -620,7 +631,10 @@ section {
   box-shadow: 0 0 18px rgba(240,181,55,0.30);
 }
 .btn-cyber-yellow::after { content: '///'; font-family: var(--font-mono); font-size: 0.7rem; letter-spacing: -0.1em; opacity: 0.55; }
-.btn-cyber-yellow:hover { background: #FFC84F; box-shadow: 0 0 30px rgba(240,181,55,0.6); }
+.btn-cyber-yellow:hover {
+  background: #FFC84F;
+  box-shadow: 5px 5px 0 rgba(0,0,0,0.6), 0 0 30px rgba(240,181,55,0.6);
+}
 
 .btn-cyber-red {
   background: var(--c-red);
@@ -628,18 +642,23 @@ section {
   box-shadow: 0 0 18px rgba(247,80,73,0.34);
 }
 .btn-cyber-red::after { content: '▶'; font-size: 0.68rem; opacity: 0.85; }
-.btn-cyber-red:hover { background: #FF6B63; box-shadow: 0 0 30px rgba(247,80,73,0.6); }
+.btn-cyber-red:hover {
+  background: #FF6B63;
+  box-shadow: 5px 5px 0 rgba(0,0,0,0.6), 0 0 30px rgba(247,80,73,0.6);
+}
 
 .btn-cyber-ghost {
   background: rgba(14,14,23,0.75);
   color: var(--txt);
-  border-color: var(--line-strong);
+  border: 1px solid var(--line-strong);
+  border-left: 3px solid var(--line-strong);
 }
 .btn-cyber-ghost:hover {
-  background: var(--c-cyan-dim);
+  background: linear-gradient(90deg, var(--c-cyan-dim) 0%, rgba(14,14,23,0.75) 72%);
   color: var(--c-cyan);
   border-color: var(--line-cyan);
-  box-shadow: 0 0 16px rgba(94,246,255,0.22);
+  border-left: 3px solid var(--c-cyan);
+  box-shadow: 5px 5px 0 rgba(0,0,0,0.45), 0 0 16px rgba(94,246,255,0.22);
 }
 
 .btn-cyber-sm { padding: 9px 17px; font-size: 0.68rem; --cut: 10px; }
