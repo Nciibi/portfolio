@@ -147,6 +147,23 @@ function renderEducation() {
 }
 
 /* ---------- Skills ---------- */
+let activeSkillLevel = "PROFICIENT";
+
+function initSkillLevels() {
+  document.querySelectorAll(".skill-levels .lvl").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      document.querySelectorAll(".skill-levels .lvl").forEach((b) => b.classList.remove("active"));
+      btn.classList.add("active");
+      activeSkillLevel = btn.getAttribute("data-level") || "PROFICIENT";
+      cyberAudio.playTab();
+      document.querySelectorAll(".skill-group").forEach((g) => {
+        const lvl = g.getAttribute("data-level") || activeSkillLevel;
+        g.classList.toggle("dimmed", lvl !== activeSkillLevel);
+      });
+    });
+  });
+}
+
 function renderSkills() {
   const wrap = document.getElementById("skills-container");
   if (!wrap || !PORTFOLIO_DATA.skills) return;
@@ -160,8 +177,9 @@ function renderSkills() {
           return `<span class="skill-chip" style="--d:${delay}s" data-level="${grp.level}">${ic}${s}</span>`;
         })
         .join("");
+      const dimmed = grp.level !== activeSkillLevel ? " dimmed" : "";
       return `
-      <article class="skill-group" data-reveal style="--d:${gi * 0.08}s">
+      <article class="skill-group${dimmed}" data-level="${grp.level}" data-reveal style="--d:${gi * 0.08}s">
         <div class="sg-head">
           <span class="sg-level lvl-${grp.level.toLowerCase()}">${grp.level}</span>
           <h3>${grp.category}</h3>
@@ -171,6 +189,7 @@ function renderSkills() {
       </article>`;
     })
     .join("");
+  initSkillLevels();
 }
 
 /* ---------- Projects (kartavya feed style) ---------- */
