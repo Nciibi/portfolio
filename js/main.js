@@ -5,7 +5,6 @@
  */
 
 document.addEventListener("DOMContentLoaded", () => {
-  initHUDClock();
   renderHeroSocials();
   renderStats();
   renderBento();
@@ -20,23 +19,51 @@ document.addEventListener("DOMContentLoaded", () => {
   initAudioEvents();
   initHUDControls();
   initDialogueOptions();
+  initTilt();
 
   document.dispatchEvent(new Event("portfolio:rendered"));
 });
 
-/* ---------- HUD clock ---------- */
-function initHUDClock() {
-  const clockEl = document.getElementById("hud-clock");
-  if (!clockEl) return;
-  const update = () => {
-    const now = new Date();
-    const h = String(now.getHours()).padStart(2, "0");
-    const m = String(now.getMinutes()).padStart(2, "0");
-    const s = String(now.getSeconds()).padStart(2, "0");
-    clockEl.textContent = `2077.10.24 // ${h}:${m}:${s}`;
+/* ---------- Pointer tilt for cards (scoped, rAF-throttled) ---------- */
+function initTilt() {
+  const SEL = ".project-card, .bento-card, .exp-card, .edu-card";
+  const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (reduce) return;
+  let current = null;
+  let raf = 0;
+  let tx = 0;
+  let ty = 0;
+  const apply = () => {
+    raf = 0;
+    if (!current) return;
+    current.style.transform =
+      `perspective(900px) rotateX(${(-ty * 7).toFixed(2)}deg) rotateY(${(tx * 9).toFixed(2)}deg) translateZ(0)`;
   };
-  update();
-  setInterval(update, 1000);
+  document.addEventListener("pointermove", (e) => {
+    const card = e.target && e.target.closest ? e.target.closest(SEL) : null;
+    if (card !== current) {
+      if (current) {
+        current.style.transition = "";
+        current.style.transform = "";
+      }
+      current = card;
+      if (current) current.style.transition = "transform .08s ease-out";
+    }
+    if (!current) return;
+    const r = current.getBoundingClientRect();
+    if (!r.width || !r.height) return;
+    tx = ((e.clientX - r.left) / r.width) * 2 - 1;
+    ty = ((e.clientY - r.top) / r.height) * 2 - 1;
+    if (!raf) raf = requestAnimationFrame(apply);
+  }, { passive: true });
+  document.addEventListener("pointerout", (e) => {
+    if (current && !(e.relatedTarget && e.relatedTarget.closest && e.relatedTarget.closest(SEL) === current)) {
+      current.style.transition = "transform .35s var(--ease-out, ease)";
+      current.style.transform = "";
+      const done = current;
+      setTimeout(() => { if (current === done) { done.style.transition = ""; current = null; } }, 360);
+    }
+  }, { passive: true });
 }
 
 /* ---------- Typing taglines (Kartavya changing-text) ---------- */
