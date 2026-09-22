@@ -14,7 +14,7 @@
   const indexBox = document.getElementById('archive-index');
   const tip = document.getElementById('archive-tip');
   if (!section || !view || !detail || !indexBox) return;
-  if (!window.PORTFOLIO_DATA || !PORTFOLIO_DATA.projects) return;
+  if (typeof PORTFOLIO_DATA === 'undefined' || !PORTFOLIO_DATA.projects) return;
 
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const projects = PORTFOLIO_DATA.projects.slice(0, 9);
