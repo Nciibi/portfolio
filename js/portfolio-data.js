@@ -70,7 +70,7 @@ const PORTFOLIO_DATA = {
     avatarImage: "assets/avatar.jpg",
     resumeUrl: "#",
     socials: [
-      { name: "GITHUB", url: "https://github.com/RedonaNova", icon: "github" },
+      { name: "GITHUB", url: "https://github.com/Nciibi", icon: "github" },
       { name: "LINKEDIN", url: "https://www.linkedin.com/in/radnaa2015", icon: "linkedin" },
       { name: "X", url: "https://twitter.com", icon: "x" },
       { name: "DISCORD", url: "https://discord.com", icon: "discord" }
@@ -365,7 +365,7 @@ const PORTFOLIO_DATA = {
     email: "hello@radnaabazar.dev",
     phone: "",
     channels: [
-      { name: "GITHUB", url: "https://github.com/RedonaNova", icon: "github", hint: "CODE" },
+      { name: "GITHUB", url: "https://github.com/Nciibi", icon: "github", hint: "CODE" },
       { name: "LINKEDIN", url: "https://www.linkedin.com/in/radnaa2015", icon: "linkedin", hint: "NETWORK" },
       { name: "X", url: "https://twitter.com", icon: "x", hint: "BROADCAST" },
       { name: "DISCORD", url: "https://discord.com", icon: "discord", hint: "VOICE" }
