@@ -1,449 +1,313 @@
 /**
- * CYBERPUNK 2077 PORTFOLIO CONTROLLER
- * Renders data-driven sections, the journal master/detail view,
- * the dialogue contact terminal, and the shard reader modal.
+ * CYBERPUNK PORTFOLIO CONTROLLER
+ * Renders hero socials/stats, bento about, skills, projects,
+ * experience tabs, journey timeline, contact netlinks.
  */
 
 document.addEventListener("DOMContentLoaded", () => {
   initHUDClock();
-  renderAttributes();
-  renderCyberware();
-  renderGigs("all");
-  renderBraindance();
+  renderHeroSocials();
+  renderStats();
+  renderBento();
+  renderEducation();
+  renderSkills();
+  renderProjects();
+  initExpTabs();
+  renderExperience("CAREER");
+  renderJourney();
   renderNetlinks();
-  initAttributeExpand();
-  initGigFilters();
+  initTyping();
   initAudioEvents();
   initHUDControls();
-  initModalEvents();
-  initTerminalTransmission();
   initDialogueOptions();
 
-  /* Let the motion layer scan freshly-rendered nodes. */
   document.dispatchEvent(new Event("portfolio:rendered"));
 });
 
-/* ---------------------------------------------------------------------------
-   1. REAL-TIME NIGHT CITY HUD CLOCK
-   --------------------------------------------------------------------------- */
+/* ---------- HUD clock ---------- */
 function initHUDClock() {
   const clockEl = document.getElementById("hud-clock");
   if (!clockEl) return;
-
-  function update() {
+  const update = () => {
     const now = new Date();
     const h = String(now.getHours()).padStart(2, "0");
     const m = String(now.getMinutes()).padStart(2, "0");
     const s = String(now.getSeconds()).padStart(2, "0");
     clockEl.textContent = `2077.10.24 // ${h}:${m}:${s}`;
-  }
+  };
   update();
   setInterval(update, 1000);
 }
 
-/* ---------------------------------------------------------------------------
-   2. RENDER ATTRIBUTES (CHARACTER SCREEN)
-   --------------------------------------------------------------------------- */
-function renderAttributes() {
-  const container = document.getElementById("attributes-container");
-  if (!container || !PORTFOLIO_DATA.attributes) return;
+/* ---------- Typing taglines (Kartavya changing-text) ---------- */
+function initTyping() {
+  const el = document.getElementById("type-target");
+  if (!el || !PORTFOLIO_DATA.profile?.taglines?.length) return;
+  const lines = PORTFOLIO_DATA.profile.taglines;
+  const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (reduce) { el.textContent = lines[0]; return; }
 
-  container.innerHTML =
-    PORTFOLIO_DATA.attributes
-      .map((attr) => {
-        const glyph = (ATTR_GLYPHS && ATTR_GLYPHS[attr.glyph]) || "";
-        return `
-      <button type="button" class="attribute-card" data-attr="${attr.id}" aria-expanded="false">
-        <span class="attr-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"
-               stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${glyph}</svg>
-        </span>
-        <span class="attr-name">${attr.name}</span>
-        <span class="attr-spec">${attr.spec}</span>
-        <span class="attr-level">
-          <b data-count="${attr.level}">0</b><span>/ ${attr.max}</span>
-        </span>
-        <span class="attr-bar-wrap"><span class="attr-bar-fill" data-fill="${attr.meter}"></span></span>
-      </button>`;
-      })
-      .join("") +
-    `
-    <div class="attr-detail" id="attr-detail" aria-live="polite">
-      <div class="attr-detail-inner">
-        <div class="attr-detail-idx" id="attr-detail-idx">01</div>
-        <div>
-          <h4 id="attr-detail-title">—</h4>
-          <p id="attr-detail-desc">—</p>
-        </div>
-        <div class="attr-detail-meta" id="attr-detail-meta"></div>
-      </div>
-    </div>`;
-}
-
-function initAttributeExpand() {
-  const container = document.getElementById("attributes-container");
-  const detail = document.getElementById("attr-detail");
-  if (!container || !detail) return;
-
-  container.addEventListener("click", (e) => {
-    const card = e.target.closest(".attribute-card");
-    if (!card) return;
-
-    const id = card.getAttribute("data-attr");
-    const attr = PORTFOLIO_DATA.attributes.find((a) => a.id === id);
-    if (!attr) return;
-
-    const wasActive = card.classList.contains("active");
-    container.querySelectorAll(".attribute-card").forEach((c) => {
-      c.classList.remove("active");
-      c.setAttribute("aria-expanded", "false");
-    });
-
-    if (wasActive) {
-      detail.classList.remove("open");
-      cyberAudio.playTab();
-      return;
+  let li = 0, ci = 0, deleting = false;
+  const tick = () => {
+    const line = lines[li];
+    if (!deleting) {
+      ci++;
+      el.textContent = line.slice(0, ci);
+      if (ci >= line.length) {
+        deleting = true;
+        setTimeout(tick, 1800);
+        return;
+      }
+      setTimeout(tick, 42 + Math.random() * 40);
+    } else {
+      ci--;
+      el.textContent = line.slice(0, ci);
+      if (ci <= 0) {
+        deleting = false;
+        li = (li + 1) % lines.length;
+        setTimeout(tick, 320);
+        return;
+      }
+      setTimeout(tick, 22);
     }
-
-    card.classList.add("active");
-    card.setAttribute("aria-expanded", "true");
-
-    const idx = PORTFOLIO_DATA.attributes.indexOf(attr) + 1;
-    document.getElementById("attr-detail-idx").textContent = String(idx).padStart(2, "0");
-    document.getElementById("attr-detail-title").textContent = attr.name + " // " + attr.perk;
-    document.getElementById("attr-detail-desc").textContent = attr.desc;
-    document.getElementById("attr-detail-meta").innerHTML =
-      `<b>${attr.level}/${attr.max}</b>${attr.perkNote || attr.spec}`;
-
-    detail.classList.remove("open");
-    void detail.offsetWidth; /* restart animation */
-    detail.classList.add("open");
-    cyberAudio.playTab();
-  });
+  };
+  setTimeout(tick, 600);
 }
 
-/* ---------------------------------------------------------------------------
-   3. RENDER CYBERWARE & SKILLS MATRIX
-   --------------------------------------------------------------------------- */
-function renderCyberware() {
-  const container = document.getElementById("cyberware-container");
-  if (!container || !PORTFOLIO_DATA.cyberware) return;
-
-  container.innerHTML = PORTFOLIO_DATA.cyberware
-    .map((cw) => {
-      const emblemSlug = ICON_SLUGS && cw.emblem ? ICON_SLUGS[cw.emblem] || cw.emblem : null;
-      const emblem = emblemSlug && typeof icon === "function" ? icon(emblemSlug) : "";
-
-      const tags = cw.skills
-        .map((s) => {
-          const slug = ICON_SLUGS ? ICON_SLUGS[s] : null;
-          const ic = slug && typeof icon === "function" ? icon(slug) : "";
-          return `<span class="skill-tag">${ic}${s}</span>`;
-        })
-        .join("");
-
-      return `
-      <article class="cyberware-card rarity-${cw.rarity}" data-reveal="scale">
-        <div class="cw-header">
-          <span class="cw-category">${cw.category}</span>
-          <span class="cw-rarity-badge">${cw.rarity}</span>
-        </div>
-        <div class="cw-head-row">
-          <span class="cw-emblem">${emblem}</span>
-          <div>
-            <h3 class="cw-name">${cw.name}</h3>
-            <div class="cw-slot">${cw.slot}</div>
-          </div>
-        </div>
-        <p class="cw-desc">${cw.desc}</p>
-        <div class="cw-skills-tags">${tags}</div>
-      </article>`;
-    })
-    .join("");
-}
-
-/* ---------------------------------------------------------------------------
-   4. RENDER FIXER GIGS — JOURNAL MASTER / DETAIL
-   --------------------------------------------------------------------------- */
-let activeGigFilter = "all";
-let activeGigId = null;
-
-function getFilteredGigs() {
-  const gigs = PORTFOLIO_DATA.gigs || [];
-  return activeGigFilter === "all"
-    ? gigs
-    : gigs.filter((g) => g.category === activeGigFilter);
-}
-
-function renderGigs(filterCategory = "all") {
-  activeGigFilter = filterCategory;
-
-  const list = document.getElementById("gigs-container");
-  const detail = document.getElementById("gig-detail");
-  const count = document.getElementById("gig-count");
-  if (!list || !detail) return;
-
-  const filtered = getFilteredGigs();
-  if (count) count.textContent = String(filtered.length).padStart(2, "0") + " RECORDS";
-
-  if (!filtered.length) {
-    list.innerHTML = `<div class="gig-row" style="cursor:default">NO CONTRACTS MATCH FILTER</div>`;
-    detail.innerHTML = "";
-    return;
-  }
-
-  if (!filtered.some((g) => g.id === activeGigId)) {
-    activeGigId = filtered[0].id;
-  }
-
-  list.innerHTML = filtered
-    .map(
-      (gig, i) => `
-    <button type="button" class="gig-row ${gig.id === activeGigId ? "active" : ""}"
-            data-id="${gig.id}" role="option" aria-selected="${gig.id === activeGigId}">
-      <span class="gig-row-idx">${String(i + 1).padStart(2, "0")}</span>
-      <span>
-        <span class="gig-row-title">${gig.title}</span>
-        <span class="gig-row-fixer">${gig.fixer}</span>
-      </span>
-      <span class="gig-row-reward">${gig.reward}</span>
-    </button>`
-    )
-    .join("");
-
-  list.querySelectorAll(".gig-row[data-id]").forEach((row) => {
-    row.addEventListener("click", () => {
-      const id = row.getAttribute("data-id");
-      if (id === activeGigId) return;
-      activeGigId = id;
-      cyberAudio.playTab();
-      list.querySelectorAll(".gig-row").forEach((r) => {
-        r.classList.toggle("active", r.getAttribute("data-id") === id);
-        r.setAttribute("aria-selected", String(r.getAttribute("data-id") === id));
-      });
-      renderGigDetail(id);
-    });
-  });
-
-  renderGigDetail(activeGigId);
-}
-
-function renderGigDetail(gigId) {
-  const detail = document.getElementById("gig-detail");
-  const gig = (PORTFOLIO_DATA.gigs || []).find((g) => g.id === gigId);
-  if (!detail || !gig) return;
-
-  const tags = gig.tags
-    .map((t) => {
-      const slug = ICON_SLUGS ? ICON_SLUGS[t] : null;
+/* ---------- Hero socials ---------- */
+function renderHeroSocials() {
+  const wrap = document.getElementById("hero-socials");
+  if (!wrap || !PORTFOLIO_DATA.profile?.socials) return;
+  wrap.innerHTML = PORTFOLIO_DATA.profile.socials
+    .map((s) => {
+      const slug = ICON_SLUGS ? ICON_SLUGS[s.name] || s.icon : s.icon;
       const ic = slug && typeof icon === "function" ? icon(slug) : "";
-      return `<span class="gig-tag">${ic}${t}</span>`;
+      return `<a href="${s.url}" target="_blank" rel="noopener" class="social-orb" title="${s.name}">${ic}<span>${s.name}</span></a>`;
     })
     .join("");
-
-  detail.innerHTML = `
-    <div class="gig-detail-media">
-      <img src="${gig.image}" alt="${gig.title}" />
-      <span class="gig-danger-badge">THREAT: ${gig.dangerLevel}</span>
-      <span class="gig-detail-status">${gig.status}</span>
-      <div class="gig-detail-heading"><h3>${gig.title}</h3></div>
-    </div>
-    <div class="gig-detail-body">
-      <div class="gig-meta">
-        <div class="gig-meta-item"><div class="k">FIXER</div><div class="v cyan">${gig.fixer}</div></div>
-        <div class="gig-meta-item"><div class="k">PAYOUT</div><div class="v yellow">${gig.reward}</div></div>
-        <div class="gig-meta-item"><div class="k">STATUS</div><div class="v">${gig.status}</div></div>
-        <div class="gig-meta-item"><div class="k">THREAT</div><div class="v" style="color:var(--c-red)">${gig.dangerLevel}</div></div>
-      </div>
-      <p class="gig-summary">${gig.summary}</p>
-      <div class="gig-brief">
-        <h4>// ARCHIVAL MISSION BRIEF &amp; DEEP SPECIFICATIONS</h4>
-        <p>${gig.details}</p>
-      </div>
-      <div class="gig-tags">${tags}</div>
-      <div class="gig-card-actions">
-        <button type="button" class="btn-cyber btn-cyber-red btn-cyber-sm gig-modal-trigger" data-id="${gig.id}">
-          VIEW DOSSIER
-        </button>
-        <a href="${gig.repoUrl}" target="_blank" rel="noopener" class="btn-cyber btn-cyber-ghost btn-cyber-sm">
-          SOURCE CODE
-        </a>
-        <a href="${gig.demoUrl}" target="_blank" rel="noopener" class="btn-cyber btn-cyber-ghost btn-cyber-sm">
-          LIVE INTERFACE
-        </a>
-      </div>
-    </div>`;
-
-  const trigger = detail.querySelector(".gig-modal-trigger");
-  if (trigger) trigger.addEventListener("click", () => openGigModal(gig.id));
 }
 
-function initGigFilters() {
-  document.querySelectorAll(".filter-btn").forEach((btn) => {
-    btn.addEventListener("click", () => {
-      document.querySelectorAll(".filter-btn").forEach((b) => {
-        b.classList.remove("active");
-        b.setAttribute("aria-selected", "false");
-      });
-      btn.classList.add("active");
-      btn.setAttribute("aria-selected", "true");
-      cyberAudio.playTab();
-      renderGigs(btn.getAttribute("data-filter"));
-    });
-  });
-}
-
-/* ---------------------------------------------------------------------------
-   5. RENDER BRAINDANCE CAREER TIMELINE
-   --------------------------------------------------------------------------- */
-function renderBraindance() {
-  const container = document.getElementById("braindance-container");
-  if (!container || !PORTFOLIO_DATA.braindance) return;
-
-  container.innerHTML = PORTFOLIO_DATA.braindance
+/* ---------- Stat strip counters ---------- */
+function renderStats() {
+  const wrap = document.getElementById("stat-strip");
+  if (!wrap || !PORTFOLIO_DATA.stats) return;
+  wrap.innerHTML = PORTFOLIO_DATA.stats
     .map(
-      (bd, i) => `
-    <div class="bd-track-item" data-reveal style="--d:${i * 0.07}s">
-      <div class="bd-track-dot">${String(i + 1).padStart(2, "0")}</div>
-      <div class="bd-item-card">
-        <div class="bd-item-meta">
-          <span class="bd-period">${bd.period}</span>
-          <span class="bd-track-id">${bd.track}</span>
-        </div>
-        <h3 class="bd-role">${bd.role}</h3>
-        <div class="bd-org">${bd.organization}</div>
-        <ul class="bd-highlights">
-          ${bd.highlights.map((h) => `<li>${h}</li>`).join("")}
-        </ul>
-      </div>
+      (st) => `
+    <div class="stat-cell big">
+      <div class="stat-num" data-count="${st.value}">0</div>
+      <div class="stat-suffix">${st.suffix || ""}</div>
+      <div class="stat-label">${st.label}</div>
     </div>`
     )
     .join("");
 }
 
-/* ---------------------------------------------------------------------------
-   6. RENDER SOCIAL NETLINKS
-   --------------------------------------------------------------------------- */
-function renderNetlinks() {
-  const container = document.getElementById("netlinks-container");
-  if (!container || !PORTFOLIO_DATA.uplink) return;
+/* ---------- Bento about grid ---------- */
+function renderBento() {
+  const wrap = document.getElementById("bento-container");
+  if (!wrap || !PORTFOLIO_DATA.about) return;
+  wrap.innerHTML = PORTFOLIO_DATA.about
+    .map((b) => {
+      const tags = (b.tags || [])
+        .map((t) => {
+          const slug = ICON_SLUGS ? ICON_SLUGS[t] : null;
+          const ic = slug && typeof icon === "function" ? icon(slug) : "";
+          return `<span class="bento-tag">${ic}${t}</span>`;
+        })
+        .join("");
+      return `
+      <article class="bento-card span-${b.span || "normal"}" data-reveal>
+        <div class="bento-kicker">${b.kicker}</div>
+        <h3 class="bento-title">${b.title}</h3>
+        ${b.body ? `<p class="bento-body">${b.body}</p>` : ""}
+        ${tags ? `<div class="bento-tags">${tags}</div>` : ""}
+      </article>`;
+    })
+    .join("");
+}
 
-  container.innerHTML = PORTFOLIO_DATA.uplink.commChannels
+/* ---------- Education ---------- */
+function renderEducation() {
+  const wrap = document.getElementById("edu-container");
+  if (!wrap || !PORTFOLIO_DATA.education) return;
+  wrap.innerHTML = PORTFOLIO_DATA.education
+    .map(
+      (e) => `
+    <article class="edu-card" data-reveal>
+      <div class="edu-top">
+        <h4>${e.title}</h4>
+        <span class="edu-score">${e.score}</span>
+      </div>
+      <div class="edu-period">${e.period}</div>
+      <p class="edu-org">${e.org}</p>
+    </article>`
+    )
+    .join("");
+}
+
+/* ---------- Skills ---------- */
+function renderSkills() {
+  const wrap = document.getElementById("skills-container");
+  if (!wrap || !PORTFOLIO_DATA.skills) return;
+  wrap.innerHTML = PORTFOLIO_DATA.skills
+    .map((grp, gi) => {
+      const chips = grp.items
+        .map((s, i) => {
+          const slug = ICON_SLUGS ? ICON_SLUGS[s] : null;
+          const ic = slug && typeof icon === "function" ? icon(slug) : "";
+          const delay = (i * 0.05).toFixed(2);
+          return `<span class="skill-chip" style="--d:${delay}s" data-level="${grp.level}">${ic}${s}</span>`;
+        })
+        .join("");
+      return `
+      <article class="skill-group" data-reveal style="--d:${gi * 0.08}s">
+        <div class="sg-head">
+          <span class="sg-level lvl-${grp.level.toLowerCase()}">${grp.level}</span>
+          <h3>${grp.category}</h3>
+        </div>
+        <p class="sg-desc">${grp.desc}</p>
+        <div class="sg-chips">${chips}</div>
+      </article>`;
+    })
+    .join("");
+}
+
+/* ---------- Projects (kartavya feed style) ---------- */
+function renderProjects() {
+  const wrap = document.getElementById("projects-container");
+  if (!wrap || !PORTFOLIO_DATA.projects) return;
+  wrap.innerHTML = PORTFOLIO_DATA.projects
+    .map((p, i) => {
+      const tags = (p.tags || [])
+        .map((t) => {
+          const slug = ICON_SLUGS ? ICON_SLUGS[t] : null;
+          const ic = slug && typeof icon === "function" ? icon(slug) : "";
+          return `<span class="gig-tag">${ic}${t}</span>`;
+        })
+        .join("");
+      const idx = String(i + 1).padStart(2, "0");
+      return `
+      <article class="project-card" data-reveal style="--d:${(i % 4) * 0.06}s" data-id="${p.id}">
+        <div class="pc-meta">
+          <span class="pc-idx">${idx}</span>
+          <span class="pc-period">${p.period}</span>
+          <span class="pc-cat">${p.category}</span>
+        </div>
+        <h3 class="pc-title">${p.title}</h3>
+        <p class="pc-summary">${p.summary}</p>
+        <div class="pc-footer">
+          <div class="gig-tags">${tags}</div>
+          <div class="pc-actions">
+            <span class="pc-likes">♥ ${p.likes}</span>
+            <a href="${p.url}" target="_blank" rel="noopener" class="btn-cyber btn-cyber-sm btn-cyber-ghost">LEARN MORE →</a>
+          </div>
+        </div>
+      </article>`;
+    })
+    .join("");
+}
+
+/* ---------- Experience tabs ---------- */
+let activeExpTab = "CAREER";
+
+function initExpTabs() {
+  document.querySelectorAll(".exp-tab").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      document.querySelectorAll(".exp-tab").forEach((b) => {
+        b.classList.remove("active");
+        b.setAttribute("aria-selected", "false");
+      });
+      btn.classList.add("active");
+      btn.setAttribute("aria-selected", "true");
+      activeExpTab = btn.getAttribute("data-tab") || "CAREER";
+      cyberAudio.playTab();
+      renderExperience(activeExpTab);
+      document.dispatchEvent(new Event("portfolio:rendered"));
+    });
+  });
+}
+
+function renderExperience(tab) {
+  const wrap = document.getElementById("experience-container");
+  if (!wrap || !PORTFOLIO_DATA.experience) return;
+  const rows = PORTFOLIO_DATA.experience.filter((e) => e.tab === tab);
+  if (!rows.length) {
+    wrap.innerHTML = `<div class="exp-empty">NO RECORDS FOR THIS CHANNEL</div>`;
+    return;
+  }
+  wrap.innerHTML = rows
+    .map(
+      (e, i) => `
+    <article class="exp-card" data-reveal style="--d:${i * 0.07}s">
+      <div class="exp-period">${e.period}</div>
+      <h3 class="exp-role">${e.role}</h3>
+      <div class="exp-org">${e.org}</div>
+      <p class="exp-desc">${e.desc}</p>
+      ${e.likes ? `<div class="pc-likes">♥ ${e.likes}</div>` : ""}
+    </article>`
+    )
+    .join("");
+}
+
+/* ---------- Journey report timeline ---------- */
+function renderJourney() {
+  const wrap = document.getElementById("journey-container");
+  if (!wrap || !PORTFOLIO_DATA.journey) return;
+  wrap.innerHTML = PORTFOLIO_DATA.journey
+    .map((j, i) => {
+      const list = (j.list || [])
+        .map((li) => `<li>${li}</li>`)
+        .join("");
+      return `
+      <div class="journey-item" data-reveal style="--d:${i * 0.08}s">
+        <div class="journey-year">
+          <span class="jy-dot"></span>
+          <span class="jy-label">${j.year}</span>
+        </div>
+        <div class="journey-card">
+          <p class="jy-text">${j.text}</p>
+          ${list ? `<ul class="jy-list">${list}</ul>` : ""}
+        </div>
+      </div>`;
+    })
+    .join("");
+}
+
+/* ---------- Netlinks ---------- */
+function renderNetlinks() {
+  const wrap = document.getElementById("netlinks-container");
+  if (!wrap || !PORTFOLIO_DATA.contact?.channels) return;
+  wrap.innerHTML = PORTFOLIO_DATA.contact.channels
     .map((ch) => {
       const slug = ICON_SLUGS ? ICON_SLUGS[ch.name.toLowerCase()] || ch.icon : ch.icon;
       const ic = slug && typeof icon === "function" ? icon(slug) : "";
       return `
-    <a href="${ch.url}" target="_blank" rel="noopener" class="netlink-btn">
-      ${ic}
-      <span>${ch.name}</span>
-      <span class="hint">${ch.hint || "OPEN"}</span>
-    </a>`;
+      <a href="${ch.url}" target="_blank" rel="noopener" class="netlink-btn">
+        ${ic}<span>${ch.name}</span><span class="hint">${ch.hint || "OPEN"}</span>
+      </a>`;
     })
     .join("");
 }
 
-/* ---------------------------------------------------------------------------
-   7. SHARD READER MODAL
-   --------------------------------------------------------------------------- */
-function openGigModal(gigId) {
-  const gig = (PORTFOLIO_DATA.gigs || []).find((g) => g.id === gigId);
-  if (!gig) return;
-
-  const modal = document.getElementById("gig-modal");
-  const modalBody = document.getElementById("modal-body-content");
-  if (!modal || !modalBody) return;
-
-  const tags = gig.tags
-    .map((t) => {
-      const slug = ICON_SLUGS ? ICON_SLUGS[t] : null;
-      const ic = slug && typeof icon === "function" ? icon(slug) : "";
-      return `<span class="gig-tag">${ic}${t}</span>`;
-    })
-    .join("");
-
-  modalBody.innerHTML = `
-    <div class="modal-img-wrap"><img src="${gig.image}" alt="${gig.title}" /></div>
-    <div class="modal-meta">
-      <span class="fixer">FIXER: ${gig.fixer}</span>
-      <span class="payout">PAYOUT: ${gig.reward}</span>
-    </div>
-    <h2>${gig.title}</h2>
-    <p>${gig.summary}</p>
-    <div class="modal-block">
-      <h4>// ARCHIVAL MISSION BRIEF &amp; DEEP SPECIFICATIONS</h4>
-      <p>${gig.details}</p>
-    </div>
-    <div style="margin-bottom:1.4rem">
-      <div style="font-family:var(--font-mono);font-size:.66rem;letter-spacing:.16em;color:var(--txt-4);margin-bottom:.5rem">
-        DEPLOYED CYBER TECH:
-      </div>
-      <div class="gig-tags">${tags}</div>
-    </div>
-    <div style="display:flex;gap:.75rem;flex-wrap:wrap">
-      <a href="${gig.demoUrl}" target="_blank" rel="noopener" class="btn-cyber btn-cyber-yellow btn-cyber-sm">LAUNCH LIVE INTERFACE</a>
-      <a href="${gig.repoUrl}" target="_blank" rel="noopener" class="btn-cyber btn-cyber-ghost btn-cyber-sm">ACCESS SOURCE CODE</a>
-    </div>`;
-
-  modal.classList.add("active");
-  document.body.style.overflow = "hidden";
-  cyberAudio.playClick();
-}
-
-function closeGigModal() {
-  const modal = document.getElementById("gig-modal");
-  if (!modal) return;
-  modal.classList.remove("active");
-  document.body.style.overflow = "";
-}
-
-function initModalEvents() {
-  const modal = document.getElementById("gig-modal");
-  const closeBtn = document.getElementById("modal-close");
-  if (!modal || !closeBtn) return;
-
-  closeBtn.addEventListener("click", () => {
-    closeGigModal();
-    cyberAudio.playClick();
-  });
-
-  modal.addEventListener("click", (e) => {
-    if (e.target === modal) {
-      closeGigModal();
-      cyberAudio.playClick();
-    }
-  });
-
-  document.addEventListener("keydown", (e) => {
-    if (e.key === "Escape" && modal.classList.contains("active")) {
-      closeGigModal();
-    }
-  });
-}
-
-/* ---------------------------------------------------------------------------
-   8. AUDIO EVENT BINDINGS
-   --------------------------------------------------------------------------- */
+/* ---------- Audio bindings ---------- */
 function initAudioEvents() {
   document.body.addEventListener("mouseover", (e) => {
-    if (e.target.closest(".btn-cyber, .nav-link, .filter-btn, .hud-ctrl-btn, .netlink-btn, .dlg-opt, .gig-row, .attribute-card")) {
+    if (e.target.closest(".btn-cyber, .nav-link, .exp-tab, .hud-ctrl-btn, .netlink-btn, .dlg-opt, .skill-chip, .social-orb, .project-card")) {
       cyberAudio.playHover();
     }
   });
-
   document.body.addEventListener("click", (e) => {
-    if (e.target.closest(".btn-cyber, .nav-link, .hud-ctrl-btn, .netlink-btn, .dlg-opt, .attribute-card")) {
+    if (e.target.closest(".btn-cyber, .nav-link, .hud-ctrl-btn, .netlink-btn, .dlg-opt, .exp-tab")) {
       cyberAudio.playClick();
     }
   });
-
   document.querySelectorAll("input, textarea").forEach((inp) => {
     inp.addEventListener("keydown", () => cyberAudio.playKeypress());
   });
 }
 
-/* ---------------------------------------------------------------------------
-   9. HUD CONTROLS (SFX + CRT)
-   --------------------------------------------------------------------------- */
+/* ---------- HUD controls ---------- */
 function initHUDControls() {
   const audioBtn = document.getElementById("btn-toggle-audio");
   if (audioBtn) {
@@ -458,7 +322,6 @@ function initHUDControls() {
       sync();
     });
   }
-
   const crtBtn = document.getElementById("btn-toggle-crt");
   if (crtBtn) {
     crtBtn.addEventListener("click", () => {
@@ -471,38 +334,7 @@ function initHUDControls() {
   }
 }
 
-/* ---------------------------------------------------------------------------
-   10. NETWATCH JACK-IN / CONTACT TRANSMISSION LOG
-   --------------------------------------------------------------------------- */
-function initTerminalTransmission() {
-  const form = document.getElementById("terminal-contact-form");
-  const logEl = document.getElementById("terminal-console-log");
-  if (!form || !logEl) return;
-
-  form.addEventListener("submit", (e) => {
-    e.preventDefault();
-    cyberAudio.playClick();
-
-    const nameVal = document.getElementById("agent-name").value.trim() || "UNKNOWN_MERC";
-    const freqVal = document.getElementById("agent-freq").value.trim() || "SECURE_RELAY";
-
-    logEl.classList.add("active");
-    logEl.innerHTML = `
-      <div>>> [NETWATCH LINK INITIATED] Connecting to proxy node...</div>
-      <div>>> Sender: ${nameVal} [${freqVal}]</div>
-      <div>>> Encrypting payload with 2048-bit Militech ICE...</div>
-      <div>>> Relay ping: 14ms latency [OK]</div>
-      <div style="color:var(--c-yellow);font-weight:bold">>> [TRANSMISSION CONFIRMED] Logged in V's neural queue.</div>
-    `;
-
-    cyberAudio.playSuccess();
-    form.reset();
-  });
-}
-
-/* ---------------------------------------------------------------------------
-   11. DIALOGUE OPTIONS
-   --------------------------------------------------------------------------- */
+/* ---------- Dialogue / form ---------- */
 function initDialogueOptions() {
   document.querySelectorAll("[data-scroll-to]").forEach((btn) => {
     btn.addEventListener("click", () => {
@@ -526,6 +358,27 @@ function initDialogueOptions() {
         el.style.animation = `fade-line .4s ${i * 0.07}s forwards`;
         el.style.opacity = "0";
       });
+    });
+  }
+
+  const form = document.getElementById("terminal-contact-form");
+  const logEl = document.getElementById("terminal-console-log");
+  if (form && logEl) {
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
+      cyberAudio.playClick();
+      const nameVal = document.getElementById("agent-name").value.trim() || "UNKNOWN";
+      const freqVal = document.getElementById("agent-freq").value.trim() || "SECURE_RELAY";
+      logEl.classList.add("active");
+      logEl.innerHTML = `
+        <div>>> [UPLINK INITIATED] Connecting to proxy node...</div>
+        <div>>> Sender: ${nameVal} [${freqVal}]</div>
+        <div>>> Encrypting payload with 2048-bit ICE...</div>
+        <div>>> Relay ping: 14ms [OK]</div>
+        <div style="color:var(--c-yellow);font-weight:bold">>> [TRANSMISSION CONFIRMED] Logged.</div>
+      `;
+      cyberAudio.playSuccess();
+      form.reset();
     });
   }
 }
