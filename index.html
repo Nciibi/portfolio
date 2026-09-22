@@ -11,6 +11,7 @@
   <link rel="stylesheet" href="css/style.css" />
   <link rel="icon" href="favicon.svg" type="image/svg+xml" />
   <link rel="apple-touch-icon" href="favicon.svg" />
+  <noscript><style>.cin-chapter{position:static !important;opacity:1 !important;transform:none !important;margin:1.25rem auto;max-width:660px;}</style></noscript>
 </head>
 <body>
 
@@ -208,12 +209,49 @@
       </div>
     </section>
 
-    <!-- ========== 05 EXPERIENCE / CAREER ========== -->
+    <!-- ========== 05 SHOWCASE / SIGNAL CORE (scroll-driven 3D cinema) ========== -->
+    <section class="cinema-section" id="showcase">
+      <div class="cinema-track" id="cinema-track">
+        <div class="cinema-sticky">
+          <div class="cinema-canvas" id="cinema-stage" role="img" aria-label="Scroll-driven 3D signal core. Scroll to rotate and zoom through three chapters."></div>
+          <div class="cinema-frame" aria-hidden="true"></div>
+          <div class="cinema-head">
+            <span class="cinema-eyebrow"><span class="num">05</span> SIGNAL CORE // SCROLL CINEMA</span>
+          </div>
+          <div class="cinema-copy">
+            <div class="cin-chapter is-active" data-ch="0">
+              <div class="cin-ch-num">01</div>
+              <h2 class="cin-ch-title">SIGNAL <em>CORE</em></h2>
+              <p class="cin-ch-text">A lattice of intent. Every node is a shipped system — fintech rails, cloud platforms, AI agents. Scroll to drive the render.</p>
+            </div>
+            <div class="cin-chapter" data-ch="1">
+              <div class="cin-ch-num">02</div>
+              <h2 class="cin-ch-title">ORBITAL <em>RINGS</em></h2>
+              <p class="cin-ch-text">Three orbits: delivery, reliability, curiosity. Every project runs the loop before it earns a place in the archive.</p>
+            </div>
+            <div class="cin-chapter" data-ch="2">
+              <div class="cin-ch-num">03</div>
+              <h2 class="cin-ch-title">NEURAL <em>NETWORK</em></h2>
+              <p class="cin-ch-text">Hundreds of signals cross-linked into one construct. Keep scrolling for the case files, the career tabs, the journey report.</p>
+            </div>
+          </div>
+          <div class="cinema-progress" aria-hidden="true"><i id="cinema-progress-fill"></i></div>
+          <div class="cinema-steps" aria-hidden="true">
+            <span class="cin-dot is-active" data-ch="0"></span>
+            <span class="cin-dot" data-ch="1"></span>
+            <span class="cin-dot" data-ch="2"></span>
+          </div>
+          <div class="cinema-hint" aria-hidden="true">SCROLL TO DRIVE // 01 — 03</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== 06 EXPERIENCE / CAREER ========== -->
     <section class="experience-section" id="experience">
       <div class="container">
         <div class="section-header" data-reveal>
           <div class="section-eyebrow">
-            <span class="num">05</span>
+            <span class="num">06</span>
             <span>MY CAREER</span>
             <span class="sep">//</span>
             <span>TABS</span>
@@ -240,7 +278,7 @@
       <div class="container">
         <div class="section-header" data-reveal>
           <div class="section-eyebrow">
-            <span class="num">06</span>
+            <span class="num">07</span>
             <span>MEMORY RECONSTRUCTION</span>
             <span class="sep">//</span>
             <span>TIMELINE</span>
@@ -273,7 +311,7 @@
       <div class="container">
         <div class="section-header" data-reveal>
           <div class="section-eyebrow">
-            <span class="num">07</span>
+            <span class="num">08</span>
             <span>SECURE TRANSMISSION</span>
             <span class="sep">//</span>
             <span>NETWATCH UPLINK</span>
@@ -374,6 +412,7 @@
   <script src="js/portfolio-data.js"></script>
   <script src="js/cyber-audio.js"></script>
   <script src="js/holo3d.js"></script>
+  <script src="js/cinema.js"></script>
   <script src="js/effects.js"></script>
   <script src="js/main.js"></script>
 </body>
