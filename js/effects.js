@@ -310,6 +310,40 @@
     }
   }
 
+  /* -------------------------------------------------------------------------
+     DEEP-LINK CAPTURE (?goto=section-id) — instant jump, force reveals.
+     ---------------------------------------------------------------------- */
+  function applyGoto() {
+    const m = /[?&]goto=([\w-]+)/.exec(location.search);
+    if (!m) return;
+    const el = document.getElementById(m[1]);
+    if (!el) return;
+    document.documentElement.style.scrollBehavior = "auto";
+    el.scrollIntoView({ behavior: "auto", block: "start" });
+    // absolute fallback in case smooth scroll raced us
+    const y = el.getBoundingClientRect().top + window.scrollY;
+    window.scrollTo(0, y);
+    document.querySelectorAll("[data-reveal]").forEach((n) => n.classList.add("is-in"));
+    document.querySelectorAll("[data-count]").forEach((n) => {
+      if (!n.dataset.counted) {
+        n.dataset.counted = "1";
+        n.textContent = n.getAttribute("data-count");
+      }
+    });
+    document.querySelectorAll("[data-fill]").forEach((n) => {
+      if (!n.dataset.filled) {
+        n.dataset.filled = "1";
+        n.style.width = n.getAttribute("data-fill") + "%";
+      }
+    });
+    // second pass after layout settles
+    setTimeout(() => {
+      window.scrollTo(0, el.getBoundingClientRect().top + window.scrollY);
+      checkReveals();
+      runMeters();
+    }, 250);
+  }
+
   if (document.readyState === "loading") {
     document.addEventListener("DOMContentLoaded", bootAll);
   } else {
@@ -320,12 +354,15 @@
   document.addEventListener("portfolio:rendered", () => {
     scanReveals();
     runMeters();
-    setTimeout(() => { checkReveals(); runMeters(); }, 80);
+    setTimeout(() => { checkReveals(); runMeters(); applyGoto(); }, 80);
   });
 
   window.addEventListener("load", () => {
     scanReveals();
     runMeters();
     checkReveals();
+    applyGoto();
   });
+
+  applyGoto();
 })();
