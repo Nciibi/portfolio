@@ -74,77 +74,47 @@
     <div class="mm-foot">NETWATCH UPLINK // SECURE<br />BUILD 2.0.77</div>
   </nav>
 
-  <nav class="rail" aria-label="Section progress">
-    <a href="#home" data-spy="home" class="active"><span class="rail-label">HOME</span>01</a>
-    <a href="#about" data-spy="about"><span class="rail-label">ABOUT</span>02</a>
-    <a href="#skills" data-spy="skills"><span class="rail-label">SKILLS</span>03</a>
-    <a href="#projects" data-spy="projects"><span class="rail-label">PROJECTS</span>04</a>
-    <a href="#experience" data-spy="experience"><span class="rail-label">CAREER</span>05</a>
-    <a href="#journey" data-spy="journey"><span class="rail-label">JOURNEY</span>06</a>
-    <a href="#contact" data-spy="contact"><span class="rail-label">CONTACT</span>07</a>
-  </nav>
-
   <main>
-    <!-- ========== 01 HOME / HERO (Kartavya splash style) ========== -->
+    <!-- ========== 01 HOME / HERO (Kartavya splash + interactive 3D stage) ========== -->
     <section class="hero-section" id="home">
       <div class="container">
-        <div class="hero-grid">
-          <div class="hero-content-col">
-            <div class="hero-meta-badge" data-reveal>
-              <span class="blink-dot"></span>
-              <span>OPERATOR PROFILE // NIGHT CITY DOSSIER</span>
-            </div>
+        <p class="hero-kicker" data-reveal>
+          <span class="k-dot"></span>
+          <span>FULLSTACK DEVELOPER // FINTECH · CLOUD · AI · MONGOLIA</span>
+        </p>
 
-            <p class="hero-role" data-reveal style="--d:.05s">FULLSTACK DEVELOPER</p>
-            <h1 class="hero-glitch-title" data-reveal style="--d:.1s">
-              <span class="glitch" data-text="V // TYREL">V // TYREL</span>
-              <span class="line-2">HELLO I'M <span class="text-red">RADNAABAZAR</span></span>
-              <span class="line-3"><span class="text-yellow">BULGAN</span></span>
-            </h1>
+        <h1 class="hero-title" data-reveal style="--d:.08s">
+          <span class="ht-hello">HELLO, I'M</span>
+          <span class="glitch ht-name" data-text="RADNAABAZAR BULGAN">RADNAABAZAR <em>BULGAN</em></span>
+        </h1>
 
-            <p class="hero-typing" aria-live="polite">
-              <span id="type-target"></span><span class="type-caret" aria-hidden="true">▌</span>
-            </p>
+        <p class="hero-typing" aria-live="polite">
+          <span id="type-target"></span><span class="type-caret" aria-hidden="true">▌</span>
+        </p>
 
-            <p class="hero-bio" data-reveal style="--d:.16s">
-              Pragmatic, delivery-oriented fullstack developer — fintech, cloud &amp; AI engineering from Mongolia.
-              Building clean systems, shipping real products, always learning.
-            </p>
+        <p class="hero-bio" data-reveal style="--d:.16s">
+          Pragmatic, delivery-oriented fullstack developer — fintech, cloud &amp; AI engineering from Mongolia.
+          Building clean systems, shipping real products, always learning.
+        </p>
 
-            <div class="hero-chips" data-reveal="wipe" style="--d:.22s">
-              <span class="chip"><i class="k">SECTOR</i> MNG // REMOTE</span>
-              <span class="chip"><i class="k">FOCUS</i> FINTECH · CLOUD · AI</span>
-              <span class="chip"><i class="k">STATUS</i> OPEN TO WORK</span>
-            </div>
+        <div class="hero-actions" data-reveal style="--d:.24s">
+          <a href="#projects" class="btn-cyber btn-cyber-yellow" id="btn-enter">ENTER PORTFOLIO</a>
+          <a href="#contact" class="btn-cyber btn-cyber-red">LET'S TALK</a>
+          <a href="#journey" class="btn-cyber btn-cyber-ghost">JOURNEY REPORT</a>
+        </div>
 
-            <div class="hero-actions" data-reveal style="--d:.28s">
-              <a href="#projects" class="btn-cyber btn-cyber-yellow" id="btn-enter">ENTER PORTFOLIO</a>
-              <a href="#contact" class="btn-cyber btn-cyber-red">LET'S TALK</a>
-              <a href="#journey" class="btn-cyber btn-cyber-ghost">JOURNEY REPORT</a>
-            </div>
+        <!-- Social row -->
+        <div class="hero-socials" data-reveal style="--d:.3s" id="hero-socials">
+          <!-- filled by main.js -->
+        </div>
 
-            <!-- Social row -->
-            <div class="hero-socials" data-reveal style="--d:.34s" id="hero-socials">
-              <!-- filled by main.js -->
-            </div>
-          </div>
-
-          <div class="hero-card-col" data-reveal="scale" style="--d:.2s">
-            <div class="cyberdeck-card" id="hero-cyberdeck-card">
-              <div class="deck-header">
-                <span class="deck-title">OPERATING ID // DOSSIER</span>
-                <span class="deck-id">ONLINE</span>
-              </div>
-              <div class="avatar-wrapper">
-                <img src="assets/avatar.jpg" alt="Portrait" id="hero-avatar-img" />
-                <div class="avatar-scan" aria-hidden="true"></div>
-                <div class="avatar-tags">
-                  <span class="callsign">CALLSIGN // V</span>
-                  <span class="cred">PORTFOLIO · 2077</span>
-                </div>
-              </div>
-              <div class="hazard-tape" aria-hidden="true"></div>
-            </div>
+        <!-- Interactive 3D viewport -->
+        <div class="hero-stage" data-reveal="wipe">
+          <div class="stage-frame" id="hero-stage" role="img" aria-label="Interactive 3D neural construct. Drag to rotate, click to pulse.">
+            <span class="stage-tag tag-tl">NEURAL LINK // INTERACTIVE</span>
+            <span class="stage-tag tag-tr"><i class="live-dot"></i>LIVE RENDER</span>
+            <span class="stage-tag tag-bl">DRAG TO ROTATE · CLICK TO PULSE</span>
+            <span class="stage-tag tag-br">FIG.01 — SIGNAL CORE</span>
           </div>
         </div>
 
@@ -382,18 +352,6 @@
       </div>
     </div>
   </footer>
-
-  <div class="legend" aria-hidden="true">
-    <span class="prompt"><span class="key">↑↓</span> NAVIGATE</span>
-    <span class="prompt"><span class="key">⏎</span> SELECT</span>
-    <span class="prompt hide-sm"><span class="key">M</span> MENU</span>
-    <span class="prompt hide-sm"><span class="key">ESC</span> CLOSE</span>
-    <span class="legend-tail">
-      <span class="live">● REC</span>
-      <span>NETWATCH UPLINK · SECURE</span>
-      <span>BUILD 2.0.77</span>
-    </span>
-  </div>
 
   <script src="js/vendor/three.min.js"></script>
   <script src="js/icon-pack.js"></script>
