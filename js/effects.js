@@ -83,13 +83,22 @@
 
   /* -------------------------------------------------------------------------
      REVEAL ON SCROLL
+     Rect-based check (robust against late font/image layout shifts),
+     with IntersectionObserver as the fast path.
      ---------------------------------------------------------------------- */
   let revealObserver = null;
 
+  function checkReveals() {
+    const vh = window.innerHeight || document.documentElement.clientHeight;
+    document.querySelectorAll("[data-reveal]:not(.is-in)").forEach((el) => {
+      const r = el.getBoundingClientRect();
+      if (r.top < vh * 0.92 && r.bottom > -40) el.classList.add("is-in");
+    });
+  }
+
   function scanReveals() {
-    const nodes = document.querySelectorAll("[data-reveal]:not(.is-in)");
     if (prefersReduced) {
-      nodes.forEach((n) => n.classList.add("is-in"));
+      document.querySelectorAll("[data-reveal]").forEach((n) => n.classList.add("is-in"));
       runMeters();
       return;
     }
@@ -103,10 +112,11 @@
             }
           });
         },
-        { threshold: 0.12, rootMargin: "0px 0px -8% 0px" }
+        { threshold: 0.08, rootMargin: "0px 0px -6% 0px" }
       );
     }
-    nodes.forEach((n) => revealObserver.observe(n));
+    document.querySelectorAll("[data-reveal]:not(.is-in)").forEach((n) => revealObserver.observe(n));
+    checkReveals();
   }
 
   /* -------------------------------------------------------------------------
@@ -188,6 +198,7 @@
         const max = doc.scrollHeight - window.innerHeight;
         const pct = max > 0 ? (window.scrollY / max) * 100 : 0;
         if (header) header.style.setProperty("--scroll-pct", pct.toFixed(2) + "%");
+        checkReveals();
         runMeters();
       });
     };
@@ -289,6 +300,14 @@
     initSpy();
     initMobileMenu();
     initKeys();
+
+    /* Re-check after fonts, images and 3D assets settle. */
+    [120, 400, 900, 1600, 2600].forEach((ms) => {
+      setTimeout(() => { checkReveals(); runMeters(); }, ms);
+    });
+    if (document.fonts && document.fonts.ready) {
+      document.fonts.ready.then(() => { checkReveals(); runMeters(); });
+    }
   }
 
   if (document.readyState === "loading") {
@@ -301,10 +320,12 @@
   document.addEventListener("portfolio:rendered", () => {
     scanReveals();
     runMeters();
+    setTimeout(() => { checkReveals(); runMeters(); }, 80);
   });
 
   window.addEventListener("load", () => {
     scanReveals();
     runMeters();
+    checkReveals();
   });
 })();

@@ -174,9 +174,9 @@ body.crt-disabled .crt-overlay { opacity: 0; display: none; }
   border-width: 0;
 }
 .reg-marks .rm-tl { top: calc(var(--h-top) + 10px); left: 10px; border-top-width: 1px; border-left-width: 1px; }
-.reg-marks .rm-tr { top: calc(var(--h-top) + 10px); right: 10px; border-top-width: 1px; border-right-width: 1px; }
+.reg-marks .rm-tr { top: calc(var(--h-top) + 10px); right: calc(var(--w-rail) + 10px); border-top-width: 1px; border-right-width: 1px; }
 .reg-marks .rm-bl { bottom: calc(var(--h-legend) + 10px); left: 10px; border-bottom-width: 1px; border-left-width: 1px; }
-.reg-marks .rm-br { bottom: calc(var(--h-legend) + 10px); right: 10px; border-bottom-width: 1px; border-right-width: 1px; }
+.reg-marks .rm-br { bottom: calc(var(--h-legend) + 10px); right: calc(var(--w-rail) + 10px); border-bottom-width: 1px; border-right-width: 1px; }
 
 /* ==========================================================================
    BOOT SEQUENCE
@@ -676,21 +676,29 @@ section {
 
 .hero-glitch-title {
   font-family: var(--font-display);
-  font-size: clamp(2.4rem, 6.4vw, 5rem);
+  font-size: clamp(2.3rem, 5.4vw, 4.35rem);
   font-weight: 700;
   line-height: 0.98;
   letter-spacing: -0.01em;
   color: #FFFFFF;
   text-transform: uppercase;
-  margin-bottom: 1.15rem;
+  margin-bottom: 1.05rem;
 }
 .hero-glitch-title .line-2 {
   display: block;
-  font-size: 0.52em;
+  font-size: 0.5em;
   font-weight: 600;
-  letter-spacing: 0.14em;
+  letter-spacing: 0.12em;
   color: var(--txt-3);
-  margin-top: 0.42em;
+  margin-top: 0.4em;
+}
+.hero-glitch-title .line-3 {
+  display: block;
+  font-size: 0.36em;
+  font-weight: 600;
+  letter-spacing: 0.34em;
+  color: var(--c-yellow);
+  margin-top: 0.55em;
 }
 .hero-glitch-title .text-yellow { color: var(--c-yellow); }
 .hero-glitch-title .text-red { color: var(--c-red); }
@@ -834,7 +842,7 @@ section {
 .avatar-wrapper {
   position: relative;
   width: 100%;
-  aspect-ratio: 4 / 5;
+  aspect-ratio: 1 / 1;
   overflow: hidden;
   border: 1px solid var(--line-strong);
   margin-bottom: 1rem;
