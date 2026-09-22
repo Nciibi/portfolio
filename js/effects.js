@@ -160,7 +160,7 @@
   /* -------------------------------------------------------------------------
      SCROLL-SPY + SECTION RAIL + PROGRESS
      ---------------------------------------------------------------------- */
-  const SECTION_IDS = ["home", "about", "skills", "projects", "showcase", "experience", "journey", "contact"];
+  const SECTION_IDS = ["home", "about", "skills", "projects", "archive", "experience", "journey", "contact"];
 
   function initSpy() {
     const spyLinks = Array.from(document.querySelectorAll("[data-spy]"));

@@ -8,7 +8,7 @@
   <meta name="theme-color" content="#0E0E17" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link rel="stylesheet" href="css/style.css?v=db2c667" />
+  <link rel="stylesheet" href="css/style.css?v=2" />
   <link rel="icon" href="favicon.svg" type="image/svg+xml" />
   <link rel="apple-touch-icon" href="favicon.svg" />
   <noscript><style>.cin-chapter{position:static !important;opacity:1 !important;transform:none !important;margin:1.25rem auto;max-width:660px;}</style></noscript>
@@ -199,39 +199,45 @@
       </div>
     </section>
 
-    <!-- ========== 05 SHOWCASE / SIGNAL CORE (scroll-driven 3D cinema) ========== -->
-    <section class="cinema-section" id="showcase">
-      <div class="cinema-track" id="cinema-track">
-        <div class="cinema-sticky">
-          <div class="cinema-canvas" id="cinema-stage" role="img" aria-label="Scroll-driven 3D signal core. Scroll to rotate and zoom through three chapters."></div>
-          <div class="cinema-frame" aria-hidden="true"></div>
-          <div class="cinema-head">
-            <span class="cinema-eyebrow"><span class="num">05</span> SIGNAL CORE // SCROLL CINEMA</span>
+    <!-- ========== 05 ARCHIVE / ORBITAL CASE FILES (interactive 3D navigator) ========== -->
+    <section class="archive-section" id="archive">
+      <div class="container">
+        <div class="section-header" data-reveal>
+          <div class="section-eyebrow">
+            <span class="num">05</span>
+            <span>CASE FILES</span>
+            <span class="sep">//</span>
+            <span>ORBITAL ARCHIVE</span>
           </div>
-          <div class="cinema-copy">
-            <div class="cin-chapter is-active" data-ch="0">
-              <div class="cin-ch-num">01</div>
-              <h2 class="cin-ch-title">SIGNAL <em>CORE</em></h2>
-              <p class="cin-ch-text">A lattice of intent. Every node is a shipped system — fintech rails, cloud platforms, AI agents. Scroll to drive the render.</p>
+          <h2 class="section-title">PROJECT <span class="title-accent">UNIVERSE</span></h2>
+          <div class="section-sub">DRAG TO ROTATE · CLICK A NODE TO INSPECT · FILTER BY TRACK</div>
+          <div class="section-rule"></div>
+        </div>
+
+        <div class="archive-filters" data-reveal>
+          <button class="arch-filter active" data-filter="ALL" type="button">ALL // 09</button>
+          <button class="arch-filter" data-filter="HACKATHON" type="button">HACKATHONS // 05</button>
+          <button class="arch-filter" data-filter="BUILD" type="button">BUILDS // 02</button>
+          <button class="arch-filter" data-filter="AI" type="button">AI SYSTEMS // 02</button>
+        </div>
+
+        <div class="archive-grid" data-reveal="wipe">
+          <div class="archive-view" id="archive-view" role="img" aria-label="Interactive 3D map of 9 projects. Use the index list to inspect each case file.">
+            <div class="archive-tip" id="archive-tip" aria-hidden="true"></div>
+            <div class="archive-zoom">
+              <button id="arch-zoom-in" type="button" aria-label="Zoom in">+</button>
+              <button id="arch-zoom-out" type="button" aria-label="Zoom out">−</button>
             </div>
-            <div class="cin-chapter" data-ch="1">
-              <div class="cin-ch-num">02</div>
-              <h2 class="cin-ch-title">ORBITAL <em>RINGS</em></h2>
-              <p class="cin-ch-text">Three orbits: delivery, reliability, curiosity. Every project runs the loop before it earns a place in the archive.</p>
-            </div>
-            <div class="cin-chapter" data-ch="2">
-              <div class="cin-ch-num">03</div>
-              <h2 class="cin-ch-title">NEURAL <em>NETWORK</em></h2>
-              <p class="cin-ch-text">Hundreds of signals cross-linked into one construct. Keep scrolling for the case files, the career tabs, the journey report.</p>
+            <div class="archive-legend" aria-hidden="true">
+              <span><i class="dot d-hack"></i>HACKATHON</span>
+              <span><i class="dot d-build"></i>BUILD</span>
+              <span><i class="dot d-ai"></i>AI SYSTEM</span>
             </div>
           </div>
-          <div class="cinema-progress" aria-hidden="true"><i id="cinema-progress-fill"></i></div>
-          <div class="cinema-steps" aria-hidden="true">
-            <span class="cin-dot is-active" data-ch="0"></span>
-            <span class="cin-dot" data-ch="1"></span>
-            <span class="cin-dot" data-ch="2"></span>
-          </div>
-          <div class="cinema-hint" aria-hidden="true">SCROLL TO DRIVE // 01 — 03</div>
+          <aside class="archive-panel" aria-live="polite">
+            <div class="arch-detail" id="archive-detail"><!-- filled by archive.js --></div>
+            <div class="archive-index" id="archive-index"><!-- filled by archive.js --></div>
+          </aside>
         </div>
       </div>
     </section>
@@ -397,12 +403,12 @@
     </div>
   </footer>
 
-  <script src="js/vendor/three.min.js?v=db2c667"></script>
-  <script src="js/icon-pack.js?v=db2c667"></script>
-  <script src="js/portfolio-data.js?v=db2c667"></script>
-  <script src="js/cyber-audio.js?v=db2c667"></script>
-  <script src="js/cinema.js?v=db2c667"></script>
-  <script src="js/effects.js?v=db2c667"></script>
-  <script src="js/main.js?v=db2c667"></script>
+  <script src="js/vendor/three.min.js?v=2"></script>
+  <script src="js/icon-pack.js?v=2"></script>
+  <script src="js/portfolio-data.js?v=2"></script>
+  <script src="js/cyber-audio.js?v=2"></script>
+  <script src="js/archive.js?v=2"></script>
+  <script src="js/effects.js?v=2"></script>
+  <script src="js/main.js?v=2"></script>
 </body>
 </html>
