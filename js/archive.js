@@ -395,12 +395,11 @@
       if (!reduceMotion && !dragging) {
         idleT += 0.016;
         const spin = idleT > 2.5 ? 0.0016 : 0.0006;
-        root.rotation.y += spin + Math.abs(velX) * 0 + velX * 0;
+        root.rotation.y += spin;
         velX *= 0.94;
         velY *= 0.94;
         root.rotation.y += velX;
         root.rotation.x = Math.max(-0.6, Math.min(0.6, root.rotation.x + velY));
-        velY *= 0.94;
       }
       t += 0.016;
       anchor.rotation.y += 0.002;
