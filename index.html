@@ -3,32 +3,18 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>V // TYREL | Cyberpunk 2077 Full-Stack Architect & Netrunner Portfolio</title>
-  <meta name="description" content="A Cyberpunk 2077 user-interface homage portfolio — in-game menu chrome, character sheet attributes, cyberware skill matrix, mercenary gig journal, and a dialogue-style contact terminal." />
-  <meta name="keywords" content="Cyberpunk 2077, Web Portfolio, Netrunner, Full-Stack Architect, WebGL, Three.js, React, UI/UX, CD PROJEKT RED, FUI" />
-  <meta name="author" content="Tyrel // V" />
+  <title>V // TYREL | Cyberpunk Portfolio — Journey & Projects</title>
+  <meta name="description" content="Cyberpunk 2077 themed portfolio — journey report, full-stack projects, skills and experience, restyled in Night City UI." />
   <meta name="theme-color" content="#0E0E17" />
-
-  <!-- Open Graph Meta -->
-  <meta property="og:title" content="V // TYREL | Cyberpunk 2077 Web Portfolio" />
-  <meta property="og:description" content="Night City dossier: character-sheet attributes, cyberware skills, fixer gig journal and a dialogue contact terminal." />
-  <meta property="og:type" content="website" />
-  <meta property="og:image" content="assets/proj-netrunner.jpg" />
-
-  <!-- Google Fonts Preconnect -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-
-  <!-- Master Stylesheet -->
   <link rel="stylesheet" href="css/style.css" />
   <link rel="icon" href="favicon.svg" type="image/svg+xml" />
   <link rel="apple-touch-icon" href="favicon.svg" />
 </head>
 <body>
 
-  <!-- ========================================================================
-       BOOT SEQUENCE (first visit only)
-       ======================================================================== -->
+  <!-- BOOT -->
   <div class="boot" id="boot-screen" role="status" aria-live="polite">
     <div class="boot-inner">
       <div class="boot-mark">Cyber<br />Interface</div>
@@ -39,25 +25,21 @@
     </div>
   </div>
 
-  <!-- Ambient CRT Scanline & Phosphor Overlay -->
   <div class="crt-overlay" id="crt-screen-overlay" aria-hidden="true"></div>
 
-  <!-- Viewport registration marks -->
   <div class="reg-marks" aria-hidden="true">
     <span class="rm-tl"></span><span class="rm-tr"></span>
     <span class="rm-bl"></span><span class="rm-br"></span>
   </div>
 
-  <!-- Interactive 3D holographic centerpiece (background) -->
+  <!-- 3D hologram background -->
   <div id="three-canvas-container" aria-label="Interactive 3D neural hologram"></div>
   <div class="scrim" aria-hidden="true"></div>
 
-  <!-- ========================================================================
-       TOP HUD — GAME MENU TAB BAR
-       ======================================================================== -->
+  <!-- HEADER -->
   <header class="hud-header" id="hud-top-bar">
     <div class="hud-left">
-      <a href="#hero" class="brand-badge" id="hud-brand-link">
+      <a href="#home" class="brand-badge" id="hud-brand-link">
         <span class="mark">V</span>
         <span>TYREL<em>//</em>2077</span>
       </a>
@@ -70,17 +52,16 @@
       </div>
     </div>
 
-    <!-- Menu tabs -->
     <nav class="hud-nav" aria-label="Main Navigation">
-      <a href="#hero" class="nav-link active" data-spy="hero"><span class="idx">01</span> HUB</a>
-      <a href="#attributes" class="nav-link" data-spy="attributes"><span class="idx">02</span> ATTRIBUTES</a>
-      <a href="#cyberware" class="nav-link" data-spy="cyberware"><span class="idx">03</span> CYBERWARE</a>
-      <a href="#gigs" class="nav-link" data-spy="gigs"><span class="idx">04</span> GIGS</a>
-      <a href="#braindance" class="nav-link" data-spy="braindance"><span class="idx">05</span> JOURNAL</a>
-      <a href="#jack-in" class="nav-link" data-spy="jack-in"><span class="idx">06</span> CONTACT</a>
+      <a href="#home" class="nav-link active" data-spy="home"><span class="idx">01</span> HOME</a>
+      <a href="#about" class="nav-link" data-spy="about"><span class="idx">02</span> ABOUT</a>
+      <a href="#skills" class="nav-link" data-spy="skills"><span class="idx">03</span> SKILLS</a>
+      <a href="#projects" class="nav-link" data-spy="projects"><span class="idx">04</span> PROJECTS</a>
+      <a href="#experience" class="nav-link" data-spy="experience"><span class="idx">05</span> CAREER</a>
+      <a href="#journey" class="nav-link" data-spy="journey"><span class="idx">06</span> JOURNEY</a>
+      <a href="#contact" class="nav-link" data-spy="contact"><span class="idx">07</span> CONTACT</a>
     </nav>
 
-    <!-- HUD Action Controls -->
     <div class="hud-right">
       <button class="hud-ctrl-btn on" id="btn-toggle-audio" title="Toggle Synthesized Cyber SFX" aria-pressed="true">SFX</button>
       <button class="hud-ctrl-btn on" id="btn-toggle-crt" title="Toggle CRT Scanlines" aria-pressed="true">CRT</button>
@@ -91,241 +72,241 @@
     </button>
   </header>
 
-  <!-- Mobile full-screen hub menu -->
   <nav class="mobile-menu" id="mobile-menu" aria-label="Mobile Navigation">
-    <a href="#hero" class="active"><span class="idx">01</span> HUB</a>
-    <a href="#attributes"><span class="idx">02</span> ATTRIBUTES</a>
-    <a href="#cyberware"><span class="idx">03</span> CYBERWARE</a>
-    <a href="#gigs"><span class="idx">04</span> GIGS</a>
-    <a href="#braindance"><span class="idx">05</span> JOURNAL</a>
-    <a href="#jack-in"><span class="idx">06</span> CONTACT</a>
-    <div class="mm-foot">
-      NETWATCH UPLINK // SECURE<br />
-      NIGHT CITY · PACIFICA SECTOR 04<br />
-      BUILD 2.0.77 · ICE SECURE
-    </div>
+    <a href="#home" class="active"><span class="idx">01</span> HOME</a>
+    <a href="#about"><span class="idx">02</span> ABOUT</a>
+    <a href="#skills"><span class="idx">03</span> SKILLS</a>
+    <a href="#projects"><span class="idx">04</span> PROJECTS</a>
+    <a href="#experience"><span class="idx">05</span> CAREER</a>
+    <a href="#journey"><span class="idx">06</span> JOURNEY</a>
+    <a href="#contact"><span class="idx">07</span> CONTACT</a>
+    <div class="mm-foot">NETWATCH UPLINK // SECURE<br />BUILD 2.0.77</div>
   </nav>
 
-  <!-- Right section rail -->
   <nav class="rail" aria-label="Section progress">
-    <a href="#hero" data-spy="hero" class="active"><span class="rail-label">HUB</span>01</a>
-    <a href="#attributes" data-spy="attributes"><span class="rail-label">ATTRIBUTES</span>02</a>
-    <a href="#cyberware" data-spy="cyberware"><span class="rail-label">CYBERWARE</span>03</a>
-    <a href="#gigs" data-spy="gigs"><span class="rail-label">GIGS</span>04</a>
-    <a href="#braindance" data-spy="braindance"><span class="rail-label">JOURNAL</span>05</a>
-    <a href="#jack-in" data-spy="jack-in"><span class="rail-label">CONTACT</span>06</a>
+    <a href="#home" data-spy="home" class="active"><span class="rail-label">HOME</span>01</a>
+    <a href="#about" data-spy="about"><span class="rail-label">ABOUT</span>02</a>
+    <a href="#skills" data-spy="skills"><span class="rail-label">SKILLS</span>03</a>
+    <a href="#projects" data-spy="projects"><span class="rail-label">PROJECTS</span>04</a>
+    <a href="#experience" data-spy="experience"><span class="rail-label">CAREER</span>05</a>
+    <a href="#journey" data-spy="journey"><span class="rail-label">JOURNEY</span>06</a>
+    <a href="#contact" data-spy="contact"><span class="rail-label">CONTACT</span>07</a>
   </nav>
 
   <main>
-    <!-- ======================================================================
-         SECTION 01: HERO — CHARACTER SHEET
-         ====================================================================== -->
-    <section class="hero-section" id="hero">
+    <!-- ========== 01 HOME / HERO (Kartavya splash style) ========== -->
+    <section class="hero-section" id="home">
       <div class="container">
         <div class="hero-grid">
           <div class="hero-content-col">
             <div class="hero-meta-badge" data-reveal>
               <span class="blink-dot"></span>
-              <span>CLASSIFIED DOSSIER // NIGHT CITY NETRUNNER</span>
+              <span>OPERATOR PROFILE // NIGHT CITY DOSSIER</span>
             </div>
 
-            <h1 class="hero-glitch-title" data-reveal style="--d:.06s">
+            <p class="hero-role" data-reveal style="--d:.05s">FULLSTACK DEVELOPER</p>
+            <h1 class="hero-glitch-title" data-reveal style="--d:.1s">
               <span class="glitch" data-text="V // TYREL">V // TYREL</span>
-              <span class="line-2"><span class="text-red">FULL-STACK</span> ARCHITECT</span>
-              <span class="line-3"><span class="text-yellow">LEAD NETRUNNER</span></span>
+              <span class="line-2">HELLO I'M <span class="text-red">RADNAABAZAR</span></span>
+              <span class="line-3"><span class="text-yellow">BULGAN</span></span>
             </h1>
 
-            <div class="hero-quote" data-reveal style="--d:.12s">
-              “WAKE UP, SAMURAI. WE’VE GOT A CITY TO CODE.”
-            </div>
-
-            <p class="hero-bio" data-reveal style="--d:.18s">
-              Architecting mission-critical distributed systems, high-speed neural networks, and fluid WebGL
-              interfaces across the digital underbelly of Night City. Military-grade clean code, zero-trust
-              infrastructure, and unyielding aesthetic precision.
+            <p class="hero-typing" aria-live="polite">
+              <span id="type-target"></span><span class="type-caret" aria-hidden="true">▌</span>
             </p>
 
-            <!-- Dossier chips -->
-            <div class="hero-chips" data-reveal="wipe" style="--d:.24s">
-              <span class="chip"><i class="k">CLEARANCE</i> ICE // 05</span>
-              <span class="chip"><i class="k">SECTOR</i> PACIFICA · NC</span>
-              <span class="chip"><i class="k">STATUS</i> OPEN FOR GIGS</span>
+            <p class="hero-bio" data-reveal style="--d:.16s">
+              Pragmatic, delivery-oriented fullstack developer — fintech, cloud &amp; AI engineering from Mongolia.
+              Building clean systems, shipping real products, always learning.
+            </p>
+
+            <div class="hero-chips" data-reveal="wipe" style="--d:.22s">
+              <span class="chip"><i class="k">SECTOR</i> MNG // REMOTE</span>
+              <span class="chip"><i class="k">FOCUS</i> FINTECH · CLOUD · AI</span>
+              <span class="chip"><i class="k">STATUS</i> OPEN TO WORK</span>
             </div>
 
-            <div class="hero-actions" data-reveal style="--d:.3s">
-              <a href="#gigs" class="btn-cyber btn-cyber-red" id="btn-hero-explore">EXPLORE FIXER GIGS</a>
-              <a href="#jack-in" class="btn-cyber btn-cyber-yellow" id="btn-hero-jackin">JACK IN // CONTACT</a>
-              <a href="#cyberware" class="btn-cyber btn-cyber-ghost" id="btn-hero-cyberware">INSPECT CYBERWARE</a>
+            <div class="hero-actions" data-reveal style="--d:.28s">
+              <a href="#projects" class="btn-cyber btn-cyber-yellow" id="btn-enter">ENTER PORTFOLIO</a>
+              <a href="#contact" class="btn-cyber btn-cyber-red">LET'S TALK</a>
+              <a href="#journey" class="btn-cyber btn-cyber-ghost">JOURNEY REPORT</a>
+            </div>
+
+            <!-- Social row -->
+            <div class="hero-socials" data-reveal style="--d:.34s" id="hero-socials">
+              <!-- filled by main.js -->
             </div>
           </div>
 
-          <!-- Dossier card -->
           <div class="hero-card-col" data-reveal="scale" style="--d:.2s">
             <div class="cyberdeck-card" id="hero-cyberdeck-card">
               <div class="deck-header">
-                <span class="deck-title">OPERATING ID // #77-MIL-8849</span>
+                <span class="deck-title">OPERATING ID // DOSSIER</span>
                 <span class="deck-id">ONLINE</span>
               </div>
-
               <div class="avatar-wrapper">
-                <img src="assets/avatar.jpg" alt="V Tyrel Cyberpunk Netrunner Portrait" id="hero-avatar-img" />
+                <img src="assets/avatar.jpg" alt="Portrait" id="hero-avatar-img" />
                 <div class="avatar-scan" aria-hidden="true"></div>
                 <div class="avatar-tags">
                   <span class="callsign">CALLSIGN // V</span>
                   <span class="cred">PORTFOLIO · 2077</span>
                 </div>
               </div>
-
-              <div class="deck-stats-grid">
-                <div class="stat-cell">
-                  <div class="stat-label">AFFILIATION</div>
-                  <div class="stat-val">AFTERLIFE MERC</div>
-                </div>
-                <div class="stat-cell">
-                  <div class="stat-label">NEURAL DECK</div>
-                  <div class="stat-val">PARALINE MK.5</div>
-                </div>
-                <div class="stat-cell">
-                  <div class="stat-label">LOCATION</div>
-                  <div class="stat-val">PACIFICA // SEC 04</div>
-                </div>
-                <div class="stat-cell">
-                  <div class="stat-label">CLEARANCE</div>
-                  <div class="stat-val">LEVEL 05 // ICE</div>
-                </div>
-              </div>
-
               <div class="hazard-tape" aria-hidden="true"></div>
             </div>
           </div>
         </div>
+
+        <!-- Stat strip (counters) -->
+        <div class="stat-strip" id="stat-strip" data-reveal="wipe">
+          <!-- filled by main.js -->
+        </div>
       </div>
     </section>
 
-    <!-- ======================================================================
-         SECTION 02: ATTRIBUTES — CHARACTER SCREEN
-         ====================================================================== -->
-    <section class="attributes-section" id="attributes">
+    <!-- ========== 02 ABOUT (bento) ========== -->
+    <section class="about-section" id="about">
       <div class="container">
         <div class="section-header" data-reveal>
           <div class="section-eyebrow">
             <span class="num">02</span>
-            <span>CHARACTER SPECIFICATIONS</span>
+            <span>SHORT PROFILE</span>
             <span class="sep">//</span>
-            <span>CORE ABILITIES</span>
+            <span>BENTO DOSSIER</span>
           </div>
-          <h2 class="section-title">ATTRIBUTES <span class="title-accent">&amp; DISCIPLINE</span></h2>
-          <div class="section-sub">SELECT AN ATTRIBUTE TO EXPAND ITS SPECIALISATION</div>
+          <h2 class="section-title">ABOUT <span class="title-accent">// ME</span></h2>
+          <div class="section-sub">EDUCATION · LANGUAGES · STACK · SIGNAL</div>
           <div class="section-rule"></div>
         </div>
 
-        <div class="attributes-grid" id="attributes-container" data-reveal="wipe">
-          <!-- Dynamically populated from portfolio-data.js -->
+        <div class="bento-grid" id="bento-container" data-reveal="wipe">
+          <!-- filled by main.js -->
+        </div>
+
+        <!-- Education cards -->
+        <div class="edu-row" id="edu-container" data-reveal>
+          <!-- filled by main.js -->
         </div>
       </div>
     </section>
 
-    <!-- ======================================================================
-         SECTION 03: CYBERWARE — SKILLS MATRIX
-         ====================================================================== -->
-    <section class="cyberware-section" id="cyberware">
+    <!-- ========== 03 SKILLS ========== -->
+    <section class="skills-section" id="skills">
       <div class="container">
         <div class="section-header" data-reveal>
           <div class="section-eyebrow">
             <span class="num">03</span>
-            <span>HARDWARE &amp; SOFTWARE AUGMENTATIONS</span>
+            <span>MY TECHSTACK</span>
             <span class="sep">//</span>
-            <span>INVENTORY</span>
+            <span>PROFICIENCY</span>
           </div>
-          <h2 class="section-title">CYBERWARE <span class="title-accent">IMPLANTS</span></h2>
-          <div class="section-sub">STACKED SKILL CHIPS · BRAND-RESOLVED TECH ICONOGRAPHY</div>
+          <h2 class="section-title">SKILLS <span class="title-accent">&amp; STACK</span></h2>
+          <div class="section-sub">SELECT A TRACK TO INSPECT ITS LOADOUT</div>
           <div class="section-rule"></div>
         </div>
 
-        <div class="cyberware-grid" id="cyberware-container">
-          <!-- Dynamically populated from portfolio-data.js -->
+        <div class="skill-levels" data-reveal>
+          <span class="lvl active" data-level="PROFICIENT">PROFICIENT</span>
+          <span class="lvl" data-level="INTERMEDIATE">INTERMEDIATE</span>
+          <span class="lvl" data-level="BEGINNER">BEGINNER</span>
+        </div>
+
+        <div class="skills-grid" id="skills-container" data-reveal="wipe">
+          <!-- filled by main.js -->
         </div>
       </div>
     </section>
 
-    <!-- ======================================================================
-         SECTION 04: GIGS — JOURNAL MASTER / DETAIL
-         ====================================================================== -->
-    <section class="gigs-section" id="gigs">
+    <!-- ========== 04 PROJECTS (kartavya list style) ========== -->
+    <section class="projects-section" id="projects">
       <div class="container">
         <div class="section-header" data-reveal>
           <div class="section-eyebrow">
             <span class="num">04</span>
-            <span>AFTERLIFE MERCENARY ARCHIVES</span>
+            <span>SELECTED WORK</span>
             <span class="sep">//</span>
-            <span>CONTRACTS</span>
+            <span>CASE FILES</span>
           </div>
-          <h2 class="section-title">FIXER <span class="title-accent">GIGS &amp; BUILDS</span></h2>
-          <div class="section-sub">SELECT A CONTRACT FROM THE LIST TO OPEN ITS DOSSIER</div>
+          <h2 class="section-title">MY <span class="title-accent">PROJECTS</span></h2>
+          <div class="section-sub">SCROLL THE ARCHIVE · OPEN A CASE FILE</div>
           <div class="section-rule"></div>
         </div>
 
-        <div class="gigs-filter-bar" role="tablist" aria-label="Gig Categories" data-reveal>
-          <button class="filter-btn active" data-filter="all" role="tab" aria-selected="true">[ ALL CONTRACTS ]</button>
-          <button class="filter-btn" data-filter="fullstack" role="tab" aria-selected="false">[ CYBERDECK / FULL-STACK ]</button>
-          <button class="filter-btn" data-filter="frontend" role="tab" aria-selected="false">[ HUD / 3D WEBGL ]</button>
-          <button class="filter-btn" data-filter="ai" role="tab" aria-selected="false">[ NEURAL / AI BIOCHIP ]</button>
-          <span class="filter-count" id="gig-count">03 RECORDS</span>
-        </div>
-
-        <div class="gigs-layout" data-reveal="scale">
-          <div class="gig-list" id="gigs-container" role="listbox" aria-label="Contract list">
-            <!-- Dynamically populated from portfolio-data.js -->
-          </div>
-          <div class="gig-detail" id="gig-detail">
-            <!-- Dynamically populated from portfolio-data.js -->
-          </div>
+        <div class="projects-list" id="projects-container">
+          <!-- filled by main.js -->
         </div>
       </div>
     </section>
 
-    <!-- ======================================================================
-         SECTION 05: BRAINDANCE — CAREER JOURNAL
-         ====================================================================== -->
-    <section class="braindance-section" id="braindance">
+    <!-- ========== 05 EXPERIENCE / CAREER ========== -->
+    <section class="experience-section" id="experience">
       <div class="container">
         <div class="section-header" data-reveal>
           <div class="section-eyebrow">
             <span class="num">05</span>
-            <span>MEMORY RECONSTRUCTION</span>
+            <span>MY CAREER</span>
             <span class="sep">//</span>
-            <span>CHRONOLOGICAL LOG</span>
+            <span>TABS</span>
           </div>
-          <h2 class="section-title">BRAINDANCE <span class="title-accent">EXPERIENCE</span></h2>
-          <div class="section-sub">CAREER MILESTONES MAPPED TO BD MEMORY TRACKS</div>
+          <h2 class="section-title">EXPERIENCE <span class="title-accent">// HONORS</span></h2>
+          <div class="section-sub">INVOLVEMENT · CAREER · HONORS</div>
           <div class="section-rule"></div>
         </div>
 
-        <div class="bd-track-timeline" id="braindance-container">
-          <!-- Dynamically populated from portfolio-data.js -->
+        <div class="exp-tabs" role="tablist" data-reveal>
+          <button class="exp-tab active" data-tab="CAREER" role="tab" aria-selected="true">CAREER</button>
+          <button class="exp-tab" data-tab="INVOLVEMENT" role="tab" aria-selected="false">INVOLVEMENT</button>
+          <button class="exp-tab" data-tab="HONORS" role="tab" aria-selected="false">HONORS</button>
+        </div>
+
+        <div class="exp-track" id="experience-container" data-reveal="wipe">
+          <!-- filled by main.js -->
         </div>
       </div>
     </section>
 
-    <!-- ======================================================================
-         SECTION 06: CONTACT — DIALOGUE SYSTEM
-         ====================================================================== -->
-    <section class="jackin-section" id="jack-in">
+    <!-- ========== 06 JOURNEY REPORT (radnaabazar timeline) ========== -->
+    <section class="journey-section" id="journey">
       <div class="container">
         <div class="section-header" data-reveal>
           <div class="section-eyebrow">
             <span class="num">06</span>
-            <span>SECURE TRANSMISSION PROTOCOL</span>
+            <span>MEMORY RECONSTRUCTION</span>
+            <span class="sep">//</span>
+            <span>TIMELINE</span>
+          </div>
+          <h2 class="section-title">MY JOURNEY <span class="title-accent">REPORT</span></h2>
+          <div class="section-sub">SIDE JOBS TO CORPORATE — MOSTLY FINANCIAL SYSTEMS</div>
+          <div class="section-rule"></div>
+        </div>
+
+        <p class="journey-intro" data-reveal>
+          I've had the opportunity to develop software across a variety of settings — from small side-jobs to large corporation,
+          mostly building financial systems. Here's my timeline of my journey.
+        </p>
+
+        <div class="journey-timeline" id="journey-container">
+          <!-- filled by main.js -->
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== 07 CONTACT ========== -->
+    <section class="contact-section" id="contact">
+      <div class="container">
+        <div class="section-header" data-reveal>
+          <div class="section-eyebrow">
+            <span class="num">07</span>
+            <span>SECURE TRANSMISSION</span>
             <span class="sep">//</span>
             <span>NETWATCH UPLINK</span>
           </div>
-          <h2 class="section-title">JACK IN <span class="title-accent">// TRANSMIT</span></h2>
-          <div class="section-sub">CHOOSE A DIALOGUE OPTION OR OPEN A DIRECT CHANNEL</div>
+          <h2 class="section-title">LET'S <span class="title-accent">TALK</span></h2>
+          <div class="section-sub">WHAT LED YOU HERE? PICK A CHANNEL OR SEND A BRIEF</div>
           <div class="section-rule"></div>
         </div>
 
         <div class="dialogue-wrap">
-          <!-- Left: dialogue options -->
           <div class="dialogue-panel" data-reveal>
             <div class="speaker">
               <div class="speaker-avatar">
@@ -333,28 +314,25 @@
               </div>
               <div>
                 <div class="speaker-name">V // TYREL</div>
-                <div class="speaker-role">SENIOR FULL-STACK ARCHITECT · INDEPENDENT</div>
+                <div class="speaker-role">FULLSTACK DEVELOPER · OPEN TO WORK</div>
               </div>
             </div>
-
-            <p class="dialogue-line">
-              Got a high-priority gig, a distributed architecture to scale, or need military-grade WebGL
-              interfaces? Pick a response — I’ll open the right channel.
+            <p class="dialogue-line" id="contact-blurb">
+              What led you here? What are you looking for? I would love to hear from you over a virtual coffee chat!
             </p>
-
             <div class="dialogue-options">
               <div class="opt-label">// AVAILABLE RESPONSES</div>
               <button type="button" class="dlg-opt" data-scroll-to="#terminal-contact-form">
                 <span class="num">[1]</span>
-                <span>I’ve got a contract for you.</span>
+                <span>I've got a contract for you.</span>
                 <span class="tail">▶</span>
               </button>
-              <a href="mailto:tyrel@nightcity.net" class="dlg-opt">
+              <a href="mailto:hello@radnaabazar.dev" class="dlg-opt">
                 <span class="num">[2]</span>
                 <span>Need a direct line — send an email.</span>
                 <span class="tail">▶</span>
               </a>
-              <a href="#gigs" class="dlg-opt">
+              <a href="#projects" class="dlg-opt">
                 <span class="num">[3]</span>
                 <span>Show me your past work first.</span>
                 <span class="tail">▶</span>
@@ -365,13 +343,9 @@
                 <span class="tail">▶</span>
               </button>
             </div>
-
-            <div class="netlinks-list" id="netlinks-container">
-              <!-- Dynamically populated from portfolio-data.js -->
-            </div>
+            <div class="netlinks-list" id="netlinks-container"></div>
           </div>
 
-          <!-- Right: terminal form -->
           <form class="dialogue-panel terminal-form" id="terminal-contact-form" data-reveal style="--d:.1s">
             <div class="speaker">
               <div class="speaker-avatar" style="display:grid;place-items:center;font-family:var(--font-mono);color:var(--c-red);font-size:1.2rem;">
@@ -379,29 +353,24 @@
               </div>
               <div>
                 <div class="speaker-name">NETWATCH UPLINK</div>
-                <div class="speaker-role">QUANTUM ENCRYPTED CHANNEL · READY TO TRANSMIT</div>
+                <div class="speaker-role">QUANTUM ENCRYPTED · READY TO TRANSMIT</div>
               </div>
             </div>
-
             <div class="form-group">
-              <label for="agent-name">// OPERATIVE CODENAME / NAME</label>
+              <label for="agent-name">// OPERATIVE NAME</label>
               <input type="text" id="agent-name" placeholder="e.g. Johnny Silverhand" required />
             </div>
-
             <div class="form-group">
-              <label for="agent-freq">// TRANSMISSION FREQUENCY / EMAIL</label>
-              <input type="email" id="agent-freq" placeholder="e.g. netrunner@afterlife.nc" required />
+              <label for="agent-freq">// EMAIL FREQUENCY</label>
+              <input type="email" id="agent-freq" placeholder="you@nightcity.net" required />
             </div>
-
             <div class="form-group">
-              <label for="agent-msg">// MISSION BRIEF / MESSAGE PAYLOAD</label>
-              <textarea id="agent-msg" rows="4" placeholder="Specify contract parameters, tech stack, and timeline..." required></textarea>
+              <label for="agent-msg">// MISSION BRIEF</label>
+              <textarea id="agent-msg" rows="4" placeholder="Contract parameters, stack, timeline..." required></textarea>
             </div>
-
             <button type="submit" class="btn-cyber btn-cyber-yellow" id="btn-submit-transmission">
               TRANSMIT MISSION BRIEF
             </button>
-
             <div class="terminal-console-log" id="terminal-console-log" aria-live="polite"></div>
           </form>
         </div>
@@ -409,39 +378,20 @@
     </section>
   </main>
 
-  <!-- ========================================================================
-       MODAL — SHARD READER
-       ======================================================================== -->
-  <div class="cyber-modal" id="gig-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title-heading">
-    <div class="modal-container">
-      <div class="modal-header">
-        <span class="modal-title" id="modal-title-heading">// FIXER DOSSIER // DECLASSIFIED</span>
-        <button class="modal-close-btn" id="modal-close" aria-label="Close modal">✕ [ESC]</button>
-      </div>
-      <div class="modal-body" id="modal-body-content">
-        <!-- Injected dynamically on click -->
-      </div>
-    </div>
-  </div>
-
-  <!-- ========================================================================
-       FOOTER
-       ======================================================================== -->
   <footer class="footer-section">
     <div class="container">
       <div class="footer-grid">
         <div class="footer-brand">V <em>//</em> TYREL &nbsp;·&nbsp; NIGHT CITY 2077</div>
-        <div class="footer-intel">ARASAKA CORP · MILITECH · KANG TAO PROTOCOLS COMPLIANT</div>
+        <div class="footer-intel">JOURNEY CONTENT INSPIRED BY RADNAABAZAR · PROJECT STRUCTURE FROM KARTAVYA SINGH</div>
       </div>
       <div class="footer-copy">
-        CYBERPUNK 2077 UI HOMAGE PORTFOLIO · ORIGINAL FAN WORK, UNAFFILIATED WITH CD PROJEKT RED ·
-        ICONOGRAPHY VIA <a href="https://github.com/simple-icons/simple-icons" target="_blank" rel="noopener">SIMPLE-ICONS</a> (CC0)
+        CYBERPUNK 2077 UI HOMAGE · ORIGINAL FAN WORK, UNAFFILIATED WITH CD PROJEKT RED ·
+        ICONS VIA <a href="https://github.com/simple-icons/simple-icons" target="_blank" rel="noopener">SIMPLE-ICONS</a> (CC0)
         &amp; <a href="https://github.com/devicons/devicon" target="_blank" rel="noopener">DEVICON</a> (MIT)
       </div>
     </div>
   </footer>
 
-  <!-- Bottom legend / button prompts -->
   <div class="legend" aria-hidden="true">
     <span class="prompt"><span class="key">↑↓</span> NAVIGATE</span>
     <span class="prompt"><span class="key">⏎</span> SELECT</span>
@@ -454,10 +404,7 @@
     </span>
   </div>
 
-  <!-- Three.js Vendor Libraries -->
   <script src="js/vendor/three.min.js"></script>
-
-  <!-- Scripts -->
   <script src="js/icon-pack.js"></script>
   <script src="js/portfolio-data.js"></script>
   <script src="js/cyber-audio.js"></script>
