@@ -746,52 +746,35 @@ section {
   margin-bottom: 2rem;
 }
 
-/* Vitals strip ------------------------------------------------------------ */
-.vitals {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 1px;
-  background: var(--line);
-  border: 1px solid var(--line);
+/* Dossier chips (replaces vitals HUD) -------------------------------------- */
+.hero-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.55rem;
   margin-bottom: 2rem;
-  max-width: 620px;
+  max-width: 640px;
 }
-.vital {
-  background: rgba(9,11,17,0.92);
-  padding: 0.7rem 0.9rem;
-}
-.vital-label {
+.hero-chips .chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
   font-family: var(--font-mono);
-  font-size: 0.62rem;
-  letter-spacing: 0.16em;
-  color: var(--txt-4);
-  margin-bottom: 0.3rem;
+  font-size: 0.68rem;
+  letter-spacing: 0.1em;
+  color: var(--txt-2);
+  background: rgba(14,14,23,0.85);
+  border: 1px solid var(--line-strong);
+  padding: 6px 12px 6px 10px;
+  --cut: 9px;
+  clip-path: polygon(0 0, calc(100% - var(--cut)) 0, 100% var(--cut), 100% 100%, 0 100%);
 }
-.vital-val {
-  font-family: var(--font-display);
-  font-size: 1.15rem;
-  font-weight: 700;
-  color: var(--txt);
-  letter-spacing: 0.04em;
+.hero-chips .chip .k {
+  font-style: normal;
+  color: var(--c-red);
+  letter-spacing: 0.14em;
 }
-.vital-val.red { color: var(--c-red); }
-.vital-val.cyan { color: var(--c-cyan); }
-.vital-val.yellow { color: var(--c-yellow); }
-.vital-bar {
-  margin-top: 0.45rem;
-  height: 4px;
-  background: rgba(255,255,255,0.08);
-  overflow: hidden;
-}
-.vital-bar i {
-  display: block; height: 100%;
-  background: var(--c-red);
-  box-shadow: 0 0 8px var(--c-red);
-  width: 0;
-  transition: width 1.2s var(--ease-ui);
-}
-.vital-bar.cyan i { background: var(--c-cyan); box-shadow: 0 0 8px var(--c-cyan); }
-.vital-bar.yellow i { background: var(--c-yellow); box-shadow: 0 0 8px var(--c-yellow); }
+.hero-chips .chip:last-child { border-color: rgba(16,222,131,0.45); }
+.hero-chips .chip:last-child .k { color: var(--c-green); }
 
 .hero-actions { display: flex; align-items: center; gap: 1rem; flex-wrap: wrap; }
 
@@ -886,15 +869,15 @@ section {
   font-size: 0.64rem;
   letter-spacing: 0.1em;
 }
-.avatar-tags .lvl {
+.avatar-tags .callsign {
   font-family: var(--font-display);
-  font-size: 1.9rem;
+  font-size: 0.72rem;
   font-weight: 700;
-  line-height: 1;
-  color: var(--c-yellow);
-  text-shadow: 0 0 18px rgba(252,238,10,0.55);
+  letter-spacing: 0.14em;
+  color: var(--c-cyan);
+  text-shadow: 0 0 14px rgba(94,246,255,0.55);
 }
-.avatar-tags .cred { color: var(--c-cyan); }
+.avatar-tags .cred { color: var(--txt-3); }
 
 .deck-stats-grid {
   display: grid;
@@ -1264,13 +1247,18 @@ section {
 }
 .gig-row:hover { background: var(--card-hi); padding-left: 1.35rem; }
 .gig-row.active {
+  /* in-game selection: solid cyan arrow row + dark text */
   background: var(--c-cyan);
-  color: #04070C;
+  color: #0E0E17;
+  --cut: 14px;
+  clip-path: polygon(0 0, calc(100% - var(--cut)) 0, 100% 50%,
+    calc(100% - var(--cut)) 100%, 0 100%);
+  padding-right: 1.6rem;
 }
-.gig-row.active .gig-row-title { color: #04070C; font-weight: 700; }
+.gig-row.active .gig-row-title { color: #0E0E17; font-weight: 700; }
 .gig-row.active .gig-row-fixer,
-.gig-row.active .gig-row-idx { color: rgba(4,7,12,0.72); }
-.gig-row.active .gig-row-reward { color: #04070C; }
+.gig-row.active .gig-row-idx { color: rgba(14,14,23,0.72); }
+.gig-row.active .gig-row-reward { color: #0E0E17; }
 
 .gig-row-idx {
   font-family: var(--font-mono);
