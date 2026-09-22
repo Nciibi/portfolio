@@ -1,309 +1,372 @@
 /**
- * CYBERPUNK 2077 PORTFOLIO DATA CONFIGURATION
- * Profile, attributes, cyberware, fixer gigs, braindance timeline and
- * uplink channels. Edit this file to change all rendered content.
- *
- * Icon slugs resolve against js/icon-pack.js (simple-icons / devicon).
+ * CYBERPUNK PORTFOLIO — CONTENT CONFIG
+ * Journey report: radnaabazar.com/en
+ * Projects / structure inspiration: kartavya-singh.com
+ * Icons resolve via js/icon-pack.js
  */
 
-/* Map a display label onto a simple-icons / devicon slug (or null). */
 const ICON_SLUGS = {
+  "MongoDB": "mongodb",
+  "Express": "nodedotjs",
+  "React": "react",
+  "Node.js": "nodedotjs",
+  "Flask": "python",
+  "CSS": "css",
+  "Framer Motion": null,
+  "Angular": "angular",
+  "JavaScript": "javascript",
+  "Python": "python",
+  "C++": "cplusplus",
+  "TypeScript": "typescript",
+  "C": "c",
+  "Java": "java",
+  "Go": "go",
+  "Next.js": "nextdotjs",
+  "PostgreSQL": "postgresql",
+  "Tailwind": "tailwindcss",
   "Docker": "docker",
   "Kubernetes": "kubernetes",
-  "AWS Cloud": null,
-  "Linux Kernel": "linux",
-  "Terraform": "terraform",
-  "CI/CD": null,
-  "TypeScript": "typescript",
-  "Node.js": "nodedotjs",
-  "Python": "python",
-  "Go": "go",
-  "Rust": "rust",
-  "PostgreSQL": "postgresql",
-  "Redis": "redis",
-  "React 19": "react",
-  "Next.js": "nextdotjs",
-  "WebGL": "webgl",
-  "HTML5 Canvas": null,
-  "Tailored CSS": "tailwindcss",
-  "Three.js": "threedotjs",
-  "WebSockets": "socketdotio",
+  "AWS": "amazonwebservices",
   "GraphQL": "graphql",
-  "gRPC": null,
   "Kafka": "apachekafka",
-  "REST API": null,
-  "WebRTC": null,
+  "Redis": "redis",
   "PyTorch": "pytorch",
   "FastAPI": "fastapi",
-  "Canvas API": null,
-  "D3.js": null,
-  "GeoJSON": null,
-  "GPU Shaders": "webgl",
-  "Vite": null,
-  "Web Audio API": null,
-  "NGINX": "nginx",
   "Git": "git",
-  "Figma": "figma"
-};
-
-/* Stroke glyphs (24×24) used by the attribute screen. */
-const ATTR_GLYPHS = {
-  tech: '<path d="M12 15.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z"/><path d="M12 2.5v3M12 18.5v3M2.5 12h3M18.5 12h3M5.2 5.2l2.1 2.1M16.7 16.7l2.1 2.1M18.8 5.2l-2.1 2.1M7.3 16.7l-2.1 2.1"/>',
-  intel: '<rect x="8.5" y="8.5" width="7" height="7"/><path d="M10 2.5v3M14 2.5v3M10 18.5v3M14 18.5v3M2.5 10h3M2.5 14h3M18.5 10h3M18.5 14h3"/>',
-  reflex: '<path d="M13.5 2.5 4.5 13.5h5.5l-1 8 9-11.5h-5.5l1-7.5z"/>',
-  cool: '<circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="3.5"/><path d="M12 1.5v3.5M12 19v3.5M1.5 12h3.5M19 12h3.5"/>',
-  body: '<path d="M12 2.5 20 6v6.2c0 4.9-3.3 8.5-8 9.8-4.7-1.3-8-4.9-8-9.8V6l8-3.5z"/>'
+  "Figma": "figma",
+  "GitHub": "github",
+  "Vite": null,
+  "Electron": "electron",
+  "ElevenLabs": null,
+  "Gemini": null,
+  "OpenAI": "openai",
+  "Ruby": "ruby",
+  "Rails": "rubyonrails",
+  "PowerBI": null,
+  "Taipy": null,
+  "Google Cloud": "googlecloud",
+  "Wikipedia": null,
+  "GBIF": null
 };
 
 const PORTFOLIO_DATA = {
   profile: {
     alias: "V // TYREL",
-    title: "SENIOR FULL-STACK ARCHITECT // LEAD NETRUNNER",
-    subHeadline: "WAKE UP, SAMURAI. WE'VE GOT A CITY TO CODE.",
-    status: "ACTIVE // CONTRACTOR",
-    location: "NIGHT CITY // PACIFICA SECTOR 04",
-    affiliation: "INDEPENDENT MERC // THE AFTERLIFE",
-    streetCred: 50,
-    level: 60,
-    eddies: "142,850",
-    iceStatus: "SECURE // ICEBREAKER ACTIVE",
-    securityClearance: "LEVEL 05 - BLACK-ICE CERTIFIED",
+    name: "RADNAABAZAR BULGAN",
+    title: "FULLSTACK DEVELOPER",
+    taglines: [
+      "Developing with curiosity and expertise",
+      "Fintech, cloud & AI engineering",
+      "Always learning & innovating",
+      "Pragmatic. Delivery-oriented."
+    ],
+    subHeadline: "Pragmatic, delivery-oriented | Fintech, Cloud & AI Engineering | Mongolia",
+    status: "OPEN TO WORK // NIGHT CITY",
+    location: "MONGOLIA // REMOTE-READY",
+    bio: "I build clean, reliable cloud and fintech systems — from real-time exchanges to AI agents. Graduating soon, exploring what's next, and always shipping.",
+    email: "radnaa@example.com",
     avatarImage: "assets/avatar.jpg",
-    bioDossier: `
-      Elite Netrunner and Full-Stack Systems Architect operating in the neon sprawl of Night City.
-      Specialized in mission-critical distributed infrastructures, low-latency real-time telemetry,
-      high-performance graphics (WebGL/Three.js/Canvas), and bulletproof zero-trust neural network backends.
-      Whether breaking through Arasaka-grade ICE or crafting ultra-responsive client interfaces,
-      every system is engineered with military precision, aesthetic dominance, and unyielding reliability.
-    `
+    resumeUrl: "#",
+    socials: [
+      { name: "GITHUB", url: "https://github.com/RedonaNova", icon: "github" },
+      { name: "LINKEDIN", url: "https://www.linkedin.com/in/radnaa2015", icon: "linkedin" },
+      { name: "X", url: "https://twitter.com", icon: "x" },
+      { name: "DISCORD", url: "https://discord.com", icon: "discord" }
+    ]
   },
 
-  /* Character attributes — modeled on the in-game character screen. */
-  attributes: [
+  stats: [
+    { value: 22, suffix: "", label: "AGE" },
+    { value: 3, suffix: "+", label: "YEARS EXPERIENCE" },
+    { value: 25, suffix: "+", label: "PROJECTS WORKED ON" },
+    { value: 15, suffix: "", label: "PROJECTS DEPLOYED" }
+  ],
+
+  education: [
     {
-      id: "tech",
-      glyph: "tech",
-      name: "TECHNICAL ABILITY",
-      level: 20,
-      max: 20,
-      spec: "System Architecture & Distributed Cloud",
-      desc: "Architecting fault-tolerant microservices, CI/CD automation, and high-load backend pipelines. Every service ships with health probes, structured tracing, and a rollback path that has never once been needed.",
-      meter: 98,
-      perk: "TECHNICAL SPECIALISATION",
-      perkNote: "BLAST DAMAGE · CHARGE MASTER · FIELD MECHANIC"
+      title: "High School",
+      period: "Sep 2019 — Jun 2022",
+      score: "98.5",
+      org: "Oyunii Ireedui Complex — Honorary graduate"
     },
     {
-      id: "intel",
-      glyph: "intel",
-      name: "INTELLIGENCE",
-      level: 20,
-      max: 20,
-      spec: "Algorithms, Neural AI & Protocol Design",
-      desc: "Advanced neural networks, data encryption, reverse engineering, and low-level data structures. Comfortable dropping from a React tree down into a B-tree page split without changing tone of voice.",
-      meter: 96,
-      perk: "QUICKHACK SPECIALISATION",
-      perkNote: "DATAMINE · MASS VULNERABILITY · ICEPICK"
-    },
-    {
-      id: "reflex",
-      glyph: "reflex",
-      name: "REFLEXES",
-      level: 18,
-      max: 20,
-      spec: "Real-Time WebSockets & Interactive WebGL",
-      desc: "Ultra-responsive client states, 60fps animations, WebGL shaders, and high-frequency data feeds. Frames are a budget, and the budget is spent before the deadline.",
-      meter: 92,
-      perk: "COMBAT SPECIALISATION",
-      perkNote: "SLIPPERY · DOGFIGHT · MURKMAN"
-    },
-    {
-      id: "cool",
-      glyph: "cool",
-      name: "COOL",
-      level: 19,
-      max: 20,
-      spec: "Code Quality, Security & Zero-Trust",
-      desc: "Penetration resilience, zero-downtime migrations, and defensive architecture under pressure. Reviews are kind, deploys are boring, and incidents are short.",
-      meter: 95,
-      perk: "STEALTH SPECIALISATION",
-      perkNote: "NINJA · COLD HARD · GHOST"
-    },
-    {
-      id: "body",
-      glyph: "body",
-      name: "BODY",
-      level: 17,
-      max: 20,
-      spec: "High-Load Scalability & Resilience",
-      desc: "Database optimization, cache clustering, memory efficiency, and massive traffic endurance. Systems that take a hit, absorb it, and keep answering requests.",
-      meter: 88,
-      perk: "SPECIALISATION",
-      perkNote: "DIE HARD · WRECKING BALL · IPHY"
+      title: "Bachelor in Information Technology",
+      period: "Sep 2022 — Jun 2026",
+      score: "3.7",
+      org: "National University of Mongolia — Best Academic Graduate Award"
     }
   ],
 
-  /* Cyberware & skills matrix (in-game cyberware slot categories). */
-  cyberware: [
+  about: [
     {
-      category: "OPERATING SYSTEM",
-      name: "Militech Paraline MK.5",
-      rarity: "iconic",
-      slot: "OS CORE // DEVOPS",
-      emblem: "docker",
-      skills: ["Docker", "Kubernetes", "AWS Cloud", "Linux Kernel", "Terraform", "CI/CD", "NGINX"],
-      desc: "Military-grade container orchestration and cloud-native serverless clusters with zero latency."
+      span: "wide",
+      kicker: "SHORT PROFILE",
+      title: "Developer building clean, reliable cloud, fintech systems",
+      body: "Hello · こんにちは · Сайн уу · Bonjour · 你好"
     },
     {
-      category: "FRONTAL CORTEX",
-      name: "Camillo RAM Optimizer",
-      rarity: "iconic",
-      slot: "LOGIC // BACK-END",
-      emblem: "nodedotjs",
-      skills: ["TypeScript", "Node.js", "Python", "Go", "Rust", "PostgreSQL", "Redis"],
-      desc: "High-throughput asynchronous logic processing and robust multi-threaded server architecture."
+      span: "tall",
+      kicker: "LANGUAGES",
+      title: "Fluent in English, Japanese and Mongolian",
+      body: "IELTS 7 · JLPT N3"
     },
     {
-      category: "OCULAR SYSTEM",
-      name: "Kiroshi Optics V3 HUD",
-      rarity: "epic",
-      slot: "VISUALS // FRONT-END",
-      emblem: "react",
-      skills: ["React 19", "Next.js", "WebGL", "HTML5 Canvas", "Tailored CSS", "Three.js"],
-      desc: "High-definition visual rendering, procedural canvas dynamics, and buttery fluid micro-interactions."
+      span: "normal",
+      kicker: "PRIMARY STACK",
+      title: "NEXT · Golang",
+      tags: ["Next.js", "Golang", "Express", "TypeScript", "Kubernetes", "Python", "React", "MongoDB"]
     },
     {
-      category: "NERVOUS SYSTEM",
-      name: "Kerenzikov Reflex Booster",
-      rarity: "rare",
-      slot: "STREAMING // NETWORK",
-      emblem: "graphql",
-      skills: ["WebSockets", "GraphQL", "gRPC", "Kafka", "REST API", "WebRTC"],
-      desc: "Real-time bidirectional event streaming and distributed pub/sub pipelines with sub-millisecond response."
+      span: "normal",
+      kicker: "CERTIFICATION",
+      title: "AWS Solutions Architect — Associate",
+      body: "Cloud architecture & cost-optimised infrastructure design."
     },
     {
-      category: "IMMUNE SYSTEM",
-      name: "Frontal Mesh Firewall",
-      rarity: "epic",
-      slot: "SECURITY // QUALITY",
-      emblem: "git",
-      skills: ["Git", "Figma", "Terraform", "CI/CD", "REST API"],
-      desc: "Zero-trust review gates, automated regression sweeps and threat-modelled release trains."
+      span: "normal",
+      kicker: "THE INSIDE SCOOP",
+      title: "Graduating soon, exploring what's next",
+      body: "Open to full-stack, platform, and AI engineering roles."
     },
     {
-      category: "CIRCULATORY SYSTEM",
-      name: "Blood Pump Endurance Core",
-      rarity: "rare",
-      slot: "ML // DATA PIPELINES",
-      emblem: "pytorch",
-      skills: ["Python", "PyTorch", "FastAPI", "Kafka", "PostgreSQL"],
-      desc: "Training loops, feature stores and streaming inference that keep breathing under load."
+      span: "wide",
+      kicker: "SIGNAL",
+      title: "Do you want to ask a question?",
+      body: "Copy my email and let's talk."
     }
   ],
 
-  /* Fixer gig contracts — journal entries with a master/detail dossier. */
-  gigs: [
+  skills: [
     {
-      id: "gig-01",
-      title: "BLACK-ICE PROTOCOL // NETRUNNER CYBERDECK",
-      category: "fullstack",
-      dangerLevel: "VERY HIGH",
-      fixer: "Rogue Amendiares // The Afterlife",
-      reward: "€$ 75,000",
-      status: "COMPLETED",
-      image: "assets/proj-netrunner.jpg",
-      summary: "Distributed cyberdeck neural telemetry & breach protocol console with real-time WebSocket node telemetry, multi-threaded worker processing, and a custom WebGL network graph visualiser.",
-      details: "Engineered to withstand military-grade Netwatch counter-measures. Features an interactive 3D node topology graph, automated ICE-breaking simulation, and end-to-end encrypted protocol channels. Load-tested to 40k concurrent sockets with a p99 of 38ms.",
-      tags: ["React 19", "WebGL", "Node.js", "WebSockets", "Web Audio API"],
-      demoUrl: "https://github.com",
-      repoUrl: "https://github.com"
+      category: "FULL STACK DEVELOPMENT",
+      level: "PROFICIENT",
+      desc: "Robust front-end and back-end technologies for production systems.",
+      items: ["MongoDB", "Express", "React", "Node.js", "Flask", "CSS", "Framer Motion", "Angular"]
     },
     {
-      id: "gig-02",
-      title: "NIGHT CITY TACTICAL HUD // 3D GEO-SPATIAL MAPPING",
-      category: "frontend",
-      dangerLevel: "EXTREME",
-      fixer: "Muamar 'El Capitan' Reyes",
-      reward: "€$ 90,000",
-      status: "COMPLETED",
-      image: "assets/proj-citymap.jpg",
-      summary: "Interactive 3D vector topographic grid of Night City with real-time fixer gig dispatch, vehicle telemetry tracking, and a dynamic crime incident heatmap.",
-      details: "Built with tailored GPU shaders and vector mesh streaming. Enables real-time dispatch tracking across all six Night City districts with zero frame drops on complex polygon clusters.",
-      tags: ["Three.js", "TypeScript", "GPU Shaders", "GeoJSON", "Vite"],
-      demoUrl: "https://github.com",
-      repoUrl: "https://github.com"
+      category: "PROGRAMMING & DEVELOPMENT",
+      level: "INTERMEDIATE",
+      desc: "Modern programming languages and frameworks across the stack.",
+      items: ["JavaScript", "Python", "C++", "TypeScript", "C", "Java", "Go"]
     },
     {
-      id: "gig-03",
-      title: "SYNAPTIC NEURAL INTERFACE // ARASAKA RELIC ANALYZER",
-      category: "ai",
-      dangerLevel: "MAX-TAC CLASSIFIED",
-      fixer: "Wakako Okada // Westbrook",
-      reward: "€$ 115,000",
-      status: "COMPLETED",
-      image: "assets/proj-neural.jpg",
-      summary: "AI-driven neural EEG visualiser parsing raw biochip telemetry, cognitive residual recovery, and real-time biometric anomaly detection.",
-      details: "Deep learning pipeline processing real-time neural waveform patterns. Integrates frequency spectral analysis, automated anomaly triggers, and cybernetic sensory synthesis.",
-      tags: ["Python", "PyTorch", "FastAPI", "Canvas API", "D3.js"],
-      demoUrl: "https://github.com",
-      repoUrl: "https://github.com"
+      category: "CLOUD & PLATFORM",
+      level: "PROFICIENT",
+      desc: "Containers, orchestration, CI/CD and cloud-native delivery.",
+      items: ["Docker", "Kubernetes", "AWS", "Git", "GraphQL", "Kafka", "Redis"]
     }
   ],
 
-  /* Career timeline as braindance memory tracks. */
-  braindance: [
+  /* Projects — sourced from kartavya-singh.com structure/content */
+  projects: [
     {
-      period: "2024 — PRESENT",
-      track: "TRACK 04 // MASTER SYSTEM",
-      role: "PRINCIPAL SYSTEMS ARCHITECT",
-      organization: "KANG TAO // ADVANCED CYBERNETICS LAB",
-      highlights: [
-        "Architected enterprise-scale micro-frontend ecosystem serving 5M+ daily neural requests.",
-        "Engineered real-time telemetry streaming layer reducing operational latency by 48%.",
-        "Pioneered WebGL diagnostic dashboards and secure hardware token integration."
-      ]
+      id: "proj-01",
+      period: "February 2026 — March 2026",
+      category: "Full-Stack Multi-Agentic Career System",
+      title: "CareerSignal — Agentic Career Platform",
+      summary: "Semi-autonomous multi-agent career intelligence platform — 36 specialised AI agents and one local brain for job analysis, company research, contact discovery, and personalised application assistance. Zero data leaves your machine.",
+      likes: 19,
+      tags: ["Next.js", "TypeScript", "Python", "AI"],
+      url: "https://github.com"
     },
     {
-      period: "2022 — 2024",
-      track: "TRACK 03 // DEEP RUN",
-      role: "SENIOR FULL-STACK ENGINEER",
-      organization: "MILITECH DEFENSE NETWORKS",
-      highlights: [
-        "Built mission-critical tactical dispatch systems with zero unplanned downtime.",
-        "Scaled Kubernetes multi-cluster microservices across hybrid cloud regions.",
-        "Mentored a team of 8 engineers in reactive UI design and zero-trust protocol compliance."
-      ]
+      id: "proj-02",
+      period: "November 2025",
+      category: "MakeUC Hackathon 2025",
+      title: "PersonaForge: Where Voice Meets AI",
+      summary: "Windows desktop voice assistant (Electron, React/TS, Node, Web Audio) with ElevenLabs STT/TTS + Gemini/OpenAI — 4-stage real-time loop and executor framework for 8 core OS actions. Best Use of AI Using ElevenLabs.",
+      likes: 12,
+      tags: ["Electron", "React", "ElevenLabs", "OpenAI"],
+      url: "https://github.com"
     },
     {
-      period: "2020 — 2022",
-      track: "TRACK 02 // SUB-NET INTRUSION",
-      role: "FRONTEND & GRAPHICS ENGINEER",
-      organization: "ARASAKA ORBITAL PLATFORMS",
-      highlights: [
-        "Developed interactive 3D telemetry displays and high-frequency asset visualisers.",
-        "Decreased initial bundle load time by 62% through modern code splitting & shader caching."
-      ]
+      id: "proj-03",
+      period: "January 2025 — April 2025",
+      category: "Full-Stack AI Development",
+      title: "My AI Companion — Interactive Portfolio",
+      summary: "Transformed a personal portfolio into an interactive AI experience — a companion that knows the whole journey and loves to share it.",
+      likes: 24,
+      tags: ["Next.js", "AI", "TypeScript"],
+      url: "https://github.com"
     },
     {
-      period: "2018 — 2020",
-      track: "TRACK 01 // FIRST DIVE",
-      role: "SOFTWARE DEVELOPER",
-      organization: "NIGHT CITY DIGITAL TELECOM",
-      highlights: [
-        "Constructed high-speed RESTful APIs and real-time WebSocket communication backends.",
-        "Authored automated testing suites achieving 94% code test coverage."
-      ]
+      id: "proj-04",
+      period: "August 2024 — January 2025",
+      category: "Full-Stack Development",
+      title: "Personal MERN Stack Portfolio Website",
+      summary: "Fully revamped, feature-rich MERN portfolio showcasing projects, experience and honours — a significant evolution in full-stack craft.",
+      likes: 23,
+      tags: ["MongoDB", "Express", "React", "Node.js"],
+      url: "https://github.com"
+    },
+    {
+      id: "proj-05",
+      period: "August 2024 — September 2024",
+      category: "Future of Data Hackathon 2024",
+      title: "FinVest: Budget Smart, Invest Sharp",
+      summary: "Dynamic financial platform unifying budgeting, spending and investment tracking with real-time 3D visualisations. Best Finance Software — MidwestCon 2024.",
+      likes: 33,
+      tags: ["React", "Python", "D3"],
+      url: "https://github.com"
+    },
+    {
+      id: "proj-06",
+      period: "February 2024",
+      category: "RevUC Hackathon 2024",
+      title: "HealthSphere: Data-Driven Wellness Solutions",
+      summary: "Holistic health platform with real-time data analysis and personalised insights. Winner — Best Digital Solution (Medpace) & Best Use of Taipy.",
+      likes: 25,
+      tags: ["React", "Python", "Taipy"],
+      url: "https://github.com"
+    },
+    {
+      id: "proj-07",
+      period: "October 2023",
+      category: "MakeUC Hackathon 2023",
+      title: "FaunaFinder: AI-Powered Animal Breed Recognition",
+      summary: "Award-winning recognition platform integrating Google Cloud Vision, Wikipedia and GBIF APIs. Winner — Best Use of AI in Education.",
+      likes: 32,
+      tags: ["Google Cloud", "Python", "AI"],
+      url: "https://github.com"
+    },
+    {
+      id: "proj-08",
+      period: "June 2023 — August 2023",
+      category: "FARM Stack Self-Learning",
+      title: "First Personal Portfolio Website",
+      summary: "First large-scale full-stack project in year 2 — FARM stack, showcasing growth across projects and involvements.",
+      likes: 18,
+      tags: ["Flask", "React", "MongoDB"],
+      url: "https://github.com"
+    },
+    {
+      id: "proj-09",
+      period: "February 2023",
+      category: "RevUC Hackathon 2023",
+      title: "BearChat: YUCY AI ChatBot",
+      summary: "Offline full-stack AI chatbot for campus support with 99% query accuracy. Best Use of Google Cloud (MLH).",
+      likes: 26,
+      tags: ["Google Cloud", "Python", "AI"],
+      url: "https://github.com"
     }
   ],
 
-  /* Contact & transmission netlinks */
-  uplink: {
-    handle: "V // TYREL",
-    netFrequency: "tyrel@nightcity.net",
-    commChannels: [
-      { name: "GITHUB", url: "https://github.com", icon: "github", hint: "REPOSITORIES" },
-      { name: "LINKEDIN", url: "https://linkedin.com", icon: "linkedin", hint: "PROFESSIONAL" },
-      { name: "TWITTER_X", url: "https://twitter.com", icon: "x", hint: "BROADCAST" },
-      { name: "DISCORD", url: "https://discord.com", icon: "discord", hint: "VOICE CHANNEL" }
+  /* Experience — kartavya career track + radna role cards */
+  experience: [
+    {
+      tab: "CAREER",
+      role: "GenAI Research Associate",
+      org: "UC Clermont Learning Commons | Batavia, OH",
+      period: "March 2026 — Present",
+      desc: "Building and hardening BearcatGPT's multi-agent tutoring ecosystem — visual learning engine, course-specific agents, and institutional QA for reliable AI learning support at scale.",
+      likes: 6
+    },
+    {
+      tab: "CAREER",
+      role: "Data Engineering (Full Stack) Co-op",
+      org: "Possip | Nashville, TN (Remote)",
+      period: "May 2025 — August 2025",
+      desc: "Enterprise-grade full stack — shipping production features across a multi-tenant SaaS while learning the Ruby on Rails ecosystem.",
+      likes: 9
+    },
+    {
+      tab: "CAREER",
+      role: "Data Science Intern",
+      org: "Byte Link Systems | Houston, TX",
+      period: "May 2022 — July 2022",
+      desc: "Designed and deployed a global Pneumonia growth analysis PowerBI dashboard with advanced Python and machine learning.",
+      likes: 11
+    },
+    {
+      tab: "INVOLVEMENT",
+      role: "Frontend Engineer",
+      org: "Team Lead // Product Delivery",
+      period: "2023 — 2025",
+      desc: "Deployed three projects as team leader and built real-time auction interfaces. Continuously improving UX; exploring motion design for polish.",
+      likes: 0
+    },
+    {
+      tab: "INVOLVEMENT",
+      role: "Backend Engineer",
+      org: "ISO-secure monoliths & microservices",
+      period: "2024 — 2025",
+      desc: "Designed systems where over 320 million USD of trades executed — archiving, operation logging, full NFR coverage.",
+      likes: 0
+    },
+    {
+      tab: "INVOLVEMENT",
+      role: "Teammate",
+      org: "Mining Commodity Exchange System",
+      period: "2024",
+      desc: "Worked with stakeholders end-to-end; led development and shipped successfully.",
+      likes: 0
+    },
+    {
+      tab: "INVOLVEMENT",
+      role: "Aspiring DevOps",
+      org: "Production maintenance",
+      period: "2024 — Present",
+      desc: "Maintaining multi-system production estates while preparing Red Hat and AWS Solutions Architect certifications.",
+      likes: 0
+    },
+    {
+      tab: "HONORS",
+      role: "Best Student of the Year",
+      org: "Mongolian National University",
+      period: "2025",
+      desc: "Named Best Student of the Year; FIBO Cloud scholarship winner among 200+ students.",
+      likes: 0
+    },
+    {
+      tab: "HONORS",
+      role: "AWS Certified Solutions Architect",
+      org: "Amazon Web Services",
+      period: "Associate",
+      desc: "Cloud architecture certification — design resilient, cost-optimised systems.",
+      likes: 0
+    }
+  ],
+
+  /* Journey report — radnaabazar.com/en (verbatim timeline) */
+  journey: [
+    {
+      year: "2025",
+      text: "It's been quite an exciting year! While finishing my thesis, I built core dealer-broker systems and organized online annual general meetings for 10 companies, including Khan Bank. I was honored to be named Best Student of the Year at Mongolian National University and thrilled to win the FIBO Cloud scholarship among 200+ students. Separately, I completed a one-month internship in Japan at Academic Express, where I worked entirely in Japanese. Between all that, collaborating with friends on side businesses. Balancing everything was challenging, but I'm loving every moment of growth and learning.",
+      images: []
+    },
+    {
+      year: "2024",
+      text: "Designed and successfully implemented the architecture for a real-time mining commodity exchange system which processed over $320 million in transactions. The system was audited and has an ISO-compliant secure Back-end system. Also implemented non-functional requirements such as periodic archiving and operation logging. This was my first major successful project implementation.",
+      images: []
+    },
+    {
+      year: "Early 2024",
+      text: "(First job as 2nd year student) Joined BDSEC Securities Company, a financial institution with over 1 million clients, as an IT professional. Worked on the following projects to improve my foundational skills:",
+      list: [
+        "Dashboard Development — dashboards tracking financial data.",
+        "Automations — NodeJS app applying taxes on stock transactions.",
+        "API Integration — data from two exchanges for real-time stock display.",
+        "Personal Projects — social media app with PostgreSQL + Next.js/TypeScript."
+      ],
+      images: []
+    },
+    {
+      year: "2023",
+      text: "Received an invitation from the government and 'American Corner' company to join the 'Call For You' project as a mentor teacher, teaching English to high school students from Darkhan-Uul province. Served as a mentor teacher for 2 months.",
+      images: []
+    }
+  ],
+
+  contact: {
+    headline: "Let's Talk",
+    blurb: "What led you here? What are you looking for? I would love to hear from you over a virtual coffee chat!",
+    email: "hello@radnaabazar.dev",
+    phone: "",
+    channels: [
+      { name: "GITHUB", url: "https://github.com/RedonaNova", icon: "github", hint: "CODE" },
+      { name: "LINKEDIN", url: "https://www.linkedin.com/in/radnaa2015", icon: "linkedin", hint: "NETWORK" },
+      { name: "X", url: "https://twitter.com", icon: "x", hint: "BROADCAST" },
+      { name: "DISCORD", url: "https://discord.com", icon: "discord", hint: "VOICE" }
     ]
   }
 };
