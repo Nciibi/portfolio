@@ -661,6 +661,7 @@ section {
   align-items: center;
   width: 100%;
 }
+.hero-content-col { align-self: center; }
 
 .hero-meta-badge {
   display: inline-flex; align-items: center; gap: 0.7rem;
@@ -1854,6 +1855,7 @@ section {
   color: var(--c-cyan);
   animation: blink-caret 0.9s steps(1) infinite;
 }
+.hero-typing:has(#type-target:empty) .type-caret { visibility: hidden; }
 @keyframes blink-caret { 50% { opacity: 0; } }
 
 .hero-socials {
@@ -1902,6 +1904,7 @@ section {
   padding: 1.1rem 1rem 1.15rem;
   text-align: center;
 }
+.stat-strip .stat-cell.big { padding: 1.35rem 1rem 1.4rem; }
 .stat-strip .stat-num {
   font-family: var(--font-display);
   font-size: clamp(1.6rem, 3vw, 2.4rem);
