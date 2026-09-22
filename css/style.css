@@ -951,17 +951,20 @@ section {
 .attribute-card.active { box-shadow: inset 0 0 40px rgba(255,61,61,0.07); }
 
 .attr-icon {
+  display: grid;
+  place-items: center;
   width: 34px; height: 34px;
-  display: grid; place-items: center;
   border: 1px solid var(--line-strong);
   color: var(--c-red);
   margin-bottom: 0.9rem;
   font-size: 1rem;
   clip-path: polygon(0 0, calc(100% - 7px) 0, 100% 7px, 100% 100%, 7px 100%, 0 calc(100% - 7px));
 }
+.attr-icon svg { width: 19px; height: 19px; }
 .attribute-card.active .attr-icon { background: var(--c-red); color: #fff; border-color: var(--c-red); }
 
 .attr-name {
+  display: block;
   font-family: var(--font-display);
   font-size: 0.82rem; font-weight: 700;
   letter-spacing: 0.09em;
@@ -970,6 +973,7 @@ section {
   min-height: 2.4em;
 }
 .attr-spec {
+  display: block;
   font-family: var(--font-mono);
   font-size: 0.63rem;
   letter-spacing: 0.08em;
@@ -980,8 +984,7 @@ section {
 .attr-level {
   display: flex; align-items: baseline; gap: 0.3rem;
   margin-top: 1.1rem;
-}
-.attr-level b {
+}.attr-level b {
   font-family: var(--font-display);
   font-size: 2.4rem; font-weight: 700;
   line-height: 1;
@@ -993,12 +996,14 @@ section {
   color: var(--txt-4);
 }
 .attr-bar-wrap {
+  display: block;
   margin-top: 0.8rem;
   height: 4px;
   background: rgba(255,255,255,0.08);
   overflow: hidden;
 }
 .attr-bar-fill {
+  display: block;
   height: 100%;
   width: 0;
   background: linear-gradient(90deg, var(--c-red), var(--c-yellow));
@@ -1259,6 +1264,7 @@ section {
   color: var(--txt-4);
 }
 .gig-row-title {
+  display: block;
   font-family: var(--font-display);
   font-size: 0.86rem;
   font-weight: 600;
@@ -1267,6 +1273,7 @@ section {
   line-height: 1.3;
 }
 .gig-row-fixer {
+  display: block;
   font-family: var(--font-mono);
   font-size: 0.64rem;
   color: var(--txt-4);
