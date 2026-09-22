@@ -26,7 +26,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 /* ---------- Pointer tilt for cards (scoped, rAF-throttled) ---------- */
 function initTilt() {
-  const SEL = ".project-card, .bento-card, .exp-card, .edu-card";
+  const SEL = ".bento-card, .exp-card, .edu-card";
   const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   if (reduce) return;
   let current = null;
