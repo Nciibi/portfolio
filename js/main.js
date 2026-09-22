@@ -339,7 +339,7 @@ function renderNetlinks() {
 /* ---------- Audio bindings ---------- */
 function initAudioEvents() {
   document.body.addEventListener("mouseover", (e) => {
-    if (e.target.closest(".btn-cyber, .nav-link, .exp-tab, .hud-ctrl-btn, .netlink-btn, .dlg-opt, .skill-chip, .social-orb, .project-card")) {
+    if (e.target.closest(".btn-cyber, .nav-link, .exp-tab, .hud-ctrl-btn, .netlink-btn, .dlg-opt, .skill-chip, .social-orb, .project-card, .gh-repo, .gh-refresh")) {
       cyberAudio.playHover();
     }
   });
