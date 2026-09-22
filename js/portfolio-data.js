@@ -35,6 +35,9 @@ const ICON_SLUGS = {
   "PyTorch": "pytorch",
   "FastAPI": "fastapi",
   "Git": "git",
+  "Linux": "linux",
+  "Networks": null,
+  "Dart": null,
   "Figma": "figma",
   "GitHub": "github",
   "Vite": "vite",
@@ -139,22 +142,28 @@ const PORTFOLIO_DATA = {
 
   skills: [
     {
-      category: "FULL STACK DEVELOPMENT",
+      category: "CORE LANGUAGES",
       level: "PROFICIENT",
-      desc: "Robust front-end and back-end technologies for production systems.",
-      items: ["MongoDB", "Express", "React", "Node.js", "Flask", "CSS", "Framer Motion", "Angular"]
+      desc: "Daily drivers — the languages I design and ship in.",
+      items: ["Python", "C", "JavaScript"]
     },
     {
-      category: "PROGRAMMING & DEVELOPMENT",
+      category: "APP DEVELOPMENT",
       level: "INTERMEDIATE",
-      desc: "Modern programming languages and frameworks across the stack.",
-      items: ["JavaScript", "Python", "C++", "TypeScript", "C", "Java", "Go"]
+      desc: "Mobile and web apps beyond the core stack.",
+      items: ["Kotlin", "TypeScript", "Dart"]
     },
     {
-      category: "CLOUD & PLATFORM",
+      category: "SYSTEMS & NETWORKS",
       level: "PROFICIENT",
-      desc: "Containers, orchestration, CI/CD and cloud-native delivery.",
-      items: ["Docker", "Kubernetes", "AWS", "Git", "GraphQL", "Kafka", "Redis"]
+      desc: "Where my systems live — servers, version control and networks.",
+      items: ["Linux", "Git", "Networks"]
+    },
+    {
+      category: "DEVOPS TOOLING",
+      level: "BEGINNER",
+      desc: "Currently levelling up — containers and in-memory data.",
+      items: ["Docker", "Redis"]
     }
   ],
 
