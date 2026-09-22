@@ -666,8 +666,17 @@ section {
   color: var(--c-cyan);
   border-color: var(--line-cyan);
   border-left: 3px solid var(--c-cyan);
-  box-shadow: 0 0 18px rgba(94,246,255,0.25);
+  filter: drop-shadow(3px 3px 0 rgba(0,0,0,0.55)) drop-shadow(0 0 14px rgba(94,246,255,0.25));
 }
+/* game marker: chevron slides in on hover */
+.btn-cyber-ghost::after {
+  content: '▶';
+  font-size: 0.62rem;
+  opacity: 0;
+  transform: translateX(-8px);
+  transition: opacity 0.16s ease, transform 0.16s var(--ease-ui);
+}
+.btn-cyber-ghost:hover::after { opacity: 0.9; transform: none; }
 
 .btn-cyber-sm { padding: 9px 17px; font-size: 0.68rem; --cut: 10px; }
 
@@ -2305,11 +2314,12 @@ section {
   --cut: 8px;
   clip-path: polygon(0 0, calc(100% - var(--cut)) 0, 100% var(--cut), 100% 100%, 0 100%);
 }
-.exp-tab:hover { color: var(--txt); background: rgba(255,255,255,0.045); }
+.exp-tab:hover { color: var(--txt); background: rgba(255,255,255,0.045); border-left: 3px solid var(--line-strong); }
 .exp-tab.active {
   background: var(--c-cyan);
   color: #0E0E17;
-  box-shadow: 0 0 16px rgba(94,246,255,0.3);
+  border-left: 3px solid #fff;
+  filter: drop-shadow(0 0 14px rgba(94,246,255,0.3));
 }
 
 .exp-track {
