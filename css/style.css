@@ -129,7 +129,7 @@ button, input, textarea, select { font: inherit; color: inherit; }
   z-index: 0;
   opacity: 0.55;
 }
-#lattice-mount canvas {
+#three-canvas-container canvas {
   width: 100% !important;
   height: 100% !important;
   display: block;
@@ -901,11 +901,11 @@ section {
   letter-spacing: 0.03em;
 }
 
-.hazard-tape {
+  .hazard-tape {
   height: 6px; margin-top: 1rem;
   background: repeating-linear-gradient(-45deg,
     var(--c-yellow), var(--c-yellow) 9px,
-    #05060A 9px, #05060A 18px);
+    #0E0E17 9px, #0E0E17 18px);
   opacity: 0.85;
 }
 
@@ -2006,7 +2006,7 @@ section {
 
 @media (max-width: 760px) {
   .attributes-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .vitals { grid-template-columns: 1fr; }
+  .hero-chips { flex-direction: column; align-items: stretch; }
   .netlinks-list { grid-template-columns: 1fr; }
   .legend .legend-tail { display: none; }
   .eddie-counter { display: none; }
@@ -2020,7 +2020,7 @@ section {
   .brand-badge span:not(.mark) { display: none; }
   .gig-meta { gap: 1rem; }
   .cyberware-grid { grid-template-columns: 1fr; }
-  .avatar-tags .lvl { font-size: 1.5rem; }
+  .avatar-tags .callsign { font-size: 0.62rem; }
 }
 
 /* ==========================================================================
