@@ -2936,160 +2936,111 @@ section {
 .skill-chip:hover { transform: translateY(-2px); }
 
 /* ==========================================================================
-   ARCHIVE — orbital project navigator (interactive 3D, genuinely useful).
+   GITHUB — live open-source section (Nciibi).
    ========================================================================== */
-#archive { --acc: var(--c-yellow); }
-.archive-section {
+#github { --acc: var(--c-green); }
+.github-section {
   position: relative;
   background: rgba(5,6,10,0.6);
   border-top: 1px solid var(--line);
   border-bottom: 1px solid var(--line);
 }
-/* ---- track filters ---------------------------------------------------------- */
-.archive-filters {
-  display: flex; flex-wrap: wrap;
-  gap: 0.45rem;
+/* ---- sync status -------------------------------------------------------------- */
+.gh-status {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.18em;
+  color: var(--txt-3);
+  text-transform: uppercase;
   margin-bottom: 1.4rem;
 }
-.arch-filter {
-  font-family: var(--font-head);
-  font-size: 0.9rem;
-  font-weight: 600;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--txt-3);
-  background: transparent;
-  border: 1px solid transparent;
-  padding: 9px 18px;
-  cursor: pointer;
-  transition: all 0.18s ease;
-  --cut: 8px;
-  clip-path: polygon(0 0, calc(100% - var(--cut)) 0, 100% var(--cut), 100% 100%, 0 100%);
-}
-.arch-filter:hover { color: var(--txt); background: rgba(255,255,255,0.045); }
-.arch-filter.active {
+.gh-live-dot {
+  width: 8px; height: 8px; border-radius: 50%;
   background: var(--c-yellow);
-  color: #0E0E17;
-  box-shadow: 0 0 16px rgba(240,181,55,0.3);
+  box-shadow: 0 0 8px rgba(240,181,55,0.7);
+  flex: none;
 }
-/* ---- viewport + panel grid ---------------------------------------------------- */
-.archive-grid {
-  display: grid;
-  grid-template-columns: 1.12fr 0.88fr;
-  gap: 1.1rem;
-  align-items: stretch;
-}
-.archive-view {
-  position: relative;
-  min-height: clamp(420px, 68vh, 620px);
-  background:
-    radial-gradient(ellipse 60% 55% at 50% 45%, rgba(240,181,55,0.06), transparent 70%),
-    radial-gradient(ellipse 50% 45% at 50% 50%, rgba(94,246,255,0.05), transparent 70%),
-    rgba(9,11,17,0.94);
-  border: 1px solid var(--line);
-  --cut: 18px;
-  clip-path: polygon(0 0, calc(100% - var(--cut)) 0, 100% var(--cut),
-    100% 100%, var(--cut) 100%, 0 calc(100% - var(--cut)));
-  overflow: hidden;
-  cursor: grab;
-  touch-action: pan-y;
-}
-.archive-view:active { cursor: grabbing; }
-.archive-view canvas {
-  position: absolute; inset: 0;
-  width: 100% !important; height: 100% !important;
-  display: block;
-}
-.archive-view::before,
-.archive-view::after {
-  content: '';
-  position: absolute;
-  width: 24px; height: 24px;
-  pointer-events: none;
-  z-index: 4;
-}
-.archive-view::before {
-  top: 8px; left: 8px;
-  border-top: 2px solid var(--c-cyan);
-  border-left: 2px solid var(--c-cyan);
-}
-.archive-view::after {
-  bottom: 8px; right: 8px;
-  border-bottom: 2px solid var(--c-yellow);
-  border-right: 2px solid var(--c-yellow);
-}
-.archive-tip {
-  position: absolute;
-  z-index: 5;
-  pointer-events: none;
-  background: rgba(5,6,10,0.92);
-  border: 1px solid var(--line-cyan);
-  padding: 0.5rem 0.7rem;
-  max-width: 200px;
-  opacity: 0;
-  transition: opacity 0.15s ease;
-}
-.archive-tip.on { opacity: 1; }
-.archive-tip b {
-  display: block;
-  font-family: var(--font-head);
-  font-size: 0.85rem;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  color: #fff;
-  margin-bottom: 0.15rem;
-}
-.archive-tip span {
+.gh-live-dot.on { background: var(--c-green); box-shadow: 0 0 10px rgba(16,222,131,0.8); animation: pulse-chip 1.6s infinite; }
+.gh-live-dot.sync { background: var(--c-cyan); box-shadow: 0 0 10px rgba(94,246,255,0.8); animation: pulse-chip 0.7s infinite; }
+.gh-live-dot.off { background: var(--c-yellow); box-shadow: 0 0 8px rgba(240,181,55,0.6); }
+.gh-refresh {
+  margin-left: auto;
   font-family: var(--font-mono);
-  font-size: 0.62rem;
-  letter-spacing: 0.1em;
-  color: var(--c-cyan);
-}
-.archive-zoom {
-  position: absolute;
-  right: 12px; bottom: 12px;
-  z-index: 5;
-  display: flex;
-  flex-direction: column;
-  gap: 0.4rem;
-}
-.archive-zoom button {
-  width: 34px; height: 34px;
-  display: grid; place-items: center;
-  font-family: var(--font-mono);
-  font-size: 1rem;
+  font-size: 0.66rem;
+  letter-spacing: 0.14em;
   color: var(--txt-2);
-  background: rgba(9,11,17,0.9);
+  background: transparent;
   border: 1px solid var(--line-strong);
+  padding: 6px 12px;
   cursor: pointer;
   transition: all 0.15s ease;
 }
-.archive-zoom button:hover { color: var(--c-cyan); border-color: var(--line-cyan); }
-.archive-legend {
-  position: absolute;
-  left: 14px; bottom: 14px;
-  z-index: 5;
+.gh-refresh:hover { color: var(--c-cyan); border-color: var(--line-cyan); }
+/* ---- profile strip --------------------------------------------------------------- */
+.gh-profile {
   display: flex;
+  align-items: stretch;
+  gap: 1.5rem;
+  background: var(--card);
+  border: 1px solid var(--line);
+  padding: clamp(1rem, 2.5vw, 1.4rem);
+  margin-bottom: 1.1rem;
+  --cut: 14px;
+  clip-path: polygon(0 0, calc(100% - var(--cut)) 0, 100% var(--cut), 100% 100%, 0 100%);
+}
+.gh-avatar {
+  display: flex;
+  align-items: center;
   gap: 0.9rem;
+  text-decoration: none;
+  flex: none;
+}
+.gh-avatar img {
+  width: 76px; height: 76px;
+  object-fit: cover;
+  background: var(--bg-3);
+  --cut: 10px;
+  clip-path: polygon(0 0, calc(100% - var(--cut)) 0, 100% var(--cut),
+    100% 100%, var(--cut) 100%, 0 calc(100% - var(--cut)));
+}
+.gh-handle {
+  font-family: var(--font-head);
+  font-size: 1.4rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: var(--txt);
+}
+.gh-counters {
+  flex: 1;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1px;
+  background: var(--line);
+  border: 1px solid var(--line);
+  align-self: center;
+}
+.gh-counter {
+  background: rgba(9,11,17,0.95);
+  padding: 0.85rem 0.5rem;
+  text-align: center;
+}
+.gh-num {
+  display: block;
+  font-family: var(--font-display);
+  font-size: clamp(1.35rem, 2.6vw, 1.9rem);
+  font-weight: 700;
+  color: #fff;
+  line-height: 1.1;
+}
+.gh-label {
   font-family: var(--font-mono);
-  font-size: 0.6rem;
-  letter-spacing: 0.16em;
+  font-size: 0.58rem;
+  letter-spacing: 0.18em;
   color: var(--txt-3);
-  background: rgba(5,6,10,0.72);
-  padding: 5px 10px;
-  border: 1px solid rgba(255,255,255,0.08);
 }
-.archive-legend .dot {
-  display: inline-block;
-  width: 8px; height: 8px;
-  transform: rotate(45deg);
-  margin-right: 0.4rem;
-}
-.archive-legend .d-hack { background: var(--c-yellow); box-shadow: 0 0 8px rgba(240,181,55,0.7); }
-.archive-legend .d-build { background: var(--c-cyan); box-shadow: 0 0 8px rgba(94,246,255,0.7); }
-.archive-legend .d-ai { background: var(--c-red); box-shadow: 0 0 8px rgba(247,80,73,0.7); }
-.no-webgl .archive-view { display: none; }
-.no-webgl .archive-grid { grid-template-columns: 1fr; }
 /* ---- detail panel + accessible index -------------------------------------------- */
 .archive-panel {
   background: var(--card);
