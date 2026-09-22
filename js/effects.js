@@ -23,7 +23,12 @@
 
     let finished = false;
     const alreadyBooted = (() => {
-      try { return sessionStorage.getItem("cp_booted") === "1"; } catch (e) { return false; }
+      try {
+        if (sessionStorage.getItem("cp_booted") === "1") return true;
+        return /[?&]skipboot\b/.test(location.search);
+      } catch (e) {
+        return /[?&]skipboot\b/.test(location.search);
+      }
     })();
 
     const finish = () => {
