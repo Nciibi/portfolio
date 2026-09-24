@@ -327,7 +327,13 @@ function initMenuTabs() {
     if (railProgressBar) railProgressBar.style.width = `${((activeIndex + 1) / tabs.length) * 100}%`;
     document.body.dataset.activeModule = id;
     if (stage) stage.scrollTop = 0;
-    if (typeof setMobileMenuOpen === "function" && window.innerWidth <= 900) setMobileMenuOpen(false);
+    if (focusedPanel && !focusedPanel.classList.contains("active")) {
+      window.requestAnimationFrame(() => stage?.focus({ preventScroll: true }));
+    }
+    if (typeof setMobileMenuOpen === "function" && window.innerWidth <= 900) {
+      setMobileMenuOpen(false);
+      window.requestAnimationFrame(() => stage?.focus({ preventScroll: true }));
+    }
     if (updateHash && window.history && window.history.replaceState) window.history.replaceState(null, "", `#${id}`);
     document.dispatchEvent(new Event("portfolio:rendered"));
     try { cyberAudio.playTab(); } catch (error) {}
