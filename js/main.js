@@ -287,6 +287,9 @@ function initMenuTabs() {
   const validIds = new Set(tabs.map((tab) => tab.getAttribute("data-menu-tab")));
   const currentIndex = document.getElementById("menu-current-index");
   const currentLabel = document.getElementById("menu-current-label");
+  const railActiveModule = document.getElementById("rail-active-module");
+  const railActiveCode = document.getElementById("rail-active-code");
+  const railProgressBar = document.getElementById("rail-progress-bar");
   const stage = document.querySelector(".menu-stage");
   let activeId = "profile";
 
@@ -306,9 +309,17 @@ function initMenuTabs() {
       panel.setAttribute("aria-hidden", String(!active));
     });
     const activeTab = tabs.find((tab) => tab.getAttribute("data-menu-tab") === id);
+    const activeIndex = Math.max(0, tabs.indexOf(activeTab));
+    const label = activeTab?.querySelector(".tab-label")?.textContent || "PROFILE";
+    const code = activeTab?.getAttribute("data-menu-code") || "RECORD";
     if (currentIndex && activeTab) currentIndex.textContent = activeTab.querySelector(".tab-index")?.textContent || "01";
-    if (currentLabel && activeTab) currentLabel.textContent = `${activeTab.querySelector(".tab-label")?.textContent || "PROFILE"} // ${id === "profile" ? "USER DOSSIER" : "RECORD MODULE"}`;
+    if (currentLabel) currentLabel.textContent = `${label} // ${code}`;
+    if (railActiveModule) railActiveModule.textContent = label;
+    if (railActiveCode) railActiveCode.textContent = code;
+    if (railProgressBar) railProgressBar.style.width = `${((activeIndex + 1) / tabs.length) * 100}%`;
+    document.body.dataset.activeModule = id;
     if (stage) stage.scrollTop = 0;
+    if (typeof setMobileMenuOpen === "function" && window.innerWidth <= 900) setMobileMenuOpen(false);
     if (updateHash && window.history && window.history.replaceState) window.history.replaceState(null, "", `#${id}`);
     document.dispatchEvent(new Event("portfolio:rendered"));
     try { cyberAudio.playTab(); } catch (error) {}
@@ -333,8 +344,73 @@ function initMenuTabs() {
     if (id && id !== activeId) activate(id);
   });
 
+  document.addEventListener("keydown", (event) => {
+    const target = event.target;
+    const typing = target && (target.tagName === "INPUT" || target.tagName === "TEXTAREA" || target.isContentEditable);
+    if (typing || event.defaultPrevented) return;
+    const boot = document.getElementById("boot-screen");
+    if (boot && !boot.classList.contains("is-done")) return;
+
+    if (event.key === "m" || event.key === "M") {
+      event.preventDefault();
+      if (window.innerWidth <= 900 && typeof setMobileMenuOpen === "function") setMobileMenuOpen(true);
+      else tabs.find((tab) => tab.getAttribute("data-menu-tab") === activeId)?.focus();
+      return;
+    }
+
+    if (event.key === "Escape") {
+      event.preventDefault();
+      if (window.innerWidth <= 900 && typeof setMobileMenuOpen === "function") setMobileMenuOpen(false);
+      if (activeId !== "profile") activate("profile", true);
+      else stage?.focus({ preventScroll: true });
+      return;
+    }
+
+    const isTab = target?.closest?.("[data-menu-tab]");
+    const isControl = target?.closest?.("button, a, input, textarea, select");
+    if (event.key === "Enter" && !isTab && isControl) return;
+    if (!["ArrowDown", "ArrowUp", "ArrowLeft", "ArrowRight", "Home", "End", "Enter"].includes(event.key)) return;
+    event.preventDefault();
+    const focusedIndex = isTab ? tabs.indexOf(isTab) : tabs.findIndex((tab) => tab.getAttribute("data-menu-tab") === activeId);
+    const current = focusedIndex < 0 ? 0 : focusedIndex;
+    let next = current;
+    if (event.key === "ArrowDown" || event.key === "ArrowRight") next = (current + 1) % tabs.length;
+    if (event.key === "ArrowUp" || event.key === "ArrowLeft") next = (current - 1 + tabs.length) % tabs.length;
+    if (event.key === "Home") next = 0;
+    if (event.key === "End") next = tabs.length - 1;
+    if (event.key === "Enter") {
+      activate(activeId, false);
+      stage?.focus({ preventScroll: true });
+      return;
+    }
+    activate(tabs[next].getAttribute("data-menu-tab"), true);
+  });
+
   const initialId = window.location.hash.slice(1);
   activate(validIds.has(initialId) ? initialId : "profile", false, false);
+}
+
+function setMobileMenuOpen(open) {
+  const toggle = document.getElementById("menu-toggle");
+  const menu = document.querySelector(".main-menu");
+  if (!toggle || !menu) return;
+  const next = Boolean(open);
+  menu.classList.toggle("is-mobile-open", next);
+  toggle.classList.toggle("is-open", next);
+  toggle.setAttribute("aria-expanded", String(next));
+  document.body.classList.toggle("mobile-menu-open", next);
+  if (next) window.requestAnimationFrame(() => menu.querySelector(".menu-tab")?.focus());
+}
+
+function initMobileMenu() {
+  const toggle = document.getElementById("menu-toggle");
+  const menu = document.querySelector(".main-menu");
+  if (!toggle || !menu) return;
+  toggle.addEventListener("click", () => setMobileMenuOpen(!menu.classList.contains("is-mobile-open")));
+  window.addEventListener("resize", () => {
+    if (window.innerWidth > 900) setMobileMenuOpen(false);
+  });
+  setMobileMenuOpen(false);
 }
 
 function initAudioEvents() {
