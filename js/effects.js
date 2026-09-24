@@ -297,11 +297,10 @@
     initBoot();
     scanReveals();
     runMeters();
-    initSpy();
-    initMobileMenu();
-    initKeys();
+     initSpy();
+     initMobileMenu();
 
-    /* Re-check after fonts, images and 3D assets settle. */
+     /* Re-check after fonts, images and 3D assets settle. */
     [120, 400, 900, 1600, 2600].forEach((ms) => {
       setTimeout(() => { checkReveals(); runMeters(); }, ms);
     });
