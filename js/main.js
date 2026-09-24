@@ -548,8 +548,12 @@ function initDialogueOptions() {
   const netlinksButton = document.getElementById("dlg-netlinks");
   const netlinks = document.getElementById("netlinks-container");
   if (netlinksButton && netlinks) {
+    netlinks.inert = true;
+    netlinks.setAttribute("aria-hidden", "true");
     netlinksButton.addEventListener("click", () => {
       const open = netlinks.classList.toggle("is-open");
+      netlinks.inert = !open;
+      netlinks.setAttribute("aria-hidden", String(!open));
       netlinksButton.setAttribute("aria-expanded", String(open));
     });
   }
