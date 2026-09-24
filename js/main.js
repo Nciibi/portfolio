@@ -440,6 +440,7 @@ function initHUDControls() {
     const enabled = !cyberAudio.isMuted;
     audioButtons.forEach((button) => {
       button.setAttribute("aria-pressed", String(enabled));
+      button.dataset.controlValue = enabled ? "ON" : "OFF";
       const value = button.querySelector("[data-control-value]");
       if (value) value.textContent = enabled ? "ON" : "OFF";
     });
@@ -448,6 +449,7 @@ function initHUDControls() {
     const enabled = !document.body.classList.contains("crt-disabled");
     crtButtons.forEach((button) => {
       button.setAttribute("aria-pressed", String(enabled));
+      button.dataset.controlValue = enabled ? "ON" : "OFF";
       const value = button.querySelector("[data-control-value]");
       if (value) value.textContent = enabled ? "ON" : "OFF";
     });
