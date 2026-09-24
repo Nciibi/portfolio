@@ -311,12 +311,24 @@
       <aside class="system-rail" aria-label="System status rail">
         <div class="rail-header"><span>NCIIBI_OS</span><span class="rail-online">ONLINE</span></div>
         <div class="rail-clock" id="menu-clock">00:00:00</div>
-        <div class="rail-vertical">NIGHT CITY // NODE 77 // SECURE CHANNEL</div>
+        <div class="rail-map" aria-label="Night City tactical map">
+          <div class="rail-map-grid"></div>
+          <span class="rail-map-label">NIGHT CITY // NODE 77</span>
+          <span class="rail-map-target">TARGET // CURRENT</span>
+          <span class="rail-map-cross">+</span>
+        </div>
+        <div class="rail-vertical">SECURE CHANNEL // OPERATOR LINK</div>
+        <div class="rail-active">
+          <span>ACTIVE MODULE</span>
+          <strong id="rail-active-module">PROFILE</strong>
+          <small id="rail-active-code">DOSSIER</small>
+        </div>
         <div class="rail-metrics">
-          <div><span>NET</span><b>98%</b></div>
-          <div><span>SYNC</span><b>READY</b></div>
+          <div><span>NET</span><b id="rail-net-value">98%</b></div>
+          <div><span>SYNC</span><b id="rail-sync-value">READY</b></div>
           <div><span>MODE</span><b>MENU</b></div>
         </div>
+        <div class="rail-progress" aria-hidden="true"><span>RECORD PROGRESS</span><i><b id="rail-progress-bar"></b></i></div>
         <div class="rail-footer">USER ID<br /><strong>77-MIL-8849</strong></div>
       </aside>
     </div>
