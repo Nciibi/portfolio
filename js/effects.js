@@ -311,6 +311,7 @@
     scanReveals();
     runMeters();
      initSpy();
+     initStageScroll();
      initMobileMenu();
 
      /* Re-check after fonts, images and 3D assets settle. */
