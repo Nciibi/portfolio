@@ -3,23 +3,27 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Nciibi | Ahmed Ncibi — Portfolio</title>
-  <meta name="description" content="Ahmed Ncibi — final-year IoT & Computer Engineering at ISTIC. Projects, skills, open source and journey." />
-  <meta name="theme-color" content="#0E0E17" />
+  <title>Nciibi | Ahmed Nciibi — Cyberpunk Portfolio</title>
+  <meta name="description" content="Ahmed Nciibi — IoT and computer engineering portfolio presented as a Cyberpunk 2077-inspired menu interface." />
+  <meta name="theme-color" content="#080a0f" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link rel="stylesheet" href="css/style.css?v=2" />
+  <link rel="stylesheet" href="css/style.css?v=3" />
   <link rel="icon" href="favicon.svg" type="image/svg+xml" />
   <link rel="apple-touch-icon" href="favicon.svg" />
-  <noscript><style>.cin-chapter{position:static !important;opacity:1 !important;transform:none !important;margin:1.25rem auto;max-width:660px;}</style></noscript>
+  <noscript>
+    <style>
+      body{overflow:auto}.menu-stage{overflow:visible}.menu-panel{display:block!important;min-height:auto;margin-bottom:2rem}.menu-panel:not(.active){display:block!important}
+    </style>
+  </noscript>
 </head>
 <body>
+  <a class="skip-link" href="#menu-content">Skip to portfolio content</a>
 
-  <!-- BOOT -->
   <div class="boot" id="boot-screen" role="status" aria-live="polite">
     <div class="boot-inner">
-      <div class="boot-mark">Cyber<br />Interface</div>
-      <div class="boot-sub">USER INTERFACE // PORTFOLIO BUILD 2.0.77</div>
+      <div class="boot-mark">NCIIBI<span>//</span>OS</div>
+      <div class="boot-sub">USER INTERFACE // PORTFOLIO BUILD 3.0.0</div>
       <div class="boot-bar"><i id="boot-fill"></i></div>
       <div class="boot-log" id="boot-log"></div>
       <button class="boot-skip" id="boot-skip" type="button">[ ESC ] SKIP INITIALIZATION</button>
@@ -27,394 +31,301 @@
   </div>
 
   <div class="crt-overlay" id="crt-screen-overlay" aria-hidden="true"></div>
+  <div class="ambient-grid" aria-hidden="true"></div>
+  <div class="ambient-glow ambient-glow-red" aria-hidden="true"></div>
+  <div class="ambient-glow ambient-glow-cyan" aria-hidden="true"></div>
 
-  <div class="reg-marks" aria-hidden="true">
-    <span class="rm-tl"></span><span class="rm-tr"></span>
-    <span class="rm-bl"></span><span class="rm-br"></span>
+  <div class="app-shell">
+    <header class="menu-topbar" id="menu-topbar">
+      <div class="topbar-brand-wrap">
+        <a href="#profile" class="brand-badge" data-menu-target="profile" aria-label="Open Nciibi profile">
+          <span class="brand-mark">N</span>
+          <span class="brand-word">NCIIBI<em>//</em>2077</span>
+        </a>
+        <span class="topbar-build">PORTFOLIO OS <b>3.0.0</b></span>
+      </div>
+      <div class="topbar-readout" aria-label="System status">
+        <span class="readout-dot"></span>
+        <span>NETWATCH UPLINK</span>
+        <span class="readout-separator">//</span>
+        <span id="topbar-status">ONLINE</span>
+      </div>
+      <div class="topbar-controls">
+        <button class="chrome-control" type="button" data-control="audio" aria-pressed="true">
+          <span class="control-key">SFX</span><span data-control-value>ON</span>
+        </button>
+        <button class="chrome-control" type="button" data-control="crt" aria-pressed="true">
+          <span class="control-key">CRT</span><span data-control-value>ON</span>
+        </button>
+      </div>
+    </header>
+
+    <div class="menu-frame">
+      <aside class="main-menu" aria-label="Portfolio main menu">
+        <div class="menu-intro">
+          <span class="menu-overline">PORTFOLIO</span>
+          <strong>MAIN MENU</strong>
+          <span class="menu-intro-line"></span>
+          <span class="menu-intro-copy">SELECT A MODULE<br />TO INSPECT THE RECORD</span>
+        </div>
+
+        <nav class="menu-nav" aria-label="Primary menu">
+          <a href="#profile" class="menu-tab active" data-menu-tab="profile" aria-current="page">
+            <span class="tab-index">01</span><span class="tab-label">PROFILE</span><span class="tab-arrow">›</span>
+          </a>
+          <a href="#projects" class="menu-tab" data-menu-tab="projects">
+            <span class="tab-index">02</span><span class="tab-label">PROJECTS</span><span class="tab-arrow">›</span>
+          </a>
+          <a href="#skills" class="menu-tab" data-menu-tab="skills">
+            <span class="tab-index">03</span><span class="tab-label">SKILLS</span><span class="tab-arrow">›</span>
+          </a>
+          <a href="#experience" class="menu-tab" data-menu-tab="experience">
+            <span class="tab-index">04</span><span class="tab-label">EXPERIENCE</span><span class="tab-arrow">›</span>
+          </a>
+          <a href="#journey" class="menu-tab" data-menu-tab="journey">
+            <span class="tab-index">05</span><span class="tab-label">JOURNEY</span><span class="tab-arrow">›</span>
+          </a>
+          <a href="#github" class="menu-tab" data-menu-tab="github">
+            <span class="tab-index">06</span><span class="tab-label">GITHUB</span><span class="tab-arrow">›</span>
+          </a>
+          <a href="#contact" class="menu-tab" data-menu-tab="contact">
+            <span class="tab-index">07</span><span class="tab-label">CONTACT</span><span class="tab-arrow">›</span>
+          </a>
+          <a href="#options" class="menu-tab" data-menu-tab="options">
+            <span class="tab-index">08</span><span class="tab-label">OPTIONS</span><span class="tab-arrow">›</span>
+          </a>
+        </nav>
+
+        <div class="menu-bottom-copy">
+          <span class="status-dot"></span>
+          <span>LOCAL PROFILE READY</span>
+          <span class="menu-bottom-build">© 2026 // UNAFFILIATED FAN UI</span>
+        </div>
+      </aside>
+
+      <main class="menu-stage" id="menu-content" tabindex="-1">
+        <div class="stage-chrome" aria-hidden="true">
+          <span id="menu-current-index">01</span>
+          <span class="stage-chrome-line"></span>
+          <span id="menu-current-label">PROFILE // USER DOSSIER</span>
+        </div>
+
+        <section class="menu-panel active" id="profile" data-menu-panel="profile" role="tabpanel" aria-labelledby="profile-heading" aria-hidden="false">
+          <div class="panel-header">
+            <div class="panel-kicker"><span class="kicker-line"></span><span>PROFILE // USER DOSSIER</span></div>
+            <h1 class="panel-title" id="profile-heading">AHMED <span>NCIBI</span></h1>
+            <p class="panel-subtitle">IOT &amp; COMPUTER ENGINEERING // FINAL YEAR @ ISTIC</p>
+          </div>
+
+          <div class="profile-layout">
+            <div class="profile-copy">
+              <p class="profile-tagline"><span id="type-target"></span><span class="type-caret" aria-hidden="true">▌</span></p>
+              <p class="profile-bio">Building connected systems from firmware to cloud. I care about useful software, resilient infrastructure, and shipping work that survives contact with the real world.</p>
+              <div class="profile-actions">
+                <button class="btn-cyber btn-cyber-red" type="button" data-menu-target="projects">VIEW PROJECTS <span>↗</span></button>
+                <button class="btn-cyber btn-cyber-ghost" type="button" data-menu-target="contact">JACK IN <span>→</span></button>
+              </div>
+              <div class="hero-socials" id="hero-socials"></div>
+            </div>
+
+            <div class="profile-visual" aria-label="Abstract cyberpunk profile artwork">
+              <div class="visual-grid" aria-hidden="true"></div>
+              <div class="visual-image-frame">
+                <img src="assets/avatar.jpg" alt="Abstract cyberpunk profile avatar" />
+              </div>
+              <div class="visual-tag visual-tag-top">CALLSIGN // NCIBI</div>
+              <div class="visual-tag visual-tag-bottom">STATUS // AVAILABLE</div>
+              <div class="visual-reticle" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+            </div>
+          </div>
+
+          <div class="profile-metrics" id="stat-strip" aria-label="Profile metrics"></div>
+
+          <div class="profile-dossier">
+            <div class="subsection-heading">
+              <div><span class="subsection-index">01.1</span><h2>PERSONAL DOSSIER</h2></div>
+              <span class="subsection-code">REC // VERIFIED BY OWNER</span>
+            </div>
+            <div class="bento-grid" id="bento-container"></div>
+            <div class="edu-row" id="edu-container"></div>
+          </div>
+        </section>
+
+        <section class="menu-panel" id="projects" data-menu-panel="projects" role="tabpanel" aria-labelledby="projects-heading" aria-hidden="true">
+          <div class="panel-header">
+            <div class="panel-kicker"><span class="kicker-line"></span><span>PROJECTS // CASE FILES</span></div>
+            <h1 class="panel-title" id="projects-heading">SELECTED <span>WORK</span></h1>
+            <p class="panel-subtitle">FOUR OPEN-SOURCE SYSTEMS // SELECT A FILE TO INSPECT</p>
+          </div>
+          <div class="panel-rule"></div>
+          <div class="projects-list" id="projects-container"></div>
+          <div class="panel-endnote"><span>END OF FILE</span><span>OPEN SOURCE // PUBLICLY AVAILABLE</span></div>
+        </section>
+
+        <section class="menu-panel" id="skills" data-menu-panel="skills" role="tabpanel" aria-labelledby="skills-heading" aria-hidden="true">
+          <div class="panel-header">
+            <div class="panel-kicker"><span class="kicker-line"></span><span>SKILLS // LOADOUT</span></div>
+            <h1 class="panel-title" id="skills-heading">TECHNICAL <span>STACK</span></h1>
+            <p class="panel-subtitle">SELECT A PROFICIENCY CHANNEL TO FILTER THE LOADOUT</p>
+          </div>
+          <div class="skill-levels" role="group" aria-label="Filter skills by proficiency">
+            <button class="lvl active" type="button" data-level="PROFICIENT" aria-pressed="true">PROFICIENT</button>
+            <button class="lvl" type="button" data-level="INTERMEDIATE" aria-pressed="false">INTERMEDIATE</button>
+            <button class="lvl" type="button" data-level="BEGINNER" aria-pressed="false">BEGINNER</button>
+          </div>
+          <div class="skills-grid" id="skills-container"></div>
+        </section>
+
+        <section class="menu-panel" id="experience" data-menu-panel="experience" role="tabpanel" aria-labelledby="experience-heading" aria-hidden="true">
+          <div class="panel-header">
+            <div class="panel-kicker"><span class="kicker-line"></span><span>EXPERIENCE // CAREER RECORD</span></div>
+            <h1 class="panel-title" id="experience-heading">WORK <span>LOG</span></h1>
+            <p class="panel-subtitle">CAREER // INVOLVEMENT // HONORS</p>
+          </div>
+          <div class="exp-tabs" role="tablist" aria-label="Experience categories">
+            <button class="exp-tab active" type="button" data-tab="CAREER" role="tab" aria-selected="true" aria-controls="experience-panel">CAREER</button>
+            <button class="exp-tab" type="button" data-tab="INVOLVEMENT" role="tab" aria-selected="false" aria-controls="experience-panel">INVOLVEMENT</button>
+            <button class="exp-tab" type="button" data-tab="HONORS" role="tab" aria-selected="false" aria-controls="experience-panel">HONORS</button>
+          </div>
+          <div class="exp-track" id="experience-panel" role="tabpanel" tabindex="0" aria-label="Experience entries"></div>
+        </section>
+
+        <section class="menu-panel" id="journey" data-menu-panel="journey" role="tabpanel" aria-labelledby="journey-heading" aria-hidden="true">
+          <div class="panel-header">
+            <div class="panel-kicker"><span class="kicker-line"></span><span>JOURNEY // MEMORY LOG</span></div>
+            <h1 class="panel-title" id="journey-heading">THE <span>ROAD</span></h1>
+            <p class="panel-subtitle">MILESTONES // ROLES // SYSTEMS SHIPPED</p>
+          </div>
+          <div class="panel-rule"></div>
+          <p class="journey-intro">A compact record of the work, people, and systems that shaped the way I build.</p>
+          <div class="journey-timeline" id="journey-container"></div>
+        </section>
+
+        <section class="menu-panel" id="github" data-menu-panel="github" role="tabpanel" aria-labelledby="github-heading" aria-hidden="true">
+          <div class="panel-header">
+            <div class="panel-kicker"><span class="kicker-line"></span><span>GITHUB // OPEN CHANNEL</span></div>
+            <h1 class="panel-title" id="github-heading">CODE IN <span>THE WILD</span></h1>
+            <p class="panel-subtitle">PUBLIC REPOSITORIES // STARS // RECENT ACTIVITY</p>
+          </div>
+          <div class="gh-status" aria-live="polite">
+            <span class="gh-live-dot" id="gh-live-dot"></span>
+            <span id="gh-live-text">SYNCING WITH GITHUB…</span>
+            <button class="gh-refresh" id="gh-refresh" type="button">↻ RESYNC</button>
+          </div>
+          <div class="gh-profile">
+            <a class="gh-avatar" href="https://github.com/Nciibi" target="_blank" rel="noopener" aria-label="Nciibi on GitHub">
+              <img src="https://avatars.githubusercontent.com/u/214894921?v=4" alt="Nciibi GitHub avatar" loading="lazy" onerror="this.style.display='none'" />
+              <span class="gh-handle">@Nciibi</span>
+            </a>
+            <div class="gh-counters">
+              <div class="gh-counter"><span class="gh-num" data-count="0" id="gh-c-repos">0</span><span class="gh-label">PUBLIC REPOS</span></div>
+              <div class="gh-counter"><span class="gh-num" data-count="0" id="gh-c-stars">0</span><span class="gh-label">TOTAL STARS</span></div>
+              <div class="gh-counter"><span class="gh-num" data-count="0" id="gh-c-followers">0</span><span class="gh-label">FOLLOWERS</span></div>
+              <div class="gh-counter"><span class="gh-num" data-count="0" id="gh-c-following">0</span><span class="gh-label">FOLLOWING</span></div>
+            </div>
+          </div>
+          <div class="github-grid">
+            <div class="github-main">
+              <h2 class="gh-h">TOP REPOS <span>// BY STARS</span></h2>
+              <div class="gh-repos" id="gh-repos"></div>
+              <h2 class="gh-h">LANGUAGES <span>// BY REPOSITORY</span></h2>
+              <div class="gh-langs" id="gh-langs"></div>
+            </div>
+            <aside class="github-side">
+              <h2 class="gh-h">RECENT ACTIVITY <span>// FEED</span></h2>
+              <div class="gh-feed" id="gh-feed"></div>
+              <a class="btn-cyber btn-cyber-sm btn-cyber-ghost gh-all" href="https://github.com/Nciibi?tab=repositories" target="_blank" rel="noopener">ALL REPOSITORIES ↗</a>
+            </aside>
+          </div>
+        </section>
+
+        <section class="menu-panel" id="contact" data-menu-panel="contact" role="tabpanel" aria-labelledby="contact-heading" aria-hidden="true">
+          <div class="panel-header">
+            <div class="panel-kicker"><span class="kicker-line"></span><span>CONTACT // SECURE CHANNEL</span></div>
+            <h1 class="panel-title" id="contact-heading">LET'S <span>TALK</span></h1>
+            <p class="panel-subtitle">PICK A CHANNEL // START A CONVERSATION</p>
+          </div>
+          <div class="dialogue-wrap">
+            <div class="dialogue-panel">
+              <div class="speaker">
+                <div class="speaker-avatar"><img src="assets/avatar.jpg" alt="Abstract profile avatar" /></div>
+                <div><div class="speaker-name">AHMED NCIBI</div><div class="speaker-role">IOT &amp; COMPUTER ENGINEERING // AVAILABLE</div></div>
+              </div>
+              <p class="dialogue-line" id="contact-blurb">What led you here? Pick a direct channel or leave a brief.</p>
+              <div class="dialogue-options">
+                <div class="opt-label">// AVAILABLE RESPONSES</div>
+                <button type="button" class="dlg-opt" data-scroll-to="#terminal-contact-form"><span class="num">[1]</span><span>I've got a contract for you.</span><span class="tail">▶</span></button>
+                <a href="mailto:ncibiahmed2017@gmail.com" class="dlg-opt"><span class="num">[2]</span><span>Need a direct line — send an email.</span><span class="tail">▶</span></a>
+                <button type="button" class="dlg-opt" data-menu-target="projects"><span class="num">[3]</span><span>Show me your past work first.</span><span class="tail">▶</span></button>
+                <button type="button" class="dlg-opt" id="dlg-netlinks"><span class="num">[4]</span><span>What are your net channels?</span><span class="tail">▶</span></button>
+              </div>
+              <div class="netlinks-list" id="netlinks-container"></div>
+            </div>
+            <form class="dialogue-panel terminal-form" id="terminal-contact-form">
+              <div class="speaker">
+                <div class="speaker-avatar terminal-avatar">&gt;_</div>
+                <div><div class="speaker-name">LOCAL BRIEF</div><div class="speaker-role">DEMO CHANNEL // NO SERVER CONNECTION</div></div>
+              </div>
+              <div class="form-group"><label for="agent-name">// OPERATIVE NAME</label><input type="text" id="agent-name" name="name" autocomplete="name" placeholder="Your name" required /></div>
+              <div class="form-group"><label for="agent-freq">// EMAIL FREQUENCY</label><input type="email" id="agent-freq" name="email" autocomplete="email" placeholder="you@example.com" required /></div>
+              <div class="form-group"><label for="agent-msg">// MISSION BRIEF</label><textarea id="agent-msg" name="message" rows="4" placeholder="Tell me what you are building..." required></textarea></div>
+              <button type="submit" class="btn-cyber btn-cyber-yellow" id="btn-submit-transmission">PREVIEW BRIEF <span>→</span></button>
+              <div class="terminal-console-log" id="terminal-console-log" aria-live="polite"></div>
+            </form>
+          </div>
+        </section>
+
+        <section class="menu-panel" id="options" data-menu-panel="options" role="tabpanel" aria-labelledby="options-heading" aria-hidden="true">
+          <div class="panel-header">
+            <div class="panel-kicker"><span class="kicker-line"></span><span>OPTIONS // SYSTEM SETTINGS</span></div>
+            <h1 class="panel-title" id="options-heading">SYSTEM <span>OPTIONS</span></h1>
+            <p class="panel-subtitle">AUDIO // DISPLAY // ACCESSIBILITY</p>
+          </div>
+          <div class="options-grid">
+            <div class="option-block">
+              <div class="option-heading"><span>01</span><h2>INTERFACE</h2></div>
+              <button class="option-row" type="button" data-control="audio" aria-pressed="true"><span><b>SYNTHESIZED SFX</b><small>Procedural interface feedback</small></span><strong data-control-value>ON</strong></button>
+              <button class="option-row" type="button" data-control="crt" aria-pressed="true"><span><b>CRT OVERLAY</b><small>Scanlines and viewport vignette</small></span><strong data-control-value>ON</strong></button>
+            </div>
+            <div class="option-block">
+              <div class="option-heading"><span>02</span><h2>CONTROLS</h2></div>
+              <div class="key-guide"><span><kbd>↑</kbd><kbd>↓</kbd> NAVIGATE</span><span><kbd>ENTER</kbd> SELECT</span><span><kbd>ESC</kbd> BACK</span><span><kbd>M</kbd> FOCUS MENU</span></div>
+            </div>
+            <div class="option-block option-block-wide">
+              <div class="option-heading"><span>03</span><h2>ABOUT THIS BUILD</h2></div>
+              <p class="about-build">A Cyberpunk 2077-inspired portfolio interface built as a full-screen menu system. Original fan work; unaffiliated with CD PROJEKT RED. Portfolio content and project links belong to their respective owners.</p>
+              <div class="build-stamp">NCIIBI_OS <b>3.0.0</b> // STATIC FRONTEND // NO EXTERNAL STATE</div>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <aside class="system-rail" aria-label="System status rail">
+        <div class="rail-header"><span>NCIIBI_OS</span><span class="rail-online">ONLINE</span></div>
+        <div class="rail-clock" id="menu-clock">00:00:00</div>
+        <div class="rail-vertical">NIGHT CITY // NODE 77 // SECURE CHANNEL</div>
+        <div class="rail-metrics">
+          <div><span>NET</span><b>98%</b></div>
+          <div><span>SYNC</span><b>READY</b></div>
+          <div><span>MODE</span><b>MENU</b></div>
+        </div>
+        <div class="rail-footer">USER ID<br /><strong>77-MIL-8849</strong></div>
+      </aside>
+    </div>
+
+    <footer class="menu-legend">
+      <span><kbd>↑</kbd><kbd>↓</kbd> NAVIGATE</span>
+      <span><kbd>ENTER</kbd> SELECT</span>
+      <span><kbd>ESC</kbd> BACK</span>
+      <span class="legend-tail"><i class="status-dot"></i> SECURE UPLINK // <b>NCIIBI</b></span>
+    </footer>
   </div>
 
-  <!-- 3D mount removed: hero owns a contained interactive viewport now -->
-
-  <!-- HEADER -->
-  <header class="hud-header" id="hud-top-bar">
-    <div class="hud-left">
-      <a href="#home" class="brand-badge" id="hud-brand-link">
-        <span class="mark">N</span>
-        <span>NCIIBI<em>//</em>2077</span>
-      </a>
-    </div>
-
-    <nav class="hud-nav" aria-label="Main Navigation">
-      <a href="#home" class="nav-link active" data-spy="home"><span class="idx">01</span> HOME</a>
-      <a href="#about" class="nav-link" data-spy="about"><span class="idx">02</span> ABOUT</a>
-      <a href="#skills" class="nav-link" data-spy="skills"><span class="idx">03</span> SKILLS</a>
-      <a href="#projects" class="nav-link" data-spy="projects"><span class="idx">04</span> PROJECTS</a>
-      <a href="#github" class="nav-link" data-spy="github"><span class="idx">05</span> GITHUB</a>
-      <a href="#experience" class="nav-link" data-spy="experience"><span class="idx">06</span> CAREER</a>
-      <a href="#journey" class="nav-link" data-spy="journey"><span class="idx">07</span> JOURNEY</a>
-      <a href="#contact" class="nav-link" data-spy="contact"><span class="idx">08</span> CONTACT</a>
-    </nav>
-
-    <div class="hud-right">
-      <button class="hud-ctrl-btn on" id="btn-toggle-audio" title="Toggle Synthesized Cyber SFX" aria-pressed="true">SFX</button>
-      <button class="hud-ctrl-btn on" id="btn-toggle-crt" title="Toggle CRT Scanlines" aria-pressed="true">CRT</button>
-    </div>
-
-    <button class="menu-toggle" id="menu-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu">
-      <span></span><span></span><span></span>
-    </button>
-  </header>
-
-  <nav class="mobile-menu" id="mobile-menu" aria-label="Mobile Navigation">
-    <a href="#home" class="active"><span class="idx">01</span> HOME</a>
-    <a href="#about"><span class="idx">02</span> ABOUT</a>
-    <a href="#skills"><span class="idx">03</span> SKILLS</a>
-    <a href="#projects"><span class="idx">04</span> PROJECTS</a>
-    <a href="#github"><span class="idx">05</span> GITHUB</a>
-    <a href="#experience"><span class="idx">06</span> CAREER</a>
-    <a href="#journey"><span class="idx">07</span> JOURNEY</a>
-    <a href="#contact"><span class="idx">08</span> CONTACT</a>
-    <div class="mm-foot">NETWATCH UPLINK // SECURE<br />BUILD 2.0.77</div>
-  </nav>
-
-  <main>
-    <!-- ========== 01 HOME / HERO (Kartavya splash + interactive 3D stage) ========== -->
-    <section class="hero-section" id="home">
-      <div class="container">
-        <p class="hero-kicker" data-reveal>
-          <span class="k-dot"></span>
-          <span>FINAL-YEAR IOT &amp; COMPUTER ENGINEERING // ISTIC</span>
-        </p>
-
-        <h1 class="hero-title" data-reveal style="--d:.08s">
-          <span class="ht-hello">HELLO, I'M</span>
-          <span class="glitch ht-name" data-text="AHMED NCIBI">AHMED <em>NCIBI</em></span>
-        </h1>
-
-        <p class="hero-typing" aria-live="polite">
-          <span id="type-target"></span><span class="type-caret" aria-hidden="true">▌</span>
-        </p>
-
-        <p class="hero-bio" data-reveal style="--d:.16s">
-          Final-year IoT &amp; Computer Engineering student at ISTIC — building connected systems
-          from firmware to cloud. Always learning, always shipping.
-        </p>
-
-        <div class="hero-actions" data-reveal style="--d:.24s">
-          <a href="#projects" class="btn-cyber btn-cyber-yellow" id="btn-enter">ENTER PORTFOLIO</a>
-          <a href="#contact" class="btn-cyber btn-cyber-red">LET'S TALK</a>
-          <a href="#journey" class="btn-cyber btn-cyber-ghost">JOURNEY REPORT</a>
-        </div>
-
-        <!-- Social row -->
-        <div class="hero-socials" data-reveal style="--d:.3s" id="hero-socials">
-          <!-- filled by main.js -->
-        </div>
-
-        <!-- Stat strip (counters) -->
-        <div class="stat-strip" id="stat-strip" data-reveal="wipe">
-          <!-- filled by main.js -->
-        </div>
-      </div>
-    </section>
-
-    <div class="ticker" aria-hidden="true">
-      <div class="ticker-track">
-        <div class="ticker-group"><span class="tk">IOT &amp; EMBEDDED</span><span class="tk-sep">///</span><span class="tk">FIRMWARE → CLOUD</span><span class="tk-sep">///</span><span class="tk">ISTIC</span><span class="tk-sep">///</span><span class="tk">OPEN TO WORK</span><span class="tk-sep">///</span><span class="tk">TUNISIA → WORLD</span><span class="tk-sep">///</span><span class="tk">SHIPPED · NOT SLIDES</span><span class="tk-sep">///</span></div>
-        <div class="ticker-group"><span class="tk">IOT &amp; EMBEDDED</span><span class="tk-sep">///</span><span class="tk">FIRMWARE → CLOUD</span><span class="tk-sep">///</span><span class="tk">ISTIC</span><span class="tk-sep">///</span><span class="tk">OPEN TO WORK</span><span class="tk-sep">///</span><span class="tk">TUNISIA → WORLD</span><span class="tk-sep">///</span><span class="tk">SHIPPED · NOT SLIDES</span><span class="tk-sep">///</span></div>
-      </div>
-    </div>
-
-    <!-- ========== 02 ABOUT (bento) ========== -->
-    <section class="about-section" id="about">
-      <div class="container">
-        <div class="section-header" data-reveal>
-          <div class="section-eyebrow">
-            <span class="num">02</span>
-            <span>SHORT PROFILE</span>
-            <span class="sep">//</span>
-            <span>BENTO DOSSIER</span>
-          </div>
-          <h2 class="section-title">ABOUT <span class="title-accent">// ME</span></h2>
-          <div class="section-sub">EDUCATION · LANGUAGES · STACK · SIGNAL</div>
-          <div class="section-rule"></div>
-        </div>
-
-        <div class="bento-grid" id="bento-container" data-reveal="wipe">
-          <!-- filled by main.js -->
-        </div>
-
-        <!-- Education cards -->
-        <div class="edu-row" id="edu-container" data-reveal>
-          <!-- filled by main.js -->
-        </div>
-      </div>
-    </section>
-
-    <!-- ========== 03 SKILLS ========== -->
-    <section class="skills-section" id="skills">
-      <div class="container">
-        <div class="section-header" data-reveal>
-          <div class="section-eyebrow">
-            <span class="num">03</span>
-            <span>MY TECHSTACK</span>
-            <span class="sep">//</span>
-            <span>PROFICIENCY</span>
-          </div>
-          <h2 class="section-title">SKILLS <span class="title-accent">&amp; STACK</span></h2>
-          <div class="section-sub">SELECT A TRACK TO INSPECT ITS LOADOUT</div>
-          <div class="section-rule"></div>
-        </div>
-
-        <div class="skill-levels" data-reveal>
-          <span class="lvl active" data-level="PROFICIENT">PROFICIENT</span>
-          <span class="lvl" data-level="INTERMEDIATE">INTERMEDIATE</span>
-          <span class="lvl" data-level="BEGINNER">BEGINNER</span>
-        </div>
-
-        <div class="skills-grid" id="skills-container" data-reveal="wipe">
-          <!-- filled by main.js -->
-        </div>
-      </div>
-    </section>
-
-    <!-- ========== 04 PROJECTS (kartavya list style) ========== -->
-    <section class="projects-section" id="projects">
-      <div class="container">
-        <div class="section-header" data-reveal>
-          <div class="section-eyebrow">
-            <span class="num">04</span>
-            <span>SELECTED WORK</span>
-            <span class="sep">//</span>
-            <span>CASE FILES</span>
-          </div>
-          <h2 class="section-title">MY <span class="title-accent">PROJECTS</span></h2>
-          <div class="section-sub">STRAIGHT FROM GITHUB · CLICK TO OPEN A REPO</div>
-          <div class="section-rule"></div>
-        </div>
-
-        <div class="projects-list" id="projects-container">
-          <!-- filled by main.js -->
-        </div>
-      </div>
-    </section>
-
-    <!-- ========== 05 OPEN SOURCE / GITHUB (live Nciibi data) ========== -->
-    <section class="github-section" id="github">
-      <div class="container">
-        <div class="section-header" data-reveal>
-          <div class="section-eyebrow">
-            <span class="num">05</span>
-            <span>OPEN SOURCE</span>
-            <span class="sep">//</span>
-            <span>GITHUB LIVE</span>
-          </div>
-          <h2 class="section-title">CODE IN <span class="title-accent">THE WILD</span></h2>
-          <div class="section-sub">REAL REPOS · REAL STARS · SYNCED FROM GITHUB</div>
-          <div class="section-rule"></div>
-        </div>
-
-        <div class="gh-status" data-reveal>
-          <span class="gh-live-dot" id="gh-live-dot"></span>
-          <span id="gh-live-text">SYNCING WITH GITHUB…</span>
-          <button class="gh-refresh" id="gh-refresh" type="button">↻ RESYNC</button>
-        </div>
-
-        <div class="gh-profile" data-reveal="wipe">
-          <a class="gh-avatar" href="https://github.com/Nciibi" target="_blank" rel="noopener" aria-label="Nciibi on GitHub">
-            <img src="https://avatars.githubusercontent.com/u/214894921?v=4" alt="Nciibi GitHub avatar" loading="lazy" onerror="this.style.display='none'" />
-            <span class="gh-handle">@Nciibi</span>
-          </a>
-          <div class="gh-counters">
-            <div class="gh-counter"><span class="gh-num" data-count="0" id="gh-c-repos">0</span><span class="gh-label">PUBLIC REPOS</span></div>
-            <div class="gh-counter"><span class="gh-num" data-count="0" id="gh-c-stars">0</span><span class="gh-label">TOTAL STARS</span></div>
-            <div class="gh-counter"><span class="gh-num" data-count="0" id="gh-c-followers">0</span><span class="gh-label">FOLLOWERS</span></div>
-            <div class="gh-counter"><span class="gh-num" data-count="0" id="gh-c-following">0</span><span class="gh-label">FOLLOWING</span></div>
-          </div>
-        </div>
-
-        <div class="github-grid">
-          <div class="github-main">
-            <h3 class="gh-h" data-reveal>TOP REPOS <span>// BY STARS</span></h3>
-            <div class="gh-repos" id="gh-repos"><!-- filled by github.js --></div>
-            <h3 class="gh-h" data-reveal>LANGUAGES <span>// BY REPOSITORY</span></h3>
-            <div class="gh-langs" id="gh-langs"><!-- filled by github.js --></div>
-          </div>
-          <aside class="github-side">
-            <h3 class="gh-h" data-reveal>RECENT ACTIVITY <span>// PUSHES</span></h3>
-            <div class="gh-feed" id="gh-feed"><!-- filled by github.js --></div>
-            <a class="btn-cyber btn-cyber-sm btn-cyber-ghost gh-all" href="https://github.com/Nciibi?tab=repositories" target="_blank" rel="noopener" data-reveal>ALL REPOSITORIES →</a>
-          </aside>
-        </div>
-      </div>
-    </section>
-
-    <!-- ========== 06 EXPERIENCE / CAREER ========== -->
-    <section class="experience-section" id="experience">
-      <div class="container">
-        <div class="section-header" data-reveal>
-          <div class="section-eyebrow">
-            <span class="num">06</span>
-            <span>MY CAREER</span>
-            <span class="sep">//</span>
-            <span>TABS</span>
-          </div>
-          <h2 class="section-title">EXPERIENCE <span class="title-accent">// HONORS</span></h2>
-          <div class="section-sub">INVOLVEMENT · CAREER · HONORS</div>
-          <div class="section-rule"></div>
-        </div>
-
-        <div class="exp-tabs" role="tablist" data-reveal>
-          <button class="exp-tab active" data-tab="CAREER" role="tab" aria-selected="true">CAREER</button>
-          <button class="exp-tab" data-tab="INVOLVEMENT" role="tab" aria-selected="false">INVOLVEMENT</button>
-          <button class="exp-tab" data-tab="HONORS" role="tab" aria-selected="false">HONORS</button>
-        </div>
-
-        <div class="exp-track" id="experience-container" data-reveal="wipe">
-          <!-- filled by main.js -->
-        </div>
-      </div>
-    </section>
-
-    <!-- ========== 06 JOURNEY REPORT (radnaabazar timeline) ========== -->
-    <section class="journey-section" id="journey">
-      <div class="container">
-        <div class="section-header" data-reveal>
-          <div class="section-eyebrow">
-            <span class="num">07</span>
-            <span>MEMORY RECONSTRUCTION</span>
-            <span class="sep">//</span>
-            <span>TIMELINE</span>
-          </div>
-          <h2 class="section-title">MY JOURNEY <span class="title-accent">REPORT</span></h2>
-          <div class="section-sub">SIDE JOBS TO CORPORATE — MOSTLY FINANCIAL SYSTEMS</div>
-          <div class="section-rule"></div>
-        </div>
-
-        <p class="journey-intro" data-reveal>
-          I've had the opportunity to develop software across a variety of settings — from small side-jobs to large corporation,
-          mostly building financial systems. Here's my timeline of my journey.
-        </p>
-
-        <div class="journey-timeline" id="journey-container">
-          <!-- filled by main.js -->
-        </div>
-      </div>
-    </section>
-
-    <div class="ticker ticker-rev" aria-hidden="true">
-      <div class="ticker-track">
-        <div class="ticker-group"><span class="tk">9 CASE FILES</span><span class="tk-sep">///</span><span class="tk">4-YEAR JOURNEY REPORT</span><span class="tk-sep">///</span><span class="tk">HACKATHON WINS</span><span class="tk-sep">///</span><span class="tk">PRODUCTION FINTECH</span><span class="tk-sep">///</span><span class="tk">LET'S TALK</span><span class="tk-sep">///</span></div>
-        <div class="ticker-group"><span class="tk">9 CASE FILES</span><span class="tk-sep">///</span><span class="tk">4-YEAR JOURNEY REPORT</span><span class="tk-sep">///</span><span class="tk">HACKATHON WINS</span><span class="tk-sep">///</span><span class="tk">PRODUCTION FINTECH</span><span class="tk-sep">///</span><span class="tk">LET'S TALK</span><span class="tk-sep">///</span></div>
-      </div>
-    </div>
-
-    <!-- ========== 07 CONTACT ========== -->
-    <section class="contact-section" id="contact">
-      <div class="container">
-        <div class="section-header" data-reveal>
-          <div class="section-eyebrow">
-            <span class="num">08</span>
-            <span>SECURE TRANSMISSION</span>
-            <span class="sep">//</span>
-            <span>NETWATCH UPLINK</span>
-          </div>
-          <h2 class="section-title">LET'S <span class="title-accent">TALK</span></h2>
-          <div class="section-sub">WHAT LED YOU HERE? PICK A CHANNEL OR SEND A BRIEF</div>
-          <div class="section-rule"></div>
-        </div>
-
-        <div class="dialogue-wrap">
-          <div class="dialogue-panel" data-reveal>
-            <div class="speaker">
-              <div class="speaker-avatar">
-                <img src="assets/avatar.jpg" alt="Ahmed Ncibi" />
-              </div>
-              <div>
-                <div class="speaker-name">AHMED NCIBI</div>
-                <div class="speaker-role">IOT &amp; COMPUTER ENGINEERING · FINAL YEAR @ ISTIC</div>
-              </div>
-            </div>
-            <p class="dialogue-line" id="contact-blurb">
-              What led you here? What are you looking for? I would love to hear from you over a virtual coffee chat!
-            </p>
-            <div class="dialogue-options">
-              <div class="opt-label">// AVAILABLE RESPONSES</div>
-              <button type="button" class="dlg-opt" data-scroll-to="#terminal-contact-form">
-                <span class="num">[1]</span>
-                <span>I've got a contract for you.</span>
-                <span class="tail">▶</span>
-              </button>
-              <a href="mailto:ncibiahmed2017@gmail.com" class="dlg-opt">
-                <span class="num">[2]</span>
-                <span>Need a direct line — send an email.</span>
-                <span class="tail">▶</span>
-              </a>
-              <a href="#projects" class="dlg-opt">
-                <span class="num">[3]</span>
-                <span>Show me your past work first.</span>
-                <span class="tail">▶</span>
-              </a>
-              <button type="button" class="dlg-opt" id="dlg-netlinks">
-                <span class="num">[4]</span>
-                <span>What are your net channels?</span>
-                <span class="tail">▶</span>
-              </button>
-            </div>
-            <div class="netlinks-list" id="netlinks-container"></div>
-          </div>
-
-          <form class="dialogue-panel terminal-form" id="terminal-contact-form" data-reveal style="--d:.1s">
-            <div class="speaker">
-              <div class="speaker-avatar" style="display:grid;place-items:center;font-family:var(--font-mono);color:var(--c-red);font-size:1.2rem;">
-                &gt;_
-              </div>
-              <div>
-                <div class="speaker-name">NETWATCH UPLINK</div>
-                <div class="speaker-role">QUANTUM ENCRYPTED · READY TO TRANSMIT</div>
-              </div>
-            </div>
-            <div class="form-group">
-              <label for="agent-name">// OPERATIVE NAME</label>
-              <input type="text" id="agent-name" placeholder="e.g. Johnny Silverhand" required />
-            </div>
-            <div class="form-group">
-              <label for="agent-freq">// EMAIL FREQUENCY</label>
-              <input type="email" id="agent-freq" placeholder="you@nightcity.net" required />
-            </div>
-            <div class="form-group">
-              <label for="agent-msg">// MISSION BRIEF</label>
-              <textarea id="agent-msg" rows="4" placeholder="Contract parameters, stack, timeline..." required></textarea>
-            </div>
-            <button type="submit" class="btn-cyber btn-cyber-yellow" id="btn-submit-transmission">
-              TRANSMIT MISSION BRIEF
-            </button>
-            <div class="terminal-console-log" id="terminal-console-log" aria-live="polite"></div>
-          </form>
-        </div>
-      </div>
-    </section>
-  </main>
-
-  <footer class="footer-section">
-    <div class="container">
-      <div class="footer-grid">
-        <div class="footer-brand">N <em>//</em> NCIIBI &nbsp;·&nbsp; PORTFOLIO</div>
-        <div class="footer-intel">JOURNEY CONTENT INSPIRED BY RADNAABAZAR · PROJECT STRUCTURE FROM KARTAVYA SINGH</div>
-      </div>
-      <div class="footer-copy">
-        CYBERPUNK 2077 UI HOMAGE · ORIGINAL FAN WORK, UNAFFILIATED WITH CD PROJEKT RED ·
-        ICONS VIA <a href="https://github.com/simple-icons/simple-icons" target="_blank" rel="noopener">SIMPLE-ICONS</a> (CC0)
-        &amp; <a href="https://github.com/devicons/devicon" target="_blank" rel="noopener">DEVICON</a> (MIT)
-      </div>
-    </div>
-  </footer>
-
-  <script src="js/icon-pack.js?v=2"></script>
-  <script src="js/portfolio-data.js?v=2"></script>
-  <script src="js/cyber-audio.js?v=2"></script>
-  <script src="js/github.js?v=2"></script>
-  <script src="js/effects.js?v=2"></script>
-  <script src="js/main.js?v=2"></script>
+  <script src="js/icon-pack.js?v=3"></script>
+  <script src="js/portfolio-data.js?v=3"></script>
+  <script src="js/cyber-audio.js?v=3"></script>
+  <script src="js/github.js?v=3"></script>
+  <script src="js/effects.js?v=3"></script>
+  <script src="js/main.js?v=3"></script>
 </body>
 </html>

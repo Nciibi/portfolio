@@ -1,9 +1,3 @@
-/**
- * CYBERPUNK PORTFOLIO CONTROLLER
- * Renders hero socials/stats, bento about, skills, projects,
- * experience tabs, journey timeline, contact netlinks.
- */
-
 document.addEventListener("DOMContentLoaded", () => {
   renderHeroSocials();
   renderStats();
@@ -15,416 +9,383 @@ document.addEventListener("DOMContentLoaded", () => {
   renderExperience("CAREER");
   renderJourney();
   renderNetlinks();
+  initMenuTabs();
   initTyping();
   initAudioEvents();
   initHUDControls();
   initDialogueOptions();
-  initTilt();
-
+  initClock();
   document.dispatchEvent(new Event("portfolio:rendered"));
 });
 
-/* ---------- Pointer tilt for cards (scoped, rAF-throttled) ---------- */
-function initTilt() {
-  const SEL = ".bento-card, .exp-card, .edu-card";
-  const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  if (reduce) return;
-  let current = null;
-  let raf = 0;
-  let tx = 0;
-  let ty = 0;
-  const apply = () => {
-    raf = 0;
-    if (!current) return;
-    current.style.transform =
-      `perspective(900px) rotateX(${(-ty * 7).toFixed(2)}deg) rotateY(${(tx * 9).toFixed(2)}deg) translateZ(0)`;
-  };
-  document.addEventListener("pointermove", (e) => {
-    const card = e.target && e.target.closest ? e.target.closest(SEL) : null;
-    if (card !== current) {
-      if (current) {
-        current.style.transition = "";
-        current.style.transform = "";
-      }
-      current = card;
-      if (current) current.style.transition = "transform .08s ease-out";
-    }
-    if (!current) return;
-    const r = current.getBoundingClientRect();
-    if (!r.width || !r.height) return;
-    tx = ((e.clientX - r.left) / r.width) * 2 - 1;
-    ty = ((e.clientY - r.top) / r.height) * 2 - 1;
-    if (!raf) raf = requestAnimationFrame(apply);
-  }, { passive: true });
-  document.addEventListener("pointerout", (e) => {
-    if (current && !(e.relatedTarget && e.relatedTarget.closest && e.relatedTarget.closest(SEL) === current)) {
-      current.style.transition = "transform .35s var(--ease-out, ease)";
-      current.style.transform = "";
-      const done = current;
-      setTimeout(() => { if (current === done) { done.style.transition = ""; current = null; } }, 360);
-    }
-  }, { passive: true });
+function escapeHtml(value) {
+  return String(value == null ? "" : value)
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#039;");
 }
 
-/* ---------- Typing taglines (Kartavya changing-text) ---------- */
-function initTyping() {
-  const el = document.getElementById("type-target");
-  if (!el || !PORTFOLIO_DATA.profile?.taglines?.length) return;
-  const lines = PORTFOLIO_DATA.profile.taglines;
-  const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  if (reduce) { el.textContent = lines[0]; return; }
-
-  let li = 0, ci = 0, deleting = false;
-  const tick = () => {
-    const line = lines[li];
-    if (!deleting) {
-      ci++;
-      el.textContent = line.slice(0, ci);
-      if (ci >= line.length) {
-        deleting = true;
-        setTimeout(tick, 1800);
-        return;
-      }
-      setTimeout(tick, 42 + Math.random() * 40);
-    } else {
-      ci--;
-      el.textContent = line.slice(0, ci);
-      if (ci <= 0) {
-        deleting = false;
-        li = (li + 1) % lines.length;
-        setTimeout(tick, 320);
-        return;
-      }
-      setTimeout(tick, 22);
-    }
-  };
-  setTimeout(tick, 600);
+function safeHref(value) {
+  const href = String(value || "");
+  return /^(https?:|mailto:|#)/i.test(href) ? escapeHtml(href) : "#";
 }
 
-/* ---------- Hero socials ---------- */
+function getIcon(name) {
+  const slugs = typeof ICON_SLUGS !== "undefined" ? ICON_SLUGS : null;
+  const slug = slugs && name ? slugs[name] || name : name;
+  return typeof icon === "function" && slug ? icon(slug) : "";
+}
+
 function renderHeroSocials() {
   const wrap = document.getElementById("hero-socials");
   if (!wrap || !PORTFOLIO_DATA.profile?.socials) return;
-  wrap.innerHTML = PORTFOLIO_DATA.profile.socials
-    .map((s) => {
-      const slug = ICON_SLUGS ? ICON_SLUGS[s.name] || s.icon : s.icon;
-      const ic = slug && typeof icon === "function" ? icon(slug) : "";
-      return `<a href="${s.url}" target="_blank" rel="noopener" class="social-orb" title="${s.name}">${ic}<span>${s.name}</span></a>`;
-    })
-    .join("");
+  wrap.innerHTML = PORTFOLIO_DATA.profile.socials.map((social) => `
+    <a class="social-link" href="${safeHref(social.url)}" target="_blank" rel="noopener">${getIcon(social.name || social.icon)}<span>${escapeHtml(social.name)}</span></a>
+  `).join("");
 }
 
-/* ---------- Stat strip counters ---------- */
 function renderStats() {
   const wrap = document.getElementById("stat-strip");
   if (!wrap || !PORTFOLIO_DATA.stats) return;
-  wrap.innerHTML = PORTFOLIO_DATA.stats
-    .map(
-      (st) => `
-    <div class="stat-cell big">
-      <div class="stat-num" data-count="${st.value}">0</div>
-      <div class="stat-suffix">${st.suffix || ""}</div>
-      <div class="stat-label">${st.label}</div>
-    </div>`
-    )
-    .join("");
+  wrap.innerHTML = PORTFOLIO_DATA.stats.map((stat, index) => `
+    <div class="stat-cell" data-reveal style="--d:${(index * 0.06).toFixed(2)}s">
+      <div><span class="stat-num" data-count="${Number(stat.value) || 0}">0</span>${stat.suffix ? `<span class="stat-suffix">${escapeHtml(stat.suffix)}</span>` : ""}</div>
+      <div class="stat-label">${escapeHtml(stat.label)}</div>
+    </div>
+  `).join("");
 }
 
-/* ---------- Bento about grid ---------- */
 function renderBento() {
   const wrap = document.getElementById("bento-container");
   if (!wrap || !PORTFOLIO_DATA.about) return;
-  wrap.innerHTML = PORTFOLIO_DATA.about
-    .map((b) => {
-      const tags = (b.tags || [])
-        .map((t) => {
-          const slug = ICON_SLUGS ? ICON_SLUGS[t] : null;
-          const ic = slug && typeof icon === "function" ? icon(slug) : "";
-          return `<span class="bento-tag">${ic}${t}</span>`;
-        })
-        .join("");
-      return `
-      <article class="bento-card span-${b.span || "normal"}" data-reveal>
-        <div class="bento-kicker">${b.kicker}</div>
-        <h3 class="bento-title">${b.title}</h3>
-        ${b.body ? `<p class="bento-body">${b.body}</p>` : ""}
+  wrap.innerHTML = PORTFOLIO_DATA.about.map((item, index) => {
+    const tags = (item.tags || []).map((tag) => `<span class="bento-tag">${getIcon(tag)}${escapeHtml(tag)}</span>`).join("");
+    return `
+      <article class="bento-card span-${escapeHtml(item.span || "normal")}" data-reveal style="--d:${(index * 0.05).toFixed(2)}s">
+        <div class="bento-kicker">${escapeHtml(item.kicker)}</div>
+        <h3 class="bento-title">${escapeHtml(item.title)}</h3>
+        ${item.body ? `<p class="bento-body">${escapeHtml(item.body)}</p>` : ""}
         ${tags ? `<div class="bento-tags">${tags}</div>` : ""}
-      </article>`;
-    })
-    .join("");
+      </article>
+    `;
+  }).join("");
 }
 
-/* ---------- Education ---------- */
 function renderEducation() {
   const wrap = document.getElementById("edu-container");
   if (!wrap || !PORTFOLIO_DATA.education) return;
-  wrap.innerHTML = PORTFOLIO_DATA.education
-    .map(
-      (e) => `
-    <article class="edu-card" data-reveal>
-      <div class="edu-top">
-        <h4>${e.title}</h4>
-        <span class="edu-score">${e.score}</span>
-      </div>
-      <div class="edu-period">${e.period}</div>
-      <p class="edu-org">${e.org}</p>
-    </article>`
-    )
-    .join("");
+  wrap.innerHTML = PORTFOLIO_DATA.education.map((item, index) => `
+    <article class="edu-card" data-reveal style="--d:${(0.2 + index * 0.06).toFixed(2)}s">
+      <div class="edu-top"><h4>${escapeHtml(item.title)}</h4><span class="edu-score">${escapeHtml(item.score)}</span></div>
+      <div class="edu-period">${escapeHtml(item.period)}</div>
+      <p class="edu-org">${escapeHtml(item.org)}</p>
+    </article>
+  `).join("");
 }
 
-/* ---------- Skills ---------- */
 let activeSkillLevel = "PROFICIENT";
-
-function initSkillLevels() {
-  document.querySelectorAll(".skill-levels .lvl").forEach((btn) => {
-    btn.addEventListener("click", () => {
-      document.querySelectorAll(".skill-levels .lvl").forEach((b) => b.classList.remove("active"));
-      btn.classList.add("active");
-      activeSkillLevel = btn.getAttribute("data-level") || "PROFICIENT";
-      document.querySelectorAll(".skill-group").forEach((g) => {
-        const lvl = g.getAttribute("data-level") || activeSkillLevel;
-        g.classList.toggle("hidden", lvl !== activeSkillLevel);
-      });
-      try { cyberAudio.playTab(); } catch (e) {}
-    });
-  });
-}
 
 function renderSkills() {
   const wrap = document.getElementById("skills-container");
   if (!wrap || !PORTFOLIO_DATA.skills) return;
-  wrap.innerHTML = PORTFOLIO_DATA.skills
-    .map((grp, gi) => {
-      const chips = grp.items
-        .map((s, i) => {
-          const slug = ICON_SLUGS ? ICON_SLUGS[s] : null;
-          const ic = slug && typeof icon === "function" ? icon(slug) : "";
-          const delay = (i * 0.05).toFixed(2);
-          return `<span class="skill-chip" style="--d:${delay}s" data-level="${grp.level}">${ic}${s}</span>`;
-        })
-        .join("");
-      const dimmed = grp.level !== activeSkillLevel ? " hidden" : "";
-      return `
-      <article class="skill-group${dimmed}" data-level="${grp.level}" data-reveal style="--d:${gi * 0.08}s">
-        <div class="sg-head">
-          <span class="sg-level lvl-${grp.level.toLowerCase()}">${grp.level}</span>
-          <h3>${grp.category}</h3>
-        </div>
-        <p class="sg-desc">${grp.desc}</p>
+  wrap.innerHTML = PORTFOLIO_DATA.skills.map((group, index) => {
+    const hidden = group.level !== activeSkillLevel ? " hidden" : "";
+    const chips = group.items.map((skill, chipIndex) => `<span class="skill-chip" data-reveal style="--d:${(chipIndex * 0.035).toFixed(2)}s">${getIcon(skill)}${escapeHtml(skill)}</span>`).join("");
+    return `
+      <article class="skill-group${hidden}" data-level="${escapeHtml(group.level)}" data-reveal style="--d:${(index * 0.06).toFixed(2)}s">
+        <div class="sg-head"><span class="sg-level lvl-${escapeHtml(group.level.toLowerCase())}">${escapeHtml(group.level)}</span><h3>${escapeHtml(group.category)}</h3></div>
+        <p class="sg-desc">${escapeHtml(group.desc)}</p>
         <div class="sg-chips">${chips}</div>
-      </article>`;
-    })
-    .join("");
+      </article>
+    `;
+  }).join("");
   initSkillLevels();
 }
 
-/* ---------- Projects (kartavya feed style) ---------- */
-function renderProjects() {
-  const wrap = document.getElementById("projects-container");
-  if (!wrap || !PORTFOLIO_DATA.projects) return;
-  wrap.innerHTML = PORTFOLIO_DATA.projects
-    .map((p, i) => {
-      const tags = (p.tags || [])
-        .map((t) => {
-          const slug = ICON_SLUGS ? ICON_SLUGS[t] : null;
-          const ic = slug && typeof icon === "function" ? icon(slug) : "";
-          return `<span class="gig-tag">${ic}${t}</span>`;
-        })
-        .join("");
-      const idx = String(i + 1).padStart(2, "0");
-      return `
-      <article class="project-card" data-reveal style="--d:${(i % 4) * 0.06}s" data-id="${p.id}">
-        <div class="pc-meta">
-          <span class="pc-idx">${idx}</span>
-          <span class="pc-period">${p.period}</span>
-          <span class="pc-cat">${p.category}</span>
-        </div>
-        <h3 class="pc-title">${p.title}</h3>
-        <p class="pc-summary">${p.summary}</p>
-        <div class="pc-footer">
-          <div class="gig-tags">${tags}</div>
-          <div class="pc-actions">
-            <span class="pc-likes">♥ ${p.likes}</span>
-            <a href="${p.url}" target="_blank" rel="noopener" class="btn-cyber btn-cyber-sm btn-cyber-ghost">OPEN REPO ↗</a>
-          </div>
-        </div>
-      </article>`;
-    })
-    .join("");
-}
-
-/* ---------- Experience tabs ---------- */
-let activeExpTab = "CAREER";
-
-function initExpTabs() {
-  document.querySelectorAll(".exp-tab").forEach((btn) => {
-    btn.addEventListener("click", () => {
-      document.querySelectorAll(".exp-tab").forEach((b) => {
-        b.classList.remove("active");
-        b.setAttribute("aria-selected", "false");
+function initSkillLevels() {
+  document.querySelectorAll(".skill-levels .lvl").forEach((button) => {
+    button.addEventListener("click", () => {
+      activeSkillLevel = button.getAttribute("data-level") || "PROFICIENT";
+      document.querySelectorAll(".skill-levels .lvl").forEach((item) => {
+        const active = item === button;
+        item.classList.toggle("active", active);
+        item.setAttribute("aria-pressed", String(active));
       });
-      btn.classList.add("active");
-      btn.setAttribute("aria-selected", "true");
-      activeExpTab = btn.getAttribute("data-tab") || "CAREER";
-      renderExperience(activeExpTab);
-      try { cyberAudio.playTab(); } catch (e) {}
+      document.querySelectorAll(".skill-group").forEach((group) => {
+        group.classList.toggle("hidden", group.getAttribute("data-level") !== activeSkillLevel);
+      });
+      try { cyberAudio.playTab(); } catch (error) {}
       document.dispatchEvent(new Event("portfolio:rendered"));
     });
   });
 }
 
-function renderExperience(tab) {
-  const wrap = document.getElementById("experience-container");
-  if (!wrap || !PORTFOLIO_DATA.experience) return;
-  const rows = PORTFOLIO_DATA.experience.filter((e) => e.tab === tab);
-  if (!rows.length) {
-    wrap.innerHTML = `<div class="exp-empty">NO RECORDS FOR THIS CHANNEL</div>`;
-    return;
-  }
-  wrap.innerHTML = rows
-    .map(
-      (e, i) => `
-    <article class="exp-card" data-reveal style="--d:${i * 0.07}s">
-      <div class="exp-period">${e.period}</div>
-      <h3 class="exp-role">${e.role}</h3>
-      <div class="exp-org">${e.org}</div>
-      <p class="exp-desc">${e.desc}</p>
-      ${e.likes ? `<div class="pc-likes">♥ ${e.likes}</div>` : ""}
-    </article>`
-    )
-    .join("");
+function renderProjects() {
+  const wrap = document.getElementById("projects-container");
+  if (!wrap || !PORTFOLIO_DATA.projects) return;
+  wrap.innerHTML = PORTFOLIO_DATA.projects.map((project, index) => {
+    const tags = (project.tags || []).map((tag) => `<span class="gig-tag">${getIcon(tag)}${escapeHtml(tag)}</span>`).join("");
+    const idx = String(index + 1).padStart(2, "0");
+    return `
+      <article class="project-card" data-reveal style="--d:${(index * 0.07).toFixed(2)}s">
+        <div class="pc-meta"><span class="pc-idx">${idx}</span><span class="pc-period">${escapeHtml(project.period)}</span><span class="pc-cat">${escapeHtml(project.category)}</span></div>
+        <h3 class="pc-title">${escapeHtml(project.title)}</h3>
+        <p class="pc-summary">${escapeHtml(project.summary)}</p>
+        <div class="pc-footer"><div class="gig-tags">${tags}</div><div class="pc-actions"><span class="pc-likes">♥ ${Number(project.likes) || 0}</span><a class="btn-cyber btn-cyber-sm btn-cyber-ghost" href="${safeHref(project.url)}" target="_blank" rel="noopener">OPEN FILE ↗</a></div></div>
+      </article>
+    `;
+  }).join("");
 }
 
-/* ---------- Journey report timeline ---------- */
+let activeExpTab = "CAREER";
+
+function initExpTabs() {
+  document.querySelectorAll(".exp-tab").forEach((button) => {
+    button.addEventListener("click", () => {
+      activeExpTab = button.getAttribute("data-tab") || "CAREER";
+      document.querySelectorAll(".exp-tab").forEach((item) => {
+        const active = item === button;
+        item.classList.toggle("active", active);
+        item.setAttribute("aria-selected", String(active));
+      });
+      renderExperience(activeExpTab);
+      try { cyberAudio.playTab(); } catch (error) {}
+    });
+  });
+}
+
+function renderExperience(tab) {
+  const wrap = document.getElementById("experience-panel");
+  if (!wrap || !PORTFOLIO_DATA.experience) return;
+  const rows = PORTFOLIO_DATA.experience.filter((item) => item.tab === tab);
+  if (!rows.length) {
+    wrap.innerHTML = '<div class="exp-empty">NO RECORDS FOR THIS CHANNEL</div>';
+    return;
+  }
+  wrap.innerHTML = rows.map((item, index) => `
+    <article class="exp-card" data-reveal style="--d:${(index * 0.07).toFixed(2)}s">
+      <div class="exp-period">${escapeHtml(item.period)}</div>
+      <h3 class="exp-role">${escapeHtml(item.role)}</h3>
+      <div class="exp-org">${escapeHtml(item.org)}</div>
+      <p class="exp-desc">${escapeHtml(item.desc)}</p>
+      ${item.likes ? `<span class="pc-likes">♥ ${Number(item.likes) || 0}</span>` : ""}
+    </article>
+  `).join("");
+  document.dispatchEvent(new Event("portfolio:rendered"));
+}
+
 function renderJourney() {
   const wrap = document.getElementById("journey-container");
   if (!wrap || !PORTFOLIO_DATA.journey) return;
-  wrap.innerHTML = PORTFOLIO_DATA.journey
-    .map((j, i) => {
-      const list = (j.list || [])
-        .map((li) => `<li>${li}</li>`)
-        .join("");
-      return `
-      <div class="journey-item" data-reveal style="--d:${i * 0.08}s">
-        <div class="journey-year">
-          <span class="jy-dot"></span>
-          <span class="jy-label">${j.year}</span>
-        </div>
-        <div class="journey-card">
-          <p class="jy-text">${j.text}</p>
-          ${list ? `<ul class="jy-list">${list}</ul>` : ""}
-        </div>
-      </div>`;
-    })
-    .join("");
+  wrap.innerHTML = PORTFOLIO_DATA.journey.map((item, index) => {
+    const list = (item.list || []).map((entry) => `<li>${escapeHtml(entry)}</li>`).join("");
+    return `
+      <article class="journey-item" data-reveal style="--d:${(index * 0.07).toFixed(2)}s">
+        <div class="journey-year"><span class="jy-label">${escapeHtml(item.year)}</span></div>
+        <div class="journey-card"><p class="jy-text">${escapeHtml(item.text)}</p>${list ? `<ul class="jy-list">${list}</ul>` : ""}</div>
+      </article>
+    `;
+  }).join("");
 }
 
-/* ---------- Netlinks ---------- */
 function renderNetlinks() {
   const wrap = document.getElementById("netlinks-container");
   if (!wrap || !PORTFOLIO_DATA.contact?.channels) return;
-  wrap.innerHTML = PORTFOLIO_DATA.contact.channels
-    .map((ch) => {
-      const slug = ICON_SLUGS ? ICON_SLUGS[ch.name.toLowerCase()] || ch.icon : ch.icon;
-      const ic = slug && typeof icon === "function" ? icon(slug) : "";
-      return `
-      <a href="${ch.url}" target="_blank" rel="noopener" class="netlink-btn">
-        ${ic}<span>${ch.name}</span><span class="hint">${ch.hint || "OPEN"}</span>
-      </a>`;
-    })
-    .join("");
+  wrap.innerHTML = PORTFOLIO_DATA.contact.channels.map((channel) => `
+    <a class="netlink-btn" href="${safeHref(channel.url)}" target="_blank" rel="noopener">${getIcon(channel.name.toLowerCase() || channel.icon)}<span>${escapeHtml(channel.name)}</span><span class="hint">${escapeHtml(channel.hint || "OPEN")}</span></a>
+  `).join("");
 }
 
-/* ---------- Audio bindings ---------- */
+function initTyping() {
+  const target = document.getElementById("type-target");
+  const lines = PORTFOLIO_DATA.profile?.taglines || [];
+  if (!target || !lines.length) return;
+  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    target.textContent = lines[0];
+    return;
+  }
+  let lineIndex = 0;
+  let charIndex = 0;
+  let deleting = false;
+  const tick = () => {
+    const line = lines[lineIndex];
+    if (!deleting) {
+      charIndex += 1;
+      target.textContent = line.slice(0, charIndex);
+      if (charIndex >= line.length) {
+        deleting = true;
+        window.setTimeout(tick, 1600);
+        return;
+      }
+      window.setTimeout(tick, 45 + Math.random() * 35);
+      return;
+    }
+    charIndex -= 1;
+    target.textContent = line.slice(0, charIndex);
+    if (charIndex <= 0) {
+      deleting = false;
+      lineIndex = (lineIndex + 1) % lines.length;
+      window.setTimeout(tick, 280);
+      return;
+    }
+    window.setTimeout(tick, 24);
+  };
+  window.setTimeout(tick, 550);
+}
+
+function initMenuTabs() {
+  const tabs = Array.from(document.querySelectorAll("[data-menu-tab]"));
+  const panels = Array.from(document.querySelectorAll("[data-menu-panel]"));
+  const validIds = new Set(tabs.map((tab) => tab.getAttribute("data-menu-tab")));
+  const currentIndex = document.getElementById("menu-current-index");
+  const currentLabel = document.getElementById("menu-current-label");
+  const stage = document.querySelector(".menu-stage");
+  let activeId = "profile";
+
+  const activate = (id, focusTab = false, updateHash = true) => {
+    if (!validIds.has(id)) id = "profile";
+    activeId = id;
+    tabs.forEach((tab) => {
+      const active = tab.getAttribute("data-menu-tab") === id;
+      tab.classList.toggle("active", active);
+      if (active) tab.setAttribute("aria-current", "page");
+      else tab.removeAttribute("aria-current");
+      if (active && focusTab) tab.focus();
+    });
+    panels.forEach((panel) => {
+      const active = panel.getAttribute("data-menu-panel") === id;
+      panel.classList.toggle("active", active);
+      panel.setAttribute("aria-hidden", String(!active));
+    });
+    const activeTab = tabs.find((tab) => tab.getAttribute("data-menu-tab") === id);
+    if (currentIndex && activeTab) currentIndex.textContent = activeTab.querySelector(".tab-index")?.textContent || "01";
+    if (currentLabel && activeTab) currentLabel.textContent = `${activeTab.querySelector(".tab-label")?.textContent || "PROFILE"} // ${id === "profile" ? "USER DOSSIER" : "RECORD MODULE"}`;
+    if (stage) stage.scrollTop = 0;
+    if (updateHash && window.history && window.history.replaceState) window.history.replaceState(null, "", `#${id}`);
+    document.dispatchEvent(new Event("portfolio:rendered"));
+    try { cyberAudio.playTab(); } catch (error) {}
+  };
+
+  tabs.forEach((tab) => {
+    tab.addEventListener("click", (event) => {
+      event.preventDefault();
+      activate(tab.getAttribute("data-menu-tab"), false);
+    });
+  });
+
+  document.addEventListener("click", (event) => {
+    const trigger = event.target.closest("[data-menu-target]");
+    if (!trigger) return;
+    event.preventDefault();
+    activate(trigger.getAttribute("data-menu-target"));
+  });
+
+  window.addEventListener("hashchange", () => {
+    const id = window.location.hash.slice(1);
+    if (id && id !== activeId) activate(id);
+  });
+
+  const initialId = window.location.hash.slice(1);
+  activate(validIds.has(initialId) ? initialId : "profile", false, false);
+}
+
 function initAudioEvents() {
-  document.body.addEventListener("mouseover", (e) => {
-    if (e.target.closest(".btn-cyber, .nav-link, .exp-tab, .hud-ctrl-btn, .netlink-btn, .dlg-opt, .skill-chip, .social-orb, .project-card, .gh-repo, .gh-refresh")) {
-      cyberAudio.playHover();
+  const interactive = ".btn-cyber, .menu-tab, .exp-tab, .lvl, .chrome-control, .netlink-btn, .dlg-opt, .skill-chip, .social-link, .project-card, .gh-repo, .gh-refresh, .option-row";
+  document.body.addEventListener("mouseover", (event) => {
+    if (event.relatedTarget && event.relatedTarget.closest && event.relatedTarget.closest(interactive) === event.target.closest(interactive)) return;
+    if (event.target.closest(interactive)) {
+      try { cyberAudio.playHover(); } catch (error) {}
     }
   });
-  document.body.addEventListener("click", (e) => {
-    if (e.target.closest(".btn-cyber, .nav-link, .hud-ctrl-btn, .netlink-btn, .dlg-opt, .exp-tab")) {
-      cyberAudio.playClick();
+  document.body.addEventListener("click", (event) => {
+    if (event.target.closest(".btn-cyber, .menu-tab, .chrome-control, .netlink-btn, .dlg-opt, .exp-tab, .lvl, .option-row, .gh-refresh")) {
+      try { cyberAudio.playClick(); } catch (error) {}
     }
   });
-  document.querySelectorAll("input, textarea").forEach((inp) => {
-    inp.addEventListener("keydown", () => cyberAudio.playKeypress());
+  document.querySelectorAll("input, textarea").forEach((input) => {
+    input.addEventListener("keydown", () => {
+      try { cyberAudio.playKeypress(); } catch (error) {}
+    });
   });
 }
 
-/* ---------- HUD controls ---------- */
 function initHUDControls() {
-  const audioBtn = document.getElementById("btn-toggle-audio");
-  if (audioBtn) {
-    const sync = () => {
-      audioBtn.textContent = cyberAudio.isMuted ? "SFX OFF" : "SFX ON";
-      audioBtn.classList.toggle("on", !cyberAudio.isMuted);
-      audioBtn.setAttribute("aria-pressed", String(!cyberAudio.isMuted));
-    };
-    sync();
-    audioBtn.addEventListener("click", () => {
-      cyberAudio.toggleMute();
-      sync();
+  const audioButtons = Array.from(document.querySelectorAll('[data-control="audio"]'));
+  const crtButtons = Array.from(document.querySelectorAll('[data-control="crt"]'));
+  const syncAudio = () => {
+    const enabled = !cyberAudio.isMuted;
+    audioButtons.forEach((button) => {
+      button.setAttribute("aria-pressed", String(enabled));
+      const value = button.querySelector("[data-control-value]");
+      if (value) value.textContent = enabled ? "ON" : "OFF";
     });
-  }
-  const crtBtn = document.getElementById("btn-toggle-crt");
-  if (crtBtn) {
-    crtBtn.addEventListener("click", () => {
-      document.body.classList.toggle("crt-disabled");
-      const disabled = document.body.classList.contains("crt-disabled");
-      crtBtn.textContent = disabled ? "CRT OFF" : "CRT ON";
-      crtBtn.classList.toggle("on", !disabled);
-      crtBtn.setAttribute("aria-pressed", String(!disabled));
+  };
+  const syncCrt = () => {
+    const enabled = !document.body.classList.contains("crt-disabled");
+    crtButtons.forEach((button) => {
+      button.setAttribute("aria-pressed", String(enabled));
+      const value = button.querySelector("[data-control-value]");
+      if (value) value.textContent = enabled ? "ON" : "OFF";
     });
-  }
+  };
+  let crtDisabled = false;
+  try { crtDisabled = localStorage.getItem("cyber_crt_disabled") === "true"; } catch (error) {}
+  document.body.classList.toggle("crt-disabled", crtDisabled);
+  syncAudio();
+  syncCrt();
+  audioButtons.forEach((button) => button.addEventListener("click", () => {
+    cyberAudio.toggleMute();
+    syncAudio();
+  }));
+  crtButtons.forEach((button) => button.addEventListener("click", () => {
+    const disabled = document.body.classList.toggle("crt-disabled");
+    try { localStorage.setItem("cyber_crt_disabled", String(disabled)); } catch (error) {}
+    syncCrt();
+  }));
 }
 
-/* ---------- Dialogue / form ---------- */
 function initDialogueOptions() {
-  document.querySelectorAll("[data-scroll-to]").forEach((btn) => {
-    btn.addEventListener("click", () => {
-      const target = document.querySelector(btn.getAttribute("data-scroll-to"));
-      if (target) target.scrollIntoView({ behavior: "smooth", block: "center" });
-      setTimeout(() => {
-        const first = target.querySelector("input, textarea");
-        if (first) first.focus({ preventScroll: true });
-      }, 500);
+  document.querySelectorAll("[data-scroll-to]").forEach((button) => {
+    button.addEventListener("click", () => {
+      const target = document.querySelector(button.getAttribute("data-scroll-to"));
+      if (!target) return;
+      target.scrollIntoView({ behavior: "smooth", block: "center" });
+      window.setTimeout(() => target.querySelector("input, textarea")?.focus({ preventScroll: true }), 350);
     });
   });
 
-  const netlinksBtn = document.getElementById("dlg-netlinks");
+  const netlinksButton = document.getElementById("dlg-netlinks");
   const netlinks = document.getElementById("netlinks-container");
-  if (netlinksBtn && netlinks) {
-    netlinksBtn.addEventListener("click", () => {
-      netlinks.scrollIntoView({ behavior: "smooth", block: "center" });
-      netlinks.querySelectorAll(".netlink-btn").forEach((el, i) => {
-        el.style.animation = "none";
-        void el.offsetWidth;
-        el.style.animation = `fade-line .4s ${i * 0.07}s forwards`;
-        el.style.opacity = "0";
-      });
+  if (netlinksButton && netlinks) {
+    netlinksButton.addEventListener("click", () => {
+      const open = netlinks.classList.toggle("is-open");
+      netlinksButton.setAttribute("aria-expanded", String(open));
     });
   }
 
   const form = document.getElementById("terminal-contact-form");
-  const logEl = document.getElementById("terminal-console-log");
-  if (form && logEl) {
-    form.addEventListener("submit", (e) => {
-      e.preventDefault();
-      cyberAudio.playClick();
-      const nameVal = document.getElementById("agent-name").value.trim() || "UNKNOWN";
-      const freqVal = document.getElementById("agent-freq").value.trim() || "SECURE_RELAY";
-      logEl.classList.add("active");
-      logEl.innerHTML = `
-        <div>>> [UPLINK INITIATED] Connecting to proxy node...</div>
-        <div>>> Sender: ${nameVal} [${freqVal}]</div>
-        <div>>> Encrypting payload with 2048-bit ICE...</div>
-        <div>>> Relay ping: 14ms [OK]</div>
-        <div style="color:var(--c-yellow);font-weight:bold">>> [TRANSMISSION CONFIRMED] Logged.</div>
-      `;
-      cyberAudio.playSuccess();
-      form.reset();
+  const log = document.getElementById("terminal-console-log");
+  if (form && log) {
+    form.addEventListener("submit", (event) => {
+      event.preventDefault();
+      const name = document.getElementById("agent-name").value.trim() || "UNKNOWN";
+      const email = document.getElementById("agent-freq").value.trim() || "NO FREQUENCY";
+      const message = document.getElementById("agent-msg").value.trim() || "NO BRIEF";
+      log.textContent = `LOCAL PREVIEW ONLY\n> Sender: ${name} [${email}]\n> Brief: ${message}\n> Delivery endpoint: NOT CONNECTED`;
+      log.classList.add("active");
+      try { cyberAudio.playSuccess(); } catch (error) {}
     });
   }
+}
+
+function initClock() {
+  const clock = document.getElementById("menu-clock");
+  if (!clock) return;
+  const update = () => {
+    clock.textContent = new Intl.DateTimeFormat(undefined, { hour: "2-digit", minute: "2-digit", second: "2-digit", hour12: false }).format(new Date());
+  };
+  update();
+  window.setInterval(update, 1000);
 }
