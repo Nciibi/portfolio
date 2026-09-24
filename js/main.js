@@ -188,16 +188,29 @@ function renderProjects() {
 let activeExpTab = "CAREER";
 
 function initExpTabs() {
-  document.querySelectorAll(".exp-tab").forEach((button) => {
+  const buttons = Array.from(document.querySelectorAll(".exp-tab"));
+  buttons.forEach((button, index) => {
     button.addEventListener("click", () => {
       activeExpTab = button.getAttribute("data-tab") || "CAREER";
-      document.querySelectorAll(".exp-tab").forEach((item) => {
+      buttons.forEach((item) => {
         const active = item === button;
         item.classList.toggle("active", active);
         item.setAttribute("aria-selected", String(active));
+        item.setAttribute("tabindex", active ? "0" : "-1");
       });
       renderExperience(activeExpTab);
       try { cyberAudio.playTab(); } catch (error) {}
+    });
+    button.addEventListener("keydown", (event) => {
+      if (!["ArrowLeft", "ArrowRight", "Home", "End"].includes(event.key)) return;
+      event.preventDefault();
+      let next = index;
+      if (event.key === "ArrowLeft") next = (index - 1 + buttons.length) % buttons.length;
+      if (event.key === "ArrowRight") next = (index + 1) % buttons.length;
+      if (event.key === "Home") next = 0;
+      if (event.key === "End") next = buttons.length - 1;
+      buttons[next].click();
+      buttons[next].focus();
     });
   });
 }
