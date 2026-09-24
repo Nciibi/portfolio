@@ -406,16 +406,28 @@ function initMenuTabs() {
   if (gotoId && validIds.has(gotoId)) activate(gotoId, false, false);
 }
 
+let mobileReturnFocus = null;
+
 function setMobileMenuOpen(open) {
   const toggle = document.getElementById("menu-toggle");
   const menu = document.querySelector(".main-menu");
+  const stage = document.querySelector(".menu-stage");
   if (!toggle || !menu) return;
+  const wasOpen = menu.classList.contains("is-mobile-open");
   const next = Boolean(open);
+  if (next && !wasOpen) mobileReturnFocus = document.activeElement;
   menu.classList.toggle("is-mobile-open", next);
   toggle.classList.toggle("is-open", next);
   toggle.setAttribute("aria-expanded", String(next));
   document.body.classList.toggle("mobile-menu-open", next);
-  if (next) window.requestAnimationFrame(() => menu.querySelector(".menu-tab")?.focus());
+  if (stage) stage.inert = next;
+  if (next) {
+    window.requestAnimationFrame(() => menu.querySelector(".menu-tab")?.focus());
+  } else if (wasOpen) {
+    const restore = mobileReturnFocus;
+    mobileReturnFocus = null;
+    if (restore?.isConnected) window.requestAnimationFrame(() => restore.focus());
+  }
 }
 
 function initMobileMenu() {
