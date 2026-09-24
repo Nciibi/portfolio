@@ -190,9 +190,20 @@ function renderProjects() {
     };
     card.addEventListener("click", choose);
     card.addEventListener("keydown", (event) => {
-      if (event.key !== "Enter" && event.key !== " ") return;
+      if (event.key === "Enter" || event.key === " ") {
+        event.preventDefault();
+        selectProject(card.getAttribute("data-project-id"));
+        return;
+      }
+      if (event.key !== "ArrowDown" && event.key !== "ArrowUp") return;
       event.preventDefault();
-      selectProject(card.getAttribute("data-project-id"));
+      const cards = Array.from(wrap.querySelectorAll(".project-select"));
+      const index = cards.indexOf(card);
+      const next = event.key === "ArrowDown"
+        ? Math.min(cards.length - 1, index + 1)
+        : Math.max(0, index - 1);
+      cards[next].focus();
+      selectProject(cards[next].getAttribute("data-project-id"));
     });
   });
   selectProject(PORTFOLIO_DATA.projects[0]?.id);
