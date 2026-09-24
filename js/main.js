@@ -422,7 +422,7 @@ function initAudioEvents() {
     }
   });
   document.body.addEventListener("click", (event) => {
-    if (event.target.closest(".btn-cyber, .menu-tab, .chrome-control, .netlink-btn, .dlg-opt, .exp-tab, .lvl, .option-row, .gh-refresh")) {
+    if (event.target.closest(".btn-cyber, .menu-tab, .mobile-menu-toggle, .chrome-control, .netlink-btn, .dlg-opt, .exp-tab, .lvl, .option-row, .gh-refresh")) {
       try { cyberAudio.playClick(); } catch (error) {}
     }
   });
