@@ -123,14 +123,46 @@ function initSkillLevels() {
   });
 }
 
+function projectArtwork(project) {
+  const category = String(project?.category || "").toLowerCase();
+  if (category.includes("ai")) return "assets/proj-neural.jpg";
+  if (category.includes("p2p") || category.includes("security")) return "assets/proj-netrunner.jpg";
+  return "assets/proj-citymap.jpg";
+}
+
 function renderProjects() {
   const wrap = document.getElementById("projects-container");
+  const detail = document.getElementById("project-detail");
   if (!wrap || !PORTFOLIO_DATA.projects) return;
+  const selectProject = (id) => {
+    const project = PORTFOLIO_DATA.projects.find((item) => item.id === id) || PORTFOLIO_DATA.projects[0];
+    if (!project) return;
+    wrap.querySelectorAll(".project-select").forEach((card) => {
+      const active = card.getAttribute("data-project-id") === project.id;
+      card.classList.toggle("selected", active);
+      card.setAttribute("aria-selected", String(active));
+    });
+    if (!detail) return;
+    const tags = (project.tags || []).map((tag) => `<span class="gig-tag">${getIcon(tag)}${escapeHtml(tag)}</span>`).join("");
+    detail.innerHTML = `
+      <div class="project-detail-visual" style="background-image: linear-gradient(180deg, rgba(8, 10, 15, 0.08), rgba(8, 10, 15, 0.92)), url('${projectArtwork(project)}')">
+        <span class="detail-visual-code">CASE // ${escapeHtml(project.id.replace("gh-", "").toUpperCase())}</span>
+        <span class="detail-visual-status">ARCHIVE READY</span>
+      </div>
+      <div class="project-detail-copy">
+        <div class="project-detail-meta"><span>${escapeHtml(project.period)}</span><span>${escapeHtml(project.category)}</span></div>
+        <h3>${escapeHtml(project.title)}</h3>
+        <p>${escapeHtml(project.summary)}</p>
+        <div class="gig-tags">${tags}</div>
+        <a class="btn-cyber btn-cyber-sm btn-cyber-red" href="${safeHref(project.url)}" target="_blank" rel="noopener">OPEN CASE FILE ↗</a>
+      </div>
+    `;
+  };
   wrap.innerHTML = PORTFOLIO_DATA.projects.map((project, index) => {
     const tags = (project.tags || []).map((tag) => `<span class="gig-tag">${getIcon(tag)}${escapeHtml(tag)}</span>`).join("");
     const idx = String(index + 1).padStart(2, "0");
     return `
-      <article class="project-card" data-reveal style="--d:${(index * 0.07).toFixed(2)}s">
+      <article class="project-card project-select${index === 0 ? " selected" : ""}" data-project-id="${escapeHtml(project.id)}" data-reveal style="--d:${(index * 0.07).toFixed(2)}s" role="option" aria-selected="${index === 0}" tabindex="0">
         <div class="pc-meta"><span class="pc-idx">${idx}</span><span class="pc-period">${escapeHtml(project.period)}</span><span class="pc-cat">${escapeHtml(project.category)}</span></div>
         <h3 class="pc-title">${escapeHtml(project.title)}</h3>
         <p class="pc-summary">${escapeHtml(project.summary)}</p>
@@ -138,6 +170,19 @@ function renderProjects() {
       </article>
     `;
   }).join("");
+  wrap.querySelectorAll(".project-select").forEach((card) => {
+    const choose = (event) => {
+      if (event.target.closest("a")) return;
+      selectProject(card.getAttribute("data-project-id"));
+    };
+    card.addEventListener("click", choose);
+    card.addEventListener("keydown", (event) => {
+      if (event.key !== "Enter" && event.key !== " ") return;
+      event.preventDefault();
+      selectProject(card.getAttribute("data-project-id"));
+    });
+  });
+  selectProject(PORTFOLIO_DATA.projects[0]?.id);
 }
 
 let activeExpTab = "CAREER";
