@@ -3655,6 +3655,14 @@ body::before {
     padding-left: 18px;
   }
 
+  .profile-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .profile-visual {
+    min-height: 320px;
+  }
+
   .system-rail {
     display: none;
   }
