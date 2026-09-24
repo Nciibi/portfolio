@@ -3603,6 +3603,10 @@ body::before {
     position: relative;
   }
 
+  .menu-frame::after {
+    display: none;
+  }
+
   .main-menu {
     position: fixed;
     inset: var(--topbar) 0 var(--legend);
