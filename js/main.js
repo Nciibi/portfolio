@@ -10,6 +10,7 @@ document.addEventListener("DOMContentLoaded", () => {
   renderJourney();
   renderNetlinks();
   initMenuTabs();
+  initMobileMenu();
   initTyping();
   initAudioEvents();
   initHUDControls();
