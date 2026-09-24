@@ -296,11 +296,19 @@ function initMenuTabs() {
   const activate = (id, focusTab = false, updateHash = true) => {
     if (!validIds.has(id)) id = "profile";
     activeId = id;
+    const focusedPanel = document.activeElement?.closest?.("[data-menu-panel]");
     tabs.forEach((tab) => {
       const active = tab.getAttribute("data-menu-tab") === id;
       tab.classList.toggle("active", active);
-      if (active) tab.setAttribute("aria-current", "page");
-      else tab.removeAttribute("aria-current");
+      if (active) {
+        tab.setAttribute("aria-current", "page");
+        tab.setAttribute("aria-selected", "true");
+        tab.setAttribute("tabindex", "0");
+      } else {
+        tab.removeAttribute("aria-current");
+        tab.setAttribute("aria-selected", "false");
+        tab.setAttribute("tabindex", "-1");
+      }
       if (active && focusTab) tab.focus();
     });
     panels.forEach((panel) => {
