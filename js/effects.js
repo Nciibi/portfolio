@@ -331,6 +331,7 @@
     if (!m) return;
     const el = document.getElementById(m[1]);
     if (!el) return;
+    if (el.matches("[data-menu-panel]")) return;
     document.documentElement.style.scrollBehavior = "auto";
     el.scrollIntoView({ behavior: "auto", block: "start" });
     // absolute fallback in case smooth scroll raced us
