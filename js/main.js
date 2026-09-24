@@ -107,6 +107,7 @@ function renderSkills() {
 
 function initSkillLevels() {
   const buttons = Array.from(document.querySelectorAll(".skill-levels .lvl"));
+  buttons.forEach((button, index) => button.setAttribute("tabindex", index === 0 ? "0" : "-1"));
   buttons.forEach((button, index) => {
     button.addEventListener("click", () => {
       activeSkillLevel = button.getAttribute("data-level") || "PROFICIENT";
