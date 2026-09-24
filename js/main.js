@@ -414,7 +414,7 @@ function initMobileMenu() {
 }
 
 function initAudioEvents() {
-  const interactive = ".btn-cyber, .menu-tab, .exp-tab, .lvl, .chrome-control, .netlink-btn, .dlg-opt, .skill-chip, .social-link, .project-card, .gh-repo, .gh-refresh, .option-row";
+  const interactive = ".btn-cyber, .menu-tab, .mobile-menu-toggle, .exp-tab, .lvl, .chrome-control, .netlink-btn, .dlg-opt, .skill-chip, .social-link, .project-card, .gh-repo, .gh-refresh, .option-row";
   document.body.addEventListener("mouseover", (event) => {
     if (event.relatedTarget && event.relatedTarget.closest && event.relatedTarget.closest(interactive) === event.target.closest(interactive)) return;
     if (event.target.closest(interactive)) {
