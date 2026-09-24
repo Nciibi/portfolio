@@ -106,19 +106,32 @@ function renderSkills() {
 }
 
 function initSkillLevels() {
-  document.querySelectorAll(".skill-levels .lvl").forEach((button) => {
+  const buttons = Array.from(document.querySelectorAll(".skill-levels .lvl"));
+  buttons.forEach((button, index) => {
     button.addEventListener("click", () => {
       activeSkillLevel = button.getAttribute("data-level") || "PROFICIENT";
-      document.querySelectorAll(".skill-levels .lvl").forEach((item) => {
+      buttons.forEach((item) => {
         const active = item === button;
         item.classList.toggle("active", active);
         item.setAttribute("aria-pressed", String(active));
+        item.setAttribute("tabindex", active ? "0" : "-1");
       });
       document.querySelectorAll(".skill-group").forEach((group) => {
         group.classList.toggle("hidden", group.getAttribute("data-level") !== activeSkillLevel);
       });
       try { cyberAudio.playTab(); } catch (error) {}
       document.dispatchEvent(new Event("portfolio:rendered"));
+    });
+    button.addEventListener("keydown", (event) => {
+      if (!["ArrowLeft", "ArrowRight", "Home", "End"].includes(event.key)) return;
+      event.preventDefault();
+      let next = index;
+      if (event.key === "ArrowLeft") next = (index - 1 + buttons.length) % buttons.length;
+      if (event.key === "ArrowRight") next = (index + 1) % buttons.length;
+      if (event.key === "Home") next = 0;
+      if (event.key === "End") next = buttons.length - 1;
+      buttons[next].click();
+      buttons[next].focus();
     });
   });
 }
