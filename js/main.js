@@ -472,6 +472,26 @@ function initMobileMenu() {
   const menu = document.querySelector(".main-menu");
   if (!toggle || !menu) return;
   toggle.addEventListener("click", () => setMobileMenuOpen(!menu.classList.contains("is-mobile-open")));
+  document.addEventListener("keydown", (event) => {
+    if (!menu.classList.contains("is-mobile-open")) return;
+    if (event.key === "Escape") {
+      event.preventDefault();
+      setMobileMenuOpen(false);
+      return;
+    }
+    if (event.key !== "Tab") return;
+    const focusable = Array.from(menu.querySelectorAll("a, button, input, textarea, select, [tabindex]:not([tabindex='-1'])")).filter((element) => !element.disabled);
+    if (!focusable.length) return;
+    const first = focusable[0];
+    const last = focusable[focusable.length - 1];
+    if (event.shiftKey && document.activeElement === first) {
+      event.preventDefault();
+      last.focus();
+    } else if (!event.shiftKey && document.activeElement === last) {
+      event.preventDefault();
+      first.focus();
+    }
+  });
   window.addEventListener("resize", () => {
     if (window.innerWidth > 900) setMobileMenuOpen(false);
   });
