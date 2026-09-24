@@ -402,6 +402,8 @@ function initMenuTabs() {
 
   const initialId = window.location.hash.slice(1);
   activate(validIds.has(initialId) ? initialId : "profile", false, false);
+  const gotoId = new URLSearchParams(window.location.search).get("goto");
+  if (gotoId && validIds.has(gotoId)) activate(gotoId, false, false);
 }
 
 function setMobileMenuOpen(open) {
