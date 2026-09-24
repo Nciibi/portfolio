@@ -3564,6 +3564,16 @@ body::before {
   }
 }
 
+@media (max-width: 1050px) {
+  .profile-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .profile-visual {
+    min-height: 360px;
+  }
+}
+
 @media (max-width: 900px) {
   :root {
     --topbar: 58px;
