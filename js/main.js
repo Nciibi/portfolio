@@ -381,8 +381,8 @@ function initMenuTabs() {
     }
 
     const isTab = target?.closest?.("[data-menu-tab]");
-    const isControl = target?.closest?.("button, a, input, textarea, select");
-    if (event.key === "Enter" && !isTab && isControl) return;
+    const isWidget = target?.closest?.("button, a, input, textarea, select, [role='option'], [role='tab'], .project-card, .skill-chip");
+    if (!isTab && isWidget) return;
     if (!["ArrowDown", "ArrowUp", "ArrowLeft", "ArrowRight", "Home", "End", "Enter"].includes(event.key)) return;
     event.preventDefault();
     const focusedIndex = isTab ? tabs.indexOf(isTab) : tabs.findIndex((tab) => tab.getAttribute("data-menu-tab") === activeId);
