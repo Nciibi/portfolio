@@ -155,7 +155,9 @@
         el.style.width = el.getAttribute("data-fill") + "%";
       }
     });
-  }  function initStageScroll() {
+  }
+
+  function initStageScroll() {
     const stage = document.querySelector(".menu-stage");
     if (!stage) return;
     let ticking = false;
