@@ -155,6 +155,19 @@
         el.style.width = el.getAttribute("data-fill") + "%";
       }
     });
+  }  function initStageScroll() {
+    const stage = document.querySelector(".menu-stage");
+    if (!stage) return;
+    let ticking = false;
+    stage.addEventListener("scroll", () => {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(() => {
+        ticking = false;
+        checkReveals();
+        runMeters();
+      });
+    }, { passive: true });
   }
 
   /* -------------------------------------------------------------------------
