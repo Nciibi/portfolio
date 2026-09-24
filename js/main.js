@@ -155,6 +155,7 @@ function renderProjects() {
       const active = card.getAttribute("data-project-id") === project.id;
       card.classList.toggle("selected", active);
       card.setAttribute("aria-selected", String(active));
+      card.setAttribute("tabindex", active ? "0" : "-1");
     });
     if (!detail) return;
     const tags = (project.tags || []).map((tag) => `<span class="gig-tag">${getIcon(tag)}${escapeHtml(tag)}</span>`).join("");
