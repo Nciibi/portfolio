@@ -214,6 +214,7 @@ let activeExpTab = "CAREER";
 
 function initExpTabs() {
   const buttons = Array.from(document.querySelectorAll(".exp-tab"));
+  buttons.forEach((button, index) => button.setAttribute("tabindex", index === 0 ? "0" : "-1"));
   buttons.forEach((button, index) => {
     button.addEventListener("click", () => {
       activeExpTab = button.getAttribute("data-tab") || "CAREER";
