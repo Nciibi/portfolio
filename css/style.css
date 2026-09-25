@@ -165,7 +165,9 @@ button {
   content: '';
   pointer-events: none;
   background: linear-gradient(90deg, var(--red) 0 16%, transparent 42%);
+  background-size: 180% 100%;
   opacity: 0.6;
+  animation: top-signal 7s linear infinite;
 }
 
 .topbar-brand-wrap,
