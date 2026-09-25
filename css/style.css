@@ -2452,7 +2452,8 @@ button {
   }
 
   .menu-stage::before,
-  .menu-stage::after {
+  .menu-stage::after,
+  .module-signal {
     left: 0;
   }
 }
