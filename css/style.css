@@ -1382,6 +1382,36 @@ button {
   background: var(--blue);
 }
 
+.project-card::after {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: -35%;
+  width: 22%;
+  content: '';
+  pointer-events: none;
+  background: linear-gradient(90deg, transparent, rgba(32, 215, 242, 0.18), transparent);
+  opacity: 0;
+  transform: skewX(-14deg);
+}
+
+.project-card:hover::after,
+.project-card:focus-visible::after,
+.project-card.selected::after {
+  animation: project-scan 540ms var(--ease-glitch) 1;
+}
+
+.project-card:hover,
+.project-card:focus-visible {
+  box-shadow: inset 0 0 26px rgba(32, 215, 242, 0.05), 8px 0 20px rgba(5, 5, 7, 0.22);
+}
+
+@keyframes project-scan {
+  0% { opacity: 0; transform: translateX(0) skewX(-14deg); }
+  25% { opacity: 1; }
+  100% { opacity: 0; transform: translateX(650%) skewX(-14deg); }
+}
+
 .pc-meta,
 .pc-footer,
 .pc-actions {
