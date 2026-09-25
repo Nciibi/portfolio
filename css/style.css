@@ -533,6 +533,7 @@ button {
 
 .btn-cyber-red {
   --button-accent: var(--yellow);
+  --button-sheen: rgba(255, 54, 88, 0.34);
   color: var(--red);
   background: var(--red-faint);
   border-color: var(--red-mild);
