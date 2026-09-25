@@ -330,6 +330,9 @@ function renderExperience(tab) {
       ${item.likes ? `<span class="pc-likes">♥ ${Number(item.likes) || 0}</span>` : ""}
     </article>
   `).join("");
+  wrap.classList.remove("is-refreshing");
+  void wrap.offsetWidth;
+  wrap.classList.add("is-refreshing");
   document.dispatchEvent(new Event("portfolio:rendered"));
 }
 
