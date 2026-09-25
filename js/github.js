@@ -23,6 +23,7 @@
   const CACHE_MS = 30 * 60 * 1000;
   let hasRendered = false;
   let syncStarted = false;
+  let syncScheduled = false;
 
   const LANG_COLORS = {
     Python: '#3572A5', Rust: '#DEA584', JavaScript: '#F1E05A', Go: '#00ADD8',
@@ -173,6 +174,17 @@
     else render(GITHUB_SNAPSHOT, { mode: 'off', label: '● SNAPSHOT — ' + (GITHUB_SNAPSHOT.fetched_at || '') });
   }
 
+  function scheduleSync() {
+    if (syncScheduled || syncStarted) return;
+    syncScheduled = true;
+    const start = () => {
+      syncScheduled = false;
+      sync(false);
+    };
+    if (typeof window.requestIdleCallback === 'function') window.requestIdleCallback(start, { timeout: 1200 });
+    else window.setTimeout(start, 0);
+  }
+
   async function sync(manual) {
     if (!manual && syncStarted) return;
     syncStarted = true;
@@ -197,6 +209,6 @@
   document.addEventListener('portfolio:module-shown', (event) => {
     if (!event.detail || event.detail.id !== 'github') return;
     ensureRendered();
-    sync(false);
+    scheduleSync();
   });
 })();
