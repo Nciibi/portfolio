@@ -1611,7 +1611,50 @@ button {
   gap: 10px;
 }
 
-.pc-likes {
+.project-card .pc-meta {
+  position: relative;
+  z-index: 2;
+  flex-wrap: wrap;
+  gap: 7px;
+}
+
+.project-card .pc-idx {
+  min-width: 30px;
+  height: 21px;
+  font-size: 0.62rem;
+}
+
+.project-card .pc-title {
+  position: relative;
+  z-index: 2;
+  margin-top: 9px;
+  font-size: clamp(1.5rem, 2.2vw, 1.9rem);
+  text-shadow: 0 2px 12px rgba(5, 5, 7, 0.7);
+}
+
+.project-card .pc-summary {
+  position: relative;
+  z-index: 2;
+  display: -webkit-box;
+  min-height: 4.3em;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  text-shadow: 0 1px 8px rgba(5, 5, 7, 0.8);
+}
+
+.project-card .pc-footer {
+  position: relative;
+  z-index: 2;
+  margin-top: 13px;
+}
+
+.project-card .gig-tags {
+  max-width: 68%;
+  overflow: hidden;
+}
+
+.project-card .pc-likes {
   color: var(--yellow);
   font-family: var(--font-mono);
   font-size: 0.61rem;
