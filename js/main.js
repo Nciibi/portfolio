@@ -1,14 +1,10 @@
+const renderedModules = new Set(["profile"]);
+
 document.addEventListener("DOMContentLoaded", () => {
   renderHeroSocials();
   renderStats();
   renderBento();
   renderEducation();
-  renderSkills();
-  renderProjects();
-  initExpTabs();
-  renderExperience("CAREER");
-  renderJourney();
-  renderNetlinks();
   initMenuTabs();
   initMobileMenu();
   initTyping();
@@ -18,6 +14,19 @@ document.addEventListener("DOMContentLoaded", () => {
   initClock();
   document.dispatchEvent(new Event("portfolio:rendered"));
 });
+
+function ensureModuleRendered(id) {
+  if (renderedModules.has(id)) return;
+  renderedModules.add(id);
+  if (id === "projects") renderProjects();
+  if (id === "skills") renderSkills();
+  if (id === "experience") {
+    initExpTabs();
+    renderExperience(activeExpTab);
+  }
+  if (id === "journey") renderJourney();
+  if (id === "contact") renderNetlinks();
+}
 
 function escapeHtml(value) {
   return String(value == null ? "" : value)
