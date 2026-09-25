@@ -15,6 +15,7 @@ document.addEventListener("DOMContentLoaded", () => {
   initAudioEvents();
   initInterfaceControls();
   initDialogueOptions();
+  document.dispatchEvent(new Event("portfolio:rendered"));
 });
 
 function ensureModuleRendered(id) {
