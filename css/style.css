@@ -316,6 +316,25 @@ button {
   transition: color 120ms ease, background 120ms ease, border-color 120ms ease;
 }
 
+.menu-tab::before {
+  position: absolute;
+  right: 0;
+  bottom: -1px;
+  left: 0;
+  height: 2px;
+  content: '';
+  pointer-events: none;
+  background: var(--red);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 180ms var(--ease), background 120ms ease;
+}
+
+.menu-tab:hover::before,
+.menu-tab:focus-visible::before {
+  transform: scaleX(0.34);
+}
+
 .menu-tab::after {
   position: absolute;
   top: 9px;
