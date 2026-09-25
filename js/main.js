@@ -1,6 +1,9 @@
 const renderedModules = new Set(["profile"]);
+const motionPreference = window.matchMedia("(prefers-reduced-motion: reduce)");
 
-document.addEventListener("DOMContentLoaded", () => {
+function prefersReducedMotion() {
+  return motionPreference.matches;
+}
   renderHeroSocials();
   renderStats();
   renderBento();
