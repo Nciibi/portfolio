@@ -226,6 +226,8 @@ function renderProjects() {
     const commit = () => {
       if (committed || token !== transitionToken) return;
       committed = true;
+      const currentLayer = mediaStack.querySelector(".project-detail-layer.is-current");
+      mediaStack.querySelectorAll(".project-detail-layer:not(.is-current)").forEach((layer) => layer.remove());
       mediaStack.classList.add("is-switching");
       mediaStack.append(nextLayer);
       nextLayer.classList.add("is-visible");
