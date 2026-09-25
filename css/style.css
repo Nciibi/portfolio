@@ -233,10 +233,30 @@ button {
   outline: none;
 }
 
+.chrome-control::after {
+  width: 4px;
+  height: 4px;
+  content: '';
+  pointer-events: none;
+  background: var(--green);
+  box-shadow: 0 0 7px rgba(118, 216, 139, 0.7);
+  opacity: 0;
+  transition: opacity 140ms ease;
+}
+
+.chrome-control[aria-pressed='true']::after {
+  opacity: 1;
+}
+
 .chrome-control[data-control-value='OFF'] {
   color: var(--text-4);
   background: transparent;
   border-color: var(--line-soft);
+}
+
+.chrome-control:active,
+.mobile-menu-toggle:active {
+  transform: translateY(1px);
 }
 
 .control-key {
