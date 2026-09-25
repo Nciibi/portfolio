@@ -2725,7 +2725,7 @@ body::before {
   position: relative;
   z-index: 100;
   padding: 0 26px;
-  background: linear-gradient(90deg, rgba(5, 5, 5, 0.98), rgba(11, 15, 22, 0.94), rgba(5, 5, 5, 0.98));
+  background: linear-gradient(90deg, rgba(5, 5, 5, 0.98), rgba(16, 11, 14, 0.94), rgba(5, 5, 5, 0.98));
   border-bottom-color: rgba(249, 22, 67, 0.34);
   box-shadow: 0 12px 32px rgba(0, 0, 0, 0.22);
 }
@@ -3539,7 +3539,7 @@ body::before {
 .system-rail {
   position: relative;
   padding: 24px 16px 18px;
-  background: linear-gradient(180deg, rgba(5, 5, 5, 0.95), rgba(11, 15, 22, 0.88));
+  background: linear-gradient(180deg, rgba(5, 5, 5, 0.95), rgba(16, 11, 14, 0.88));
   border-left-color: rgba(249, 22, 67, 0.26);
 }
 
