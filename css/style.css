@@ -1080,30 +1080,6 @@ button {
   background: linear-gradient(180deg, transparent 50%, rgba(5, 5, 7, 0.86) 100%);
 }
 
-.detail-visual-code,
-.detail-visual-status {
-  position: absolute;
-  z-index: 1;
-  top: 12px;
-  padding: 4px 6px;
-  color: var(--yellow);
-  background: rgba(5, 5, 7, 0.9);
-  border: 1px solid rgba(242, 233, 0, 0.32);
-  font-family: var(--font-mono);
-  font-size: 0.5rem;
-  letter-spacing: 0.1em;
-}
-
-.detail-visual-code {
-  left: 12px;
-}
-
-.detail-visual-status {
-  right: 12px;
-  color: var(--green);
-  border-color: rgba(118, 216, 139, 0.32);
-}
-
 .project-detail-copy {
   padding: 19px;
 }
