@@ -2871,7 +2871,7 @@ body::before {
 .main-menu {
   padding: 34px 18px 20px;
   background:
-    linear-gradient(180deg, rgba(16, 11, 14, 0.94), rgba(6, 9, 14, 0.88)),
+    linear-gradient(180deg, rgba(16, 11, 14, 0.94), rgba(5, 5, 5, 0.88)),
     repeating-linear-gradient(0deg, transparent 0 3px, rgba(255, 255, 255, 0.012) 3px 4px);
   border-right-color: rgba(249, 22, 67, 0.22);
 }
