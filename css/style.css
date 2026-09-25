@@ -302,6 +302,19 @@ button {
   top: 4px;
 }
 
+.mobile-menu-toggle.is-open .mobile-menu-glyph::before,
+.mobile-menu-toggle.is-open .mobile-menu-glyph::after {
+  top: 0;
+}
+
+.mobile-menu-toggle.is-open .mobile-menu-glyph::before {
+  transform: rotate(45deg);
+}
+
+.mobile-menu-toggle.is-open .mobile-menu-glyph::after {
+  transform: rotate(-45deg);
+}
+
 .menu-frame {
   display: grid;
   grid-template-columns: var(--nav-width) minmax(0, 1fr);
