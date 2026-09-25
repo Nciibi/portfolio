@@ -2566,13 +2566,21 @@ body.boot-enabled .boot {
   --legend: 42px;
   --nav-width: 292px;
   --rail-width: 218px;
-  --red: #f23846;
-  --red-bright: #ff4c57;
-  --cyan: #5de8f1;
-  --yellow: #f4d35e;
-  --panel: rgba(10, 14, 21, 0.96);
-  --panel-soft: rgba(16, 22, 31, 0.88);
-  --panel-bright: rgba(28, 36, 48, 0.96);
+  --bg-0: #050505;
+  --bg-1: #0b090a;
+  --bg-2: #151013;
+  --red: #f91643;
+  --red-bright: #ff3358;
+  --red-dim: rgba(249, 22, 67, 0.14);
+  --cyan: #00cbd9;
+  --cyan-dim: rgba(0, 203, 217, 0.12);
+  --yellow: #f9f500;
+  --yellow-dim: rgba(249, 245, 0, 0.12);
+  --green: #7df229;
+  --green-dim: rgba(125, 242, 41, 0.12);
+  --panel: rgba(5, 5, 5, 0.96);
+  --panel-soft: rgba(16, 11, 14, 0.92);
+  --panel-bright: rgba(31, 18, 22, 0.96);
 }
 
 body {
