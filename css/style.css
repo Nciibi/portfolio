@@ -708,7 +708,8 @@ button {
   letter-spacing: 0.11em;
   text-transform: uppercase;
   clip-path: var(--cut-button);
-  transition: color 120ms ease, background 120ms ease, border-color 120ms ease, box-shadow 120ms ease;
+  transition: color 120ms ease, background 120ms ease, border-color 120ms ease, box-shadow 120ms ease, letter-spacing 180ms var(--ease);
+  text-shadow: 0 0 0 transparent;
 }
 
 .btn-cyber::before {
