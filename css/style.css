@@ -1714,7 +1714,7 @@ button {
 
 .project-detail-media-stack {
   position: relative;
-  min-height: 210px;
+  min-height: 300px;
   overflow: hidden;
   border-bottom: 1px solid var(--line);
 }
