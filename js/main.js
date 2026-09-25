@@ -410,6 +410,7 @@ function setMobileMenuOpen(open) {
   menu.classList.toggle("is-mobile-open", next);
   toggle.classList.toggle("is-open", next);
   toggle.setAttribute("aria-expanded", String(next));
+  toggle.setAttribute("aria-label", next ? "Close navigation menu" : "Open navigation menu");
   document.body.classList.toggle("mobile-menu-open", next);
   if (stage) stage.inert = next;
   if (next) {
