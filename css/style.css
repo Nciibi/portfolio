@@ -892,7 +892,7 @@ button {
   font-size: 0.6rem;
   letter-spacing: 0.08em;
   clip-path: polygon(0 0, calc(100% - 6px) 0, 100% 6px, 100% 100%, 0 100%);
-  transition: color 120ms ease, background 120ms ease, border-color 120ms ease;
+  transition: color 120ms ease, background 120ms ease, border-color 120ms ease, transform 180ms var(--ease-snap);
 }
 
 .social-link:hover,
@@ -901,6 +901,7 @@ button {
   background: var(--blue-faint);
   border-color: var(--line-blue);
   outline: none;
+  transform: translateY(-2px);
 }
 
 .social-link svg,
@@ -1789,7 +1790,8 @@ button {
   background: var(--bg-soft);
   border: 1px solid var(--line);
   clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 10px 100%, 0 calc(100% - 10px));
-  transition: background 120ms ease, border-color 120ms ease;
+  transition: background 120ms ease, border-color 120ms ease, transform 260ms var(--ease-snap);
+  transform: perspective(900px) rotateX(var(--card-tilt-x, 0deg)) rotateY(var(--card-tilt-y, 0deg));
 }
 
 .exp-card:hover {
@@ -1855,8 +1857,34 @@ button {
 }
 
 .journey-timeline {
+  position: relative;
   display: grid;
   gap: 9px;
+}
+
+.journey-timeline::before {
+  position: absolute;
+  top: 18px;
+  bottom: 18px;
+  left: 53px;
+  width: 1px;
+  content: '';
+  pointer-events: none;
+  background: linear-gradient(180deg, var(--yellow), var(--red), transparent);
+  box-shadow: 0 0 10px rgba(232, 49, 79, 0.26);
+  opacity: 0.7;
+  transform: scaleY(0);
+  transform-origin: top;
+}
+
+.journey-timeline.is-in::before {
+  animation: journey-trace 920ms var(--ease-snap) 1;
+}
+
+@keyframes journey-trace {
+  0% { opacity: 0; transform: scaleY(0); }
+  25% { opacity: 1; }
+  100% { opacity: 0.7; transform: scaleY(1); }
 }
 
 .journey-item {
@@ -1887,7 +1915,8 @@ button {
   padding: 15px 17px;
   background: var(--bg-soft);
   border: 1px solid var(--line);
-  transition: background 120ms ease, border-color 120ms ease;
+  transition: background 120ms ease, border-color 120ms ease, transform 260ms var(--ease-snap);
+  transform: perspective(900px) rotateX(var(--card-tilt-x, 0deg)) rotateY(var(--card-tilt-y, 0deg));
 }
 
 .journey-card:hover {
@@ -2083,7 +2112,8 @@ button {
   padding: 13px;
   background: var(--bg-soft);
   border: 1px solid var(--line);
-  transition: background 120ms ease, border-color 120ms ease;
+  transition: background 120ms ease, border-color 120ms ease, transform 260ms var(--ease-snap);
+  transform: perspective(900px) rotateX(var(--card-tilt-x, 0deg)) rotateY(var(--card-tilt-y, 0deg));
 }
 
 .gh-repo:hover {
@@ -2839,6 +2869,10 @@ button {
 
   .journey-year {
     padding-top: 0;
+  }
+
+  .journey-timeline::before {
+    left: 6px;
   }
 
   .gh-counters {
