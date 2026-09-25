@@ -168,14 +168,14 @@
   function processPointer() {
     hudFrame = 0;
     if (!pendingPointer || !stage) return;
-    const { x, y, target } = pendingPointer;
+    const { x, y, target, tilt } = pendingPointer;
     pendingPointer = null;
     stage.classList.add("is-pointer-active");
     stage.style.setProperty("--spot-x", `${x}px`);
     stage.style.setProperty("--spot-y", `${y}px`);
     setReticleTarget(target);
-    setTiltTarget(target && target.matches(".profile-visual") ? target : target?.closest(tiltSelector));
-    updateTilt(target?.matches(".profile-visual") ? target : target?.closest(tiltSelector), x, y);
+    setTiltTarget(tilt);
+    updateTilt(tilt, x, y);
   }
 
   function queuePointer(event) {
