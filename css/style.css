@@ -445,6 +445,7 @@ button {
 
 .btn-cyber {
   --button-accent: var(--yellow);
+  --button-sheen: rgba(255, 255, 255, 0.2);
   position: relative;
   isolation: isolate;
   display: inline-flex;
