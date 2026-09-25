@@ -568,8 +568,9 @@ function initDialogueOptions() {
     button.addEventListener("click", () => {
       const target = document.querySelector(button.getAttribute("data-scroll-to"));
       if (!target) return;
-      target.scrollIntoView({ behavior: "smooth", block: "center" });
-      window.setTimeout(() => target.querySelector("input, textarea")?.focus({ preventScroll: true }), 350);
+      const reduced = prefersReducedMotion();
+      target.scrollIntoView({ behavior: reduced ? "auto" : "smooth", block: "center" });
+      window.setTimeout(() => target.querySelector("input, textarea")?.focus({ preventScroll: true }), reduced ? 0 : 350);
     });
   });
 
