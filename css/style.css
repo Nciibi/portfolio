@@ -1951,6 +1951,7 @@ button {
 .dlg-opt:hover .tail,
 .dlg-opt:focus-visible .tail {
   color: var(--blue);
+  animation: arrow-tap 300ms var(--ease) 1;
 }
 
 .netlinks-list {
