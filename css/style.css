@@ -2706,8 +2706,8 @@ body::before {
   min-height: 30px;
   padding: 6px 10px;
   color: var(--yellow);
-  background: rgba(244, 211, 94, 0.08);
-  border: 1px solid rgba(244, 211, 94, 0.38);
+  background: rgba(249, 245, 0, 0.08);
+  border: 1px solid rgba(249, 245, 0, 0.38);
   font-family: var(--font-mono);
   font-size: 0.6rem;
   letter-spacing: 0.1em;
@@ -3068,7 +3068,7 @@ body::before {
   color: var(--yellow);
   font-size: clamp(0.95rem, 1.5vw, 1.15rem);
   letter-spacing: 0.08em;
-  text-shadow: 0 0 18px rgba(244, 211, 94, 0.2);
+  text-shadow: 0 0 18px rgba(249, 245, 0, 0.2);
 }
 
 .profile-bio {
@@ -3132,8 +3132,8 @@ body::before {
   height: 58px;
   right: 40px;
   bottom: 48px;
-  border-color: rgba(244, 211, 94, 0.84);
-  box-shadow: 0 0 18px rgba(244, 211, 94, 0.18), inset 0 0 14px rgba(244, 211, 94, 0.12);
+  border-color: rgba(249, 245, 0, 0.84);
+  box-shadow: 0 0 18px rgba(249, 245, 0, 0.18), inset 0 0 14px rgba(249, 245, 0, 0.12);
   animation: reticle-pulse 2.8s ease-in-out infinite;
 }
 
@@ -3318,7 +3318,7 @@ body::before {
   padding: 5px 7px;
   color: var(--yellow);
   background: rgba(6, 8, 12, 0.84);
-  border: 1px solid rgba(244, 211, 94, 0.38);
+  border: 1px solid rgba(249, 245, 0, 0.38);
   font-family: var(--font-mono);
   font-size: 0.52rem;
   letter-spacing: 0.12em;
@@ -3393,7 +3393,7 @@ body::before {
   color: var(--yellow);
   font-size: 1.34rem;
   letter-spacing: 0.08em;
-  text-shadow: 0 0 16px rgba(244, 211, 94, 0.24);
+  text-shadow: 0 0 16px rgba(249, 245, 0, 0.24);
   writing-mode: horizontal-tb;
   transform: none;
 }
