@@ -1680,7 +1680,8 @@ button {
   background: var(--bg-soft);
   border: 1px solid var(--line);
   clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 10px 100%, 0 calc(100% - 10px));
-  transition: background 120ms ease, border-color 120ms ease;
+  transition: background 120ms ease, border-color 120ms ease, transform 260ms var(--ease-snap);
+  transform: perspective(900px) rotateX(var(--card-tilt-x, 0deg)) rotateY(var(--card-tilt-y, 0deg));
 }
 
 .skill-group:hover {
@@ -1690,6 +1691,15 @@ button {
 
 .skill-group.hidden {
   display: none;
+}
+
+.skill-group.is-entering {
+  animation: group-in 360ms var(--ease-snap) 1;
+}
+
+@keyframes group-in {
+  0% { opacity: 0; transform: translateY(10px) scale(0.985); }
+  100% { opacity: 1; transform: translateY(0) scale(1); }
 }
 
 .sg-head {
