@@ -2876,65 +2876,94 @@ body::before {
 
 .menu-tab {
   grid-template-columns: 42px minmax(0, 1fr) 22px;
-  min-height: 64px;
-  padding: 0 13px;
-  color: var(--txt-3);
-  background: rgba(255, 255, 255, 0.018);
-  border: 1px solid rgba(220, 231, 244, 0.07);
-  clip-path: polygon(0 0, calc(100% - 13px) 0, 100% 13px, 100% 100%, 0 100%);
-  transition: color 0.22s ease, background 0.22s ease, border-color 0.22s ease, transform 0.22s var(--ease), box-shadow 0.22s ease;
+  min-height: 60px;
+  padding: 0 14px;
+  color: rgba(249, 22, 67, 0.78);
+  background: rgba(5, 5, 5, 0.64);
+  border: 1px solid rgba(249, 22, 67, 0.22);
+  border-left: 2px solid rgba(249, 22, 67, 0.64);
+  clip-path: polygon(0 0, calc(100% - 12px) 0, 100% 12px, 100% 100%, 12px 100%, 0 calc(100% - 12px));
+  transition: color 0.14s ease, background 0.14s ease, border-color 0.14s ease, transform 0.18s var(--ease), box-shadow 0.18s ease;
 }
 
 .menu-tab::before {
-  width: 4px;
-  background: transparent;
+  top: 0;
+  bottom: 0;
+  left: -1px;
+  width: 2px;
+  background: var(--red);
+  box-shadow: 0 0 8px rgba(249, 22, 67, 0.42);
+  transform: scaleY(0.32);
+  transform-origin: center;
+  transition: background 0.14s ease, box-shadow 0.14s ease, transform 0.18s var(--ease);
 }
 
 .menu-tab::after {
   position: absolute;
-  top: 12px;
-  right: 6px;
-  bottom: 12px;
+  top: 10px;
+  right: 8px;
+  bottom: 10px;
   width: 1px;
   content: '';
-  background: transparent;
-  transition: background 0.22s ease, box-shadow 0.22s ease;
+  background: rgba(249, 22, 67, 0.34);
+  transition: background 0.14s ease, box-shadow 0.14s ease;
 }
 
 .menu-tab:hover,
 .menu-tab:focus-visible {
-  color: var(--txt);
-  background: rgba(0, 203, 217, 0.06);
-  border-color: rgba(0, 203, 217, 0.35);
-  transform: translateX(4px);
+  color: var(--red-bright);
+  background: rgba(249, 22, 67, 0.08);
+  border-color: rgba(249, 22, 67, 0.68);
+  box-shadow: inset 0 0 22px rgba(249, 22, 67, 0.035);
+  transform: translateX(3px);
   outline: none;
 }
 
+.menu-tab:hover::before,
+.menu-tab:focus-visible::before {
+  transform: scaleY(1);
+}
+
+.menu-tab:hover::after,
+.menu-tab:focus-visible::after {
+  background: var(--red);
+  box-shadow: 0 0 8px rgba(249, 22, 67, 0.7);
+}
+
 .menu-tab.active {
-  color: #f2f4f2;
-  background: linear-gradient(100deg, var(--red) 0%, #bd2338 72%, #8f1e36 100%);
-  border-color: var(--red);
-  box-shadow: 0 0 28px rgba(249, 22, 67, 0.2), inset 0 0 22px rgba(255, 255, 255, 0.06);
+  color: var(--cyan);
+  background: rgba(5, 5, 5, 0.94);
+  border-color: var(--cyan);
+  box-shadow: 0 0 24px rgba(0, 203, 217, 0.12), inset 0 0 24px rgba(0, 203, 217, 0.025);
+  animation: tab-lock 240ms steps(2, end) 1;
 }
 
 .menu-tab.active::before {
   background: var(--yellow);
-  box-shadow: 0 0 14px var(--yellow);
+  box-shadow: 0 0 12px rgba(249, 245, 0, 0.72);
+  transform: scaleY(1);
 }
 
 .menu-tab.active::after {
-  background: var(--yellow);
-  box-shadow: 0 0 10px var(--yellow);
+  background: var(--cyan);
+  box-shadow: 0 0 10px rgba(0, 203, 217, 0.72);
+}
+
+@keyframes tab-lock {
+  0% { clip-path: inset(44% 0 44% 0); filter: brightness(1.8); transform: translateX(-3px); }
+  38% { clip-path: inset(18% 0 62% 0); filter: brightness(1.35); transform: translateX(2px); }
+  68% { clip-path: inset(66% 0 16% 0); filter: brightness(1.15); transform: translateX(-1px); }
+  100% { clip-path: inset(0); filter: brightness(1); transform: translateX(0); }
 }
 
 .tab-index {
   align-self: center;
-  color: var(--txt-4);
+  color: rgba(249, 22, 67, 0.62);
   font-size: 0.7rem;
 }
 
 .menu-tab.active .tab-index {
-  color: rgba(255, 247, 247, 0.72);
+  color: var(--yellow);
 }
 
 .tab-copy {
@@ -2952,7 +2981,7 @@ body::before {
 }
 
 .tab-meta {
-  color: var(--txt-4);
+  color: rgba(249, 22, 67, 0.52);
   font-family: var(--font-mono);
   font-size: 0.5rem;
   letter-spacing: 0.12em;
@@ -2961,7 +2990,7 @@ body::before {
 }
 
 .menu-tab.active .tab-meta {
-  color: rgba(255, 247, 247, 0.7);
+  color: rgba(0, 203, 217, 0.68);
 }
 
 .tab-arrow {
