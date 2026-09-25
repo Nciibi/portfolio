@@ -318,16 +318,6 @@ function initMenuTabs() {
       panel.setAttribute("aria-hidden", String(!active));
     });
     ensureModuleRendered(id);
-    const activeTab = tabs.find((tab) => tab.getAttribute("data-menu-tab") === id);
-    const activeIndex = Math.max(0, tabs.indexOf(activeTab));
-    const label = activeTab?.querySelector(".tab-label")?.textContent || "PROFILE";
-    const code = activeTab?.getAttribute("data-menu-code") || "RECORD";
-    if (currentIndex && activeTab) currentIndex.textContent = activeTab.querySelector(".tab-index")?.textContent || "01";
-    if (currentLabel) currentLabel.textContent = `${label} // ${code}`;
-    if (railActiveModule) railActiveModule.textContent = label;
-    if (railActiveCode) railActiveCode.textContent = code;
-    if (railProgressBar) railProgressBar.style.width = `${((activeIndex + 1) / tabs.length) * 100}%`;
-    document.body.dataset.activeModule = id;
     if (stage) stage.scrollTop = 0;
     if (focusedPanel && !focusedPanel.classList.contains("active")) {
       window.requestAnimationFrame(() => stage?.focus({ preventScroll: true }));
