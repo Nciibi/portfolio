@@ -2932,7 +2932,12 @@ button {
     transition-duration: 0.01ms !important;
   }
 
-  [data-reveal] {
+:is(.btn-cyber, .menu-tab, .chrome-control, .mobile-menu-toggle, .lvl, .exp-tab, .project-card, .bento-card, .skill-chip, .dlg-opt, .netlink-btn, .social-link, .gh-repo, .option-row):focus-visible {
+  outline: 1px solid var(--blue);
+  outline-offset: 3px;
+}
+
+[data-reveal] {
     opacity: 1;
     translate: none;
   }
