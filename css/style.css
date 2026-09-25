@@ -1755,8 +1755,8 @@ button {
   padding: 3px 6px;
   border: 1px solid currentColor;
   font-family: var(--font-mono);
-  font-size: 0.5rem;
-  letter-spacing: 0.08em;
+  font-size: 0.56rem;
+  letter-spacing: 0.07em;
   white-space: nowrap;
 }
 
