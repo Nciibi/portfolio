@@ -148,9 +148,9 @@ function initSkillLevels() {
 
 function projectArtwork(project) {
   const category = String(project?.category || "").toLowerCase();
-  if (category.includes("ai")) return "assets/proj-neural.jpg";
-  if (category.includes("p2p") || category.includes("security")) return "assets/proj-netrunner.jpg";
-  return "assets/proj-citymap.jpg";
+  if (category.includes("ai")) return "assets/proj-neural.webp";
+  if (category.includes("p2p") || category.includes("security")) return "assets/proj-netrunner.webp";
+  return "assets/proj-citymap.webp";
 }
 
 function renderProjects() {
@@ -365,6 +365,7 @@ function initMenuTabs() {
       panel.classList.toggle("active", active);
       panel.setAttribute("aria-hidden", String(!active));
     });
+    ensureModuleRendered(id);
     const activeTab = tabs.find((tab) => tab.getAttribute("data-menu-tab") === id);
     const activeIndex = Math.max(0, tabs.indexOf(activeTab));
     const label = activeTab?.querySelector(".tab-label")?.textContent || "PROFILE";
@@ -384,6 +385,7 @@ function initMenuTabs() {
       window.requestAnimationFrame(() => stage?.focus({ preventScroll: true }));
     }
     if (updateHash && window.history && window.history.replaceState) window.history.replaceState(null, "", `#${id}`);
+    document.dispatchEvent(new CustomEvent("portfolio:module-shown", { detail: { id } }));
     document.dispatchEvent(new Event("portfolio:rendered"));
     try { cyberAudio.playTab(); } catch (error) {}
   };
