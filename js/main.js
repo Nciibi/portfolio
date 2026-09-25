@@ -287,47 +287,6 @@ function renderNetlinks() {
   `).join("");
 }
 
-function initTyping() {
-  const target = document.getElementById("type-target");
-  const lines = PORTFOLIO_DATA.profile?.taglines || [];
-  if (!target || !lines.length) return;
-  target.textContent = lines[0];
-  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-  if (new URLSearchParams(window.location.search).get("typing") !== "1") return;
-  let lineIndex = 0;
-  let charIndex = lines[0].length;
-  let deleting = true;
-  const tick = () => {
-    const line = lines[lineIndex];
-    if (!deleting) {
-      charIndex += 1;
-      target.textContent = line.slice(0, charIndex);
-      if (charIndex >= line.length) {
-        deleting = true;
-        window.setTimeout(tick, 1600);
-        return;
-      }
-      window.setTimeout(tick, 45 + Math.random() * 35);
-      return;
-    }
-    charIndex -= 1;
-    target.textContent = line.slice(0, charIndex);
-    if (charIndex <= 0) {
-      deleting = false;
-      lineIndex = (lineIndex + 1) % lines.length;
-      window.setTimeout(tick, 280);
-      return;
-    }
-    window.setTimeout(tick, 24);
-  };
-  const start = () => tick();
-  if (typeof window.requestIdleCallback === "function") {
-    window.requestIdleCallback(start, { timeout: 2200 });
-  } else {
-    window.setTimeout(start, 1800);
-  }
-}
-
 function initMenuTabs() {
   const tabs = Array.from(document.querySelectorAll("[data-menu-tab]"));
   const panels = Array.from(document.querySelectorAll("[data-menu-panel]"));
