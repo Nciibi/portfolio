@@ -4,35 +4,20 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Nciibi | Ahmed Nciibi — Cyberpunk Portfolio</title>
-  <meta name="description" content="Ahmed Nciibi — IoT and computer engineering portfolio presented as a Cyberpunk 2077-inspired menu interface." />
+  <meta name="description" content="Ahmed Nciibi — IoT and computer engineering portfolio presented as a focused Cyberpunk 2077-inspired interface." />
   <meta name="theme-color" content="#050505" />
-  <link rel="stylesheet" href="css/style.css?v=6" />
+  <link rel="stylesheet" href="css/style.css?v=7" />
   <link rel="preload" as="image" href="assets/avatar.webp" type="image/webp" fetchpriority="high" />
   <link rel="icon" href="favicon.svg" type="image/svg+xml" />
   <link rel="apple-touch-icon" href="favicon.svg" />
   <noscript>
     <style>
-      body{overflow:auto}.boot{display:none!important}.menu-stage{overflow:visible}.main-menu{display:block!important;position:static!important}.mobile-menu-toggle{display:none!important}.menu-panel{display:block!important;min-height:auto;margin-bottom:2rem}.menu-panel:not(.active){display:block!important}
+      body{overflow:auto}.app-shell{height:auto;min-height:100vh}.menu-frame{display:block}.main-menu{position:static;display:block}.mobile-menu-toggle{display:none}.menu-stage{height:auto;overflow:visible}.menu-panel{display:block!important;min-height:auto;margin-bottom:2rem}
     </style>
   </noscript>
 </head>
 <body>
   <a class="skip-link" href="#menu-content">Skip to portfolio content</a>
-
-  <div class="boot" id="boot-screen" role="status" aria-live="polite">
-    <div class="boot-inner">
-      <div class="boot-mark">NCIIBI<span>//</span>OS</div>
-      <div class="boot-sub">USER INTERFACE // PORTFOLIO BUILD 4.0.0</div>
-      <div class="boot-bar"><i id="boot-fill"></i></div>
-      <div class="boot-log" id="boot-log"></div>
-      <button class="boot-skip" id="boot-skip" type="button">[ ESC ] SKIP INITIALIZATION</button>
-    </div>
-  </div>
-
-  <div class="crt-overlay" id="crt-screen-overlay" aria-hidden="true"></div>
-  <div class="ambient-grid" aria-hidden="true"></div>
-  <div class="ambient-glow ambient-glow-red" aria-hidden="true"></div>
-  <div class="ambient-glow ambient-glow-cyan" aria-hidden="true"></div>
 
   <div class="app-shell">
     <header class="menu-topbar" id="menu-topbar">
@@ -41,105 +26,72 @@
           <span class="brand-mark">N</span>
           <span class="brand-word">NCIIBI<em>//</em>2077</span>
         </a>
-        <span class="topbar-build">PORTFOLIO OS <b>4.0.0</b></span>
-      </div>
-      <div class="topbar-readout" aria-label="System status">
-        <span class="readout-dot"></span>
-        <span>NETWATCH UPLINK</span>
-        <span class="readout-separator">//</span>
-        <span id="topbar-status">ONLINE</span>
       </div>
       <div class="topbar-controls">
-        <button class="mobile-menu-toggle" id="menu-toggle" type="button" aria-controls="main-menu-nav" aria-expanded="false"><span class="mobile-menu-glyph">≡</span> MENU</button>
-        <button class="chrome-control" type="button" data-control="audio" aria-pressed="true">
-          <span class="control-key">SFX</span><span data-control-value>ON</span>
+        <button class="mobile-menu-toggle" id="menu-toggle" type="button" aria-controls="main-menu-nav" aria-expanded="false" aria-label="Open navigation menu">
+          <span class="mobile-menu-glyph" aria-hidden="true"></span><span>MENU</span>
         </button>
-        <button class="chrome-control" type="button" data-control="crt" aria-pressed="true">
-          <span class="control-key">CRT</span><span data-control-value>ON</span>
+        <button class="chrome-control" type="button" data-control="audio" aria-pressed="true" aria-label="Toggle sound effects">
+          <span class="control-key">SFX</span><span data-control-value>ON</span>
         </button>
       </div>
     </header>
 
     <div class="menu-frame">
       <aside class="main-menu" aria-label="Portfolio main menu">
-        <div class="menu-intro">
-          <span class="menu-overline">NCIIBI // MAIN MENU</span>
-          <strong>SELECT RECORD</strong>
-          <span class="menu-intro-line"></span>
-          <span class="menu-intro-copy">CHOOSE A MODULE<br />ENTER TO INSPECT</span>
-        </div>
-
         <nav class="menu-nav" id="main-menu-nav" role="tablist" aria-label="Primary menu">
-          <a href="#profile" class="menu-tab active" data-menu-tab="profile" data-menu-code="DOSSIER" role="tab" aria-controls="profile" aria-current="page">
-            <span class="tab-index">01</span><span class="tab-copy"><span class="tab-label">PROFILE</span><span class="tab-meta">OPERATOR FILE</span></span><span class="tab-arrow">›</span>
+          <a href="#profile" class="menu-tab active" data-menu-tab="profile" role="tab" aria-controls="profile" aria-current="page">
+            <span class="tab-index">01</span><span class="tab-label">PROFILE</span><span class="tab-arrow" aria-hidden="true">›</span>
           </a>
-          <a href="#projects" class="menu-tab" data-menu-tab="projects" data-menu-code="CASE FILES" role="tab" aria-controls="projects">
-            <span class="tab-index">02</span><span class="tab-copy"><span class="tab-label">PROJECTS</span><span class="tab-meta">SELECTED WORK</span></span><span class="tab-arrow">›</span>
+          <a href="#projects" class="menu-tab" data-menu-tab="projects" role="tab" aria-controls="projects">
+            <span class="tab-index">02</span><span class="tab-label">PROJECTS</span><span class="tab-arrow" aria-hidden="true">›</span>
           </a>
-          <a href="#skills" class="menu-tab" data-menu-tab="skills" data-menu-code="LOADOUT" role="tab" aria-controls="skills">
-            <span class="tab-index">03</span><span class="tab-copy"><span class="tab-label">SKILLS</span><span class="tab-meta">TECH STACK</span></span><span class="tab-arrow">›</span>
+          <a href="#skills" class="menu-tab" data-menu-tab="skills" role="tab" aria-controls="skills">
+            <span class="tab-index">03</span><span class="tab-label">SKILLS</span><span class="tab-arrow" aria-hidden="true">›</span>
           </a>
-          <a href="#experience" class="menu-tab" data-menu-tab="experience" data-menu-code="CAREER LOG" role="tab" aria-controls="experience">
-            <span class="tab-index">04</span><span class="tab-copy"><span class="tab-label">EXPERIENCE</span><span class="tab-meta">WORK HISTORY</span></span><span class="tab-arrow">›</span>
+          <a href="#experience" class="menu-tab" data-menu-tab="experience" role="tab" aria-controls="experience">
+            <span class="tab-index">04</span><span class="tab-label">EXPERIENCE</span><span class="tab-arrow" aria-hidden="true">›</span>
           </a>
-          <a href="#journey" class="menu-tab" data-menu-tab="journey" data-menu-code="MEMORY LOG" role="tab" aria-controls="journey">
-            <span class="tab-index">05</span><span class="tab-copy"><span class="tab-label">JOURNEY</span><span class="tab-meta">MILESTONES</span></span><span class="tab-arrow">›</span>
+          <a href="#journey" class="menu-tab" data-menu-tab="journey" role="tab" aria-controls="journey">
+            <span class="tab-index">05</span><span class="tab-label">JOURNEY</span><span class="tab-arrow" aria-hidden="true">›</span>
           </a>
-          <a href="#github" class="menu-tab" data-menu-tab="github" data-menu-code="OPEN CHANNEL" role="tab" aria-controls="github">
-            <span class="tab-index">06</span><span class="tab-copy"><span class="tab-label">GITHUB</span><span class="tab-meta">PUBLIC REPOS</span></span><span class="tab-arrow">›</span>
+          <a href="#github" class="menu-tab" data-menu-tab="github" role="tab" aria-controls="github">
+            <span class="tab-index">06</span><span class="tab-label">GITHUB</span><span class="tab-arrow" aria-hidden="true">›</span>
           </a>
-          <a href="#contact" class="menu-tab" data-menu-tab="contact" data-menu-code="SECURE LINE" role="tab" aria-controls="contact">
-            <span class="tab-index">07</span><span class="tab-copy"><span class="tab-label">CONTACT</span><span class="tab-meta">OPEN CHANNEL</span></span><span class="tab-arrow">›</span>
+          <a href="#contact" class="menu-tab" data-menu-tab="contact" role="tab" aria-controls="contact">
+            <span class="tab-index">07</span><span class="tab-label">CONTACT</span><span class="tab-arrow" aria-hidden="true">›</span>
           </a>
-          <a href="#options" class="menu-tab" data-menu-tab="options" data-menu-code="SYSTEM SETTINGS" role="tab" aria-controls="options">
-            <span class="tab-index">08</span><span class="tab-copy"><span class="tab-label">OPTIONS</span><span class="tab-meta">SYSTEM CONTROL</span></span><span class="tab-arrow">›</span>
+          <a href="#options" class="menu-tab" data-menu-tab="options" role="tab" aria-controls="options">
+            <span class="tab-index">08</span><span class="tab-label">OPTIONS</span><span class="tab-arrow" aria-hidden="true">›</span>
           </a>
         </nav>
-
-        <div class="menu-bottom-copy">
-          <span class="status-dot"></span>
-          <span>LOCAL PROFILE READY</span>
-          <span class="menu-bottom-build">© 2026 // UNAFFILIATED FAN UI</span>
-        </div>
       </aside>
 
       <main class="menu-stage" id="menu-content" tabindex="-1">
-        <div class="stage-chrome" aria-hidden="true">
-          <span id="menu-current-index">01</span>
-          <span class="stage-chrome-line"></span>
-          <span id="menu-current-label">PROFILE // DOSSIER</span>
-          <span class="stage-chrome-state">READY // SELECT</span>
-        </div>
-
         <section class="menu-panel active" id="profile" data-menu-panel="profile" role="tabpanel" aria-labelledby="profile-heading" aria-hidden="false">
           <div class="panel-header">
-            <div class="panel-kicker"><span class="kicker-line"></span><span>PROFILE // USER DOSSIER</span></div>
             <h1 class="panel-title" id="profile-heading">AHMED <span>NCIBI</span></h1>
             <p class="panel-subtitle">IOT &amp; COMPUTER ENGINEERING // FINAL YEAR @ ISTIC</p>
           </div>
 
           <div class="profile-layout">
             <div class="profile-copy">
-              <p class="profile-tagline"><span id="type-target">IoT &amp; embedded systems</span><span class="type-caret" aria-hidden="true">▌</span></p>
+              <p class="profile-tagline"><span id="type-target">IoT &amp; embedded systems</span></p>
               <p class="profile-bio">Building connected systems from firmware to cloud. I care about useful software, resilient infrastructure, and shipping work that survives contact with the real world.</p>
               <div class="profile-actions">
-                <button class="btn-cyber btn-cyber-yellow" type="button" data-menu-target="projects">VIEW PROJECTS <span>↗</span></button>
-                <button class="btn-cyber btn-cyber-ghost" type="button" data-menu-target="contact">JACK IN <span>→</span></button>
+                <button class="btn-cyber btn-cyber-yellow" type="button" data-menu-target="projects">VIEW PROJECTS <span aria-hidden="true">↗</span></button>
+                <button class="btn-cyber btn-cyber-ghost" type="button" data-menu-target="contact">JACK IN <span aria-hidden="true">→</span></button>
               </div>
               <div class="hero-socials" id="hero-socials"></div>
             </div>
 
             <div class="profile-visual" aria-label="Abstract cyberpunk profile artwork">
-              <div class="visual-grid" aria-hidden="true"></div>
               <div class="visual-image-frame">
                 <picture>
                   <source srcset="assets/avatar.webp" type="image/webp" />
                   <img src="assets/avatar.jpg" width="512" height="512" decoding="async" fetchpriority="high" alt="Abstract cyberpunk profile avatar" />
                 </picture>
               </div>
-              <div class="visual-tag visual-tag-top">CALLSIGN // NCIBI</div>
-              <div class="visual-tag visual-tag-bottom">STATUS // AVAILABLE</div>
-              <div class="visual-reticle" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
             </div>
           </div>
 
@@ -148,7 +100,6 @@
           <div class="profile-dossier">
             <div class="subsection-heading">
               <div><span class="subsection-index">01.1</span><h2>PERSONAL DOSSIER</h2></div>
-              <span class="subsection-code">REC // VERIFIED BY OWNER</span>
             </div>
             <div class="bento-grid" id="bento-container"></div>
             <div class="edu-row" id="edu-container"></div>
@@ -157,24 +108,19 @@
 
         <section class="menu-panel" id="projects" data-menu-panel="projects" role="tabpanel" aria-labelledby="projects-heading" aria-hidden="true">
           <div class="panel-header">
-            <div class="panel-kicker"><span class="kicker-line"></span><span>PROJECTS // CASE FILES</span></div>
             <h1 class="panel-title" id="projects-heading">SELECTED <span>WORK</span></h1>
             <p class="panel-subtitle">FOUR OPEN-SOURCE SYSTEMS // SELECT A FILE TO INSPECT</p>
           </div>
-          <div class="panel-rule"></div>
           <div class="project-browser">
             <div class="project-list-shell">
-              <div class="project-list-header"><span>INDEX // PROJECTS</span><span>04 FILES</span></div>
               <div class="projects-list" id="projects-container" role="listbox" aria-label="Project case files"></div>
             </div>
             <aside class="project-detail" id="project-detail" aria-live="polite"></aside>
           </div>
-          <div class="panel-endnote"><span>END OF FILE</span><span>OPEN SOURCE // PUBLICLY AVAILABLE</span></div>
         </section>
 
         <section class="menu-panel" id="skills" data-menu-panel="skills" role="tabpanel" aria-labelledby="skills-heading" aria-hidden="true">
           <div class="panel-header">
-            <div class="panel-kicker"><span class="kicker-line"></span><span>SKILLS // LOADOUT</span></div>
             <h1 class="panel-title" id="skills-heading">TECHNICAL <span>STACK</span></h1>
             <p class="panel-subtitle">SELECT A PROFICIENCY CHANNEL TO FILTER THE LOADOUT</p>
           </div>
@@ -188,7 +134,6 @@
 
         <section class="menu-panel" id="experience" data-menu-panel="experience" role="tabpanel" aria-labelledby="experience-heading" aria-hidden="true">
           <div class="panel-header">
-            <div class="panel-kicker"><span class="kicker-line"></span><span>EXPERIENCE // CAREER RECORD</span></div>
             <h1 class="panel-title" id="experience-heading">WORK <span>LOG</span></h1>
             <p class="panel-subtitle">CAREER // INVOLVEMENT // HONORS</p>
           </div>
@@ -202,18 +147,15 @@
 
         <section class="menu-panel" id="journey" data-menu-panel="journey" role="tabpanel" aria-labelledby="journey-heading" aria-hidden="true">
           <div class="panel-header">
-            <div class="panel-kicker"><span class="kicker-line"></span><span>JOURNEY // MEMORY LOG</span></div>
             <h1 class="panel-title" id="journey-heading">THE <span>ROAD</span></h1>
             <p class="panel-subtitle">MILESTONES // ROLES // SYSTEMS SHIPPED</p>
           </div>
-          <div class="panel-rule"></div>
           <p class="journey-intro">A compact record of the work, people, and systems that shaped the way I build.</p>
           <div class="journey-timeline" id="journey-container"></div>
         </section>
 
         <section class="menu-panel" id="github" data-menu-panel="github" role="tabpanel" aria-labelledby="github-heading" aria-hidden="true">
           <div class="panel-header">
-            <div class="panel-kicker"><span class="kicker-line"></span><span>GITHUB // OPEN CHANNEL</span></div>
             <h1 class="panel-title" id="github-heading">CODE IN <span>THE WILD</span></h1>
             <p class="panel-subtitle">PUBLIC REPOSITORIES // STARS // RECENT ACTIVITY</p>
           </div>
@@ -244,14 +186,13 @@
             <aside class="github-side">
               <h2 class="gh-h">RECENT ACTIVITY <span>// FEED</span></h2>
               <div class="gh-feed" id="gh-feed"></div>
-              <a class="btn-cyber btn-cyber-sm btn-cyber-ghost gh-all" href="https://github.com/Nciibi?tab=repositories" target="_blank" rel="noopener">ALL REPOSITORIES ↗</a>
+              <a class="btn-cyber btn-cyber-sm btn-cyber-ghost gh-all" href="https://github.com/Nciibi?tab=repositories" target="_blank" rel="noopener">ALL REPOSITORIES <span aria-hidden="true">↗</span></a>
             </aside>
           </div>
         </section>
 
         <section class="menu-panel" id="contact" data-menu-panel="contact" role="tabpanel" aria-labelledby="contact-heading" aria-hidden="true">
           <div class="panel-header">
-            <div class="panel-kicker"><span class="kicker-line"></span><span>CONTACT // SECURE CHANNEL</span></div>
             <h1 class="panel-title" id="contact-heading">LET'S <span>TALK</span></h1>
             <p class="panel-subtitle">PICK A CHANNEL // START A CONVERSATION</p>
           </div>
@@ -264,22 +205,22 @@
               <p class="dialogue-line" id="contact-blurb">What led you here? Pick a direct channel or leave a brief.</p>
               <div class="dialogue-options">
                 <div class="opt-label">// AVAILABLE RESPONSES</div>
-                <button type="button" class="dlg-opt" data-scroll-to="#terminal-contact-form"><span class="num">[1]</span><span>I've got a contract for you.</span><span class="tail">▶</span></button>
-                <a href="mailto:ncibiahmed2017@gmail.com" class="dlg-opt"><span class="num">[2]</span><span>Need a direct line — send an email.</span><span class="tail">▶</span></a>
-                <button type="button" class="dlg-opt" data-menu-target="projects"><span class="num">[3]</span><span>Show me your past work first.</span><span class="tail">▶</span></button>
-                <button type="button" class="dlg-opt" id="dlg-netlinks" aria-expanded="false" aria-controls="netlinks-container"><span class="num">[4]</span><span>What are your net channels?</span><span class="tail">▶</span></button>
+                <button type="button" class="dlg-opt" data-scroll-to="#terminal-contact-form"><span class="num">[1]</span><span>I've got a contract for you.</span><span class="tail" aria-hidden="true">▶</span></button>
+                <a href="mailto:ncibiahmed2017@gmail.com" class="dlg-opt"><span class="num">[2]</span><span>Need a direct line — send an email.</span><span class="tail" aria-hidden="true">▶</span></a>
+                <button type="button" class="dlg-opt" data-menu-target="projects"><span class="num">[3]</span><span>Show me your past work first.</span><span class="tail" aria-hidden="true">▶</span></button>
+                <button type="button" class="dlg-opt" id="dlg-netlinks" aria-expanded="false" aria-controls="netlinks-container"><span class="num">[4]</span><span>What are your net channels?</span><span class="tail" aria-hidden="true">▶</span></button>
               </div>
               <div class="netlinks-list" id="netlinks-container"></div>
             </div>
             <form class="dialogue-panel terminal-form" id="terminal-contact-form">
               <div class="speaker">
-                <div class="speaker-avatar terminal-avatar">&gt;_</div>
+                <div class="speaker-avatar terminal-avatar" aria-hidden="true">&gt;_</div>
                 <div><div class="speaker-name">LOCAL BRIEF</div><div class="speaker-role">DEMO CHANNEL // NO SERVER CONNECTION</div></div>
               </div>
               <div class="form-group"><label for="agent-name">// OPERATIVE NAME</label><input type="text" id="agent-name" name="name" autocomplete="name" placeholder="Your name" required /></div>
               <div class="form-group"><label for="agent-freq">// EMAIL FREQUENCY</label><input type="email" id="agent-freq" name="email" autocomplete="email" placeholder="you@example.com" required /></div>
               <div class="form-group"><label for="agent-msg">// MISSION BRIEF</label><textarea id="agent-msg" name="message" rows="4" placeholder="Tell me what you are building..." required></textarea></div>
-              <button type="submit" class="btn-cyber btn-cyber-yellow" id="btn-submit-transmission">PREVIEW BRIEF <span>→</span></button>
+              <button type="submit" class="btn-cyber btn-cyber-yellow" id="btn-submit-transmission">PREVIEW BRIEF <span aria-hidden="true">→</span></button>
               <div class="terminal-console-log" id="terminal-console-log" aria-live="polite"></div>
             </form>
           </div>
@@ -287,15 +228,13 @@
 
         <section class="menu-panel" id="options" data-menu-panel="options" role="tabpanel" aria-labelledby="options-heading" aria-hidden="true">
           <div class="panel-header">
-            <div class="panel-kicker"><span class="kicker-line"></span><span>OPTIONS // SYSTEM SETTINGS</span></div>
             <h1 class="panel-title" id="options-heading">SYSTEM <span>OPTIONS</span></h1>
-            <p class="panel-subtitle">AUDIO // DISPLAY // ACCESSIBILITY</p>
+            <p class="panel-subtitle">AUDIO // CONTROLS // ACCESSIBILITY</p>
           </div>
           <div class="options-grid">
             <div class="option-block">
               <div class="option-heading"><span>01</span><h2>INTERFACE</h2></div>
               <button class="option-row" type="button" data-control="audio" aria-pressed="true"><span><b>SYNTHESIZED SFX</b><small>Procedural interface feedback</small></span><strong data-control-value>ON</strong></button>
-              <button class="option-row" type="button" data-control="crt" aria-pressed="true"><span><b>CRT OVERLAY</b><small>Scanlines and viewport vignette</small></span><strong data-control-value>ON</strong></button>
             </div>
             <div class="option-block">
               <div class="option-heading"><span>02</span><h2>CONTROLS</h2></div>
@@ -303,52 +242,20 @@
             </div>
             <div class="option-block option-block-wide">
               <div class="option-heading"><span>03</span><h2>ABOUT THIS BUILD</h2></div>
-              <p class="about-build">A Cyberpunk 2077-inspired portfolio interface built as a full-screen menu system. Original fan work; unaffiliated with CD PROJEKT RED. Portfolio content and project links belong to their respective owners.</p>
-              <div class="build-stamp">NCIIBI_OS <b>4.0.0</b> // STATIC FRONTEND // NO EXTERNAL STATE</div>
+              <p class="about-build">A Cyberpunk 2077-inspired portfolio interface built as a focused menu system. Original fan work; unaffiliated with CD PROJEKT RED. Portfolio content and project links belong to their respective owners.</p>
+              <div class="build-stamp">NCIIBI_OS 4.0.0 // STATIC FRONTEND // NO EXTERNAL STATE</div>
             </div>
           </div>
         </section>
       </main>
-
-      <aside class="system-rail" aria-label="System status rail">
-        <div class="rail-header"><span>NCIIBI_OS</span><span class="rail-online">ONLINE</span></div>
-        <div class="rail-clock" id="menu-clock">00:00:00</div>
-        <div class="rail-map" aria-label="Night City tactical map">
-          <div class="rail-map-grid"></div>
-          <span class="rail-map-label">NIGHT CITY // NODE 77</span>
-          <span class="rail-map-target">TARGET // CURRENT</span>
-          <span class="rail-map-cross">+</span>
-        </div>
-        <div class="rail-vertical">SECURE CHANNEL // OPERATOR LINK</div>
-        <div class="rail-active">
-          <span>ACTIVE MODULE</span>
-          <strong id="rail-active-module">PROFILE</strong>
-          <small id="rail-active-code">DOSSIER</small>
-        </div>
-        <div class="rail-metrics">
-          <div><span>NET</span><b id="rail-net-value">98%</b></div>
-          <div><span>SYNC</span><b id="rail-sync-value">READY</b></div>
-          <div><span>MODE</span><b>MENU</b></div>
-        </div>
-        <div class="rail-progress" aria-hidden="true"><span>RECORD PROGRESS</span><i><b id="rail-progress-bar"></b></i></div>
-        <div class="rail-footer">USER ID<br /><strong>77-MIL-8849</strong></div>
-      </aside>
     </div>
-
-    <footer class="menu-legend">
-      <span><kbd>↑</kbd><kbd>↓</kbd> NAVIGATE</span>
-      <span><kbd>ENTER</kbd> SELECT</span>
-      <span><kbd>ESC</kbd> BACK</span>
-      <span><kbd>M</kbd> MENU</span>
-      <span class="legend-tail"><i class="status-dot"></i> SECURE UPLINK // <b>NCIIBI</b></span>
-    </footer>
   </div>
 
-  <script src="js/icon-pack.js?v=5" defer></script>
-  <script src="js/portfolio-data.js?v=5" defer></script>
-  <script src="js/cyber-audio.js?v=5" defer></script>
-  <script src="js/main.js?v=5" defer></script>
-  <script src="js/effects.js?v=5" defer></script>
-  <script src="js/github.js?v=5" defer></script>
+  <script src="js/icon-pack.js?v=7" defer></script>
+  <script src="js/portfolio-data.js?v=7" defer></script>
+  <script src="js/cyber-audio.js?v=7" defer></script>
+  <script src="js/main.js?v=7" defer></script>
+  <script src="js/effects.js?v=7" defer></script>
+  <script src="js/github.js?v=7" defer></script>
 </body>
 </html>
