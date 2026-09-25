@@ -3399,7 +3399,7 @@ body::before {
 
 .project-card {
   padding: 17px 18px;
-  background: rgba(10, 14, 21, 0.94);
+  background: rgba(5, 5, 5, 0.94);
   border: 0;
   border-bottom: 1px solid rgba(220, 231, 244, 0.08);
   cursor: pointer;
