@@ -607,12 +607,12 @@ button {
 
 .menu-panel.active {
   display: block;
-  animation: panel-enter 180ms var(--ease) both;
+  animation: panel-enter 260ms var(--ease-snap) both;
 }
 
 @keyframes panel-enter {
-  from { opacity: 0; transform: translateX(6px); }
-  to { opacity: 1; transform: translateX(0); }
+  from { opacity: 0; transform: translateX(10px) scale(0.995); }
+  to { opacity: 1; transform: translateX(0) scale(1); }
 }
 
 .panel-header {
