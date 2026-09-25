@@ -2857,11 +2857,6 @@ button {
     padding: 15px 14px;
   }
 
-  .project-card:hover,
-  .project-card.selected {
-    padding-left: 18px;
-  }
-
   .project-detail-copy h3 {
     font-size: 1.7rem;
   }
