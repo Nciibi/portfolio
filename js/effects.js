@@ -4,7 +4,7 @@
   const motionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
   const finePointerQuery = window.matchMedia("(hover: hover) and (pointer: fine)");
   const stage = document.querySelector(".menu-stage");
-  const interactiveSelector = ".btn-cyber, .menu-tab, .project-card, .bento-card, .skill-chip, .dlg-opt, .netlink-btn, .exp-card, .journey-card, .gh-repo";
+  const interactiveSelector = ".profile-visual, .btn-cyber, .menu-tab, .project-card, .bento-card, .skill-chip, .dlg-opt, .netlink-btn, .exp-card, .journey-card, .gh-repo";
   const tiltSelector = ".project-card, .bento-card, .skill-group, .exp-card, .journey-card, .gh-repo";
   let prefersReduced = motionQuery.matches;
   let revealObserver;
