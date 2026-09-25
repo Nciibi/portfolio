@@ -2836,7 +2836,7 @@ body::before {
 .menu-frame {
   position: relative;
   isolation: isolate;
-  background: #080b11;
+  background: #050505;
 }
 
 .menu-frame::before {
