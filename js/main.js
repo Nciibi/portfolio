@@ -106,7 +106,7 @@ function renderSkills() {
     const hidden = group.level !== activeSkillLevel ? " hidden" : "";
     const chips = group.items.map((skill, chipIndex) => `<span class="skill-chip" data-reveal style="--d:${(chipIndex * 0.035).toFixed(2)}s">${getIcon(skill)}${escapeHtml(skill)}</span>`).join("");
     return `
-      <article class="skill-group${hidden}" data-level="${escapeHtml(group.level)}" data-reveal style="--d:${(index * 0.06).toFixed(2)}s">
+      <article class="skill-group${hidden}" data-level="${escapeHtml(group.level)}" data-reveal aria-hidden="${hidden ? "true" : "false"}"${hidden ? " inert" : ""} style="--d:${(index * 0.06).toFixed(2)}s">
         <div class="sg-head"><span class="sg-level lvl-${escapeHtml(group.level.toLowerCase())}">${escapeHtml(group.level)}</span><h3>${escapeHtml(group.category)}</h3></div>
         <p class="sg-desc">${escapeHtml(group.desc)}</p>
         <div class="sg-chips">${chips}</div>
