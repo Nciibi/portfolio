@@ -737,6 +737,8 @@ button {
 
 .btn-cyber:hover,
 .btn-cyber:focus-visible {
+  letter-spacing: 0.13em;
+  text-shadow: 0 0 12px color-mix(in srgb, var(--button-accent) 48%, transparent);
   outline: none;
 }
 
