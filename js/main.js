@@ -217,6 +217,7 @@ function renderProjects() {
       return;
     }
     const token = ++transitionToken;
+    detail.setAttribute("aria-busy", "true");
     let committed = false;
     const nextLayer = document.createElement("div");
     nextLayer.className = "project-detail-layer is-next";
