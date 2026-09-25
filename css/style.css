@@ -562,11 +562,11 @@ button {
 }
 
 .menu-stage.hud-ready::after {
-  opacity: 0.78;
+  opacity: 0.16;
 }
 
 .menu-stage.is-pointer-active::after {
-  opacity: 1;
+  opacity: 0.92;
 }
 
 .menu-panel {
