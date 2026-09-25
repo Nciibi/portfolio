@@ -529,13 +529,3 @@ function initDialogueOptions() {
   }
 }
 
-function initClock() {
-  const clock = document.getElementById("menu-clock");
-  if (!clock) return;
-  const formatter = new Intl.DateTimeFormat(undefined, { hour: "2-digit", minute: "2-digit", second: "2-digit", hour12: false });
-  const update = () => {
-    clock.textContent = formatter.format(new Date());
-  };
-  update();
-  window.setInterval(update, 1000);
-}
