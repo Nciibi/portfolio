@@ -1965,6 +1965,7 @@ button {
 }
 
 .jy-text {
+  max-width: 78ch;
   color: var(--text-2);
   font-size: 0.92rem;
   line-height: 1.55;
