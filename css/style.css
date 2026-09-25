@@ -1654,6 +1654,12 @@ button {
   overflow: hidden;
 }
 
+.pc-likes {
+  color: var(--yellow);
+  font-family: var(--font-mono);
+  font-size: 0.61rem;
+}
+
 .project-card .pc-likes {
   color: var(--yellow);
   font-family: var(--font-mono);
