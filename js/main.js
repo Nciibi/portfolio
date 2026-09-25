@@ -219,7 +219,8 @@ function renderProjects() {
     nextCopy.innerHTML = projectCopyMarkup(project);
     nextCopy.firstElementChild.classList.add("is-entering");
     const commit = () => {
-      if (token !== transitionToken) return;
+      if (committed || token !== transitionToken) return;
+      committed = true;
       mediaStack.classList.add("is-switching");
       mediaStack.append(nextLayer);
       nextLayer.classList.add("is-visible");
