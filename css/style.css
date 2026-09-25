@@ -2453,14 +2453,12 @@ body.boot-enabled .boot {
 
 [data-reveal] {
   opacity: 0;
-  filter: blur(5px);
   transform: translateY(12px);
-  transition: opacity 0.55s var(--ease) var(--d, 0s), filter 0.55s var(--ease) var(--d, 0s), transform 0.55s var(--ease) var(--d, 0s);
+  transition: opacity 0.55s var(--ease) var(--d, 0s), transform 0.55s var(--ease) var(--d, 0s);
 }
 
 [data-reveal].is-in {
   opacity: 1;
-  filter: none;
   transform: none;
 }
 
@@ -2598,7 +2596,7 @@ body::before {
 
 .ambient-glow-red {
   opacity: 0.16;
-  filter: blur(12px);
+  filter: none;
 }
 
 .ambient-glow-cyan {
@@ -2988,8 +2986,8 @@ body::before {
 }
 
 @keyframes menu-panel-in {
-  from { opacity: 0; transform: translateX(14px) scale(0.995); filter: blur(4px); }
-  to { opacity: 1; transform: translateX(0) scale(1); filter: blur(0); }
+  from { opacity: 0; transform: translateX(14px) scale(0.995); }
+  to { opacity: 1; transform: translateX(0) scale(1); }
 }
 
 .panel-header {
