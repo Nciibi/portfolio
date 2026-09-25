@@ -1842,8 +1842,8 @@ button {
 .exp-period {
   color: var(--red);
   font-family: var(--font-mono);
-  font-size: 0.58rem;
-  letter-spacing: 0.08em;
+  font-size: 0.62rem;
+  letter-spacing: 0.07em;
   text-transform: uppercase;
 }
 
