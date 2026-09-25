@@ -445,6 +445,7 @@ function initMenuTabs() {
     }
 
     if (event.key === "Escape") {
+      if (window.innerWidth <= 900 && document.querySelector(".main-menu.is-mobile-open")) return;
       event.preventDefault();
       if (window.innerWidth <= 900 && typeof setMobileMenuOpen === "function") setMobileMenuOpen(false);
       if (activeId !== "profile") activate("profile", true);
