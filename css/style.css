@@ -1096,7 +1096,7 @@ body.boot-enabled .boot {
   min-height: 350px;
   overflow: hidden;
   background:
-    linear-gradient(135deg, rgba(9, 12, 18, 0.2), rgba(9, 12, 18, 0.83)),
+    linear-gradient(135deg, rgba(16, 11, 14, 0.2), rgba(16, 11, 14, 0.83)),
     url('../assets/proj-citymap.webp') center / cover;
   border: 1px solid rgba(0, 203, 217, 0.32);
   clip-path: polygon(0 0, calc(100% - 26px) 0, 100% 26px, 100% 100%, 0 100%);
