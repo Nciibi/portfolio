@@ -539,6 +539,11 @@ button {
   z-index: 1;
 }
 
+@keyframes top-signal {
+  from { background-position: -60% 0; }
+  to { background-position: 160% 0; }
+}
+
 @keyframes hud-grid-drift {
   from { background-position: 0 0, 0 0, 0 -100%; }
   to { background-position: 44px 44px, 44px 44px, 100% 0; }
