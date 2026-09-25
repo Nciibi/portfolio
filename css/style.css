@@ -189,7 +189,7 @@ body.crt-disabled .crt-overlay {
   position: fixed;
   inset: 0;
   z-index: 20000;
-  display: grid;
+  display: none;
   place-items: center;
   background: #05070b;
   transition: opacity 0.55s var(--ease), visibility 0.55s;
