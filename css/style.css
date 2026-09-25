@@ -1785,9 +1785,11 @@ button {
   display: flex;
   justify-content: space-between;
   gap: 10px;
+  padding-bottom: 11px;
   color: var(--blue);
+  border-bottom: 1px solid var(--line-soft);
   font-family: var(--font-mono);
-  font-size: 0.55rem;
+  font-size: 0.6rem;
   letter-spacing: 0.08em;
   text-transform: uppercase;
 }
