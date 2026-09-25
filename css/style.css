@@ -1132,8 +1132,8 @@ button {
   margin-top: 7px;
   color: var(--text-3);
   font-family: var(--font-mono);
-  font-size: 0.54rem;
-  letter-spacing: 0.1em;
+  font-size: 0.6rem;
+  letter-spacing: 0.08em;
   line-height: 1.3;
   text-transform: uppercase;
 }
