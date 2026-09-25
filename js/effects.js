@@ -179,7 +179,8 @@
   }
 
   function queuePointer(event) {
-    if (!stage || prefersReduced || !finePointerQuery.matches || (event.pointerType && event.pointerType !== "mouse" && event.pointerType !== "pen")) return;
+    const pointerType = event.pointerType || "mouse";
+    if (!stage || prefersReduced || (pointerType !== "mouse" && pointerType !== "pen") || (pointerType === "pen" && !finePointerQuery.matches)) return;
     pendingPointer = {
       x: event.clientX,
       y: event.clientY,
