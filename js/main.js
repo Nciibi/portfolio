@@ -273,6 +273,7 @@ function renderProjects() {
     };
     card.addEventListener("click", choose);
     card.addEventListener("keydown", (event) => {
+      if (event.target.closest("a")) return;
       if (event.key === "Enter" || event.key === " ") {
         event.preventDefault();
         selectProject(card.getAttribute("data-project-id"));
