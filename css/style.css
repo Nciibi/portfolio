@@ -65,7 +65,7 @@ body::before {
   background:
     radial-gradient(circle at 72% 28%, rgba(249, 22, 67, 0.11), transparent 32%),
     radial-gradient(circle at 22% 76%, rgba(0, 203, 217, 0.06), transparent 30%),
-    linear-gradient(135deg, #090b11 0%, #0a0d13 46%, #080a0f 100%);
+    linear-gradient(135deg, #090b11 0%, #0a0d13 46%, #050505 100%);
 }
 
 img {
@@ -92,7 +92,7 @@ button {
 }
 
 ::selection {
-  color: #080a0f;
+  color: #050505;
   background: var(--cyan);
 }
 
@@ -102,7 +102,7 @@ button {
   left: 8px;
   z-index: 30000;
   padding: 8px 12px;
-  color: #080a0f;
+  color: #050505;
   background: var(--yellow);
   font-family: var(--font-mono);
   font-size: 0.72rem;
@@ -317,7 +317,7 @@ body.boot-enabled .boot {
   place-items: center;
   width: 25px;
   height: 25px;
-  color: #080a0f;
+  color: #050505;
   background: var(--red);
   font-size: 0.8rem;
   clip-path: polygon(0 0, calc(100% - 7px) 0, 100% 7px, 100% 100%, 7px 100%, 0 calc(100% - 7px));
@@ -505,7 +505,7 @@ body.boot-enabled .boot {
 }
 
 .menu-tab.active {
-  color: #080a0f;
+  color: #050505;
   background: var(--red);
   border-color: var(--red);
   box-shadow: 0 0 24px rgba(249, 22, 67, 0.16);
@@ -550,7 +550,7 @@ body.boot-enabled .boot {
 }
 
 .menu-tab.active .tab-arrow {
-  color: #080a0f;
+  color: #050505;
 }
 
 .menu-bottom-copy {
@@ -935,7 +935,7 @@ body.boot-enabled .boot {
 }
 
 .btn-cyber-red {
-  color: #080a0f;
+  color: #050505;
   background: var(--red);
   border-color: var(--red);
   box-shadow: 0 0 22px rgba(249, 22, 67, 0.15);
@@ -949,7 +949,7 @@ body.boot-enabled .boot {
 }
 
 .btn-cyber-yellow {
-  color: #080a0f;
+  color: #050505;
   background: var(--yellow);
   border-color: var(--yellow);
 }
@@ -969,7 +969,7 @@ body.boot-enabled .boot {
 
 .btn-cyber-ghost:hover,
 .btn-cyber-ghost:focus-visible {
-  color: #080a0f;
+  color: #050505;
   background: var(--cyan);
   border-color: var(--cyan);
 }
@@ -1444,7 +1444,7 @@ body.boot-enabled .boot {
 
 .lvl.active,
 .exp-tab.active {
-  color: #080a0f;
+  color: #050505;
   background: var(--cyan);
   border-color: var(--cyan);
 }
@@ -1591,7 +1591,7 @@ body.boot-enabled .boot {
   place-items: center;
   min-width: 27px;
   height: 19px;
-  color: #080a0f;
+  color: #050505;
   background: var(--red);
   font-size: 0.59rem;
 }
@@ -2266,7 +2266,7 @@ body.boot-enabled .boot {
 
 .netlink-btn:hover,
 .netlink-btn:focus-visible {
-  color: #080a0f;
+  color: #050505;
   background: var(--cyan);
   border-color: var(--cyan);
   outline: none;
@@ -2717,7 +2717,7 @@ body::before {
 .mobile-menu-toggle:hover,
 .mobile-menu-toggle:focus-visible,
 .mobile-menu-toggle.is-open {
-  color: #080a0f;
+  color: #050505;
   background: var(--yellow);
   border-color: var(--yellow);
   outline: none;
