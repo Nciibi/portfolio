@@ -209,10 +209,14 @@ function renderProjects() {
       card.setAttribute("aria-selected", String(active));
       card.setAttribute("tabindex", active ? "0" : "-1");
     });
-    if (activeProjectId === project.id) return;
+    if (activeProjectId === project.id) {
+      transitionToken += 1;
+      mediaStack.querySelectorAll(".project-detail-layer:not(.is-current)").forEach((layer) => layer.remove());
+      mediaStack.classList.remove("is-switching");
+      return;
+    }
     const token = ++transitionToken;
     let committed = false;
-    const currentLayer = mediaStack.querySelector(".project-detail-layer.is-current");
     const nextLayer = document.createElement("div");
     nextLayer.className = "project-detail-layer is-next";
     nextLayer.innerHTML = projectVisualMarkup(project);
