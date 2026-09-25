@@ -39,7 +39,7 @@ class CyberAudio {
 
   toggleMute() {
     this.isMuted = !this.isMuted;
-    localStorage.setItem("cyber_audio_muted", String(this.isMuted));
+    try { localStorage.setItem("cyber_audio_muted", String(this.isMuted)); } catch (e) {}
     if (this.masterGain && this.ctx) {
       this.masterGain.gain.cancelScheduledValues(this.ctx.currentTime);
       this.masterGain.gain.setValueAtTime(this.isMuted ? 0 : 0.18, this.ctx.currentTime);
