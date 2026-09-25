@@ -2538,7 +2538,7 @@ button {
 
 .form-group input::placeholder,
 .form-group textarea::placeholder {
-  color: var(--text-4);
+  color: var(--text-3);
 }
 
 .form-group input:focus,
