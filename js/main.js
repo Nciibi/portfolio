@@ -473,9 +473,8 @@ function initAudioEvents() {
   });
 }
 
-function initHUDControls() {
+function initInterfaceControls() {
   const audioButtons = Array.from(document.querySelectorAll('[data-control="audio"]'));
-  const crtButtons = Array.from(document.querySelectorAll('[data-control="crt"]'));
   const syncAudio = () => {
     const enabled = !cyberAudio.isMuted;
     audioButtons.forEach((button) => {
@@ -485,28 +484,10 @@ function initHUDControls() {
       if (value) value.textContent = enabled ? "ON" : "OFF";
     });
   };
-  const syncCrt = () => {
-    const enabled = !document.body.classList.contains("crt-disabled");
-    crtButtons.forEach((button) => {
-      button.setAttribute("aria-pressed", String(enabled));
-      button.dataset.controlValue = enabled ? "ON" : "OFF";
-      const value = button.querySelector("[data-control-value]");
-      if (value) value.textContent = enabled ? "ON" : "OFF";
-    });
-  };
-  let crtDisabled = false;
-  try { crtDisabled = localStorage.getItem("cyber_crt_disabled") === "true"; } catch (error) {}
-  document.body.classList.toggle("crt-disabled", crtDisabled);
   syncAudio();
-  syncCrt();
   audioButtons.forEach((button) => button.addEventListener("click", () => {
     cyberAudio.toggleMute();
     syncAudio();
-  }));
-  crtButtons.forEach((button) => button.addEventListener("click", () => {
-    const disabled = document.body.classList.toggle("crt-disabled");
-    try { localStorage.setItem("cyber_crt_disabled", String(disabled)); } catch (error) {}
-    syncCrt();
   }));
 }
 
