@@ -366,6 +366,13 @@ button {
   background: rgba(10, 14, 17, 0.96);
   border-color: var(--line-blue);
   border-left-color: var(--blue);
+  animation: tab-activate 360ms var(--ease) 1;
+}
+
+.menu-tab.active::before {
+  background: var(--blue);
+  transform: scaleX(1);
+  animation: tab-line 360ms var(--ease) 1;
 }
 
 .menu-tab.active::after {
