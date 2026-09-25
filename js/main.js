@@ -355,8 +355,6 @@ function initMenuTabs() {
     const target = event.target;
     const typing = target && (target.tagName === "INPUT" || target.tagName === "TEXTAREA" || target.isContentEditable);
     if (typing || event.defaultPrevented) return;
-    const boot = document.getElementById("boot-screen");
-    if (boot && !boot.classList.contains("is-done")) return;
 
     if (event.key === "m" || event.key === "M") {
       event.preventDefault();
