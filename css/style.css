@@ -63,7 +63,7 @@ body::before {
   z-index: -5;
   content: '';
   background:
-    radial-gradient(circle at 72% 28%, rgba(239, 63, 73, 0.11), transparent 32%),
+    radial-gradient(circle at 72% 28%, rgba(249, 22, 67, 0.11), transparent 32%),
     radial-gradient(circle at 22% 76%, rgba(93, 232, 241, 0.06), transparent 30%),
     linear-gradient(135deg, #090b11 0%, #0a0d13 46%, #080a0f 100%);
 }
@@ -453,7 +453,7 @@ body.boot-enabled .boot {
   height: 2px;
   margin: 11px 0 5px;
   background: var(--red);
-  box-shadow: 0 0 12px rgba(239, 63, 73, 0.55);
+  box-shadow: 0 0 12px rgba(249, 22, 67, 0.55);
 }
 
 .menu-intro-copy {
@@ -508,7 +508,7 @@ body.boot-enabled .boot {
   color: #080a0f;
   background: var(--red);
   border-color: var(--red);
-  box-shadow: 0 0 24px rgba(239, 63, 73, 0.16);
+  box-shadow: 0 0 24px rgba(249, 22, 67, 0.16);
 }
 
 .menu-tab.active::before {
@@ -589,7 +589,7 @@ body.boot-enabled .boot {
   height: 100%;
   content: '';
   pointer-events: none;
-  background: linear-gradient(135deg, transparent 0 62%, rgba(239, 63, 73, 0.045) 62% 63%, transparent 63% 100%);
+  background: linear-gradient(135deg, transparent 0 62%, rgba(249, 22, 67, 0.045) 62% 63%, transparent 63% 100%);
   opacity: 0.8;
 }
 
@@ -769,7 +769,7 @@ body.boot-enabled .boot {
   left: 0;
   height: 1px;
   content: '';
-  background: linear-gradient(90deg, var(--red), rgba(239, 63, 73, 0.2) 28%, var(--line) 70%, transparent);
+  background: linear-gradient(90deg, var(--red), rgba(249, 22, 67, 0.2) 28%, var(--line) 70%, transparent);
 }
 
 .panel-kicker,
@@ -794,7 +794,7 @@ body.boot-enabled .boot {
   width: 27px;
   height: 2px;
   background: var(--red);
-  box-shadow: 0 0 10px rgba(239, 63, 73, 0.6);
+  box-shadow: 0 0 10px rgba(249, 22, 67, 0.6);
 }
 
 .panel-title {
@@ -824,7 +824,7 @@ body.boot-enabled .boot {
   width: 100%;
   height: 1px;
   margin: 20px 0 24px;
-  background: linear-gradient(90deg, var(--red), rgba(239, 63, 73, 0.15) 22%, var(--line) 62%, transparent);
+  background: linear-gradient(90deg, var(--red), rgba(249, 22, 67, 0.15) 22%, var(--line) 62%, transparent);
 }
 
 .panel-endnote {
@@ -938,14 +938,14 @@ body.boot-enabled .boot {
   color: #080a0f;
   background: var(--red);
   border-color: var(--red);
-  box-shadow: 0 0 22px rgba(239, 63, 73, 0.15);
+  box-shadow: 0 0 22px rgba(249, 22, 67, 0.15);
 }
 
 .btn-cyber-red:hover,
 .btn-cyber-red:focus-visible {
   background: var(--red-bright);
   border-color: var(--red-bright);
-  box-shadow: 0 8px 25px rgba(239, 63, 73, 0.22);
+  box-shadow: 0 8px 25px rgba(249, 22, 67, 0.22);
 }
 
 .btn-cyber-yellow {
@@ -1038,7 +1038,7 @@ body.boot-enabled .boot {
   position: absolute;
   inset: 0;
   content: '';
-  background: linear-gradient(112deg, transparent 0 42%, rgba(239, 63, 73, 0.42) 42.2% 42.7%, transparent 43% 100%);
+  background: linear-gradient(112deg, transparent 0 42%, rgba(249, 22, 67, 0.42) 42.2% 42.7%, transparent 43% 100%);
   mix-blend-mode: screen;
 }
 
@@ -2078,7 +2078,7 @@ body.boot-enabled .boot {
   margin-top: 5px;
   border-radius: 50%;
   background: var(--red);
-  box-shadow: 0 0 8px rgba(239, 63, 73, 0.55);
+  box-shadow: 0 0 8px rgba(249, 22, 67, 0.55);
 }
 
 .gh-ev-text {
@@ -2135,7 +2135,7 @@ body.boot-enabled .boot {
   overflow: hidden;
   color: var(--red);
   background: var(--red-dim);
-  border: 1px solid rgba(239, 63, 73, 0.4);
+  border: 1px solid rgba(249, 22, 67, 0.4);
   font-family: var(--font-mono);
   font-size: 1rem;
   clip-path: polygon(0 0, calc(100% - 8px) 0, 100% 8px, 100% 100%, 8px 100%, 0 calc(100% - 8px));
