@@ -291,11 +291,6 @@ function initMenuTabs() {
   const tabs = Array.from(document.querySelectorAll("[data-menu-tab]"));
   const panels = Array.from(document.querySelectorAll("[data-menu-panel]"));
   const validIds = new Set(tabs.map((tab) => tab.getAttribute("data-menu-tab")));
-  const currentIndex = document.getElementById("menu-current-index");
-  const currentLabel = document.getElementById("menu-current-label");
-  const railActiveModule = document.getElementById("rail-active-module");
-  const railActiveCode = document.getElementById("rail-active-code");
-  const railProgressBar = document.getElementById("rail-progress-bar");
   const stage = document.querySelector(".menu-stage");
   let activeId = "profile";
 
