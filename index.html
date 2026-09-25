@@ -6,9 +6,8 @@
   <title>Nciibi | Ahmed Nciibi — Cyberpunk Portfolio</title>
   <meta name="description" content="Ahmed Nciibi — IoT and computer engineering portfolio presented as a Cyberpunk 2077-inspired menu interface." />
   <meta name="theme-color" content="#080a0f" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link rel="stylesheet" href="css/style.css?v=4" />
+  <link rel="stylesheet" href="css/style.css?v=5" />
+  <link rel="preload" as="image" href="assets/avatar.webp" type="image/webp" fetchpriority="high" />
   <link rel="icon" href="favicon.svg" type="image/svg+xml" />
   <link rel="apple-touch-icon" href="favicon.svg" />
   <noscript>
@@ -121,7 +120,7 @@
 
           <div class="profile-layout">
             <div class="profile-copy">
-              <p class="profile-tagline"><span id="type-target"></span><span class="type-caret" aria-hidden="true">▌</span></p>
+              <p class="profile-tagline"><span id="type-target">IoT &amp; embedded systems</span><span class="type-caret" aria-hidden="true">▌</span></p>
               <p class="profile-bio">Building connected systems from firmware to cloud. I care about useful software, resilient infrastructure, and shipping work that survives contact with the real world.</p>
               <div class="profile-actions">
                 <button class="btn-cyber btn-cyber-red" type="button" data-menu-target="projects">VIEW PROJECTS <span>↗</span></button>
@@ -133,7 +132,10 @@
             <div class="profile-visual" aria-label="Abstract cyberpunk profile artwork">
               <div class="visual-grid" aria-hidden="true"></div>
               <div class="visual-image-frame">
-                <img src="assets/avatar.jpg" alt="Abstract cyberpunk profile avatar" />
+                <picture>
+                  <source srcset="assets/avatar.webp" type="image/webp" />
+                  <img src="assets/avatar.jpg" width="768" height="768" decoding="async" fetchpriority="high" alt="Abstract cyberpunk profile avatar" />
+                </picture>
               </div>
               <div class="visual-tag visual-tag-top">CALLSIGN // NCIBI</div>
               <div class="visual-tag visual-tag-bottom">STATUS // AVAILABLE</div>
@@ -222,7 +224,7 @@
           </div>
           <div class="gh-profile">
             <a class="gh-avatar" href="https://github.com/Nciibi" target="_blank" rel="noopener" aria-label="Nciibi on GitHub">
-              <img src="https://avatars.githubusercontent.com/u/214894921?v=4" alt="Nciibi GitHub avatar" loading="lazy" onerror="this.style.display='none'" />
+              <img src="https://avatars.githubusercontent.com/u/214894921?v=4" width="62" height="62" decoding="async" fetchpriority="low" alt="Nciibi GitHub avatar" loading="lazy" onerror="this.style.display='none'" />
               <span class="gh-handle">@Nciibi</span>
             </a>
             <div class="gh-counters">
@@ -256,7 +258,7 @@
           <div class="dialogue-wrap">
             <div class="dialogue-panel">
               <div class="speaker">
-                <div class="speaker-avatar"><img src="assets/avatar.jpg" alt="Abstract profile avatar" /></div>
+                <div class="speaker-avatar"><picture><source srcset="assets/avatar.webp" type="image/webp" /><img src="assets/avatar.jpg" width="64" height="64" loading="lazy" decoding="async" alt="Abstract profile avatar" /></picture></div>
                 <div><div class="speaker-name">AHMED NCIBI</div><div class="speaker-role">IOT &amp; COMPUTER ENGINEERING // AVAILABLE</div></div>
               </div>
               <p class="dialogue-line" id="contact-blurb">What led you here? Pick a direct channel or leave a brief.</p>
@@ -342,11 +344,11 @@
     </footer>
   </div>
 
-  <script src="js/icon-pack.js?v=4"></script>
-  <script src="js/portfolio-data.js?v=4"></script>
-  <script src="js/cyber-audio.js?v=4"></script>
-  <script src="js/github.js?v=4"></script>
-  <script src="js/effects.js?v=4"></script>
-  <script src="js/main.js?v=4"></script>
+  <script src="js/icon-pack.js?v=5" defer></script>
+  <script src="js/portfolio-data.js?v=5" defer></script>
+  <script src="js/cyber-audio.js?v=5" defer></script>
+  <script src="js/main.js?v=5" defer></script>
+  <script src="js/effects.js?v=5" defer></script>
+  <script src="js/github.js?v=5" defer></script>
 </body>
 </html>
