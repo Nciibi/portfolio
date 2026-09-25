@@ -1340,7 +1340,7 @@ button {
   background: rgba(10, 8, 9, 0.94);
   border-bottom: 1px solid var(--line-soft);
   cursor: pointer;
-  transition: background 120ms ease, padding-left 140ms var(--ease), transform 300ms var(--ease-snap), box-shadow 180ms ease;
+  transition: background 120ms ease, transform 300ms var(--ease-snap), box-shadow 180ms ease;
   transform: perspective(900px) rotateX(var(--card-tilt-x, 0deg)) rotateY(var(--card-tilt-y, 0deg));
 }
 
