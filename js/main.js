@@ -228,6 +228,7 @@ function renderProjects() {
     const commit = () => {
       if (committed || token !== transitionToken) return;
       committed = true;
+      detail.setAttribute("aria-busy", "false");
       const currentLayer = mediaStack.querySelector(".project-detail-layer.is-current");
       mediaStack.querySelectorAll(".project-detail-layer:not(.is-current)").forEach((layer) => layer.remove());
       mediaStack.classList.add("is-switching");
