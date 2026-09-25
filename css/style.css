@@ -55,6 +55,7 @@ html {
   background: var(--bg-void);
   font-family: var(--font-body);
   font-size: 16px;
+  font-weight: 500;
   line-height: 1.45;
   -webkit-text-size-adjust: 100%;
 }
