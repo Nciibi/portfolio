@@ -64,7 +64,7 @@ body::before {
   content: '';
   background:
     radial-gradient(circle at 72% 28%, rgba(249, 22, 67, 0.11), transparent 32%),
-    radial-gradient(circle at 22% 76%, rgba(93, 232, 241, 0.06), transparent 30%),
+    radial-gradient(circle at 22% 76%, rgba(0, 203, 217, 0.06), transparent 30%),
     linear-gradient(135deg, #090b11 0%, #0a0d13 46%, #080a0f 100%);
 }
 
@@ -389,7 +389,7 @@ body.boot-enabled .boot {
 .chrome-control:focus-visible,
 .chrome-control[aria-pressed='true'] {
   color: var(--cyan);
-  border-color: rgba(93, 232, 241, 0.52);
+  border-color: rgba(0, 203, 217, 0.52);
   background: var(--cyan-dim);
 }
 
@@ -964,7 +964,7 @@ body.boot-enabled .boot {
 .btn-cyber-ghost {
   color: var(--cyan);
   background: var(--cyan-dim);
-  border-color: rgba(93, 232, 241, 0.4);
+  border-color: rgba(0, 203, 217, 0.4);
 }
 
 .btn-cyber-ghost:hover,
@@ -1007,7 +1007,7 @@ body.boot-enabled .boot {
 .social-link:focus-visible {
   color: var(--cyan);
   background: var(--cyan-dim);
-  border-color: rgba(93, 232, 241, 0.5);
+  border-color: rgba(0, 203, 217, 0.5);
   outline: none;
 }
 
@@ -1029,7 +1029,7 @@ body.boot-enabled .boot {
   background:
     linear-gradient(135deg, rgba(9, 12, 18, 0.2), rgba(9, 12, 18, 0.83)),
     url('../assets/proj-citymap.webp') center / cover;
-  border: 1px solid rgba(93, 232, 241, 0.32);
+  border: 1px solid rgba(0, 203, 217, 0.32);
   clip-path: polygon(0 0, calc(100% - 26px) 0, 100% 26px, 100% 100%, 0 100%);
   box-shadow: inset 0 0 60px rgba(0, 0, 0, 0.54);
 }
@@ -1047,8 +1047,8 @@ body.boot-enabled .boot {
   inset: 0;
   opacity: 0.3;
   background-image:
-    linear-gradient(rgba(93, 232, 241, 0.11) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(93, 232, 241, 0.11) 1px, transparent 1px);
+    linear-gradient(rgba(0, 203, 217, 0.11) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 203, 217, 0.11) 1px, transparent 1px);
   background-size: 26px 26px;
   mask-image: linear-gradient(180deg, black, transparent 85%);
 }
@@ -1343,7 +1343,7 @@ body.boot-enabled .boot {
   padding: 4px 7px;
   color: var(--cyan);
   background: var(--cyan-dim);
-  border: 1px solid rgba(93, 232, 241, 0.2);
+  border: 1px solid rgba(0, 203, 217, 0.2);
   font-family: var(--font-mono);
   font-size: 0.57rem;
   letter-spacing: 0.04em;
@@ -1466,7 +1466,7 @@ body.boot-enabled .boot {
 
 .skill-group:hover {
   background: var(--panel-bright);
-  border-color: rgba(93, 232, 241, 0.48);
+  border-color: rgba(0, 203, 217, 0.48);
 }
 
 .skill-group.hidden {
@@ -1534,7 +1534,7 @@ body.boot-enabled .boot {
 
 .skill-chip:hover {
   color: var(--cyan);
-  border-color: rgba(93, 232, 241, 0.45);
+  border-color: rgba(0, 203, 217, 0.45);
 }
 
 .projects-list {
@@ -1670,7 +1670,7 @@ body.boot-enabled .boot {
 
 .exp-card:hover {
   background: var(--panel-bright);
-  border-color: rgba(93, 232, 241, 0.48);
+  border-color: rgba(0, 203, 217, 0.48);
   transform: translateY(-2px);
 }
 
@@ -1772,7 +1772,7 @@ body.boot-enabled .boot {
 
 .journey-card:hover {
   background: var(--panel-bright);
-  border-color: rgba(93, 232, 241, 0.44);
+  border-color: rgba(0, 203, 217, 0.44);
   transform: translateX(3px);
 }
 
@@ -1824,7 +1824,7 @@ body.boot-enabled .boot {
 }
 
 .gh-live-dot.on { background: var(--green); box-shadow: 0 0 9px rgba(101, 230, 160, 0.8); }
-.gh-live-dot.sync { background: var(--cyan); box-shadow: 0 0 9px rgba(93, 232, 241, 0.8); }
+.gh-live-dot.sync { background: var(--cyan); box-shadow: 0 0 9px rgba(0, 203, 217, 0.8); }
 .gh-live-dot.off { background: var(--yellow); }
 
 .gh-refresh {
@@ -1957,7 +1957,7 @@ body.boot-enabled .boot {
 
 .gh-repo:hover {
   background: var(--panel-bright);
-  border-color: rgba(93, 232, 241, 0.48);
+  border-color: rgba(0, 203, 217, 0.48);
   transform: translateY(-2px);
 }
 
@@ -2218,7 +2218,7 @@ body.boot-enabled .boot {
   padding-left: 12px;
   color: var(--txt);
   background: var(--cyan-dim);
-  border-color: rgba(93, 232, 241, 0.38);
+  border-color: rgba(0, 203, 217, 0.38);
   outline: none;
 }
 
@@ -2257,7 +2257,7 @@ body.boot-enabled .boot {
   padding: 7px 9px;
   color: var(--cyan);
   background: var(--cyan-dim);
-  border: 1px solid rgba(93, 232, 241, 0.28);
+  border: 1px solid rgba(0, 203, 217, 0.28);
   font-family: var(--font-mono);
   font-size: 0.61rem;
   letter-spacing: 0.08em;
@@ -2590,7 +2590,7 @@ body {
 body::before {
   background:
     radial-gradient(circle at 76% 18%, rgba(249, 22, 67, 0.15), transparent 29%),
-    radial-gradient(circle at 36% 78%, rgba(93, 232, 241, 0.08), transparent 34%),
+    radial-gradient(circle at 36% 78%, rgba(0, 203, 217, 0.08), transparent 34%),
     linear-gradient(135deg, #07090e 0%, #090c13 50%, #06080c 100%);
 }
 
@@ -2659,15 +2659,15 @@ body::before {
 
 .topbar-build {
   padding-left: 22px;
-  border-left-color: rgba(93, 232, 241, 0.2);
+  border-left-color: rgba(0, 203, 217, 0.2);
 }
 
 .topbar-readout {
   position: relative;
   padding: 8px 15px;
   color: var(--txt-2);
-  border: 1px solid rgba(93, 232, 241, 0.14);
-  background: rgba(93, 232, 241, 0.035);
+  border: 1px solid rgba(0, 203, 217, 0.14);
+  background: rgba(0, 203, 217, 0.035);
   clip-path: polygon(8px 0, 100% 0, calc(100% - 8px) 100%, 0 100%);
 }
 
@@ -2689,14 +2689,14 @@ body::before {
 .chrome-control {
   min-height: 30px;
   padding: 6px 11px;
-  border-color: rgba(93, 232, 241, 0.2);
+  border-color: rgba(0, 203, 217, 0.2);
   clip-path: polygon(0 0, calc(100% - 7px) 0, 100% 7px, 100% 100%, 7px 100%, 0 calc(100% - 7px));
 }
 
 .chrome-control:hover,
 .chrome-control:focus-visible,
 .chrome-control[aria-pressed='true'] {
-  box-shadow: 0 0 18px rgba(93, 232, 241, 0.12);
+  box-shadow: 0 0 18px rgba(0, 203, 217, 0.12);
 }
 
 .mobile-menu-toggle {
@@ -2742,7 +2742,7 @@ body::before {
   pointer-events: none;
   background:
     linear-gradient(126deg, transparent 0 59%, rgba(249, 22, 67, 0.055) 59.1% 59.35%, transparent 59.45% 100%),
-    linear-gradient(90deg, rgba(249, 22, 67, 0.08), transparent 24%, transparent 78%, rgba(93, 232, 241, 0.035));
+    linear-gradient(90deg, rgba(249, 22, 67, 0.08), transparent 24%, transparent 78%, rgba(0, 203, 217, 0.035));
 }
 
 .menu-frame::after {
@@ -2754,7 +2754,7 @@ body::before {
   width: 1px;
   content: '';
   pointer-events: none;
-  background: linear-gradient(180deg, var(--red), rgba(93, 232, 241, 0.18) 35%, transparent 80%);
+  background: linear-gradient(180deg, var(--red), rgba(0, 203, 217, 0.18) 35%, transparent 80%);
   box-shadow: 0 0 18px rgba(249, 22, 67, 0.2);
 }
 
@@ -2838,8 +2838,8 @@ body::before {
 .menu-tab:hover,
 .menu-tab:focus-visible {
   color: var(--txt);
-  background: rgba(93, 232, 241, 0.06);
-  border-color: rgba(93, 232, 241, 0.35);
+  background: rgba(0, 203, 217, 0.06);
+  border-color: rgba(0, 203, 217, 0.35);
   transform: translateX(4px);
   outline: none;
 }
@@ -2927,7 +2927,7 @@ body::before {
   height: 100%;
   background:
     linear-gradient(135deg, transparent 0 59%, rgba(249, 22, 67, 0.09) 59.1% 59.35%, transparent 59.45% 100%),
-    linear-gradient(180deg, rgba(93, 232, 241, 0.03), transparent 28%);
+    linear-gradient(180deg, rgba(0, 203, 217, 0.03), transparent 28%);
   opacity: 1;
 }
 
@@ -3091,8 +3091,8 @@ body::before {
   background:
     linear-gradient(135deg, rgba(7, 10, 15, 0.08), rgba(7, 10, 15, 0.87)),
     url('../assets/proj-citymap.webp') center / cover;
-  border-color: rgba(93, 232, 241, 0.48);
-  box-shadow: inset 0 0 80px rgba(0, 0, 0, 0.62), 0 0 34px rgba(93, 232, 241, 0.08);
+  border-color: rgba(0, 203, 217, 0.48);
+  box-shadow: inset 0 0 80px rgba(0, 0, 0, 0.62), 0 0 34px rgba(0, 203, 217, 0.08);
 }
 
 .profile-visual::after {
@@ -3101,7 +3101,7 @@ body::before {
   z-index: 3;
   content: '';
   pointer-events: none;
-  background: repeating-linear-gradient(180deg, transparent 0 5px, rgba(93, 232, 241, 0.035) 5px 6px);
+  background: repeating-linear-gradient(180deg, transparent 0 5px, rgba(0, 203, 217, 0.035) 5px 6px);
   mix-blend-mode: screen;
 }
 
@@ -3172,7 +3172,7 @@ body::before {
 
 .skill-levels,
 .exp-tabs {
-  border-bottom-color: rgba(93, 232, 241, 0.2);
+  border-bottom-color: rgba(0, 203, 217, 0.2);
 }
 
 .lvl,
@@ -3300,7 +3300,7 @@ body::before {
   min-height: 192px;
   background-position: center;
   background-size: cover;
-  border-bottom: 1px solid rgba(93, 232, 241, 0.3);
+  border-bottom: 1px solid rgba(0, 203, 217, 0.3);
 }
 
 .project-detail-visual::after {
@@ -3406,7 +3406,7 @@ body::before {
   background:
     linear-gradient(135deg, rgba(6, 10, 15, 0.32), rgba(6, 10, 15, 0.82)),
     url('../assets/proj-citymap.webp') center / cover;
-  border: 1px solid rgba(93, 232, 241, 0.32);
+  border: 1px solid rgba(0, 203, 217, 0.32);
   clip-path: polygon(0 0, calc(100% - 13px) 0, 100% 13px, 100% 100%, 0 100%);
   box-shadow: inset 0 0 24px rgba(0, 0, 0, 0.6);
 }
@@ -3415,7 +3415,7 @@ body::before {
   position: absolute;
   inset: 0;
   content: '';
-  background: repeating-linear-gradient(180deg, transparent 0 4px, rgba(93, 232, 241, 0.06) 4px 5px);
+  background: repeating-linear-gradient(180deg, transparent 0 4px, rgba(0, 203, 217, 0.06) 4px 5px);
   mix-blend-mode: screen;
 }
 
@@ -3424,8 +3424,8 @@ body::before {
   inset: 0;
   opacity: 0.36;
   background-image:
-    linear-gradient(rgba(93, 232, 241, 0.18) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(93, 232, 241, 0.18) 1px, transparent 1px);
+    linear-gradient(rgba(0, 203, 217, 0.18) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 203, 217, 0.18) 1px, transparent 1px);
   background-size: 18px 18px;
 }
 
@@ -3476,8 +3476,8 @@ body::before {
   gap: 4px;
   margin-top: 18px;
   padding: 11px 0 12px;
-  border-top: 1px solid rgba(93, 232, 241, 0.14);
-  border-bottom: 1px solid rgba(93, 232, 241, 0.14);
+  border-top: 1px solid rgba(0, 203, 217, 0.14);
+  border-bottom: 1px solid rgba(0, 203, 217, 0.14);
   font-family: var(--font-mono);
 }
 
