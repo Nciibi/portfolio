@@ -2601,7 +2601,7 @@ body::before {
 
 .ambient-glow-cyan {
   opacity: 0.08;
-  filter: blur(16px);
+  filter: none;
 }
 
 .app-shell {
