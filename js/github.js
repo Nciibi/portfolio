@@ -165,7 +165,18 @@
     return null;
   }
 
+  function ensureRendered() {
+    if (hasRendered) return;
+    hasRendered = true;
+    const cached = readCache();
+    if (cached) render(cached, { mode: 'live', label: '● LIVE — cached session' });
+    else render(GITHUB_SNAPSHOT, { mode: 'off', label: '● SNAPSHOT — ' + (GITHUB_SNAPSHOT.fetched_at || '') });
+  }
+
   async function sync(manual) {
+    if (!manual && syncStarted) return;
+    syncStarted = true;
+    ensureRendered();
     const ctrl = new AbortController();
     const timer = setTimeout(() => ctrl.abort(), 9000);
     if (manual) setBadge('sync', 'SYNCING WITH GITHUB…');
@@ -177,7 +188,7 @@
       render(data, { mode: 'live', label: '● ' + label });
     } catch (e) {
       clearTimeout(timer);
-      if (!manual) render(GITHUB_SNAPSHOT, { mode: 'off', label: '● SNAPSHOT — ' + (GITHUB_SNAPSHOT.fetched_at || '') });
+      if (!manual) setBadge('off', '● OFFLINE — showing snapshot');
       else setBadge('off', '● OFFLINE — showing snapshot');
     }
   }
