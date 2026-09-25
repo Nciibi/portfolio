@@ -208,6 +208,7 @@ button {
 
 .chrome-control,
 .mobile-menu-toggle {
+  position: relative;
   display: inline-flex;
   align-items: center;
   gap: 6px;
@@ -220,7 +221,7 @@ button {
   font-size: 0.6rem;
   letter-spacing: 0.08em;
   clip-path: var(--cut-button);
-  transition: color 120ms ease, background 120ms ease, border-color 120ms ease;
+  transition: color 120ms ease, background 120ms ease, border-color 120ms ease, transform 160ms var(--ease-snap);
 }
 
 .chrome-control:hover,
