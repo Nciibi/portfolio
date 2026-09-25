@@ -299,6 +299,7 @@ function initTyping() {
   if (!target || !lines.length) return;
   target.textContent = lines[0];
   if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  if (new URLSearchParams(window.location.search).get("typing") !== "1") return;
   let lineIndex = 0;
   let charIndex = lines[0].length;
   let deleting = true;
