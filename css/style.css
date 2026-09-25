@@ -1465,8 +1465,8 @@ button {
   gap: 8px;
   color: var(--text-3);
   font-family: var(--font-mono);
-  font-size: 0.57rem;
-  letter-spacing: 0.06em;
+  font-size: 0.62rem;
+  letter-spacing: 0.05em;
 }
 
 .pc-idx {
