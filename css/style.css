@@ -62,18 +62,6 @@ body {
   background: var(--bg-void);
 }
 
-body::before {
-  position: fixed;
-  inset: 0;
-  z-index: -2;
-  content: '';
-  pointer-events: none;
-  background:
-    radial-gradient(circle at 78% 18%, rgba(126, 11, 36, 0.18), transparent 34%),
-    radial-gradient(circle at 20% 86%, rgba(32, 215, 242, 0.035), transparent 30%),
-    linear-gradient(135deg, #0c080a 0%, var(--bg-void) 58%);
-}
-
 img,
 svg {
   display: block;
