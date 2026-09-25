@@ -893,78 +893,142 @@ body.boot-enabled .boot {
 }
 
 .btn-cyber {
+  --button-accent: var(--yellow);
+  --button-glitch: var(--cyan);
   position: relative;
+  isolation: isolate;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 12px;
-  min-height: 42px;
-  padding: 0 18px;
+  min-height: 44px;
+  padding: 0 20px;
+  overflow: hidden;
   color: var(--txt);
-  background: rgba(255, 255, 255, 0.045);
+  background: rgba(5, 5, 5, 0.78);
   border: 1px solid var(--line-strong);
   font-family: var(--font-display);
   font-size: 0.82rem;
   font-weight: 700;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 10px 100%, 0 calc(100% - 10px));
-  transition: color 0.2s ease, background 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s var(--ease);
+  clip-path: polygon(0 0, calc(100% - 12px) 0, 100% 12px, 100% 100%, 12px 100%, 0 calc(100% - 12px));
+  transition: color 0.16s ease, background 0.16s ease, border-color 0.16s ease, box-shadow 0.16s ease, transform 0.16s var(--ease);
 }
 
 .btn-cyber::before {
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 0;
+  inset: -1px;
+  z-index: 2;
+  content: '';
+  pointer-events: none;
+  background: var(--button-glitch);
+  clip-path: inset(72% 0 0);
+  opacity: 0;
+  mix-blend-mode: screen;
+  transform: translateX(-4px);
+}
+
+.btn-cyber::after {
+  position: absolute;
+  top: -1px;
+  left: -1px;
+  width: 24px;
   height: 2px;
   content: '';
-  background: var(--yellow);
-  transition: width 0.25s var(--ease);
+  pointer-events: none;
+  background: var(--button-accent);
+  box-shadow: 0 0 10px var(--button-accent);
+  opacity: 0.9;
+  transform: scaleX(0.4);
+  transform-origin: left;
+  transition: width 0.22s var(--ease), transform 0.22s var(--ease), background 0.16s ease;
 }
 
 .btn-cyber:hover,
 .btn-cyber:focus-visible {
-  transform: translateY(-2px);
   outline: none;
+  transform: translateX(2px);
 }
 
 .btn-cyber:hover::before,
 .btn-cyber:focus-visible::before {
-  width: 100%;
+  animation: button-glitch 420ms steps(2, end) 1;
+}
+
+.btn-cyber:hover::after,
+.btn-cyber:focus-visible::after {
+  width: calc(100% + 2px);
+  transform: scaleX(1);
+}
+
+.btn-cyber:active {
+  transform: translateY(1px);
+}
+
+.btn-cyber > span {
+  color: var(--button-accent);
+  transition: transform 0.16s var(--ease);
+}
+
+.btn-cyber:hover > span,
+.btn-cyber:focus-visible > span {
+  transform: translateX(3px);
+}
+
+@keyframes button-glitch {
+  0% { opacity: 0.85; clip-path: inset(0 0 82% 0); transform: translateX(0); }
+  12% { opacity: 0.65; clip-path: inset(72% 0 0 0); transform: translateX(-4px); }
+  22% { clip-path: inset(72% 0 0 0); transform: translateX(4px); }
+  34% { opacity: 0.5; clip-path: inset(38% 0 42% 0); transform: translateX(-3px); }
+  46% { clip-path: inset(65% 0 15% 0); transform: translateX(3px); }
+  60% { opacity: 0.7; clip-path: inset(18% 0 64% 0); transform: translateX(-2px); }
+  74% { clip-path: inset(50% 0 30% 0); transform: translateX(2px); }
+  88% { opacity: 0.35; clip-path: inset(88% 0 0 0); transform: translateX(0); }
+  100% { opacity: 0; clip-path: inset(100% 0 0 0); transform: translateX(0); }
 }
 
 .btn-cyber-red {
-  color: #050505;
-  background: var(--red);
-  border-color: var(--red);
-  box-shadow: 0 0 22px rgba(249, 22, 67, 0.15);
+  --button-accent: var(--yellow);
+  --button-glitch: var(--red);
+  color: var(--red);
+  background: rgba(249, 22, 67, 0.08);
+  border-color: rgba(249, 22, 67, 0.72);
+  box-shadow: inset 0 0 18px rgba(249, 22, 67, 0.04);
 }
 
 .btn-cyber-red:hover,
 .btn-cyber-red:focus-visible {
-  background: var(--red-bright);
-  border-color: var(--red-bright);
-  box-shadow: 0 8px 25px rgba(249, 22, 67, 0.22);
+  color: #050505;
+  background: var(--red);
+  border-color: var(--red);
+  box-shadow: 0 0 24px rgba(249, 22, 67, 0.2);
 }
 
 .btn-cyber-yellow {
+  --button-accent: var(--red);
+  --button-glitch: var(--cyan);
   color: #050505;
   background: var(--yellow);
   border-color: var(--yellow);
+  box-shadow: 0 0 20px rgba(249, 245, 0, 0.1);
 }
 
 .btn-cyber-yellow:hover,
 .btn-cyber-yellow:focus-visible {
+  color: #050505;
   background: #ffff33;
   border-color: #ffff33;
-  box-shadow: 0 8px 25px rgba(249, 245, 0, 0.2);
+  box-shadow: 0 0 26px rgba(249, 245, 0, 0.22);
 }
 
 .btn-cyber-ghost {
+  --button-accent: var(--yellow);
+  --button-glitch: var(--cyan);
   color: var(--cyan);
-  background: var(--cyan-dim);
-  border-color: rgba(0, 203, 217, 0.4);
+  background: rgba(5, 5, 5, 0.72);
+  border-color: rgba(0, 203, 217, 0.56);
+  box-shadow: inset 0 0 18px rgba(0, 203, 217, 0.03);
 }
 
 .btn-cyber-ghost:hover,
@@ -972,12 +1036,14 @@ body.boot-enabled .boot {
   color: #050505;
   background: var(--cyan);
   border-color: var(--cyan);
+  box-shadow: 0 0 24px rgba(0, 203, 217, 0.18);
 }
 
 .btn-cyber-sm {
-  min-height: 32px;
-  padding: 0 12px;
+  min-height: 34px;
+  padding: 0 13px;
   font-size: 0.68rem;
+  clip-path: polygon(0 0, calc(100% - 8px) 0, 100% 8px, 100% 100%, 8px 100%, 0 calc(100% - 8px));
 }
 
 .hero-socials {
