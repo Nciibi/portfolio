@@ -3084,13 +3084,38 @@ body::before {
   box-shadow: 0 0 14px rgba(249, 22, 67, 0.6);
 }
 
+.menu-panel.active::after {
+  position: absolute;
+  inset: 0 auto 0 0;
+  z-index: 3;
+  width: 120px;
+  content: '';
+  pointer-events: none;
+  background: linear-gradient(90deg, transparent, rgba(0, 203, 217, 0.42), transparent);
+  opacity: 0;
+  transform: translateX(-140px) skewX(-12deg);
+  animation: panel-scan 440ms steps(6, end) 1;
+}
+
 .menu-panel.active {
-  animation: menu-panel-in 0.46s var(--ease) both;
+  animation: menu-panel-in 440ms steps(1, end) both;
 }
 
 @keyframes menu-panel-in {
-  from { opacity: 0; transform: translateX(14px) scale(0.995); }
-  to { opacity: 1; transform: translateX(0) scale(1); }
+  0% { opacity: 0; clip-path: inset(0 100% 0 0); filter: brightness(1.9) saturate(0.25); transform: translateX(-8px); }
+  18% { opacity: 1; clip-path: inset(0 48% 0 0); filter: brightness(1.45) saturate(0.65); transform: translateX(5px); }
+  34% { clip-path: inset(18% 0 62% 0); filter: brightness(1.2) saturate(0.85); transform: translateX(-4px); }
+  50% { clip-path: inset(62% 0 18% 0); filter: brightness(1.12) saturate(0.92); transform: translateX(3px); }
+  68% { clip-path: inset(0 0 0 14%); filter: brightness(1.06); transform: translateX(-1px); }
+  84% { clip-path: inset(0 6% 0 0); filter: brightness(1); transform: translateX(0); }
+  100% { opacity: 1; clip-path: inset(0); filter: brightness(1); transform: translateX(0); }
+}
+
+@keyframes panel-scan {
+  0% { opacity: 0; transform: translateX(-140px) skewX(-12deg); }
+  18% { opacity: 0.8; }
+  72% { opacity: 0.35; }
+  100% { opacity: 0; transform: translateX(calc(100vw + 180px)) skewX(-12deg); }
 }
 
 .panel-header {
