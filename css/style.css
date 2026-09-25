@@ -263,18 +263,20 @@ body.boot-enabled .boot {
 .boot-skip {
   margin-top: 20px;
   padding: 8px 12px;
-  color: var(--txt-3);
-  background: transparent;
-  border: 1px solid var(--line);
+  color: var(--red);
+  background: rgba(5, 5, 5, 0.72);
+  border: 1px solid rgba(249, 22, 67, 0.42);
   font-family: var(--font-mono);
   font-size: 0.64rem;
   letter-spacing: 0.12em;
-  transition: color 0.2s ease, border-color 0.2s ease;
+  clip-path: polygon(0 0, calc(100% - 8px) 0, 100% 8px, 100% 100%, 8px 100%, 0 calc(100% - 8px));
+  transition: color 0.15s ease, border-color 0.15s ease, background 0.15s ease;
 }
 
 .boot-skip:hover,
 .boot-skip:focus-visible {
-  color: var(--cyan);
+  color: #050505;
+  background: var(--cyan);
   border-color: var(--cyan);
 }
 
