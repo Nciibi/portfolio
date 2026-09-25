@@ -297,13 +297,11 @@ function initTyping() {
   const target = document.getElementById("type-target");
   const lines = PORTFOLIO_DATA.profile?.taglines || [];
   if (!target || !lines.length) return;
-  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-    target.textContent = lines[0];
-    return;
-  }
+  target.textContent = lines[0];
+  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
   let lineIndex = 0;
-  let charIndex = 0;
-  let deleting = false;
+  let charIndex = lines[0].length;
+  let deleting = true;
   const tick = () => {
     const line = lines[lineIndex];
     if (!deleting) {
@@ -327,7 +325,12 @@ function initTyping() {
     }
     window.setTimeout(tick, 24);
   };
-  window.setTimeout(tick, 550);
+  const start = () => tick();
+  if (typeof window.requestIdleCallback === "function") {
+    window.requestIdleCallback(start, { timeout: 2200 });
+  } else {
+    window.setTimeout(start, 1800);
+  }
 }
 
 function initMenuTabs() {
