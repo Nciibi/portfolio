@@ -248,6 +248,12 @@ button {
   color: inherit;
 }
 
+.chrome-control [data-control-value] {
+  padding-left: 6px;
+  color: currentColor;
+  border-left: 1px solid currentColor;
+}
+
 .mobile-menu-toggle {
   display: none;
   gap: 7px;
