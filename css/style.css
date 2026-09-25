@@ -1374,7 +1374,6 @@ button {
 }
 
 .project-card.selected {
-  padding-left: 23px;
   background: linear-gradient(90deg, var(--red-faint), rgba(23, 16, 20, 0.94) 52%);
 }
 
