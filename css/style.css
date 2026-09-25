@@ -3105,6 +3105,10 @@ button {
     inset: 14px;
   }
 
+  .projects-list {
+    grid-template-columns: 1fr;
+  }
+
   .project-card {
     min-height: 224px;
     padding: 0;
