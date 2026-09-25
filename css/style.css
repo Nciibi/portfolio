@@ -361,7 +361,7 @@ body.boot-enabled .boot {
   height: 6px;
   border-radius: 50%;
   background: var(--green);
-  box-shadow: 0 0 9px rgba(101, 230, 160, 0.8);
+  box-shadow: 0 0 9px rgba(125, 242, 41, 0.8);
 }
 
 .readout-separator {
@@ -1107,7 +1107,7 @@ body.boot-enabled .boot {
   right: 12px;
   bottom: 12px;
   color: var(--green);
-  border-color: rgba(101, 230, 160, 0.42);
+  border-color: rgba(125, 242, 41, 0.42);
 }
 
 .visual-reticle {
@@ -1823,7 +1823,7 @@ body.boot-enabled .boot {
   box-shadow: 0 0 8px rgba(249, 245, 0, 0.7);
 }
 
-.gh-live-dot.on { background: var(--green); box-shadow: 0 0 9px rgba(101, 230, 160, 0.8); }
+.gh-live-dot.on { background: var(--green); box-shadow: 0 0 9px rgba(125, 242, 41, 0.8); }
 .gh-live-dot.sync { background: var(--cyan); box-shadow: 0 0 9px rgba(0, 203, 217, 0.8); }
 .gh-live-dot.off { background: var(--yellow); }
 
@@ -3333,7 +3333,7 @@ body::before {
   right: 12px;
   bottom: 12px;
   color: var(--green);
-  border-color: rgba(101, 230, 160, 0.42);
+  border-color: rgba(125, 242, 41, 0.42);
 }
 
 .project-detail-copy {
