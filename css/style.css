@@ -970,6 +970,28 @@ button {
   inset: 18px;
   overflow: hidden;
   background: var(--bg-deep);
+  transform: translate3d(var(--hero-x, 0px), var(--hero-y, 0px), 0) scale(1.04);
+  transition: transform 420ms var(--ease-snap);
+}
+
+.visual-image-frame::before {
+  position: absolute;
+  top: -20%;
+  right: 0;
+  left: 0;
+  z-index: 2;
+  height: 18%;
+  content: '';
+  pointer-events: none;
+  background: linear-gradient(180deg, transparent, rgba(121, 237, 255, 0.26), transparent);
+  opacity: 0;
+}
+
+.profile-visual:hover .visual-image-frame::before,
+.profile-visual:focus-within .visual-image-frame::before,
+.profile-visual.is-pointer .visual-image-frame::before {
+  opacity: 1;
+  animation: optical-scan 2.4s ease-in-out infinite;
 }
 
 .visual-image-frame::after {
