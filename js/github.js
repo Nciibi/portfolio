@@ -21,6 +21,8 @@
   const USER = 'Nciibi';
   const CACHE_KEY = 'gh_live_v1';
   const CACHE_MS = 30 * 60 * 1000;
+  let hasRendered = false;
+  let syncStarted = false;
 
   const LANG_COLORS = {
     Python: '#3572A5', Rust: '#DEA584', JavaScript: '#F1E05A', Go: '#00ADD8',
