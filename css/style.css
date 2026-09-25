@@ -2718,6 +2718,12 @@ button {
 
   .main-menu.is-mobile-open {
     display: block;
+    animation: mobile-menu-in 260ms var(--ease-snap) 1;
+  }
+
+  @keyframes mobile-menu-in {
+    from { opacity: 0; transform: translateX(-14px); }
+    to { opacity: 1; transform: translateX(0); }
   }
 
   .menu-nav {
