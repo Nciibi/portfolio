@@ -7,7 +7,8 @@
 class CyberAudio {
   constructor() {
     this.ctx = null;
-    this.isMuted = localStorage.getItem("cyber_audio_muted") === "true";
+    this.isMuted = false;
+    try { this.isMuted = localStorage.getItem("cyber_audio_muted") === "true"; } catch (e) {}
     this.masterGain = null;
     this.initialized = false;
   }
