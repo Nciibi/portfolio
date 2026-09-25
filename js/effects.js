@@ -181,10 +181,12 @@
   function queuePointer(event) {
     const pointerType = event.pointerType || "mouse";
     if (!stage || prefersReduced || (pointerType !== "mouse" && pointerType !== "pen") || (pointerType === "pen" && !finePointerQuery.matches)) return;
+    const origin = event.target instanceof Element ? event.target : null;
     pendingPointer = {
       x: event.clientX,
       y: event.clientY,
-      target: event.target instanceof Element ? event.target.closest(interactiveSelector) : null,
+      target: origin?.closest(interactiveSelector) || null,
+      tilt: origin?.closest(tiltSelector) || null,
     };
     if (!hudFrame) hudFrame = requestAnimationFrame(processPointer);
   }
