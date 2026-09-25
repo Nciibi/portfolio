@@ -516,7 +516,19 @@ button {
 
 .btn-cyber:hover > span,
 .btn-cyber:focus-visible > span {
-  transform: translateX(2px);
+  animation: arrow-tap 300ms var(--ease) 1;
+}
+
+@keyframes button-sheen {
+  0% { opacity: 0; transform: translateX(-120%); }
+  24% { opacity: 0.72; }
+  100% { opacity: 0; transform: translateX(120%); }
+}
+
+@keyframes arrow-tap {
+  0% { transform: translateX(0); }
+  45% { transform: translateX(4px); }
+  100% { transform: translateX(2px); }
 }
 
 .btn-cyber-red {
