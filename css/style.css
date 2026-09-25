@@ -3106,7 +3106,12 @@ button {
   }
 
   .project-card {
-    padding: 15px 14px;
+    min-height: 224px;
+    padding: 0;
+  }
+
+  .project-card-content {
+    padding: 14px;
   }
 
   .project-detail-copy h3 {
