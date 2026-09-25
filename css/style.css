@@ -2434,7 +2434,7 @@ button {
   font-family: var(--font-mono);
   font-size: 0.6rem;
   text-align: right;
-  transition: color 120ms ease;
+  transition: color 120ms ease, transform 180ms var(--ease-snap);
 }
 
 .dlg-opt:hover .tail,
