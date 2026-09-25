@@ -7,12 +7,9 @@ document.addEventListener("DOMContentLoaded", () => {
   renderEducation();
   initMenuTabs();
   initMobileMenu();
-  initTyping();
   initAudioEvents();
-  initHUDControls();
+  initInterfaceControls();
   initDialogueOptions();
-  initClock();
-  document.dispatchEvent(new Event("portfolio:rendered"));
 });
 
 function ensureModuleRendered(id) {
