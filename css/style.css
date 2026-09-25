@@ -2438,8 +2438,18 @@ button {
 }
 
 .dlg-opt:hover .tail,
-.dlg-opt:focus-visible .tail {
+.dlg-opt:focus-visible .tail,
+.dlg-opt[aria-expanded='true'] .tail {
   color: var(--blue);
+}
+
+.dlg-opt[aria-expanded='true'] .tail {
+  color: var(--yellow);
+  transform: rotate(90deg);
+}
+
+.dlg-opt:hover .tail,
+.dlg-opt:focus-visible .tail {
   animation: arrow-tap 300ms var(--ease) 1;
 }
 
