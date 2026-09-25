@@ -1243,8 +1243,8 @@ button {
   margin-bottom: 7px;
   color: var(--red);
   font-family: var(--font-mono);
-  font-size: 0.53rem;
-  letter-spacing: 0.12em;
+  font-size: 0.59rem;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
 }
 
