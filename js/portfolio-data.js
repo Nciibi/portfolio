@@ -72,7 +72,7 @@ const PORTFOLIO_DATA = {
     location: "TUNISIA // REMOTE-READY",
     bio: "Final-year IoT & Computer Engineering student at ISTIC — building connected systems from firmware to cloud. Always learning, always shipping.",
     email: "ncibiahmed2017@gmail.com",
-    avatarImage: "assets/avatar.jpg",
+    avatarImage: "assets/avatar.webp",
     resumeUrl: "#",
     socials: [
       { name: "GITHUB", url: "https://github.com/Nciibi", icon: "github" }

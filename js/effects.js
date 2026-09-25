@@ -313,16 +313,12 @@
     initBoot();
     scanReveals();
     runMeters();
-     initSpy();
-     initStageScroll();
-     initMobileMenu();
+    initStageScroll();
 
-     /* Re-check after fonts, images and 3D assets settle. */
-    [120, 400, 900, 1600, 2600].forEach((ms) => {
-      setTimeout(() => { checkReveals(); runMeters(); }, ms);
-    });
+    const settle = () => { checkReveals(); runMeters(); };
+    window.setTimeout(settle, 900);
     if (document.fonts && document.fonts.ready) {
-      document.fonts.ready.then(() => { checkReveals(); runMeters(); });
+      document.fonts.ready.then(settle);
     }
   }
 
