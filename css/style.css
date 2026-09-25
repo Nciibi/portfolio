@@ -1363,7 +1363,6 @@ button {
 
 .project-card:hover,
 .project-card:focus-visible {
-  padding-left: 23px;
   background: var(--bg-raised);
   outline: none;
 }
