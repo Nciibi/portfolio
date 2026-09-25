@@ -22,6 +22,7 @@
     if (!boot) return;
 
     let finished = false;
+    const requestedBoot = /[?&]boot\b/.test(location.search);
     const alreadyBooted = (() => {
       try {
         if (sessionStorage.getItem("cp_booted") === "1") return true;
@@ -43,12 +44,12 @@
 
     const onKey = (e) => { if (e.key === "Escape") finish(); };
 
-    if (prefersReduced || alreadyBooted) {
-      boot.classList.add("is-done");
-      setTimeout(() => { if (boot.parentNode) boot.parentNode.removeChild(boot); }, 600);
+    if (!requestedBoot || prefersReduced || alreadyBooted) {
+      if (boot.parentNode) boot.parentNode.removeChild(boot);
       return;
     }
 
+    document.body.classList.add("boot-enabled");
     document.body.style.overflow = "hidden";
     window.addEventListener("keydown", onKey);
     if (skip) skip.addEventListener("click", finish);
