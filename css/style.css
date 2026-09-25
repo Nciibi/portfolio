@@ -753,7 +753,13 @@ button {
 }
 
 .btn-cyber:active {
-  transform: translateY(1px);
+  animation: button-impact 180ms var(--ease-snap) 1;
+}
+
+@keyframes button-impact {
+  0% { transform: translateY(0) scale(1); }
+  45% { transform: translateY(1px) scale(0.985); }
+  100% { transform: translateY(0) scale(1); }
 }
 
 .btn-cyber > span {
