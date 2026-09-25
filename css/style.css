@@ -1140,7 +1140,8 @@ button {
   padding: 17px;
   overflow: hidden;
   background: var(--bg-soft);
-  transition: background 120ms ease, border-color 120ms ease;
+  transition: background 120ms ease, border-color 120ms ease, transform 260ms var(--ease-snap);
+  transform: perspective(900px) rotateX(var(--card-tilt-x, 0deg)) rotateY(var(--card-tilt-y, 0deg));
 }
 
 .bento-card::before {
