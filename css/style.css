@@ -2635,13 +2635,13 @@ button {
 
 [data-reveal] {
   opacity: 0;
-  transform: translateY(8px);
-  transition: opacity 220ms var(--ease) var(--d, 0s), transform 220ms var(--ease) var(--d, 0s);
+  translate: 0 8px;
+  transition: opacity 220ms var(--ease) var(--d, 0s), translate 220ms var(--ease) var(--d, 0s);
 }
 
 [data-reveal].is-in {
   opacity: 1;
-  transform: none;
+  translate: 0 0;
 }
 
 @media (max-width: 1180px) {
