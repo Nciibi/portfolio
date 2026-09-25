@@ -213,6 +213,7 @@ function renderProjects() {
       transitionToken += 1;
       mediaStack.querySelectorAll(".project-detail-layer:not(.is-current)").forEach((layer) => layer.remove());
       mediaStack.classList.remove("is-switching");
+      detail.setAttribute("aria-busy", "false");
       return;
     }
     const token = ++transitionToken;
