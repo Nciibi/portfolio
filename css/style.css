@@ -956,8 +956,8 @@ body.boot-enabled .boot {
 
 .btn-cyber-yellow:hover,
 .btn-cyber-yellow:focus-visible {
-  background: #ffe37b;
-  border-color: #ffe37b;
+  background: #ffff33;
+  border-color: #ffff33;
   box-shadow: 0 8px 25px rgba(249, 245, 0, 0.2);
 }
 
