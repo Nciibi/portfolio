@@ -1007,6 +1007,22 @@ button {
   height: 100%;
   object-fit: cover;
   filter: saturate(0.78) contrast(1.08);
+  transform: scale(1.03);
+  transition: transform 520ms var(--ease-snap), filter 260ms ease;
+}
+
+.profile-visual:hover .visual-image-frame img,
+.profile-visual:focus-within .visual-image-frame img,
+.profile-visual.is-pointer .visual-image-frame img {
+  filter: saturate(0.98) contrast(1.12);
+  transform: scale(1.08);
+}
+
+@keyframes optical-scan {
+  0% { transform: translateY(-120%); opacity: 0; }
+  18% { opacity: 1; }
+  72% { opacity: 0.8; }
+  100% { transform: translateY(720%); opacity: 0; }
 }
 
 .profile-metrics {
