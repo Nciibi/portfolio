@@ -2991,8 +2991,32 @@ button {
   outline-offset: 3px;
 }
 
-[data-reveal] {
+  [data-reveal] {
     opacity: 1;
     translate: none;
+  }
+
+  .hud-reticle,
+  .module-signal {
+    display: none !important;
+  }
+
+  .profile-visual,
+  .visual-image-frame,
+  .visual-image-frame img,
+  .project-card,
+  .bento-card,
+  .skill-group,
+  .exp-card,
+  .journey-card,
+  .gh-repo {
+    transform: none !important;
+  }
+
+  .profile-visual::before,
+  .visual-image-frame::before,
+  .project-card::after,
+  .bento-card::after {
+    animation: none !important;
   }
 }
