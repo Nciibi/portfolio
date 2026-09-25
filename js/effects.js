@@ -130,6 +130,10 @@
     if (!target) return;
     target.style.removeProperty("--card-tilt-x");
     target.style.removeProperty("--card-tilt-y");
+    target.style.removeProperty("--hero-x");
+    target.style.removeProperty("--hero-y");
+    target.style.removeProperty("--hero-rotate-x");
+    target.style.removeProperty("--hero-rotate-y");
     target.classList.remove("is-pointer");
   }
 
