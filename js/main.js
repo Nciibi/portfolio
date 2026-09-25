@@ -234,6 +234,10 @@ function renderProjects() {
       detail.querySelector(".project-detail-copy")?.remove();
       detail.append(nextCopy.firstElementChild);
       activeProjectId = project.id;
+      if (window.innerWidth <= 1050) {
+        const reduced = prefersReducedMotion();
+        window.requestAnimationFrame(() => detail.scrollIntoView({ behavior: reduced ? "auto" : "smooth", block: "nearest" }));
+      }
       const settle = () => {
         if (token !== transitionToken) return;
         currentLayer?.remove();
