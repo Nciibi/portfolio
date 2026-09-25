@@ -3711,7 +3711,7 @@ body::before {
   z-index: 100;
   gap: 20px;
   padding: 0 26px;
-  background: linear-gradient(90deg, rgba(5, 5, 5, 0.98), rgba(12, 16, 23, 0.96), rgba(5, 5, 5, 0.98));
+  background: linear-gradient(90deg, rgba(5, 5, 5, 0.98), rgba(16, 11, 14, 0.96), rgba(5, 5, 5, 0.98));
   border-top-color: rgba(249, 22, 67, 0.28);
 }
 
