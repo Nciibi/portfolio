@@ -2406,13 +2406,21 @@ button {
 }
 
 .dlg-opt:hover,
-.dlg-opt:focus-visible {
+.dlg-opt:focus-visible,
+.dlg-opt[aria-expanded='true'] {
   padding-left: 12px;
   color: var(--blue);
   background: var(--blue-faint);
   border-color: var(--line-blue);
   border-left-color: var(--blue);
   outline: none;
+}
+
+.dlg-opt[aria-expanded='true'] {
+  color: var(--yellow);
+  background: rgba(242, 233, 0, 0.08);
+  border-color: rgba(242, 233, 0, 0.42);
+  border-left-color: var(--yellow);
 }
 
 .dlg-opt .num {
