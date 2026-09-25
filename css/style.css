@@ -921,6 +921,48 @@ button {
   background: var(--bg-panel);
   border: 1px solid var(--line);
   clip-path: var(--cut-panel);
+  transform: perspective(1100px) rotateX(var(--hero-rotate-x, 0deg)) rotateY(var(--hero-rotate-y, 0deg));
+  transform-style: preserve-3d;
+  transition: transform 300ms var(--ease-snap), border-color 180ms ease;
+}
+
+.profile-visual::before {
+  position: absolute;
+  inset: 10px;
+  z-index: 3;
+  content: '';
+  pointer-events: none;
+  border: 1px solid rgba(32, 215, 242, 0.58);
+  clip-path: polygon(0 0, 16px 0, 16px 1px, 1px 1px, 1px 16px, 0 16px, 0 100%, 1px 100%, 1px calc(100% - 16px), 0 calc(100% - 16px), 0 0, 100% 0, 100% 16px, calc(100% - 1px) 16px, calc(100% - 1px) 1px, calc(100% - 16px) 1px, calc(100% - 16px) 0, 100% 0, 100% 100%, calc(100% - 1px) 100%, calc(100% - 1px) calc(100% - 16px), calc(100% - 16px) calc(100% - 16px), calc(100% - 16px) 100%, 0 100%);
+  opacity: 0;
+  transform: scale(0.985);
+  transition: opacity 220ms ease, transform 360ms var(--ease-snap);
+}
+
+.profile-visual::after {
+  position: absolute;
+  right: 13px;
+  bottom: 10px;
+  z-index: 4;
+  content: 'OPTICAL FEED // 07';
+  color: var(--blue);
+  font-family: var(--font-mono);
+  font-size: 0.5rem;
+  letter-spacing: 0.1em;
+  opacity: 0.72;
+}
+
+.profile-visual:hover,
+.profile-visual:focus-within,
+.profile-visual.is-pointer {
+  border-color: var(--line-blue);
+}
+
+.profile-visual:hover::before,
+.profile-visual:focus-within::before,
+.profile-visual.is-pointer::before {
+  opacity: 1;
+  transform: scale(1);
 }
 
 .visual-image-frame {
