@@ -148,19 +148,52 @@ function initSkillLevels() {
   });
 }
 
+const projectArtworkMap = Object.freeze({
+  "gh-seagles": "assets/proj-netrunner.webp",
+  "gh-m2m": "assets/proj-citymap.webp",
+  "gh-aios": "assets/proj-neural.webp",
+  "gh-hider": "assets/proj-netrunner.webp",
+});
+
 function projectArtwork(project) {
+  const mapped = project?.id ? projectArtworkMap[project.id] : "";
+  if (mapped) return mapped;
   const category = String(project?.category || "").toLowerCase();
   if (category.includes("ai")) return "assets/proj-neural.webp";
   if (category.includes("p2p") || category.includes("security")) return "assets/proj-netrunner.webp";
   return "assets/proj-citymap.webp";
 }
 
+function projectVisualMarkup(project) {
+  const artwork = escapeHtml(projectArtwork(project));
+  return `<div class="project-detail-visual" style="background-image: linear-gradient(180deg, rgba(8, 10, 15, 0.08), rgba(8, 10, 15, 0.92)), url('${artwork}')"></div>`;
+}
+
+function projectCopyMarkup(project) {
+  const tags = (project.tags || []).map((tag) => `<span class="gig-tag">${getIcon(tag)}${escapeHtml(tag)}</span>`).join("");
+  return `
+    <div class="project-detail-copy">
+      <div class="project-detail-meta"><span>${escapeHtml(project.period)}</span><span>${escapeHtml(project.category)}</span></div>
+      <h3>${escapeHtml(project.title)}</h3>
+      <p>${escapeHtml(project.summary)}</p>
+      <div class="gig-tags">${tags}</div>
+      <a class="btn-cyber btn-cyber-sm btn-cyber-red" href="${safeHref(project.url)}" target="_blank" rel="noopener">OPEN CASE FILE <span aria-hidden="true">↗</span></a>
+    </div>
+  `;
+}
+
 function renderProjects() {
   const wrap = document.getElementById("projects-container");
   const detail = document.getElementById("project-detail");
-  if (!wrap || !PORTFOLIO_DATA.projects) return;
+  const initialProject = PORTFOLIO_DATA.projects?.[0];
+  if (!wrap || !detail || !initialProject) return;
+  detail.innerHTML = `<div class="project-detail-media-stack"><div class="project-detail-layer is-current">${projectVisualMarkup(initialProject)}</div></div>${projectCopyMarkup(initialProject)}`;
+  const mediaStack = detail.querySelector(".project-detail-media-stack");
+  let activeProjectId = initialProject.id;
+  let transitionToken = 0;
+
   const selectProject = (id) => {
-    const project = PORTFOLIO_DATA.projects.find((item) => item.id === id) || PORTFOLIO_DATA.projects[0];
+    const project = PORTFOLIO_DATA.projects.find((item) => item.id === id) || initialProject;
     if (!project) return;
     wrap.querySelectorAll(".project-select").forEach((card) => {
       const active = card.getAttribute("data-project-id") === project.id;
@@ -168,24 +201,48 @@ function renderProjects() {
       card.setAttribute("aria-selected", String(active));
       card.setAttribute("tabindex", active ? "0" : "-1");
     });
-    if (!detail) return;
-    const tags = (project.tags || []).map((tag) => `<span class="gig-tag">${getIcon(tag)}${escapeHtml(tag)}</span>`).join("");
-    detail.innerHTML = `
-      <div class="project-detail-visual" style="background-image: linear-gradient(180deg, rgba(8, 10, 15, 0.08), rgba(8, 10, 15, 0.92)), url('${projectArtwork(project)}')"></div>
-      <div class="project-detail-copy">
-        <div class="project-detail-meta"><span>${escapeHtml(project.period)}</span><span>${escapeHtml(project.category)}</span></div>
-        <h3>${escapeHtml(project.title)}</h3>
-        <p>${escapeHtml(project.summary)}</p>
-        <div class="gig-tags">${tags}</div>
-        <a class="btn-cyber btn-cyber-sm btn-cyber-red" href="${safeHref(project.url)}" target="_blank" rel="noopener">OPEN CASE FILE <span aria-hidden="true">↗</span></a>
-      </div>
-    `;
+    if (activeProjectId === project.id) return;
+    const token = ++transitionToken;
+    const currentLayer = mediaStack.querySelector(".project-detail-layer.is-current");
+    const nextLayer = document.createElement("div");
+    nextLayer.className = "project-detail-layer is-next";
+    nextLayer.innerHTML = projectVisualMarkup(project);
+    const nextCopy = document.createElement("div");
+    nextCopy.innerHTML = projectCopyMarkup(project);
+    nextCopy.firstElementChild.classList.add("is-entering");
+    const commit = () => {
+      if (token !== transitionToken) return;
+      mediaStack.classList.add("is-switching");
+      mediaStack.append(nextLayer);
+      nextLayer.classList.add("is-visible");
+      detail.querySelector(".project-detail-copy")?.remove();
+      detail.append(nextCopy.firstElementChild);
+      activeProjectId = project.id;
+      const settle = () => {
+        if (token !== transitionToken) return;
+        currentLayer?.remove();
+        nextLayer.classList.remove("is-visible");
+        nextLayer.classList.add("is-current");
+        mediaStack.classList.remove("is-switching");
+      };
+      if (prefersReducedMotion()) settle();
+      else window.setTimeout(settle, 300);
+    };
+    const image = new Image();
+    image.decoding = "async";
+    image.src = projectArtwork(project);
+    if (typeof image.decode === "function") image.decode().then(commit).catch(commit);
+    else {
+      image.onload = commit;
+      image.onerror = commit;
+    }
   };
+
   wrap.innerHTML = PORTFOLIO_DATA.projects.map((project, index) => {
     const tags = (project.tags || []).map((tag) => `<span class="gig-tag">${getIcon(tag)}${escapeHtml(tag)}</span>`).join("");
     const idx = String(index + 1).padStart(2, "0");
     return `
-      <article class="project-card project-select${index === 0 ? " selected" : ""}" data-project-id="${escapeHtml(project.id)}" data-reveal style="--d:${(index * 0.07).toFixed(2)}s" role="option" aria-selected="${index === 0}" tabindex="${index === 0 ? 0 : -1}">
+      <article class="project-card project-select${index === 0 ? " selected" : ""}" data-project-id="${escapeHtml(project.id)}" data-hud-label="${escapeHtml(project.title)}" data-reveal style="--d:${(index * 0.07).toFixed(2)}s" role="option" aria-selected="${index === 0}" tabindex="${index === 0 ? 0 : -1}">
         <div class="pc-meta"><span class="pc-idx">${idx}</span><span class="pc-period">${escapeHtml(project.period)}</span><span class="pc-cat">${escapeHtml(project.category)}</span></div>
         <h3 class="pc-title">${escapeHtml(project.title)}</h3>
         <p class="pc-summary">${escapeHtml(project.summary)}</p>
@@ -216,7 +273,6 @@ function renderProjects() {
       selectProject(cards[next].getAttribute("data-project-id"));
     });
   });
-  selectProject(PORTFOLIO_DATA.projects[0]?.id);
 }
 
 let activeExpTab = "CAREER";
