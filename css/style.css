@@ -235,6 +235,8 @@ button {
 }
 
 .chrome-control::after {
+  display: block;
+  flex: none;
   width: 4px;
   height: 4px;
   content: '';
