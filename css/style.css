@@ -549,6 +549,7 @@ button {
 
 .btn-cyber-yellow {
   --button-accent: var(--red);
+  --button-sheen: rgba(255, 255, 255, 0.42);
   color: var(--bg-void);
   background: var(--yellow);
   border-color: var(--yellow);
