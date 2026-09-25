@@ -622,6 +622,9 @@ button {
 }
 
 .panel-title {
+  position: relative;
+  display: inline-block;
+  isolation: isolate;
   color: var(--text);
   font-family: var(--font-display);
   font-size: clamp(3.2rem, 6.4vw, 5.8rem);
@@ -629,6 +632,47 @@ button {
   letter-spacing: 0.035em;
   line-height: 0.9;
   text-transform: uppercase;
+}
+
+.panel-title::before,
+.panel-title::after {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  content: attr(data-text);
+  pointer-events: none;
+  opacity: 0;
+  text-transform: uppercase;
+}
+
+.panel-title::before {
+  color: var(--red-bright);
+}
+
+.panel-title::after {
+  color: var(--blue);
+}
+
+.menu-panel.active .panel-title::before {
+  animation: title-split-red 460ms var(--ease-glitch) 1;
+}
+
+.menu-panel.active .panel-title::after {
+  animation: title-split-blue 460ms var(--ease-glitch) 1;
+}
+
+@keyframes title-split-red {
+  0% { opacity: 0; transform: translateX(0); clip-path: inset(0 100% 0 0); }
+  24% { opacity: 0.85; transform: translateX(-7px); clip-path: inset(0 0 0 0); }
+  55% { opacity: 0.45; transform: translateX(3px); }
+  100% { opacity: 0; transform: translateX(0); clip-path: inset(0 0 0 100%); }
+}
+
+@keyframes title-split-blue {
+  0% { opacity: 0; transform: translateX(0); clip-path: inset(0 0 0 100%); }
+  30% { opacity: 0.8; transform: translateX(8px); clip-path: inset(0 0 0 0); }
+  58% { opacity: 0.35; transform: translateX(-3px); }
+  100% { opacity: 0; transform: translateX(0); clip-path: inset(0 100% 0 0); }
 }
 
 .panel-title span {
