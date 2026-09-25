@@ -210,6 +210,7 @@ function renderProjects() {
     });
     if (activeProjectId === project.id) return;
     const token = ++transitionToken;
+    let committed = false;
     const currentLayer = mediaStack.querySelector(".project-detail-layer.is-current");
     const nextLayer = document.createElement("div");
     nextLayer.className = "project-detail-layer is-next";
