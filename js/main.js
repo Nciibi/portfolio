@@ -129,7 +129,14 @@ function initSkillLevels() {
         item.setAttribute("tabindex", active ? "0" : "-1");
       });
       document.querySelectorAll(".skill-group").forEach((group) => {
-        group.classList.toggle("hidden", group.getAttribute("data-level") !== activeSkillLevel);
+        const visible = group.getAttribute("data-level") === activeSkillLevel;
+        group.classList.toggle("hidden", !visible);
+        group.setAttribute("aria-hidden", String(!visible));
+        group.inert = !visible;
+        if (visible) {
+          group.classList.remove("is-entering");
+          window.requestAnimationFrame(() => group.classList.add("is-entering"));
+        }
       });
       try { cyberAudio.playTab(); } catch (error) {}
       document.dispatchEvent(new Event("portfolio:rendered"));
