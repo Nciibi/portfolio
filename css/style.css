@@ -1210,6 +1210,7 @@ button {
   position: relative;
   min-height: 34px;
   padding: 0 13px;
+  overflow: hidden;
   color: var(--red);
   background: transparent;
   border: 1px solid var(--line);
