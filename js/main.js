@@ -190,6 +190,25 @@ function projectCopyMarkup(project) {
   `;
 }
 
+function projectCardMarkup(project, index) {
+  const tags = (project.tags || []).slice(0, 3).map((tag) => `<span class="gig-tag">${getIcon(tag)}${escapeHtml(tag)}</span>`).join("");
+  const idx = String(index + 1).padStart(2, "0");
+  const artwork = escapeHtml(projectArtwork(project));
+  return `
+    <article class="project-card project-select${index === 0 ? " selected" : ""}" data-project-id="${escapeHtml(project.id)}" data-hud-label="${escapeHtml(project.title)}" data-reveal style="--d:${(index * 0.07).toFixed(2)}s" role="option" aria-selected="${index === 0}" tabindex="${index === 0 ? 0 : -1}">
+      <div class="project-card-visual" style="background-image: linear-gradient(180deg, rgba(5, 5, 7, 0.04) 0%, rgba(5, 5, 7, 0.28) 38%, rgba(5, 5, 7, 0.94) 100%), url('${artwork}')"></div>
+      <span class="pc-ghost-index" aria-hidden="true">${idx}</span>
+      <span class="pc-open" aria-hidden="true">↗</span>
+      <div class="project-card-content">
+        <div class="pc-meta"><span class="pc-idx">${idx}</span><span class="pc-period">${escapeHtml(project.period)}</span><span class="pc-cat">${escapeHtml(project.category)}</span></div>
+        <h3 class="pc-title">${escapeHtml(project.title)}</h3>
+        <p class="pc-summary">${escapeHtml(project.summary)}</p>
+        <div class="pc-footer"><div class="gig-tags">${tags}</div><div class="pc-actions"><span class="pc-likes">♥ ${Number(project.likes) || 0}</span><a class="btn-cyber btn-cyber-sm btn-cyber-ghost" href="${safeHref(project.url)}" target="_blank" rel="noopener">OPEN FILE <span aria-hidden="true">↗</span></a></div></div>
+      </div>
+    </article>
+  `;
+}
+
 function renderProjects() {
   const wrap = document.getElementById("projects-container");
   const detail = document.getElementById("project-detail");
