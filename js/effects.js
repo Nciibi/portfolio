@@ -258,10 +258,8 @@
 
   function handleMotionChange() {
     prefersReduced = motionQuery.matches;
-    if (prefersReduced) {
-      hideHud();
-      revealAll();
-    }
+    if (prefersReduced || !finePointerQuery.matches) hideHud();
+    if (prefersReduced) revealAll();
   }
 
   function init() {
