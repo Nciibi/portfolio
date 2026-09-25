@@ -166,16 +166,13 @@ function renderProjects() {
     if (!detail) return;
     const tags = (project.tags || []).map((tag) => `<span class="gig-tag">${getIcon(tag)}${escapeHtml(tag)}</span>`).join("");
     detail.innerHTML = `
-      <div class="project-detail-visual" style="background-image: linear-gradient(180deg, rgba(8, 10, 15, 0.08), rgba(8, 10, 15, 0.92)), url('${projectArtwork(project)}')">
-        <span class="detail-visual-code">CASE // ${escapeHtml(project.id.replace("gh-", "").toUpperCase())}</span>
-        <span class="detail-visual-status">ARCHIVE READY</span>
-      </div>
+      <div class="project-detail-visual" style="background-image: linear-gradient(180deg, rgba(8, 10, 15, 0.08), rgba(8, 10, 15, 0.92)), url('${projectArtwork(project)}')"></div>
       <div class="project-detail-copy">
         <div class="project-detail-meta"><span>${escapeHtml(project.period)}</span><span>${escapeHtml(project.category)}</span></div>
         <h3>${escapeHtml(project.title)}</h3>
         <p>${escapeHtml(project.summary)}</p>
         <div class="gig-tags">${tags}</div>
-        <a class="btn-cyber btn-cyber-sm btn-cyber-red" href="${safeHref(project.url)}" target="_blank" rel="noopener">OPEN CASE FILE ↗</a>
+        <a class="btn-cyber btn-cyber-sm btn-cyber-red" href="${safeHref(project.url)}" target="_blank" rel="noopener">OPEN CASE FILE <span aria-hidden="true">↗</span></a>
       </div>
     `;
   };
