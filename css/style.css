@@ -1543,6 +1543,15 @@ button {
   padding: 19px;
 }
 
+.project-detail-copy.is-entering {
+  animation: detail-copy-in 360ms var(--ease-snap) 1;
+}
+
+@keyframes detail-copy-in {
+  0% { opacity: 0; transform: translateY(8px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
 .project-detail-meta {
   display: flex;
   justify-content: space-between;
