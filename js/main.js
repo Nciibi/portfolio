@@ -4,6 +4,8 @@ const motionPreference = window.matchMedia("(prefers-reduced-motion: reduce)");
 function prefersReducedMotion() {
   return motionPreference.matches;
 }
+
+document.addEventListener("DOMContentLoaded", () => {
   renderHeroSocials();
   renderStats();
   renderBento();
