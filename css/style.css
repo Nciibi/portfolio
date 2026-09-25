@@ -2893,6 +2893,29 @@ button {
   }
 }
 
+@media (hover: none), (pointer: coarse) {
+  .hud-reticle {
+    display: none;
+  }
+
+  .profile-visual,
+  .visual-image-frame,
+  .project-card,
+  .bento-card,
+  .skill-group,
+  .exp-card,
+  .journey-card,
+  .gh-repo {
+    transform: none;
+  }
+
+  .profile-visual::before,
+  .visual-image-frame::before {
+    opacity: 0;
+    animation: none;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
