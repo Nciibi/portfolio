@@ -478,9 +478,26 @@ button {
   transition: width 140ms var(--ease);
 }
 
+.btn-cyber::after {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  content: '';
+  pointer-events: none;
+  background: linear-gradient(110deg, transparent 0 38%, var(--button-sheen) 48%, transparent 58%);
+  opacity: 0;
+  mix-blend-mode: screen;
+  transform: translateX(-120%);
+}
+
 .btn-cyber:hover,
 .btn-cyber:focus-visible {
   outline: none;
+}
+
+.btn-cyber:hover::after,
+.btn-cyber:focus-visible::after {
+  animation: button-sheen 420ms var(--ease) 1;
 }
 
 .btn-cyber:hover::before,
