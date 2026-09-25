@@ -1240,6 +1240,41 @@ button {
   box-shadow: inset 0 -2px 0 var(--blue);
 }
 
+.lvl::after,
+.exp-tab::after {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  height: 2px;
+  content: '';
+  pointer-events: none;
+  background: var(--yellow);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 180ms var(--ease);
+}
+
+.lvl:hover::after,
+.lvl:focus-visible::after,
+.exp-tab:hover::after,
+.exp-tab:focus-visible::after {
+  transform: scaleX(0.3);
+}
+
+.lvl.active::after,
+.exp-tab.active::after {
+  background: var(--blue);
+  transform: scaleX(1);
+  animation: filter-line 280ms var(--ease) 1;
+}
+
+@keyframes filter-line {
+  0% { opacity: 0; transform: scaleX(0); }
+  40% { opacity: 1; }
+  100% { opacity: 1; transform: scaleX(1); }
+}
+
 .skills-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
