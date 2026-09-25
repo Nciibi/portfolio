@@ -2209,11 +2209,6 @@ button {
     padding-right: 20px;
     padding-left: 20px;
   }
-
-  .system-rail,
-  .menu-legend {
-    display: none;
-  }
 }
 
 @media (max-width: 700px) {
