@@ -1485,12 +1485,39 @@ button {
   clip-path: var(--cut-panel);
 }
 
+.project-detail-media-stack {
+  position: relative;
+  min-height: 210px;
+  overflow: hidden;
+  border-bottom: 1px solid var(--line);
+}
+
+.project-detail-layer {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  pointer-events: none;
+  transform: scale(1.06);
+  transition: opacity 260ms ease, transform 560ms var(--ease-snap);
+}
+
+.project-detail-layer.is-current,
+.project-detail-layer.is-visible {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.project-detail-media-stack.is-switching .project-detail-layer.is-current {
+  opacity: 0;
+  transform: scale(0.98) translateX(-12px);
+}
+
 .project-detail-visual {
   position: relative;
+  height: 100%;
   min-height: 210px;
   background-position: center;
   background-size: cover;
-  border-bottom: 1px solid var(--line);
 }
 
 .project-detail-visual::after {
