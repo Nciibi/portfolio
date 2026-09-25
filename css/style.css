@@ -3109,6 +3109,11 @@ button {
     grid-template-columns: 1fr;
   }
 
+  .project-detail-media-stack,
+  .project-detail-visual {
+    min-height: 230px;
+  }
+
   .project-card {
     min-height: 224px;
     padding: 0;
