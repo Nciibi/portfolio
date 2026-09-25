@@ -538,8 +538,8 @@ button {
 }
 
 @keyframes hud-grid-drift {
-  from { background-position: 0 0, 0 0; }
-  to { background-position: 44px 44px, 44px 44px; }
+  from { background-position: 0 0, 0 0, 0 -100%; }
+  to { background-position: 44px 44px, 44px 44px, 100% 0; }
 }
 
 .module-signal {
