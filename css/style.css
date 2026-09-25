@@ -1671,7 +1671,24 @@ button {
   top: 0;
   min-height: 100%;
   overflow: hidden;
+  background: var(--bg-soft);
+  box-shadow: 0 18px 40px rgba(5, 5, 7, 0.32);
   clip-path: var(--cut-panel);
+}
+
+.project-detail::after {
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  z-index: 5;
+  padding: 4px 6px;
+  color: var(--blue);
+  background: rgba(5, 5, 7, 0.78);
+  border: 1px solid var(--line-blue);
+  content: 'ACTIVE DOSSIER // INSPECT';
+  font-family: var(--font-mono);
+  font-size: 0.5rem;
+  letter-spacing: 0.08em;
 }
 
 .project-detail[aria-busy='true']::before {
