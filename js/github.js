@@ -188,19 +188,15 @@
       render(data, { mode: 'live', label: '● ' + label });
     } catch (e) {
       clearTimeout(timer);
-      if (!manual) setBadge('off', '● OFFLINE — showing snapshot');
-      else setBadge('off', '● OFFLINE — showing snapshot');
+      setBadge('off', '● OFFLINE — showing snapshot');
     }
   }
 
   if (refreshBtn) refreshBtn.addEventListener('click', () => sync(true));
 
-  const cached = readCache();
-  if (cached) {
-    render(cached, { mode: 'live', label: '● LIVE — cached session' });
-  } else {
-    render(GITHUB_SNAPSHOT, { mode: 'off', label: '● SNAPSHOT — ' + (GITHUB_SNAPSHOT.fetched_at || '') });
-  }
-  setBadge('sync', 'SYNCING WITH GITHUB…');
-  sync(false);
+  document.addEventListener('portfolio:module-shown', (event) => {
+    if (!event.detail || event.detail.id !== 'github') return;
+    ensureRendered();
+    sync(false);
+  });
 })();
