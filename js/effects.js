@@ -228,6 +228,7 @@
       }, 0);
     });
     window.addEventListener("blur", hideHud);
+    window.addEventListener("resize", hideHud);
     document.addEventListener("visibilitychange", () => {
       if (document.hidden) hideHud();
     });
