@@ -3090,7 +3090,7 @@ body::before {
   max-width: 1240px;
   padding: 18px 0 14px;
   color: var(--txt-3);
-  border-bottom: 1px solid rgba(220, 231, 244, 0.08);
+  border-bottom: 1px solid rgba(249, 22, 67, 0.08);
 }
 
 .stage-chrome-line {
@@ -3303,7 +3303,7 @@ body::before {
 
 .profile-metrics {
   margin-top: 32px;
-  border-color: rgba(220, 231, 244, 0.16);
+  border-color: rgba(249, 22, 67, 0.16);
   box-shadow: 0 0 22px rgba(0, 0, 0, 0.18);
 }
 
@@ -3344,7 +3344,7 @@ body::before {
 .option-block,
 .dialogue-panel {
   background: rgba(5, 5, 5, 0.96);
-  border-color: rgba(220, 231, 244, 0.12);
+  border-color: rgba(249, 22, 67, 0.12);
 }
 
 .skill-group:hover,
@@ -3365,7 +3365,7 @@ body::before {
 .project-detail {
   min-width: 0;
   background: rgba(7, 11, 16, 0.9);
-  border: 1px solid rgba(220, 231, 244, 0.13);
+  border: 1px solid rgba(249, 22, 67, 0.13);
 }
 
 .project-list-shell {
@@ -3401,7 +3401,7 @@ body::before {
   padding: 17px 18px;
   background: rgba(5, 5, 5, 0.94);
   border: 0;
-  border-bottom: 1px solid rgba(220, 231, 244, 0.08);
+  border-bottom: 1px solid rgba(249, 22, 67, 0.08);
   cursor: pointer;
   clip-path: none;
   transition: background 0.2s ease, padding-left 0.25s var(--ease), box-shadow 0.2s ease;
