@@ -517,16 +517,25 @@ function initMobileMenu() {
       return;
     }
     if (event.key !== "Tab") return;
-    const focusable = Array.from(menu.querySelectorAll("a, button, input, textarea, select, [tabindex]:not([tabindex='-1'])")).filter((element) => !element.disabled);
-    if (!focusable.length) return;
+    const focusable = [toggle, ...Array.from(menu.querySelectorAll("a, button, input, textarea, select, [tabindex]:not([tabindex='-1'])")).filter((element) => !element.disabled)];
     const first = focusable[0];
     const last = focusable[focusable.length - 1];
-    if (event.shiftKey && document.activeElement === first) {
-      event.preventDefault();
-      last.focus();
-    } else if (!event.shiftKey && document.activeElement === last) {
+    const current = focusable.indexOf(document.activeElement);
+    if (current < 0) {
       event.preventDefault();
       first.focus();
+    } else if (event.shiftKey && current === 0) {
+      event.preventDefault();
+      last.focus();
+    } else if (!event.shiftKey && current === focusable.length - 1) {
+      event.preventDefault();
+      first.focus();
+    } else if (!event.shiftKey && current === 0) {
+      event.preventDefault();
+      focusable[1]?.focus();
+    } else if (event.shiftKey && current === focusable.length - 1) {
+      event.preventDefault();
+      focusable[focusable.length - 2]?.focus();
     }
   });
   window.addEventListener("resize", () => {
