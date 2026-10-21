@@ -1,11 +1,16 @@
+/* ==========================================================================
+   effects.js — HUD layer: reticle, tilt, reveal, count-up, panel sweep.
+   ========================================================================== */
 (function () {
   "use strict";
 
   const motionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
   const finePointerQuery = window.matchMedia("(hover: hover) and (pointer: fine)");
   const stage = document.querySelector(".menu-stage");
-  const interactiveSelector = ".btn-cyber, .menu-tab, .chrome-control, .mobile-menu-toggle, .lvl, .exp-tab, .project-card, .dlg-opt, .netlink-btn, .social-link, .gh-repo, .gh-refresh, .option-row";
-  const tiltSelector = ".profile-visual, .project-card, .bento-card, .skill-group, .exp-card, .journey-card, .gh-repo";
+  const interactiveSelector =
+    ".btn-cyber, .menu-tab, .chrome-control, .mobile-menu-toggle, .perk-filter, .codex-filter, .exp-tab, .project-card, .dlg-opt, .netlink-btn, .social-link, .gh-repo, .gh-refresh, .option-row, .perk-node";
+  const tiltSelector = ".profile-visual, .project-card, .bento-card, .exp-card, .journey-card, .gh-repo, .codex-entry, .perk-tree, .dialogue-panel";
+
   let prefersReduced = motionQuery.matches;
   let revealObserver;
   let meterObserver;
@@ -13,9 +18,10 @@
   let hudFrame = 0;
   let pendingPointer = null;
   let reticle;
+  let reticleBox;
   let reticleLabel;
   let activeTiltTarget;
-  let signalTimer;
+  let sweepTimer;
   let initialModule = true;
 
   function animateCount(element) {
@@ -61,67 +67,81 @@
       return;
     }
     if (!revealObserver) {
-      revealObserver = new IntersectionObserver((entries) => {
-        entries.forEach((entry) => {
-          if (!entry.isIntersecting) return;
-          entry.target.classList.add("is-in");
-          revealObserver.unobserve(entry.target);
-        });
-      }, { root: stage, threshold: 0.08, rootMargin: "0px 0px -6% 0px" });
+      revealObserver = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (!entry.isIntersecting) return;
+            entry.target.classList.add("is-in");
+            revealObserver.unobserve(entry.target);
+          });
+        },
+        { root: stage, threshold: 0.08, rootMargin: "0px 0px -6% 0px" }
+      );
     }
     if (!meterObserver) {
-      meterObserver = new IntersectionObserver((entries) => {
-        entries.forEach((entry) => {
-          if (!entry.isIntersecting) return;
-          const element = entry.target;
-          if (element.hasAttribute("data-count")) {
-            element.dataset.counted = "1";
-            animateCount(element);
-          }
-          if (element.hasAttribute("data-fill")) {
-            element.dataset.filled = "1";
-            element.style.width = `${element.getAttribute("data-fill")}%`;
-          }
-          meterObserver.unobserve(element);
-        });
-      }, { root: stage, threshold: 0.12 });
+      meterObserver = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (!entry.isIntersecting) return;
+            const element = entry.target;
+            if (element.hasAttribute("data-count")) {
+              element.dataset.counted = "1";
+              animateCount(element);
+            }
+            if (element.hasAttribute("data-fill")) {
+              element.dataset.filled = "1";
+              element.style.width = `${element.getAttribute("data-fill")}%`;
+            }
+            meterObserver.unobserve(element);
+          });
+        },
+        { root: stage, threshold: 0.12 }
+      );
     }
     if (!journeyObserver) {
-      journeyObserver = new IntersectionObserver((entries) => {
-        entries.forEach((entry) => {
-          if (!entry.isIntersecting) return;
-          entry.target.classList.add("is-in");
-          journeyObserver.unobserve(entry.target);
-        });
-      }, { root: stage, threshold: 0.12 });
+      journeyObserver = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (!entry.isIntersecting) return;
+            entry.target.classList.add("is-in");
+            journeyObserver.unobserve(entry.target);
+          });
+        },
+        { root: stage, threshold: 0.12 }
+      );
     }
     document.querySelectorAll("[data-reveal]:not(.is-in)").forEach((element) => revealObserver.observe(element));
     document.querySelectorAll("[data-count]:not([data-counted]), [data-fill]:not([data-filled])").forEach((element) => meterObserver.observe(element));
     document.querySelectorAll(".journey-timeline:not(.is-in)").forEach((element) => journeyObserver.observe(element));
   }
 
+  /* --- Reticle ------------------------------------------------------------- */
+
   function getTargetLabel(target) {
     if (!target) return "TARGET // STANDBY";
     if (target.matches(".profile-visual")) return "OPTICAL FEED // 07";
     const named = target.getAttribute("aria-label") || target.getAttribute("data-hud-label");
     if (named) return `TARGET // ${named.toUpperCase()}`;
-    const text = target.querySelector(".pc-title, .tab-label, .bento-title, .sg-head h3, .exp-role, .gh-repo-name")?.textContent || target.textContent || "";
+    const text = target.querySelector(".pc-title, .tab-label, .bento-title, .exp-role, .gh-repo-name, .pd-title, .codex-title")?.textContent || target.textContent || "";
     const clean = text.trim().replace(/\s+/g, " ");
     return `TARGET // ${(clean.slice(0, 24) || "LOCK").toUpperCase()}`;
   }
 
   function setReticleTarget(target) {
-    if (!reticle) return;
+    if (!reticleBox) return;
     if (!target || prefersReduced) {
       reticle.classList.remove("is-visible");
       return;
     }
     const rect = target.getBoundingClientRect();
+    const stageRect = stage.getBoundingClientRect();
     const inset = 4;
-    reticle.style.setProperty("--reticle-x", `${Math.max(4, rect.left - inset)}px`);
-    reticle.style.setProperty("--reticle-y", `${Math.max(4, rect.top - inset)}px`);
-    reticle.style.setProperty("--reticle-width", `${Math.max(0, rect.width + inset * 2)}px`);
-    reticle.style.setProperty("--reticle-height", `${Math.max(0, rect.height + inset * 2)}px`);
+    const x = rect.left - stageRect.left - inset;
+    const y = rect.top - stageRect.top - inset;
+    reticleBox.style.setProperty("--reticle-x", `${Math.max(0, x)}px`);
+    reticleBox.style.setProperty("--reticle-y", `${Math.max(0, y)}px`);
+    reticleBox.style.setProperty("--reticle-width", `${Math.max(0, rect.width + inset * 2)}px`);
+    reticleBox.style.setProperty("--reticle-height", `${Math.max(0, rect.height + inset * 2)}px`);
     if (reticleLabel) reticleLabel.textContent = getTargetLabel(target);
     reticle.classList.add("is-visible");
   }
@@ -180,13 +200,13 @@
 
   function queuePointer(event) {
     const pointerType = event.pointerType || "mouse";
-    if (!stage || prefersReduced || (pointerType !== "mouse" && pointerType !== "pen") || (pointerType === "pen" && !finePointerQuery.matches)) return;
+    if (!stage || prefersReduced || (pointerType !== "mouse" && pointerType !== "pen")) return;
     const origin = event.target instanceof Element ? event.target : null;
     pendingPointer = {
       x: event.clientX,
       y: event.clientY,
       target: origin?.closest(interactiveSelector) || null,
-      tilt: origin?.closest(tiltSelector) || null,
+      tilt: origin?.closest(tiltSelector) || null
     };
     if (!hudFrame) hudFrame = requestAnimationFrame(processPointer);
   }
@@ -207,8 +227,9 @@
     reticle = document.createElement("div");
     reticle.className = "hud-reticle";
     reticle.setAttribute("aria-hidden", "true");
-    reticle.innerHTML = '<span class="hud-reticle-label">TARGET // STANDBY</span>';
-    stage.append(reticle);
+    reticle.innerHTML = '<span class="hud-reticle-box"></span><span class="hud-reticle-label">TARGET // STANDBY</span>';
+    stage.appendChild(reticle);
+    reticleBox = reticle.querySelector(".hud-reticle-box");
     reticleLabel = reticle.querySelector(".hud-reticle-label");
     stage.classList.add("hud-ready");
     stage.addEventListener("pointermove", queuePointer, { passive: true });
@@ -236,28 +257,30 @@
     });
   }
 
+  /* --- Panel titles: mirror the text for the chromatic ghost layers -------- */
   function initPanelTitles() {
-    document.querySelectorAll(".panel-title").forEach((title) => {
+    document.querySelectorAll(".glitch-text").forEach((title) => {
+      if (title.dataset.text) return;
       title.dataset.text = title.textContent.trim().replace(/\s+/g, " ");
     });
   }
 
-  function showModuleSignal(event) {
+  /* --- Panel entry: a vertical scan sweep down the new panel -------------- */
+  function showScanSweep() {
     if (!stage || prefersReduced) return;
     if (initialModule) {
       initialModule = false;
       return;
     }
-    const id = event.detail?.id || "profile";
-    stage.querySelector(".module-signal")?.remove();
-    window.clearTimeout(signalTimer);
-    const signal = document.createElement("div");
-    signal.className = "module-signal";
-    signal.dataset.label = `SIGNAL // ${id.toUpperCase()}`;
-    signal.setAttribute("aria-hidden", "true");
-    stage.append(signal);
-    requestAnimationFrame(() => signal.classList.add("is-active"));
-    signalTimer = window.setTimeout(() => signal.remove(), 520);
+    const panel = document.querySelector(".menu-panel.active");
+    if (!panel) return;
+    const sweep = document.createElement("div");
+    sweep.className = "scan-sweep";
+    sweep.setAttribute("aria-hidden", "true");
+    panel.appendChild(sweep);
+    requestAnimationFrame(() => sweep.classList.add("is-active"));
+    window.clearTimeout(sweepTimer);
+    sweepTimer = window.setTimeout(() => sweep.remove(), 1000);
   }
 
   function handleMotionChange() {
@@ -273,7 +296,7 @@
     if (document.fonts?.ready) document.fonts.ready.then(scan);
   }
 
-  document.addEventListener("portfolio:module-shown", showModuleSignal);
+  document.addEventListener("portfolio:module-shown", showScanSweep);
   document.addEventListener("portfolio:rendered", scan);
   window.addEventListener("load", scan);
   if (motionQuery.addEventListener) motionQuery.addEventListener("change", handleMotionChange);

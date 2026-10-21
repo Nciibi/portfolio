@@ -1,0 +1,590 @@
+/* ==========================================================================
+   components.css — the reusable vocabulary of the interface.
+   Buttons, cards, chips, meters, tags, forms, tables, codex entries, HUD
+   readouts, brackets and the datamosh canvas frame.
+   ========================================================================== */
+
+/* ==========================================================================
+   BUTTONS
+   ========================================================================== */
+
+.btn-cyber {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  min-height: 40px;
+  padding: 0 20px;
+  overflow: hidden;
+  color: var(--cp-text);
+  background: var(--cp-surface);
+  border: 1px solid var(--cp-line-soft);
+  font-family: var(--f-tech);
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  clip-path: var(--cut-btn);
+  transition:
+    color var(--t-fast) var(--ease),
+    background var(--t-fast) var(--ease),
+    border-color var(--t-fast) var(--ease),
+    letter-spacing var(--t-med) var(--ease),
+    box-shadow var(--t-med) var(--ease);
+}
+
+.btn-cyber::after {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 40%;
+  content: '';
+  pointer-events: none;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.16), transparent);
+  mix-blend-mode: screen;
+  transform: translateX(-140%);
+  transition: transform var(--t-slow) var(--ease);
+}
+
+.btn-cyber:hover::after,
+.btn-cyber:focus-visible::after {
+  transform: translateX(260%);
+}
+
+.btn-cyber:hover,
+.btn-cyber:focus-visible {
+  border-color: var(--cp-line);
+  letter-spacing: 0.2em;
+  outline: none;
+}
+
+.btn-cyber:active {
+  transform: translateY(1px);
+}
+
+.btn-cyber-yellow {
+  color: var(--cp-black);
+  background: var(--cp-yellow);
+  border-color: var(--cp-yellow);
+  box-shadow: 0 0 18px rgba(252, 238, 10, 0.28);
+}
+
+.btn-cyber-yellow:hover,
+.btn-cyber-yellow:focus-visible {
+  color: var(--cp-black);
+  background: var(--cp-yellow-hot);
+  border-color: var(--cp-yellow-hot);
+  box-shadow: var(--glow-yellow-strong);
+}
+
+.btn-cyber-cyan {
+  color: var(--cp-cyan);
+  background: var(--cp-cyan-a08);
+  border-color: var(--cp-line-cyan);
+}
+
+.btn-cyber-cyan:hover,
+.btn-cyber-cyan:focus-visible {
+  color: var(--cp-cyan);
+  background: var(--cp-cyan-a16);
+  box-shadow: var(--glow-cyan);
+}
+
+.btn-cyber-magenta {
+  color: var(--cp-magenta-hot);
+  background: var(--cp-magenta-a12);
+  border-color: var(--cp-magenta-a40);
+}
+
+.btn-cyber-magenta:hover,
+.btn-cyber-magenta:focus-visible {
+  color: var(--cp-magenta-hot);
+  box-shadow: var(--glow-magenta);
+}
+
+.btn-cyber-ghost {
+  color: var(--cp-text-2);
+  background: transparent;
+  border-color: var(--cp-line-soft);
+}
+
+.btn-cyber-ghost:hover,
+.btn-cyber-ghost:focus-visible {
+  color: var(--cp-yellow);
+  background: var(--cp-yellow-a05);
+}
+
+/* Neomilitarism accent — reserved for destructive / external case files. */
+.btn-cyber-red {
+  color: var(--cp-red-hot);
+  background: var(--cp-red-a16);
+  border-color: var(--cp-red-a40, rgba(197, 0, 60, 0.4));
+}
+
+.btn-cyber-red:hover,
+.btn-cyber-red:focus-visible {
+  color: var(--cp-red-hot);
+  box-shadow: 0 0 16px rgba(197, 0, 60, 0.4);
+}
+
+.btn-cyber-sm {
+  min-height: 30px;
+  padding: 0 13px;
+  font-size: 0.6rem;
+  clip-path: var(--cut-chip);
+}
+
+.btn-cyber-block {
+  width: 100%;
+  justify-content: center;
+}
+
+/* ==========================================================================
+   CARDS
+   ========================================================================== */
+
+.cp-card {
+  position: relative;
+  background: linear-gradient(160deg, var(--cp-surface-2), var(--cp-surface));
+  border: 1px solid var(--cp-line-faint);
+  clip-path: var(--cut-panel-sm);
+  transition:
+    border-color var(--t-med) var(--ease),
+    box-shadow var(--t-med) var(--ease),
+    transform var(--t-med) var(--ease-snap);
+}
+
+.cp-card::before {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 2px;
+  height: 22px;
+  content: '';
+  background: var(--cp-yellow);
+  box-shadow: 0 0 10px rgba(252, 238, 10, 0.6);
+  transition: height var(--t-med) var(--ease);
+}
+
+.cp-card:hover {
+  border-color: var(--cp-line);
+  box-shadow: 0 0 22px rgba(252, 238, 10, 0.08);
+}
+
+.cp-card:hover::before {
+  height: 100%;
+}
+
+/* ==========================================================================
+   CHIPS + TAGS
+   ========================================================================== */
+
+.chip-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  color: var(--cp-text-2);
+  background: var(--cp-yellow-a05);
+  border: 1px solid var(--cp-line-faint);
+  font-family: var(--f-mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.08em;
+  clip-path: var(--cut-chip);
+  transition:
+    color var(--t-fast) var(--ease),
+    background var(--t-fast) var(--ease),
+    border-color var(--t-fast) var(--ease);
+}
+
+.chip .ico {
+  width: 12px;
+  height: 12px;
+  color: var(--cp-yellow);
+}
+
+.chip:hover {
+  color: var(--cp-yellow);
+  background: var(--cp-yellow-a16);
+  border-color: var(--cp-line);
+}
+
+.chip.is-cyan {
+  background: var(--cp-cyan-a08);
+  border-color: var(--cp-cyan-a16);
+}
+
+.chip.is-cyan .ico {
+  color: var(--cp-cyan);
+}
+
+/* ==========================================================================
+   METERS — the CP2077 attribute bars
+   ========================================================================== */
+
+.meter {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.meter-track {
+  position: relative;
+  flex: 1;
+  height: 7px;
+  overflow: hidden;
+  background: rgba(244, 242, 236, 0.07);
+  clip-path: polygon(0 0, 100% 0, calc(100% - 5px) 100%, 0 100%);
+}
+
+.meter-fill {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 0;
+  background: linear-gradient(90deg, var(--cp-yellow-deep), var(--cp-yellow));
+  box-shadow: 0 0 12px rgba(252, 238, 10, 0.6);
+  transition: width 700ms var(--ease-snap);
+}
+
+.meter-fill.is-cyan {
+  background: linear-gradient(90deg, var(--cp-cyan-deep), var(--cp-cyan));
+  box-shadow: 0 0 12px rgba(0, 240, 255, 0.6);
+}
+
+.meter-fill.is-magenta {
+  background: linear-gradient(90deg, #8a0024, var(--cp-magenta));
+  box-shadow: 0 0 12px rgba(255, 0, 68, 0.6);
+}
+
+.meter-pips {
+  display: flex;
+  gap: 3px;
+}
+
+.meter-pips i {
+  width: 7px;
+  height: 7px;
+  background: rgba(244, 242, 236, 0.1);
+  clip-path: polygon(50% 0, 100% 25%, 100% 75%, 50% 100%, 0 75%, 0 25%);
+  transition: background var(--t-med) var(--ease), box-shadow var(--t-med) var(--ease);
+}
+
+.meter-pips i.on {
+  background: var(--cp-yellow);
+  box-shadow: 0 0 8px rgba(252, 238, 10, 0.8);
+}
+
+.meter-pips.is-cyan i.on {
+  background: var(--cp-cyan);
+  box-shadow: 0 0 8px rgba(0, 240, 255, 0.8);
+}
+
+.meter-pips.is-magenta i.on {
+  background: var(--cp-magenta);
+  box-shadow: 0 0 8px rgba(255, 0, 68, 0.8);
+}
+
+/* ==========================================================================
+   HEX PIPS — level badge
+   ========================================================================== */
+
+.hex-badge {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 68px;
+  height: 68px;
+  color: var(--cp-black);
+  background: var(--cp-yellow);
+  font-family: var(--f-dots);
+  font-size: 1.5rem;
+  clip-path: polygon(50% 0, 100% 25%, 100% 75%, 50% 100%, 0 75%, 0 25%);
+  filter: drop-shadow(0 0 16px rgba(252, 238, 10, 0.55));
+}
+
+.hex-badge.is-cyan {
+  background: var(--cp-cyan);
+  filter: drop-shadow(0 0 16px rgba(0, 240, 255, 0.55));
+}
+
+.hex-badge.is-magenta {
+  background: var(--cp-magenta);
+  color: #fff;
+  filter: drop-shadow(0 0 16px rgba(255, 0, 68, 0.55));
+}
+
+.hex-badge-lg {
+  width: 92px;
+  height: 92px;
+  font-size: 2rem;
+}
+
+/* ==========================================================================
+   TAGS
+   ========================================================================== */
+
+.tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 3px 8px;
+  color: var(--cp-cyan);
+  background: var(--cp-cyan-a08);
+  border: 1px solid var(--cp-cyan-a16);
+  font-family: var(--f-mono);
+  font-size: 0.56rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  clip-path: var(--cut-chip);
+}
+
+.tag .ico {
+  width: 11px;
+  height: 11px;
+}
+
+.tag.is-yellow {
+  color: var(--cp-yellow);
+  background: var(--cp-yellow-a08);
+  border-color: var(--cp-yellow-a16);
+}
+
+.tag.is-magenta {
+  color: var(--cp-magenta-hot);
+  background: var(--cp-magenta-a12);
+  border-color: var(--cp-magenta-a40);
+}
+
+/* Project / case-file tag. Same language as .tag, slightly denser. */
+.gig-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 3px 8px;
+  color: var(--cp-cyan);
+  background: var(--cp-cyan-a08);
+  border: 1px solid var(--cp-cyan-a16);
+  font-family: var(--f-mono);
+  font-size: 0.55rem;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  clip-path: var(--cut-chip);
+}
+
+.gig-tag .ico {
+  width: 11px;
+  height: 11px;
+  flex: none;
+  color: var(--cp-cyan);
+}
+
+/* Dossier tag inside the bento cards. */
+.bento-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 3px 8px;
+  color: var(--cp-text-3);
+  background: rgba(244, 242, 236, 0.04);
+  border: 1px solid var(--cp-line-faint);
+  font-family: var(--f-mono);
+  font-size: 0.53rem;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  clip-path: var(--cut-chip);
+}
+
+.bento-tag .ico {
+  width: 11px;
+  height: 11px;
+  flex: none;
+  color: var(--cp-yellow);
+}
+
+/* ==========================================================================
+   STATUS PILLS
+   ========================================================================== */
+
+.status-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 5px 11px;
+  color: var(--cp-text-2);
+  background: rgba(244, 242, 236, 0.03);
+  border: 1px solid var(--cp-line-faint);
+  font-family: var(--f-mono);
+  font-size: 0.56rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  clip-path: var(--cut-chip);
+}
+
+.status-pill::before {
+  width: 5px;
+  height: 5px;
+  content: '';
+  background: var(--cp-cyan);
+  box-shadow: 0 0 8px currentColor;
+  clip-path: polygon(50% 0, 100% 50%, 50% 100%, 0 50%);
+}
+
+.status-pill.is-warn::before {
+  background: var(--cp-amber);
+}
+
+.status-pill.is-danger::before {
+  background: var(--cp-magenta);
+}
+
+.status-pill.is-good::before {
+  background: var(--cp-green);
+}
+
+/* ==========================================================================
+   FORMS
+   ========================================================================== */
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.form-group label {
+  color: var(--cp-cyan);
+  font-family: var(--f-mono);
+  font-size: 0.58rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  padding: 10px 12px;
+  color: var(--cp-text);
+  background: rgba(0, 0, 0, 0.55);
+  border: 1px solid var(--cp-line-soft);
+  font-family: var(--f-mono);
+  font-size: 0.78rem;
+  clip-path: var(--cut-chip);
+  transition: border-color var(--t-fast) var(--ease), box-shadow var(--t-fast) var(--ease);
+}
+
+.form-group textarea {
+  min-height: 96px;
+  resize: vertical;
+  line-height: 1.6;
+}
+
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+  color: var(--cp-text-4);
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  border-color: var(--cp-cyan);
+  box-shadow: 0 0 14px rgba(0, 240, 255, 0.2);
+  outline: none;
+}
+
+.form-group input:focus-visible,
+.form-group textarea:focus-visible {
+  outline: none;
+}
+
+/* ==========================================================================
+   TERMINAL OUTPUT
+   ========================================================================== */
+
+.terminal-log {
+  min-height: 74px;
+  padding: 12px 14px;
+  color: var(--cp-cyan);
+  background: rgba(0, 0, 0, 0.7);
+  border: 1px solid var(--cp-line-soft);
+  font-family: var(--f-mono);
+  font-size: 0.68rem;
+  line-height: 1.7;
+  white-space: pre-wrap;
+  word-break: break-word;
+  clip-path: var(--cut-chip);
+  opacity: 0;
+  transform: translateY(6px);
+  transition: opacity var(--t-med) var(--ease), transform var(--t-med) var(--ease);
+}
+
+.terminal-log.is-active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.terminal-caret {
+  display: inline-block;
+  width: 7px;
+  height: 1em;
+  margin-left: 2px;
+  vertical-align: -0.15em;
+  background: var(--cp-yellow);
+  animation: caret-blink 1.05s steps(2, start) infinite;
+}
+
+/* ==========================================================================
+   EMPTY STATE
+   ========================================================================== */
+
+.empty-state {
+  padding: 30px;
+  color: var(--cp-text-4);
+  border: 1px dashed var(--cp-line-faint);
+  font-family: var(--f-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.14em;
+  text-align: center;
+  text-transform: uppercase;
+  clip-path: var(--cut-panel-sm);
+}
+
+/* ==========================================================================
+   SCROLL REVEAL / BOOT STRIP
+   ========================================================================== */
+
+.kv-grid {
+  display: grid;
+  grid-template-columns: minmax(120px, 30%) 1fr;
+  gap: 0;
+  border-top: 1px solid var(--cp-line-faint);
+}
+
+.kv-grid dt {
+  padding: 8px 12px 8px 0;
+  color: var(--cp-text-4);
+  border-bottom: 1px solid var(--cp-line-faint);
+  font-family: var(--f-mono);
+  font-size: 0.58rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.kv-grid dd {
+  padding: 8px 0;
+  color: var(--cp-text);
+  border-bottom: 1px solid var(--cp-line-faint);
+  font-family: var(--f-body);
+  font-size: 0.92rem;
+  font-weight: 600;
+}

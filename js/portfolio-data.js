@@ -21,6 +21,7 @@ const ICON_SLUGS = {
   "C": "c",
   "Java": "java",
   "Go": "go",
+  "Golang": "go",
   "Rust": "rust",
   "Kotlin": "kotlin",
   "Next.js": "nextdotjs",
@@ -36,24 +37,33 @@ const ICON_SLUGS = {
   "FastAPI": "fastapi",
   "Git": "git",
   "Linux": "linux",
-  "Networks": null,
-  "Dart": null,
+  "Networks": "node",
+  "Dart": "node",
   "Figma": "figma",
   "GitHub": "github",
+  "GITHUB": "github",
+  "EMAIL": "mail",
   "Vite": "vite",
   "Electron": "electron",
-  "ElevenLabs": null,
+  "ElevenLabs": "node",
   "Gemini": "googlegemini",
   "OpenAI": "openai",
   "Ruby": "ruby",
   "Rails": "rubyonrails",
   "PowerBI": "powerbi",
-  "Taipy": null,
+  "Taipy": "python",
   "Google Cloud": "googlecloud",
   "Wikipedia": "wikipedia",
-  "GBIF": null,
+  "GBIF": "node",
   "D3": "d3js",
-  "AI": null
+  "AI": "chip",
+  "IoT": "chip",
+  "CVE": "shield",
+  "P2P": "signal",
+  "E2EE": "shield",
+  "Agents": "chip",
+  "C2": "shield",
+  "Stego": "eye"
 };
 
 const PORTFOLIO_DATA = {
@@ -140,30 +150,186 @@ const PORTFOLIO_DATA = {
     }
   ],
 
+  /* Perks — the four neural trees, mapped to CP2077-style perk nodes. */
   skills: [
     {
+      id: "core",
       category: "CORE STACK",
       level: "PROFICIENT",
+      tier: "TIER 3",
       desc: "Daily drivers — the languages and backend I design and ship in.",
-      items: ["Python", "C", "JavaScript", "Express"]
+      items: [
+        { name: "Python", note: "Primary language for data, automation and AI work. Shipped in production pipelines and research tooling." },
+        { name: "C", note: "Embedded and systems work — reading, tuning and writing firmware-adjacent code." },
+        { name: "JavaScript", note: "Full-stack web, real-time interfaces and browser-side tooling." },
+        { name: "Express", note: "HTTP and API layers for Node services, with auth, queues and rate limiting." }
+      ]
     },
     {
+      id: "software",
       category: "SOFTWARE DEVELOPMENT",
       level: "INTERMEDIATE",
+      tier: "TIER 2",
       desc: "Programming across mobile, web and systems.",
-      items: ["Kotlin", "TypeScript", "Dart", "Rust", "C++"]
+      items: [
+        { name: "Kotlin", note: "Android and backend services. Multiplatform work with coroutines and structured concurrency." },
+        { name: "TypeScript", note: "Typed frontend and Node projects — generics, strict mode, typed contracts." },
+        { name: "Dart", note: "Flutter and cross-platform UI work." },
+        { name: "Rust", note: "Systems and security tooling — ownership, zero-cost abstractions, no GC." },
+        { name: "C++", note: "Performance-sensitive work and competitive programming foundations." }
+      ]
     },
     {
+      id: "systems",
       category: "SYSTEMS & NETWORKS",
       level: "PROFICIENT",
+      tier: "TIER 3",
       desc: "Where my systems live — servers, version control and networks.",
-      items: ["Linux", "Git", "Networks"]
+      items: [
+        { name: "Linux", note: "Server administration, hardening, services and shell automation." },
+        { name: "Git", note: "Branching strategy, code review culture and clean history." },
+        { name: "Networks", note: "TCP/IP, DNS, subnets, routing and traffic analysis." }
+      ]
     },
     {
+      id: "devops",
       category: "DEVOPS TOOLING",
       level: "BEGINNER",
+      tier: "TIER 1",
       desc: "Currently levelling up — containers and in-memory data.",
-      items: ["Docker", "Redis"]
+      items: [
+        { name: "Docker", note: "Container images, compose stacks and reproducible dev environments." },
+        { name: "Redis", note: "Caching, sessions and simple pub/sub patterns." }
+      ]
+    }
+  ],
+
+  /* Character sheet — the CP2077 character screen. */
+  character: {
+    alias: "NCIBI",
+    realName: "AHMED NCIBI",
+    handle: "@Nciibi",
+    title: "OPERATIVE",
+    affiliation: "FREE AGENT",
+    level: 7,
+    xp: 62,
+    xpNext: 100,
+    cred: "1.2K",
+    humanity: 47,
+    cyberpsychosis: 12,
+    attributes: [
+      { key: "COOL", jp: "魅力", value: 8, max: 10, note: "Composure under fire — clean code and calm incident response." },
+      { key: "INTELLIGENCE", jp: "智力", value: 9, max: 10, note: "Research, architecture and learning velocity." },
+      { key: "BODY", jp: "体力", value: 6, max: 10, note: "Hardware, embedded work and on-site debugging." },
+      { key: "REFLEXES", jp: "反射", value: 7, max: 10, note: "Fast iteration — ship, measure, fix, ship again." },
+      { key: "TECHNICAL", jp: "技術", value: 8, max: 10, note: "Systems, security research and infrastructure design." },
+      { key: "LUCK", jp: "運", value: 5, max: 10, note: "Finding the shortcut nobody else bothered to look for." }
+    ],
+    statusEffects: [
+      { label: "CHRONIC LACK OF SLEEP", tone: "warn" },
+      { label: "TOO MUCH TECH", tone: "cool" },
+      { label: "OPEN TO WORK", tone: "good" },
+      { label: "SHIPPING", tone: "good" }
+    ]
+  },
+
+  /* Codex — journal-style records. */
+  codex: [
+    {
+      cat: "CERTIFICATION",
+      icon: "certificate",
+      title: "AWS Certified Solutions Architect — Associate",
+      note: "Cloud architecture, resilient design and cost-optimised infrastructure.",
+      year: "2025",
+      badge: "ACTIVE"
+    },
+    {
+      cat: "AWARD",
+      icon: "trophy",
+      title: "Best Student of the Year",
+      note: "Mongolian National University — awarded across the full graduating cohort.",
+      year: "2025",
+      badge: "DISTINCTION"
+    },
+    {
+      cat: "AWARD",
+      icon: "trophy",
+      title: "FIBO Cloud Scholarship",
+      note: "Selected among more than 200 applicants for cloud and infrastructure work.",
+      year: "2025",
+      badge: "SCHOLARSHIP"
+    },
+    {
+      cat: "AWARD",
+      icon: "trophy",
+      title: "Best Academic Graduate",
+      note: "Top of the Bachelor in Information Technology programme, GPA 3.7.",
+      year: "2026",
+      badge: "DISTINCTION"
+    },
+    {
+      cat: "LANGUAGE",
+      icon: "language",
+      title: "English — C1 Advanced (IELTS 7.0)",
+      note: "Working language for research, documentation and international teams.",
+      year: "2024",
+      badge: "C1"
+    },
+    {
+      cat: "LANGUAGE",
+      icon: "language",
+      title: "Japanese — JLPT N3",
+      note: "Completed a one-month internship in Japan, working entirely in Japanese.",
+      year: "2025",
+      badge: "N3"
+    },
+    {
+      cat: "LANGUAGE",
+      icon: "language",
+      title: "Mongolian — Native",
+      note: "First language. Studied and graduated in Ulaanbaatar.",
+      year: "—",
+      badge: "NATIVE"
+    },
+    {
+      cat: "PRACTICE",
+      icon: "briefcase",
+      title: "GenAI Research Associate — BearcatGPT",
+      note: "Building and hardening a multi-agent tutoring ecosystem with institutional QA.",
+      year: "2026",
+      badge: "CURRENT"
+    },
+    {
+      cat: "PRACTICE",
+      icon: "briefcase",
+      title: "Data Engineering Co-op — Possip",
+      note: "Production features in a multi-tenant SaaS while learning the Rails ecosystem.",
+      year: "2025",
+      badge: "SHIPPED"
+    },
+    {
+      cat: "PRACTICE",
+      icon: "briefcase",
+      title: "Data Science Intern — Byte Link Systems",
+      note: "Global Pneumonia growth analysis dashboard in PowerBI with Python and ML.",
+      year: "2022",
+      badge: "DEPLOYED"
+    },
+    {
+      cat: "PRACTICE",
+      icon: "briefcase",
+      title: "Mining Commodity Exchange — $320M processed",
+      note: "Real-time exchange architecture with an ISO-compliant secure backend and full NFR coverage.",
+      year: "2024",
+      badge: "AUDITED"
+    },
+    {
+      cat: "PRACTICE",
+      icon: "briefcase",
+      title: "Call For You — Mentor Teacher",
+      note: "Invited by the government to teach English to high school students.",
+      year: "2023",
+      badge: "COMMUNITY"
     }
   ],
 
@@ -323,8 +489,184 @@ const PORTFOLIO_DATA = {
     email: "ncibiahmed2017@gmail.com",
     phone: "",
     channels: [
-      { name: "GITHUB", url: "https://github.com/Nciibi", icon: "github", hint: "CODE" }
+      { name: "GITHUB", url: "https://github.com/Nciibi", icon: "github", hint: "CODE" },
+      { name: "EMAIL", url: "mailto:ncibiahmed2017@gmail.com", icon: "mail", hint: "DIRECT" }
     ]
+  },
+
+  /* Netrunner terminal — command table. */
+  netrun: {
+    banner: [
+      "  +----------------------------------------------+",
+      "  |  NCIIBI://ICE  v4.2   ::   NIGHT CITY RELAY  |",
+      "  |  AUTONOMOUS ICE BUILD 4.2.1  ::  SESSION KEY |",
+      "  +----------------------------------------------+",
+      ""
+    ],
+    commands: {
+      help: {
+        type: "head",
+        out: [
+          "AVAILABLE COMMANDS",
+          "  whoami      — operative identity dossier",
+          "  stats       — attribute + vitals readout",
+          "  skills      — neural perk trees",
+          "  projects    — case files on the open-source shelf",
+          "  github      — public repository index",
+          "  codex       — certifications, awards, languages",
+          "  journey     — the road so far",
+          "  contact     — open a direct channel",
+          "  neofetch    — system summary",
+          "  ping        — latency probe",
+          "  clear       — wipe the buffer",
+          "  sudo ...    — try anyway"
+        ]
+      },
+      whoami: {
+        type: "ok",
+        out: [
+          "OPERATIVE  NCIBI",
+          "ROLE       IOT & COMPUTER ENGINEERING — FINAL YEAR @ ISTIC",
+          "STATUS     AVAILABLE — REMOTE READY",
+          "LOCATION   TUNISIA / REMOTE",
+          "HANDLE     github.com/Nciibi",
+          "MAIL       ncibiahmed2017@gmail.com"
+        ]
+      },
+      stats: {
+        type: "ok",
+        out: [
+          "LEVEL 07   ·   XP 62%   ·   STREET CRED 1.2K",
+          "",
+          "  COOL           8 / 10   [########--]",
+          "  INTELLIGENCE   9 / 10   [#########-]",
+          "  BODY           6 / 10   [######----]",
+          "  REFLEXES       7 / 10   [#######---]",
+          "  TECHNICAL      8 / 10   [########--]",
+          "  LUCK           5 / 10   [#####-----]",
+          "",
+          "  HUMANITY 47%   ·   CYBERPSYCHOSIS 12%   ·   NOMINAL"
+        ]
+      },
+      skills: {
+        type: "ok",
+        out: [
+          "NEURAL LOADOUT",
+          "  TIER 3  CORE STACK        Python · C · JavaScript · Express",
+          "  TIER 2  SOFTWARE DEV      Kotlin · TypeScript · Dart · Rust · C++",
+          "  TIER 3  SYSTEMS & NETS    Linux · Git · Networks",
+          "  TIER 1  DEVOPS TOOLING    Docker · Redis"
+        ]
+      },
+      projects: {
+        type: "ok",
+        out: [
+          "CASE FILES",
+          "  01  SEAGLES        IOT SECURITY      Discover · scan · fingerprint IoT fleets",
+          "  02  M2M MESSENGER  P2P MESSAGING      E2EE peer-to-peer, no central servers",
+          "  03  AIOS           AI SYSTEMS         Constitutional OS for autonomous agents",
+          "  04  HIDER          OFFENSIVE SEC      Metadata, steganography, C2 framework"
+        ]
+      },
+      github: {
+        type: "ok",
+        out: [
+          "PUBLIC REPOSITORY INDEX",
+          "  28 public repos · 78 followers · live sync enabled",
+          "  Primary languages: Python · Rust · Go · JavaScript · Kotlin",
+          "  → github.com/Nciibi"
+        ]
+      },
+      codex: {
+        type: "ok",
+        out: [
+          "CODEX RECORDS",
+          "  CERTIFICATIONS  AWS Solutions Architect — Associate",
+          "  AWARDS          Best Student of the Year · FIBO Cloud Scholarship",
+          "  LANGUAGES       English C1 · Japanese N3 · Mongolian native",
+          "  PRACTICE        4 shipped roles · 1 current · 1 community"
+        ]
+      },
+      journey: {
+        type: "ok",
+        out: [
+          "THE ROAD",
+          "  2025        Best Student of the Year · FIBO Cloud Scholarship · Japan internship",
+          "  2024        Mining commodity exchange — $320M processed, ISO-audited backend",
+          "  EARLY 2024  First IT role at BDSEC Securities — 1M+ client institution",
+          "  2023        Mentor teacher — Call For You"
+        ]
+      },
+      contact: {
+        type: "ok",
+        out: [
+          "CHANNELS AVAILABLE",
+          "  MAIL    ncibiahmed2017@gmail.com",
+          "  CODE    github.com/Nciibi",
+          "",
+          "  Response time: usually under 24h."
+        ]
+      },
+      neofetch: {
+        type: "ok",
+        out: [
+          "      ,--------.        nciibi@nightcity",
+          "   ,'          `.     ------------------",
+          "  /   NCIIBI     \\    OS        NCIIBI_OS 5.0.0",
+          " |   @nightcity   |   SHELL     ice v4.2",
+          "  \\   ~~~~~~~~~~  /   UPTIME    " + "{UPTIME}",
+          "   `.            ,'   MEM       " + "{MEM}",
+          "      `--------'        DISPLAY  WebGL / 0 BUILD STEP",
+          "                        SKILLS   4 TREES / 14 NODES",
+          "                        PROJECTS 4 CASE FILES"
+        ]
+      },
+      ping: {
+        type: "ok",
+        out: [
+          "PING nightcity.edge -- ICE relay",
+          "  64 bytes from 192.168.7.13: icmp_seq=1 ttl=54 time=12.4 ms",
+          "  64 bytes from 192.168.7.13: icmp_seq=2 ttl=54 time=11.8 ms",
+          "  64 bytes from 192.168.7.13: icmp_seq=3 ttl=54 time=13.1 ms",
+          "  --- relay statistics ---",
+          "  3 packets transmitted, 3 received, 0% packet loss"
+        ]
+      },
+      clear: { type: "clear", out: [] },
+      sudo: {
+        type: "err",
+        out: [
+          "nc 2>&1: sorry, this user is not in the sudoers file.",
+          "  incident NC-0417 logged. nice try."
+        ]
+      },
+      konami: {
+        type: "head",
+        out: [
+          "  ↑ ↑ ↓ ↓ ← → ← → B A",
+          "  ... maybe try the arrow keys."
+        ]
+      },
+      credits: {
+        type: "head",
+        out: [
+          "CREDITS",
+          "  INTERFACE  original build, hand-written HTML/CSS/JS",
+          "  SYSTEM UI  inspired by CD PROJEKT RED's Cyberpunk 2077",
+          "  NEON        Studio Trigger's Cyberpunk: Edgerunners",
+          "  TYPE        Rajdhani · Chakra Petch · Saira Condensed",
+          "              Share Tech Mono · Zen Dots · Zen Kaku Gothic New",
+          "  AUDIO       100% synthesised at runtime, zero audio files",
+          "  RASTER      one WebGL fragment shader, no libraries",
+          "",
+          "  unaffiliated with CD PROJEKT RED · original fan work"
+        ]
+      },
+      exit: {
+        type: "err",
+        out: ["  session terminated by operator. use the EXIT module to disconnect."]
+      }
+    }
   }
 };
 

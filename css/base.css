@@ -1,0 +1,214 @@
+/* ==========================================================================
+   NCIIBI_OS 5.0 — BASE
+   Reset, typography, focus, selection, scrollbars, accessibility primitives.
+   ========================================================================== */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  height: 100%;
+  overflow: hidden;
+  color: var(--cp-text);
+  background: var(--cp-black);
+  font-family: var(--f-body);
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1.45;
+  -webkit-text-size-adjust: 100%;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  min-width: 320px;
+  min-height: 100%;
+  overflow: hidden;
+  background: var(--cp-black);
+}
+
+img,
+svg,
+canvas {
+  display: block;
+  max-width: 100%;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button,
+input,
+textarea,
+select {
+  border: 0;
+  border-radius: var(--radius-zero);
+  color: inherit;
+  background: none;
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+ul,
+ol {
+  list-style: none;
+}
+
+/* --- Type roles ---------------------------------------------------------- */
+
+.t-display {
+  font-family: var(--f-display);
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.t-tech {
+  font-family: var(--f-tech);
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.t-mono {
+  font-family: var(--f-mono);
+  font-weight: 400;
+  letter-spacing: 0.04em;
+}
+
+.t-jp {
+  font-family: var(--f-jp);
+  font-weight: 500;
+  letter-spacing: 0.16em;
+}
+
+.t-dots {
+  font-family: var(--f-dots);
+  font-weight: 400;
+  letter-spacing: 0.08em;
+}
+
+/* --- Selection ----------------------------------------------------------- */
+
+::selection {
+  color: var(--cp-black);
+  background: var(--cp-yellow);
+}
+
+/* --- Scrollbars ---------------------------------------------------------- */
+
+::-webkit-scrollbar {
+  width: 9px;
+  height: 9px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--cp-black);
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(252, 238, 10, 0.16);
+  border: 2px solid var(--cp-black);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(252, 238, 10, 0.34);
+}
+
+* {
+  scrollbar-color: rgba(252, 238, 10, 0.22) var(--cp-black);
+  scrollbar-width: thin;
+}
+
+/* --- Focus: cyan ring, never an outline-only state ----------------------- */
+
+:focus {
+  outline: none;
+}
+
+:focus-visible {
+  outline: 1px solid var(--cp-cyan);
+  outline-offset: 3px;
+  box-shadow: 0 0 12px rgba(0, 240, 255, 0.28);
+}
+
+/* --- Skip link ----------------------------------------------------------- */
+
+.skip-link {
+  position: fixed;
+  top: 8px;
+  left: 8px;
+  z-index: 30000;
+  padding: 9px 14px;
+  color: var(--cp-black);
+  background: var(--cp-yellow);
+  font-family: var(--f-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  clip-path: var(--cut-chip);
+  transform: translateY(-160%);
+  transition: transform var(--t-fast) var(--ease);
+}
+
+.skip-link:focus {
+  transform: translateY(0);
+}
+
+/* --- Screen-reader only -------------------------------------------------- */
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* --- Reveal primitive ---------------------------------------------------- */
+/* `translate` (not `transform`) so it composes with the 3D tilt transform. */
+
+[data-reveal] {
+  opacity: 0;
+  translate: 0 14px;
+  transition:
+    opacity var(--t-slow) var(--ease) var(--d, 0s),
+    translate var(--t-slow) var(--ease) var(--d, 0s);
+}
+
+[data-reveal].is-in {
+  opacity: 1;
+  translate: 0 0;
+}
+
+/* --- Reduced motion: collapse to static composition ---------------------- */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  [data-reveal] {
+    opacity: 1 !important;
+    translate: none !important;
+  }
+}

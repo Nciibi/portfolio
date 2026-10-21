@@ -1,0 +1,134 @@
+/* ==========================================================================
+   NCIIBI_OS 5.0 — DESIGN TOKENS
+   Cyberpunk 2077 / Edgerunners screen-UI language.
+
+   Rules of the system (from CD PROJEKT RED's UI Art Bible):
+     · Pure black is the void. Surfaces step up by luminance, not by shadow.
+     · Elevation is EMITTED LIGHT (glow), never a drop shadow.
+     · Every corner is a knife edge. Radius is zero.
+     · One dominant signal colour per view. The rest are punctuation.
+       yellow = proceed / primary action / attention
+       cyan   = system status / readouts / focus
+       magenta= stop / warn / glitch
+       red    = Neomilitarism accent, alerts only
+   ========================================================================== */
+
+:root {
+  /* --- Surfaces ---------------------------------------------------------- */
+  --cp-black: #000000;
+  --cp-void: #050507;
+  --cp-surface: #0a0a0d;
+  --cp-surface-2: #101014;
+  --cp-raise: #16161c;
+  --cp-panel: rgba(10, 10, 13, 0.94);
+  --cp-panel-soft: rgba(16, 16, 20, 0.86);
+  --cp-panel-glass: rgba(6, 6, 9, 0.72);
+
+  /* --- Primary: fluorescent yellow -------------------------------------- */
+  --cp-yellow: #fcee0a;
+  --cp-yellow-hot: #fff94d;
+  --cp-yellow-deep: #c4b000;
+  --cp-yellow-a05: rgba(252, 238, 10, 0.05);
+  --cp-yellow-a08: rgba(252, 238, 10, 0.08);
+  --cp-yellow-a16: rgba(252, 238, 10, 0.16);
+  --cp-yellow-a32: rgba(252, 238, 10, 0.32);
+  --cp-yellow-a55: rgba(252, 238, 10, 0.55);
+
+  /* --- System: cyan ------------------------------------------------------ */
+  --cp-cyan: #00f0ff;
+  --cp-cyan-hot: #9dfaff;
+  --cp-cyan-deep: #00a8b4;
+  --cp-cyan-a08: rgba(0, 240, 255, 0.08);
+  --cp-cyan-a16: rgba(0, 240, 255, 0.16);
+  --cp-cyan-a40: rgba(0, 240, 255, 0.4);
+
+  /* --- Danger: magenta --------------------------------------------------- */
+  --cp-magenta: #ff0044;
+  --cp-magenta-hot: #ff5c8a;
+  --cp-magenta-a12: rgba(255, 0, 68, 0.12);
+  --cp-magenta-a40: rgba(255, 0, 68, 0.4);
+
+  /* --- Neomilitarism: red ------------------------------------------------ */
+  --cp-red: #c5003c;
+  --cp-red-hot: #ff2d63;
+  --cp-red-a16: rgba(197, 0, 60, 0.16);
+
+  /* --- States ------------------------------------------------------------ */
+  --cp-green: #00e07a;
+  --cp-green-a20: rgba(0, 224, 122, 0.2);
+  --cp-amber: #ff9a3c;
+  --cp-amber-a20: rgba(255, 154, 60, 0.2);
+
+  /* --- Text -------------------------------------------------------------- */
+  --cp-text: #f4f2ec;
+  --cp-text-2: #b9b4ae;
+  --cp-text-3: #837d78;
+  --cp-text-4: #5c5754;
+
+  /* --- Lines ------------------------------------------------------------- */
+  --cp-line: rgba(252, 238, 10, 0.22);
+  --cp-line-soft: rgba(252, 238, 10, 0.1);
+  --cp-line-faint: rgba(252, 238, 10, 0.05);
+  --cp-line-cyan: rgba(0, 240, 255, 0.4);
+  --cp-line-magenta: rgba(255, 0, 68, 0.4);
+  --cp-line-neutral: rgba(244, 242, 236, 0.1);
+  --cp-line-soft-neutral: rgba(244, 242, 236, 0.05);
+
+  /* --- Typography -------------------------------------------------------- */
+  --f-display: 'Saira Condensed', 'Arial Narrow', 'Helvetica Neue', sans-serif;
+  --f-tech: 'Chakra Petch', 'Saira Condensed', 'Arial Narrow', sans-serif;
+  --f-body: 'Rajdhani', 'Saira Condensed', 'Arial Narrow', sans-serif;
+  --f-mono: 'Share Tech Mono', ui-monospace, 'Cascadia Mono', 'Consolas', monospace;
+  --f-jp: 'Zen Kaku Gothic New', 'Noto Sans JP', 'Hiragino Kaku Gothic ProN', sans-serif;
+  --f-dots: 'Zen Dots', 'Share Tech Mono', ui-monospace, monospace;
+
+  /* --- Metrics ----------------------------------------------------------- */
+  --header-height: 60px;
+  --nav-width: 248px;
+  --content-width: 1240px;
+  --gutter: 22px;
+  --radius-zero: 0;
+
+  /* --- Motion ------------------------------------------------------------ */
+  --ease: cubic-bezier(0.2, 0.8, 0.2, 1);
+  --ease-snap: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-glitch: cubic-bezier(0.85, 0, 0.15, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --t-fast: 120ms;
+  --t-med: 220ms;
+  --t-slow: 420ms;
+  --t-shard: 560ms;
+
+  /* --- Geometry ---------------------------------------------------------- */
+  --cut-chip: polygon(0 0, calc(100% - 6px) 0, 100% 6px, 100% 100%, 6px 100%, 0 calc(100% - 6px));
+  --cut-btn: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 10px 100%, 0 calc(100% - 10px));
+  --cut-panel: polygon(0 0, calc(100% - 16px) 0, 100% 16px, 100% 100%, 16px 100%, 0 calc(100% - 16px));
+  --cut-panel-sm: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 10px 100%, 0 calc(100% - 10px));
+
+  /* --- Glow (elevation) -------------------------------------------------- */
+  --glow-yellow: 0 0 14px rgba(252, 238, 10, 0.26);
+  --glow-yellow-strong: 0 0 26px rgba(252, 238, 10, 0.4), 0 0 6px rgba(252, 238, 10, 0.28);
+  --glow-cyan: 0 0 14px rgba(0, 240, 255, 0.28);
+  --glow-magenta: 0 0 16px rgba(255, 0, 68, 0.38);
+  --glow-text: 0 0 20px rgba(252, 238, 10, 0.32);
+  --glow-text-soft: 0 0 12px rgba(252, 238, 10, 0.18);
+
+  /* --- Live FX controls (written by js/fx-core.js) ----------------------- */
+  --fx-crt-intensity: 1;
+  --fx-grain-opacity: 0.05;
+  --fx-scanline-opacity: 0.1;
+  --fx-glitch-enabled: 1;
+  --fx-bloom: 1;
+}
+
+/* Reduced motion: neutralise every continuous animation globally. The
+   per-module JavaScript paths check the same media query, so the whole
+   system degrades to static composition rather than merely slowing down. */
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --fx-grain-opacity: 0.03;
+    --fx-scanline-opacity: 0.06;
+    --fx-glitch-enabled: 0;
+    --fx-bloom: 0.6;
+  }
+}

@@ -48,6 +48,8 @@
   function setBadge(mode, label) {
     if (liveDot) liveDot.className = 'gh-live-dot ' + (mode === 'live' ? 'on' : mode === 'sync' ? 'sync' : 'off');
     if (liveText) liveText.textContent = label;
+    const status = document.querySelector('.gh-status');
+    if (status) status.setAttribute('data-state', mode);
   }
 
   function setCounter(id, n) {
@@ -80,12 +82,14 @@
         return `
         <a class="gh-repo" data-reveal style="--d:${(i * 0.06).toFixed(2)}s" href="${esc(r.url)}" target="_blank" rel="noopener">
           <div class="gh-repo-top">
-            <span class="gh-lang"><i style="background:${col}"></i>${esc(lang)}</span>
-            <span class="gh-repo-stats">★ ${r.stars} · ⑂ ${r.forks}</span>
+            <h4 class="gh-repo-name">${esc(r.name)}</h4>
+            <span class="gh-repo-meta"><span>★ ${r.stars}</span><span>⑂ ${r.forks}</span></span>
           </div>
-          <h4 class="gh-repo-name">${esc(r.name)}</h4>
           <p class="gh-repo-desc">${esc(r.desc || 'No description yet — code speaks.')}</p>
-          <div class="gh-repo-foot"><span>UPDATED ${esc(r.updated || '—')}</span><span class="gh-open">OPEN →</span></div>
+          <div class="gh-repo-foot">
+            <span class="gh-repo-lang"><i style="background:${col}"></i>${esc(lang)}</span>
+            <span class="gh-repo-date">UPDATED ${esc(r.updated || '—')}</span>
+          </div>
         </a>`;
       })
       .join('');
@@ -100,10 +104,10 @@
         const col = LANG_COLORS[lang] || '#6E7C92';
         const pct = Math.round((n / total) * 100);
         return `
-        <div class="gh-lang-row" data-reveal style="--d:${(i * 0.05).toFixed(2)}s">
-          <span class="gh-lang-name"><i style="background:${col}"></i>${esc(lang)}</span>
-          <span class="gh-bar"><i data-fill="${pct}" style="background:${col}"></i></span>
-          <span class="gh-lang-n">${n} · ${pct}%</span>
+        <div class="gh-langbar" data-reveal style="--d:${(i * 0.05).toFixed(2)}s">
+          <span class="gh-lang-name">${esc(lang)}</span>
+          <span class="gh-lang-track"><i class="gh-lang-fill" data-fill="${pct}" style="background:${col}"></i></span>
+          <span class="gh-lang-pct">${pct}%</span>
         </div>`;
       })
       .join('');
@@ -115,13 +119,15 @@
           const repo = esc(String(e.repo || '?').replace(/^Nciibi\//, ''));
           const n = e.size > 1 ? `${e.size} commits` : 'a commit';
           return `
-          <div class="gh-event" data-reveal style="--d:${(i * 0.05).toFixed(2)}s">
-            <span class="gh-ev-dot"></span>
-            <div><div class="gh-ev-text">Pushed ${n} to <b>${repo}</b></div>
-            <div class="gh-ev-time">${esc(timeAgo(e.at))}</div></div>
+          <div class="gh-feed-item" data-reveal style="--d:${(i * 0.05).toFixed(2)}s">
+            <span class="gh-feed-ico" aria-hidden="true">▸</span>
+            <div>
+              <div class="gh-feed-text">Pushed ${n} to <b>${repo}</b></div>
+              <div class="gh-feed-time">${esc(timeAgo(e.at))}</div>
+            </div>
           </div>`;
         }).join('')
-      : '<div class="gh-event"><span class="gh-ev-dot"></span><div><div class="gh-ev-text">Activity feed unavailable offline.</div></div></div>';
+      : '<div class="gh-feed-item"><span class="gh-feed-ico" aria-hidden="true">▸</span><div><div class="gh-feed-text">Activity feed unavailable offline.</div></div></div>';
 
     document.dispatchEvent(new Event('portfolio:rendered'));
   }
@@ -170,8 +176,8 @@
     if (hasRendered) return;
     hasRendered = true;
     const cached = readCache();
-    if (cached) render(cached, { mode: 'live', label: '● LIVE — cached session' });
-    else render(GITHUB_SNAPSHOT, { mode: 'off', label: '● SNAPSHOT — ' + (GITHUB_SNAPSHOT.fetched_at || '') });
+    if (cached) render(cached, { mode: 'live', label: 'LIVE — cached session' });
+    else render(GITHUB_SNAPSHOT, { mode: 'off', label: 'SNAPSHOT — ' + (GITHUB_SNAPSHOT.fetched_at || '') });
   }
 
   function scheduleSync() {
@@ -191,16 +197,16 @@
     ensureRendered();
     const ctrl = new AbortController();
     const timer = setTimeout(() => ctrl.abort(), 9000);
-    if (manual) setBadge('sync', 'SYNCING WITH GITHUB…');
+    if (manual) setBadge('sync', 'BREACHING GITHUB RELAY…');
     try {
       const data = await fetchLive(ctrl.signal);
       clearTimeout(timer);
       try { sessionStorage.setItem(CACHE_KEY, JSON.stringify({ at: Date.now(), data })); } catch (e) {}
       const label = 'LIVE — synced ' + (data.fetched_at || '').slice(11);
-      render(data, { mode: 'live', label: '● ' + label });
+      render(data, { mode: 'live', label });
     } catch (e) {
       clearTimeout(timer);
-      setBadge('off', '● OFFLINE — showing snapshot');
+      setBadge('off', 'OFFLINE — showing baked snapshot');
     }
   }
 

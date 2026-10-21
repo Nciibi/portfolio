@@ -1,5 +1,13 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
-  <rect width="32" height="32" rx="4" fill="#0A0C12"/>
-  <path d="M4 4h18l6 6v18H10l-6-6V4z" fill="none" stroke="#FF3D3D" stroke-width="2"/>
-  <text x="7" y="22" font-family="Arial Black,Arial,sans-serif" font-size="16" font-weight="900" fill="#FCEE0A">V</text>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="NCIIBI">
+  <defs>
+    <clipPath id="cp-hex">
+      <polygon points="32,2 60,17 60,47 32,62 4,47 4,17" />
+    </clipPath>
+  </defs>
+  <rect width="64" height="64" fill="#000000" />
+  <g clip-path="url(#cp-hex)">
+    <polygon points="32,2 60,17 60,47 32,62 4,47 4,17" fill="#fcee0a" />
+    <polygon points="32,2 60,17 60,30 4,30 4,17" fill="#fff52b" opacity="0.35" />
+  </g>
+  <path d="M20 44V20h5.6l12.8 15.2V20H44v24h-5.6L25.6 28.8V44z" fill="#000000" />
 </svg>

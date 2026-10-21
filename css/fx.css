@@ -1,0 +1,484 @@
+/* ==========================================================================
+   fx.css — motion, glitch and post-processing.
+
+   House rule borrowed from CD PROJEKT RED's UI art bible and from
+   Cyberpunk: Edgerunners' use of distortion: a glitch is PUNCTUATION.
+   It marks a state change, an error, an unstable signal. It is never
+   wallpaper. Every effect below is therefore either triggered by a state
+   change or, when continuous, deliberately rare and low amplitude.
+   ========================================================================== */
+
+/* ==========================================================================
+   KEYFRAMES
+   ========================================================================== */
+
+@keyframes top-signal {
+  0% { background-position: 120% 0; }
+  100% { background-position: -120% 0; }
+}
+
+@keyframes status-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.25; }
+}
+
+@keyframes grid-drift {
+  0% { background-position: 0 0; }
+  100% { background-position: 0 62px; }
+}
+
+@keyframes glow-breathe {
+  0%, 100% { opacity: 0.7; }
+  50% { opacity: 1; }
+}
+
+@keyframes rain-fall {
+  0% { transform: translateY(-8%); }
+  100% { transform: translateY(8%); }
+}
+
+@keyframes panel-in {
+  0% { opacity: 0; transform: translateY(16px) scale(0.995); filter: blur(2px); }
+  100% { opacity: 1; transform: none; filter: none; }
+}
+
+@keyframes caret-blink {
+  0%, 49% { opacity: 1; }
+  50%, 100% { opacity: 0; }
+}
+
+/* --- Chromatic text glitch (asymmetric 6 / 5 step cadence) ---------------- */
+
+@keyframes glitch-red {
+  0%, 100% { clip-path: inset(0 0 100% 0); transform: translate(0, 0); }
+  9% { clip-path: inset(14% 0 66% 0); transform: translate(-4px, 1px); }
+  20% { clip-path: inset(58% 0 24% 0); transform: translate(3px, -1px); }
+  31% { clip-path: inset(28% 0 50% 0); transform: translate(-2px, 0); }
+  44% { clip-path: inset(72% 0 8% 0); transform: translate(5px, 1px); }
+  57% { clip-path: inset(4% 0 84% 0); transform: translate(-3px, -1px); }
+  69% { clip-path: inset(40% 0 42% 0); transform: translate(2px, 0); }
+  83% { clip-path: inset(86% 0 4% 0); transform: translate(-5px, 1px); }
+}
+
+@keyframes glitch-blue {
+  0%, 100% { clip-path: inset(0 0 100% 0); transform: translate(0, 0); }
+  12% { clip-path: inset(22% 0 54% 0); transform: translate(4px, -1px); }
+  25% { clip-path: inset(64% 0 16% 0); transform: translate(-3px, 1px); }
+  38% { clip-path: inset(36% 0 44% 0); transform: translate(2px, 0); }
+  52% { clip-path: inset(80% 0 6% 0); transform: translate(-4px, 0); }
+  66% { clip-path: inset(8% 0 78% 0); transform: translate(3px, 1px); }
+  78% { clip-path: inset(50% 0 34% 0); transform: translate(-2px, -1px); }
+}
+
+/* --- The idle title jitter: a rare, low-amplitude signal wobble ----------- */
+
+@keyframes title-idle {
+  0%, 92%, 100% { transform: translate(0, 0); }
+  93% { transform: translate(-1px, 0); }
+  94% { transform: translate(1px, 0); }
+  95% { transform: translate(0, 0); }
+  96% { transform: translate(-1px, 0); }
+  97% { transform: translate(0, 0); }
+}
+
+/* --- Shard wipe ------------------------------------------------------------ */
+
+@keyframes shard-sweep {
+  0% { transform: translateX(-420%) skewX(-14deg); opacity: 0; }
+  16% { opacity: 1; }
+  84% { opacity: 1; }
+  100% { transform: translateX(420%) skewX(-14deg); opacity: 0; }
+}
+
+/* --- Vertical scan sweep on panel entry ------------------------------------ */
+
+@keyframes scan-sweep {
+  0% { transform: translateY(-10%); opacity: 0; }
+  8% { opacity: 1; }
+  100% { transform: translateY(1100%); opacity: 0; }
+}
+
+/* --- Signal tear overlay --------------------------------------------------- */
+
+@keyframes tear-jitter {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(-2px); }
+  100% { transform: translateY(2px); }
+}
+
+/* --- Element shake --------------------------------------------------------- */
+
+@keyframes fx-shake {
+  0%, 100% { transform: translate(0, 0); }
+  20% { transform: translate(-2px, 1px); }
+  40% { transform: translate(2px, -1px); }
+  60% { transform: translate(-1px, -1px); }
+  80% { transform: translate(1px, 1px); }
+}
+
+/* --- Power flicker --------------------------------------------------------- */
+
+@keyframes power-flicker {
+  0%, 100% { opacity: 1; }
+  8% { opacity: 0.35; }
+  16% { opacity: 1; }
+  22% { opacity: 0.6; }
+  30% { opacity: 1; }
+}
+
+/* --- HUD reticle ------------------------------------------------------------ */
+
+@keyframes reticle-spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+@keyframes reticle-blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.35; }
+}
+
+/* --- Breach protocol loader (GitHub sync) ----------------------------------- */
+
+@keyframes breach-spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+@keyframes breach-pulse {
+  0%, 100% { opacity: 0.35; transform: scale(0.94); }
+  50% { opacity: 1; transform: scale(1); }
+}
+
+/* --- Hex level badge draw --------------------------------------------------- */
+
+@keyframes hex-draw {
+  0% { clip-path: polygon(50% 0, 100% 25%, 100% 75%, 50% 100%, 0 75%, 0 25%); }
+  100% { clip-path: polygon(50% 0, 100% 25%, 100% 75%, 50% 100%, 0 75%, 0 25%); }
+}
+
+/* --- Ticker ----------------------------------------------------------------- */
+
+@keyframes ticker-scroll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+/* ==========================================================================
+   GLITCH TEXT
+   ========================================================================== */
+
+.glitch-text {
+  position: relative;
+}
+
+.glitch-text::before,
+.glitch-text::after {
+  position: absolute;
+  inset: 0;
+  content: attr(data-text);
+  pointer-events: none;
+  opacity: 0;
+}
+
+.glitch-text::before {
+  color: var(--cp-magenta);
+  text-shadow: none;
+}
+
+.glitch-text::after {
+  color: var(--cp-cyan);
+  text-shadow: none;
+}
+
+.glitch-text.is-glitching::before {
+  opacity: 0.9;
+  animation: glitch-red 420ms steps(1, end) both;
+}
+
+.glitch-text.is-glitching::after {
+  opacity: 0.9;
+  animation: glitch-blue 420ms steps(1, end) both;
+}
+
+/* Rare idle wobble on the panel headline only. */
+.panel-title.glitch-text {
+  animation: title-idle 7.5s steps(1, end) infinite;
+}
+
+/* ==========================================================================
+   SHARD WIPE — the panel transition
+   ========================================================================== */
+
+.shard-layer {
+  position: absolute;
+  inset: 0;
+  z-index: 60;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.shard {
+  position: absolute;
+  top: -14%;
+  bottom: -14%;
+  left: 0;
+  width: 30%;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(252, 238, 10, 0.12) 38%,
+    rgba(255, 255, 255, 0.6) 50%,
+    rgba(255, 0, 68, 0.3) 62%,
+    transparent 100%
+  );
+  opacity: 0;
+  transform: translateX(-420%) skewX(-14deg);
+}
+
+.shard:nth-child(2n) {
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(0, 240, 255, 0.16) 38%,
+    rgba(255, 255, 255, 0.68) 50%,
+    rgba(252, 238, 10, 0.22) 62%,
+    transparent 100%
+  );
+}
+
+.shard:nth-child(3n) {
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 0, 68, 0.24) 38%,
+    rgba(255, 255, 255, 0.64) 50%,
+    rgba(0, 240, 255, 0.2) 62%,
+    transparent 100%
+  );
+}
+
+.shard.is-active {
+  animation: shard-sweep 520ms var(--ease-glitch) both;
+}
+
+/* ==========================================================================
+   SCAN SWEEP
+   ========================================================================== */
+
+.scan-sweep {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 45;
+  width: 100%;
+  height: 2px;
+  pointer-events: none;
+  background: linear-gradient(90deg, transparent, var(--cp-yellow), var(--cp-cyan), transparent);
+  box-shadow: 0 0 22px rgba(252, 238, 10, 0.75);
+  opacity: 0;
+}
+
+.scan-sweep.is-active {
+  animation: scan-sweep 900ms var(--ease) both;
+}
+
+/* ==========================================================================
+   SIGNAL TEAR OVERLAY (stage-level, during a filter burst)
+   ========================================================================== */
+
+.menu-stage.is-glitching::after {
+  position: absolute;
+  inset: 0;
+  z-index: 30;
+  content: '';
+  pointer-events: none;
+  background: repeating-linear-gradient(0deg, rgba(255, 0, 68, 0.22) 0 2px, transparent 2px 7px);
+  mix-blend-mode: screen;
+  animation: tear-jitter 90ms steps(2, end) infinite;
+}
+
+/* ==========================================================================
+   HUD RETICLE — custom targeting cursor
+   ========================================================================== */
+
+.hud-reticle {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 90;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 160ms var(--ease);
+}
+
+.hud-reticle.is-visible {
+  opacity: 1;
+}
+
+.hud-reticle-box {
+  position: absolute;
+  top: var(--reticle-y, 0);
+  left: var(--reticle-x, 0);
+  width: var(--reticle-width, 0);
+  height: var(--reticle-height, 0);
+  border: 1px solid var(--cp-yellow);
+  box-shadow: 0 0 14px rgba(252, 238, 10, 0.3), inset 0 0 14px rgba(252, 238, 10, 0.08);
+  clip-path: polygon(0 0, 14px 0, 14px 1px, 1px 1px, 1px 14px, 0 14px, 0 0, 100% 0, 100% 14px, calc(100% - 1px) 14px, calc(100% - 1px) 1px, calc(100% - 14px) 1px, calc(100% - 14px) 0, 100% 0, 100% 100%, calc(100% - 14px) 100%, calc(100% - 14px) calc(100% - 1px), calc(100% - 1px) calc(100% - 1px), calc(100% - 1px) calc(100% - 14px), 100% calc(100% - 14px), 100% 100%, 0 100%, 0 calc(100% - 14px), 1px calc(100% - 14px), 1px calc(100% - 1px), 14px calc(100% - 1px), 14px 100%, 0 100%);
+}
+
+.hud-reticle-label {
+  position: absolute;
+  top: calc(var(--reticle-y, 0) - 17px);
+  left: var(--reticle-x, 0);
+  padding: 1px 6px;
+  color: var(--cp-black);
+  background: var(--cp-yellow);
+  font-family: var(--f-mono);
+  font-size: 0.52rem;
+  letter-spacing: 0.12em;
+  white-space: nowrap;
+}
+
+/* ==========================================================================
+   GLOBAL TOGGLES
+   ========================================================================== */
+
+.fx-no-glitch .glitch-text::before,
+.fx-no-glitch .glitch-text::after,
+.fx-no-glitch .menu-stage.is-glitching::after {
+  display: none;
+}
+
+.fx-no-crt .crt-overlay {
+  display: none !important;
+}
+
+.fx-no-bloom {
+  --glow-yellow: 0 0 8px rgba(252, 238, 10, 0.16);
+  --glow-text: 0 0 10px rgba(252, 238, 10, 0.18);
+}
+
+/* CSS-only CRT fallback for machines without WebGL, or the "low" tier. */
+.fx-crt-css-only .menu-stage::before {
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+  content: '';
+  pointer-events: none;
+  background: repeating-linear-gradient(0deg, rgba(0, 0, 0, 0.34) 0 1px, transparent 1px 3px);
+  opacity: var(--fx-scanline-opacity);
+}
+
+/* ==========================================================================
+   ELEMENT-LEVEL EFFECTS
+   ========================================================================== */
+
+.fx-shake {
+  animation: fx-shake 240ms steps(2, end) both;
+}
+
+.is-power-flicker {
+  animation: power-flicker 420ms steps(1, end) both;
+}
+
+/* Hover glitch on primary actions — brief, sharp, one-shot. */
+.glitch-hover {
+  position: relative;
+}
+
+.glitch-hover:hover::before,
+.glitch-hover:hover::after {
+  position: absolute;
+  inset: 0;
+  content: attr(data-text);
+  pointer-events: none;
+  opacity: 0.75;
+}
+
+.glitch-hover:hover::before {
+  color: var(--cp-magenta);
+  animation: glitch-red 300ms steps(1, end) both;
+}
+
+.glitch-hover:hover::after {
+  color: var(--cp-cyan);
+  animation: glitch-blue 300ms steps(1, end) both;
+}
+
+/* ==========================================================================
+   SYSTEM OVERRIDE — the Konami payload
+   ========================================================================== */
+
+.override-flash {
+  position: fixed;
+  inset: 0;
+  z-index: 20000;
+  display: grid;
+  place-items: center;
+  pointer-events: none;
+  background:
+    radial-gradient(60% 60% at 50% 50%, rgba(252, 238, 10, 0.14), transparent 70%),
+    linear-gradient(0deg, rgba(255, 0, 68, 0.12), rgba(0, 240, 255, 0.1));
+  mix-blend-mode: screen;
+  opacity: 0;
+}
+
+.override-flash.is-active {
+  animation: override-flash 2.2s var(--ease-glitch) both;
+}
+
+.override-flash span {
+  padding: 14px 26px;
+  color: var(--cp-black);
+  background: var(--cp-yellow);
+  font-family: var(--f-tech);
+  font-size: clamp(0.8rem, 2.2vw, 1.5rem);
+  font-weight: 700;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  clip-path: var(--cut-btn);
+  box-shadow: 0 0 60px rgba(252, 238, 10, 0.6);
+  animation: override-text 2.2s steps(1, end) both;
+}
+
+@keyframes override-flash {
+  0% { opacity: 0; }
+  4% { opacity: 1; }
+  8% { opacity: 0.25; }
+  12% { opacity: 1; }
+  30% { opacity: 0.6; }
+  100% { opacity: 0; }
+}
+
+@keyframes override-text {
+  0%, 100% { transform: translateX(0) skewX(0); }
+  6% { transform: translateX(-8px) skewX(-8deg); }
+  12% { transform: translateX(6px) skewX(4deg); }
+  18% { transform: translateX(-3px) skewX(-2deg); }
+  26% { transform: translateX(0) skewX(0); }
+}
+
+/* ==========================================================================
+   REDUCED MOTION — collapse the whole engine
+   ========================================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  .crt-overlay,
+  .shard-layer,
+  .scan-sweep {
+    display: none !important;
+  }
+
+  .menu-stage.is-glitching::after {
+    display: none;
+  }
+
+  .panel-title.glitch-text {
+    animation: none;
+  }
+
+  .hud-reticle {
+    display: none;
+  }
+}
