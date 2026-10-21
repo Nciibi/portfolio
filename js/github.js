@@ -80,7 +80,7 @@
         const lang = r.lang || 'Other';
         const col = LANG_COLORS[lang] || '#6E7C92';
         return `
-        <a class="gh-repo" data-reveal style="--d:${(i * 0.06).toFixed(2)}s" href="${esc(r.url)}" target="_blank" rel="noopener">
+        <a class="gh-repo row-glitch" data-reveal style="--d:${(i * 0.06).toFixed(2)}s" href="${esc(r.url)}" target="_blank" rel="noopener">
           <div class="gh-repo-top">
             <h4 class="gh-repo-name">${esc(r.name)}</h4>
             <span class="gh-repo-meta"><span>★ ${r.stars}</span><span>⑂ ${r.forks}</span></span>

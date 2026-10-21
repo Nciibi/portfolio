@@ -49,18 +49,29 @@
   <div class="app-shell">
     <!-- ================= TOPBAR ================= -->
     <header class="menu-topbar" id="menu-topbar">
-      <div class="topbar-brand-wrap">
+      <div class="topbar-status">
+        <div class="stat-block">
+          <span class="stat-num is-cyan" id="top-level">07</span>
+          <span class="stat-lab">LEVEL</span>
+          <span class="stat-dash" aria-hidden="true"></span>
+        </div>
+        <div class="stat-block">
+          <span class="stat-num is-green" id="top-cred">1.2K</span>
+          <span class="stat-lab">STREET CRED</span>
+          <span class="stat-dash" aria-hidden="true"></span>
+        </div>
+      </div>
+
+      <div class="topbar-wordmark">
         <a href="#profile" class="brand-badge" data-menu-target="profile" aria-label="Open Nciibi profile">
-          <span class="brand-mark" aria-hidden="true">N</span>
-          <span class="brand-word">NCIIBI<em>//</em>OS</span>
-          <span class="brand-ver" aria-hidden="true">5.0</span>
+          <span class="wordmark-text">NCIIBI<em>//</em>OS</span>
+          <span class="wordmark-sub">5.0.0</span>
         </a>
       </div>
 
       <div class="topbar-readouts" aria-hidden="true">
-        <div class="readout"><span class="readout-k">LV</span><span class="readout-v" id="top-level">07</span></div>
-        <div class="readout"><span class="readout-k">CRED</span><span class="readout-v" id="top-cred">1.2K</span></div>
         <div class="readout"><span class="readout-k">NIGHT CITY</span><span class="readout-v is-cyan" id="top-clock">00:00</span></div>
+        <div class="readout"><span class="readout-k">NET</span><span class="readout-v">ONLINE</span></div>
       </div>
 
       <div class="topbar-controls">
@@ -77,89 +88,99 @@
       <!-- ================= NAV RAIL ================= -->
       <aside class="main-menu" aria-label="Portfolio main menu">
         <div class="menu-rail-head">
-          <span class="rail-eyebrow">NIGHT CITY OS</span>
-          <span class="rail-ver">5.0.0</span>
+          <span class="rail-eyebrow">OPERATIVE INDEX</span>
+          <span class="rail-ver">12 MODULES</span>
         </div>
 
         <nav class="menu-nav" id="main-menu-nav" role="tablist" aria-label="Primary menu">
-          <span class="nav-cursor" id="nav-cursor" aria-hidden="true"></span>
-
           <a href="#profile" class="menu-tab active" data-menu-tab="profile" role="tab" aria-controls="profile" aria-current="page" aria-selected="true">
+            <span class="tab-frame" aria-hidden="true"></span>
             <span class="tab-index">01</span>
             <span class="tab-icon" aria-hidden="true"></span>
             <span class="tab-body"><span class="tab-label">PROFILE</span><span class="tab-jp" lang="ja">プロフィール</span></span>
-            <span class="tab-arrow" aria-hidden="true">›</span>
+            <span class="tab-hatch" aria-hidden="true"></span>
           </a>
           <a href="#character" class="menu-tab" data-menu-tab="character" role="tab" aria-controls="character" aria-selected="false">
+            <span class="tab-frame" aria-hidden="true"></span>
             <span class="tab-index">02</span>
             <span class="tab-icon" aria-hidden="true"></span>
             <span class="tab-body"><span class="tab-label">CHARACTER</span><span class="tab-jp" lang="ja">キャラクター</span></span>
-            <span class="tab-arrow" aria-hidden="true">›</span>
+            <span class="tab-hatch" aria-hidden="true"></span>
           </a>
           <a href="#projects" class="menu-tab" data-menu-tab="projects" role="tab" aria-controls="projects" aria-selected="false">
+            <span class="tab-frame" aria-hidden="true"></span>
             <span class="tab-index">03</span>
             <span class="tab-icon" aria-hidden="true"></span>
             <span class="tab-body"><span class="tab-label">PROJECTS</span><span class="tab-jp" lang="ja">案件</span></span>
-            <span class="tab-arrow" aria-hidden="true">›</span>
+            <span class="tab-hatch" aria-hidden="true"></span>
           </a>
           <a href="#perks" class="menu-tab" data-menu-tab="perks" role="tab" aria-controls="perks" aria-selected="false">
+            <span class="tab-frame" aria-hidden="true"></span>
             <span class="tab-index">04</span>
             <span class="tab-icon" aria-hidden="true"></span>
             <span class="tab-body"><span class="tab-label">PERKS</span><span class="tab-jp" lang="ja">強化</span></span>
-            <span class="tab-arrow" aria-hidden="true">›</span>
+            <span class="tab-hatch" aria-hidden="true"></span>
           </a>
           <a href="#experience" class="menu-tab" data-menu-tab="experience" role="tab" aria-controls="experience" aria-selected="false">
+            <span class="tab-frame" aria-hidden="true"></span>
             <span class="tab-index">05</span>
             <span class="tab-icon" aria-hidden="true"></span>
             <span class="tab-body"><span class="tab-label">WORK LOG</span><span class="tab-jp" lang="ja">経歴</span></span>
-            <span class="tab-arrow" aria-hidden="true">›</span>
+            <span class="tab-hatch" aria-hidden="true"></span>
           </a>
           <a href="#journey" class="menu-tab" data-menu-tab="journey" role="tab" aria-controls="journey" aria-selected="false">
+            <span class="tab-frame" aria-hidden="true"></span>
             <span class="tab-index">06</span>
             <span class="tab-icon" aria-hidden="true"></span>
             <span class="tab-body"><span class="tab-label">THE ROAD</span><span class="tab-jp" lang="ja">旅路</span></span>
-            <span class="tab-arrow" aria-hidden="true">›</span>
+            <span class="tab-hatch" aria-hidden="true"></span>
           </a>
           <a href="#github" class="menu-tab" data-menu-tab="github" role="tab" aria-controls="github" aria-selected="false">
+            <span class="tab-frame" aria-hidden="true"></span>
             <span class="tab-index">07</span>
             <span class="tab-icon" aria-hidden="true"></span>
             <span class="tab-body"><span class="tab-label">GITHUB</span><span class="tab-jp" lang="ja">コード</span></span>
-            <span class="tab-arrow" aria-hidden="true">›</span>
+            <span class="tab-hatch" aria-hidden="true"></span>
           </a>
           <a href="#codex" class="menu-tab" data-menu-tab="codex" role="tab" aria-controls="codex" aria-selected="false">
+            <span class="tab-frame" aria-hidden="true"></span>
             <span class="tab-index">08</span>
             <span class="tab-icon" aria-hidden="true"></span>
             <span class="tab-body"><span class="tab-label">CODEX</span><span class="tab-jp" lang="ja">事典</span></span>
-            <span class="tab-arrow" aria-hidden="true">›</span>
+            <span class="tab-hatch" aria-hidden="true"></span>
           </a>
           <a href="#netrun" class="menu-tab" data-menu-tab="netrun" role="tab" aria-controls="netrun" aria-selected="false">
+            <span class="tab-frame" aria-hidden="true"></span>
             <span class="tab-index">09</span>
             <span class="tab-icon" aria-hidden="true"></span>
             <span class="tab-body"><span class="tab-label">NETRUN</span><span class="tab-jp" lang="ja">ネットランナー</span></span>
-            <span class="tab-arrow" aria-hidden="true">›</span>
+            <span class="tab-hatch" aria-hidden="true"></span>
           </a>
           <a href="#contact" class="menu-tab" data-menu-tab="contact" role="tab" aria-controls="contact" aria-selected="false">
+            <span class="tab-frame" aria-hidden="true"></span>
             <span class="tab-index">10</span>
             <span class="tab-icon" aria-hidden="true"></span>
             <span class="tab-body"><span class="tab-label">CONTACT</span><span class="tab-jp" lang="ja">連絡</span></span>
-            <span class="tab-arrow" aria-hidden="true">›</span>
+            <span class="tab-hatch" aria-hidden="true"></span>
           </a>
           <a href="#options" class="menu-tab" data-menu-tab="options" role="tab" aria-controls="options" aria-selected="false">
+            <span class="tab-frame" aria-hidden="true"></span>
             <span class="tab-index">11</span>
             <span class="tab-icon" aria-hidden="true"></span>
             <span class="tab-body"><span class="tab-label">OPTIONS</span><span class="tab-jp" lang="ja">設定</span></span>
-            <span class="tab-arrow" aria-hidden="true">›</span>
+            <span class="tab-hatch" aria-hidden="true"></span>
           </a>
           <a href="#exit" class="menu-tab" data-menu-tab="exit" role="tab" aria-controls="exit" aria-selected="false">
+            <span class="tab-frame" aria-hidden="true"></span>
             <span class="tab-index">12</span>
             <span class="tab-icon" aria-hidden="true"></span>
             <span class="tab-body"><span class="tab-label">EXIT</span><span class="tab-jp" lang="ja">終了</span></span>
-            <span class="tab-arrow" aria-hidden="true">›</span>
+            <span class="tab-hatch" aria-hidden="true"></span>
           </a>
         </nav>
 
         <div class="menu-rail-foot">
-          <div class="rail-foot-line"><span>NET</span><b>ONLINE</b></div>
+          <div class="rail-foot-line"><span>RELAY</span><b>CONNECTED</b></div>
         </div>
       </aside>
 
@@ -387,7 +408,7 @@
             </div>
             <div class="netrun-out" id="netrun-out" role="log" aria-live="polite" aria-label="Terminal output"></div>
             <form class="netrun-in" id="netrun-form">
-              <label class="netrun-prompt" for="netrun-cmd" aria-hidden="true">&gt;</label>
+              <label class="netrun-prompt" for="netrun-cmd" aria-hidden="true">&gt;</label><span class="netrun-key" aria-hidden="true">&#9166;</span>
               <input type="text" id="netrun-cmd" name="command" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="type 'help' and press enter" aria-label="Terminal command" />
             </form>
           </div>
@@ -517,11 +538,14 @@
     <!-- The city backdrop sits behind the stage and is pinned to the shell,
          so it never scrolls with the panel content. -->
     <div class="stage-bg" aria-hidden="true">
+      <div class="stage-wash"></div>
       <div class="stage-grid"></div>
-      <div class="stage-glow"></div>
+      <div class="stage-bars"></div>
+      <div class="stage-blocks"></div>
       <div class="stage-rain"></div>
       <div class="stage-spot"></div>
       <div class="stage-vignette"></div>
+      <div class="stage-binary" id="stage-binary"></div>
     </div>
   </div>
 

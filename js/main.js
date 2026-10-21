@@ -1,5 +1,5 @@
 /* ==========================================================================
-   main.js — renderer + router for the NCIIBI_OS interface.
+   main.js â€” renderer + router for the NCIIBI_OS interface.
    ========================================================================== */
 
 const renderedModules = new Set(["profile"]);
@@ -54,6 +54,7 @@ document.addEventListener("DOMContentLoaded", () => {
   initTopbarReadouts();
   initExitPanel();
   initEasterEggs();
+  initBinaryColumn();
   startEngine();
   document.dispatchEvent(new Event("portfolio:rendered"));
 });
@@ -98,7 +99,8 @@ function getIconColored(name) {
 }
 
 function initNavIcons() {
-  document.querySelectorAll("[data-menu-tab]").forEach((tab) => {
+  document.querySelectorAll("[data-menu-tab]").forEach((tab, index) => {
+    tab.style.setProperty("--d", `${140 + index * 42}ms`);
     const holder = tab.querySelector(".tab-icon");
     if (!holder) return;
     const slug = NAV_ICONS[tab.getAttribute("data-menu-tab")];
@@ -123,7 +125,7 @@ function ensureModuleRendered(id) {
 }
 
 /* ==========================================================================
-   01 — PROFILE
+   01 â€” PROFILE
    ========================================================================== */
 
 function renderHeroSocials() {
@@ -179,7 +181,7 @@ function renderBento() {
     .map((item, index) => {
       const tags = (item.tags || []).map((tag) => `<span class="bento-tag">${getIcon(tag)}${escapeHtml(tag)}</span>`).join("");
       return `
-      <article class="bento-card span-${escapeHtml(item.span || "normal")}" data-reveal style="--d:${(index * 0.05).toFixed(2)}s">
+      <article class="bento-card row-glitch span-${escapeHtml(item.span || "normal")}" data-reveal style="--d:${(index * 0.05).toFixed(2)}s">
         <div class="bento-kicker">${escapeHtml(item.kicker)}</div>
         <h3 class="bento-title">${escapeHtml(item.title)}</h3>
         ${item.body ? `<p class="bento-body">${escapeHtml(item.body)}</p>` : ""}
@@ -205,7 +207,7 @@ function renderEducation() {
 }
 
 /* ==========================================================================
-   02 — CHARACTER SHEET
+   02 â€” CHARACTER SHEET
    ========================================================================== */
 
 function renderCharacter() {
@@ -242,11 +244,11 @@ function renderCharacter() {
         </picture>
       </div>
       <div class="char-level-row">
-        <div class="hex-badge" aria-label="Level ${c.level}">${String(c.level).padStart(2, "0")}</div>
+        <div class="hex-badge" aria-label="Level ${c.level}"><span>${String(c.level).padStart(2, "0")}</span></div>
         <div class="char-level-meta">
           <div class="cl-k">LEVEL</div>
           <div class="cl-v">${escapeHtml(c.realName)}</div>
-          <div class="char-alias">${escapeHtml(c.alias)} · ${escapeHtml(c.title)} · ${escapeHtml(c.affiliation)}</div>
+          <div class="char-alias">${escapeHtml(c.alias)} Â· ${escapeHtml(c.title)} Â· ${escapeHtml(c.affiliation)}</div>
         </div>
       </div>
       <div class="char-xp">
@@ -288,7 +290,7 @@ function renderCharacter() {
 }
 
 /* ==========================================================================
-   03 — PROJECTS
+   03 â€” PROJECTS
    ========================================================================== */
 
 const projectArtworkMap = Object.freeze({
@@ -320,7 +322,7 @@ function projectCopyMarkup(project) {
       <h3>${escapeHtml(project.title)}</h3>
       <p>${escapeHtml(project.summary)}</p>
       <div class="gig-tags">${tags}</div>
-      <a class="btn-cyber btn-cyber-sm btn-cyber-red" href="${safeHref(project.url)}" target="_blank" rel="noopener">OPEN CASE FILE <span aria-hidden="true">↗</span></a>
+      <a class="btn-cyber btn-cyber-sm btn-cyber-red" href="${safeHref(project.url)}" target="_blank" rel="noopener">OPEN CASE FILE <span aria-hidden="true">â†—</span></a>
     </div>`;
 }
 
@@ -329,15 +331,15 @@ function projectCardMarkup(project, index) {
   const idx = String(index + 1).padStart(2, "0");
   const artwork = escapeHtml(projectArtwork(project));
   return `
-    <article class="project-card project-select${index === 0 ? " selected" : ""}" data-project-id="${escapeHtml(project.id)}" data-hud-label="${escapeHtml(project.title)}" data-reveal style="--d:${(index * 0.07).toFixed(2)}s" role="option" aria-selected="${index === 0}" tabindex="${index === 0 ? 0 : -1}">
+    <article class="project-card row-glitch project-select${index === 0 ? " selected" : ""}" data-project-id="${escapeHtml(project.id)}" data-hud-label="${escapeHtml(project.title)}" data-reveal style="--d:${(index * 0.07).toFixed(2)}s" role="option" aria-selected="${index === 0}" tabindex="${index === 0 ? 0 : -1}">
       <div class="project-card-visual" style="background-image: linear-gradient(180deg, rgba(5,5,7,.04) 0%, rgba(5,5,7,.28) 38%, rgba(5,5,7,.94) 100%), url('${artwork}')"></div>
       <span class="pc-ghost-index" aria-hidden="true">${idx}</span>
-      <span class="pc-open" aria-hidden="true">↗</span>
+      <span class="pc-open" aria-hidden="true">â†—</span>
       <div class="project-card-content">
         <div class="pc-meta"><span class="pc-idx">${idx}</span><span class="pc-period">${escapeHtml(project.period)}</span><span class="pc-cat">${escapeHtml(project.category)}</span></div>
         <h3 class="pc-title">${escapeHtml(project.title)}</h3>
         <p class="pc-summary">${escapeHtml(project.summary)}</p>
-        <div class="pc-footer"><div class="gig-tags">${tags}</div><div class="pc-actions"><span class="pc-likes">♥ ${Number(project.likes) || 0}</span><a class="btn-cyber btn-cyber-sm btn-cyber-ghost" href="${safeHref(project.url)}" target="_blank" rel="noopener">OPEN FILE <span aria-hidden="true">↗</span></a></div></div>
+        <div class="pc-footer"><div class="gig-tags">${tags}</div><div class="pc-actions"><span class="pc-likes">â™¥ ${Number(project.likes) || 0}</span><a class="btn-cyber btn-cyber-sm btn-cyber-ghost" href="${safeHref(project.url)}" target="_blank" rel="noopener">OPEN FILE <span aria-hidden="true">â†—</span></a></div></div>
       </div>
     </article>`;
 }
@@ -487,7 +489,7 @@ function renderProjects() {
 }
 
 /* ==========================================================================
-   04 — PERKS
+   04 â€” PERKS
    ========================================================================== */
 
 function renderPerks() {
@@ -498,15 +500,15 @@ function renderPerks() {
   const trees = PORTFOLIO_DATA.skills
     .map((group, index) => {
       const nodes = group.items
-        .map((item, itemIndex) => {
+        .map((item) => {
           const iconMarkup = getIconColored(item.name);
           const locked = group.level === "BEGINNER";
-          return `<button class="perk-node${locked ? " is-locked" : ""}" type="button" data-perk="${escapeHtml(group.id)}:${escapeHtml(item.name)}" data-hud-label="${escapeHtml(item.name)}" aria-label="${escapeHtml(item.name)}">${iconMarkup || `<span class="t-dots" aria-hidden="true">${itemIndex + 1}</span>`}</button>`;
+          return `<button class="hex-node${locked ? " is-locked" : ""}" type="button" data-perk="${escapeHtml(group.id)}:${escapeHtml(item.name)}" data-hud-label="${escapeHtml(item.name)}" aria-label="${escapeHtml(item.name)}">${iconMarkup}</button>`;
         })
         .join('<span class="perk-connector" aria-hidden="true"></span>');
       return `
       <section class="perk-tree" data-tree="${escapeHtml(group.id)}" data-level="${escapeHtml(group.level)}" data-reveal style="--d:${(index * 0.07).toFixed(2)}s">
-        <div class="perk-tree-head"><h3>${escapeHtml(group.category)}</h3><span class="perk-tree-tier">${escapeHtml(group.tier || group.level)}</span></div>
+        <div class="perk-tree-head"><h3>${escapeHtml(group.category)}</h3><span class="cp-tag${group.level === "PROFICIENT" ? "" : " is-red"}">${escapeHtml(group.tier || group.level)}</span></div>
         <p class="perk-tree-desc">${escapeHtml(group.desc)}</p>
         <div class="perk-nodes">${nodes}</div>
       </section>`;
@@ -565,13 +567,16 @@ function initPerkFilters() {
 }
 
 function initPerkNodes() {
-  document.querySelectorAll(".perk-node").forEach((node) => {
+  document.querySelectorAll(".perk-node, .hex-node").forEach((node) => {
     node.addEventListener("click", () => selectPerk(node.getAttribute("data-perk")));
     node.addEventListener("mouseenter", () => {
       const detail = document.getElementById("perk-detail");
       const id = node.getAttribute("data-perk");
       const found = findPerk(id);
-      if (detail && found) detail.querySelector(".pd-title") && (detail.querySelector(".pd-title").textContent = found.item.name);
+      if (detail && found) {
+        const title = detail.querySelector(".pd-title");
+        if (title) title.textContent = found.item.name;
+      }
     });
   });
 }
@@ -613,7 +618,7 @@ function selectPerk(id) {
 }
 
 /* ==========================================================================
-   05 — WORK LOG
+   05 â€” WORK LOG
    ========================================================================== */
 
 let activeExpTab = "CAREER";
@@ -662,7 +667,7 @@ function renderExperience(tab) {
   wrap.innerHTML = rows
     .map(
       (item, index) => `
-    <article class="exp-card" data-reveal style="--d:${(index * 0.07).toFixed(2)}s">
+    <article class="exp-card row-glitch" data-reveal style="--d:${(index * 0.07).toFixed(2)}s">
       <div>
         <div class="exp-period">${escapeHtml(item.period)}</div>
         <div class="exp-org">${escapeHtml(item.org)}</div>
@@ -681,7 +686,7 @@ function renderExperience(tab) {
 }
 
 /* ==========================================================================
-   06 — THE ROAD
+   06 â€” THE ROAD
    ========================================================================== */
 
 function renderJourney() {
@@ -702,7 +707,7 @@ function renderJourney() {
 }
 
 /* ==========================================================================
-   08 — CODEX
+   08 â€” CODEX
    ========================================================================== */
 
 function renderCodex() {
@@ -711,7 +716,7 @@ function renderCodex() {
   wrap.innerHTML = PORTFOLIO_DATA.codex
     .map(
       (entry, index) => `
-    <article class="codex-entry" data-cat="${escapeHtml(entry.cat)}" data-reveal style="--d:${(index * 0.04).toFixed(2)}s">
+    <article class="codex-entry row-glitch" data-cat="${escapeHtml(entry.cat)}" data-reveal style="--d:${(index * 0.04).toFixed(2)}s">
       <div class="codex-mark" aria-hidden="true">${getIcon(entry.icon)}</div>
       <div class="codex-main">
         <div class="codex-cat">${escapeHtml(entry.cat)}</div>
@@ -722,6 +727,7 @@ function renderCodex() {
         <span class="codex-year">${escapeHtml(entry.year)}</span>
         <span class="codex-badge">${escapeHtml(entry.badge)}</span>
       </div>
+      <span class="expand-chevron" aria-hidden="true"></span>
     </article>`
     )
     .join("");
@@ -749,7 +755,7 @@ function renderCodex() {
 }
 
 /* ==========================================================================
-   09 — NETRUN TERMINAL
+   09 â€” NETRUN TERMINAL
    ========================================================================== */
 
 function initNetrun() {
@@ -839,7 +845,7 @@ function initNetrun() {
 }
 
 /* ==========================================================================
-   10 — CONTACT
+   10 â€” CONTACT
    ========================================================================== */
 
 function renderNetlinks() {
@@ -854,7 +860,7 @@ function renderNetlinks() {
 }
 
 /* ==========================================================================
-   11 — OPTIONS
+   11 â€” OPTIONS
    ========================================================================== */
 
 function initOptionsPanel() {
@@ -911,7 +917,7 @@ function initOptionsPanel() {
 }
 
 /* ==========================================================================
-   12 — EXIT
+   12 â€” EXIT
    ========================================================================== */
 
 function initExitPanel() {
@@ -980,25 +986,28 @@ function createShardLayer() {
 }
 
 function moveNavCursor(tab) {
-  const cursor = document.getElementById("nav-cursor");
-  const nav = document.getElementById("main-menu-nav");
-  if (!cursor || !nav || !tab) return;
-  const rect = tab.getBoundingClientRect();
-  const navRect = nav.getBoundingClientRect();
-  const top = rect.top - navRect.top + nav.scrollTop;
-  const height = rect.height;
+  /* The active row carries its own 1px cyan parallelogram frame, so there
+     is no separate cursor element to move. We only re-trigger the hatch
+     animation so the selection always reads as freshly acquired. */
+  if (!tab) return;
+  const hatch = tab.querySelector(".tab-hatch");
+  if (!hatch) return;
+  hatch.style.animation = "none";
+  void hatch.offsetWidth;
+  hatch.style.animation = "";
+}
 
-  if (window.FX && !window.FX.reduced) {
-    window.FX.fly(cursor, () => {
-      cursor.style.top = `${top}px`;
-      cursor.style.height = `${height}px`;
-      cursor.classList.add("is-active");
-    }, { duration: 300 });
-  } else {
-    cursor.style.top = `${top}px`;
-    cursor.style.height = `${height}px`;
-    cursor.classList.add("is-active");
+/* The column of binary digits down the right edge of the stage. */
+function initBinaryColumn() {
+  const host = document.getElementById("stage-binary");
+  if (!host) return;
+  const rows = [];
+  for (let i = 0; i < 90; i += 1) {
+    let row = "";
+    for (let j = 0; j < 5; j += 1) row += Math.random() > 0.5 ? "1" : "0";
+    rows.push(row);
   }
+  host.textContent = rows.join("\n");
 }
 
 function initMenuTabs() {

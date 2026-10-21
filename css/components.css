@@ -1,7 +1,10 @@
 /* ==========================================================================
-   components.css — the reusable vocabulary of the interface.
-   Buttons, cards, chips, meters, tags, forms, tables, codex entries, HUD
-   readouts, brackets and the datamosh canvas frame.
+   components.css â€” the reusable vocabulary.
+
+   The rule that governs everything here: RED is the default state of the
+   interface, CYAN is what is selected, YELLOW is what is valuable, GREEN
+   is what is alive. Nothing is filled with yellow. Nothing is filled with
+   red except the one selected list row, the way Night City does it.
    ========================================================================== */
 
 /* ==========================================================================
@@ -13,16 +16,16 @@
   display: inline-flex;
   align-items: center;
   gap: 9px;
-  min-height: 40px;
+  min-height: 38px;
   padding: 0 20px;
   overflow: hidden;
-  color: var(--cp-text);
-  background: var(--cp-surface);
-  border: 1px solid var(--cp-line-soft);
+  color: var(--cp-red);
+  background: rgba(255, 92, 84, 0.05);
+  border: 1px solid var(--cp-red-a30);
   font-family: var(--f-tech);
-  font-size: 0.7rem;
+  font-size: 0.68rem;
   font-weight: 600;
-  letter-spacing: 0.16em;
+  letter-spacing: 0.18em;
   text-transform: uppercase;
   clip-path: var(--cut-btn);
   transition:
@@ -41,7 +44,7 @@
   width: 40%;
   content: '';
   pointer-events: none;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.16), transparent);
+  background: linear-gradient(90deg, transparent, rgba(0, 240, 255, 0.22), transparent);
   mix-blend-mode: screen;
   transform: translateX(-140%);
   transition: transform var(--t-slow) var(--ease);
@@ -49,13 +52,15 @@
 
 .btn-cyber:hover::after,
 .btn-cyber:focus-visible::after {
-  transform: translateX(260%);
+  transform: translateX(280%);
 }
 
 .btn-cyber:hover,
 .btn-cyber:focus-visible {
-  border-color: var(--cp-line);
-  letter-spacing: 0.2em;
+  color: var(--cp-cyan);
+  background: var(--cp-cyan-a12);
+  border-color: var(--cp-line-cyan);
+  letter-spacing: 0.22em;
   outline: none;
 }
 
@@ -63,11 +68,12 @@
   transform: translateY(1px);
 }
 
+/* The primary action is the one thing that gets the yellow. */
 .btn-cyber-yellow {
   color: var(--cp-black);
   background: var(--cp-yellow);
   border-color: var(--cp-yellow);
-  box-shadow: 0 0 18px rgba(252, 238, 10, 0.28);
+  box-shadow: 0 0 18px rgba(255, 239, 2, 0.22);
 }
 
 .btn-cyber-yellow:hover,
@@ -75,63 +81,39 @@
   color: var(--cp-black);
   background: var(--cp-yellow-hot);
   border-color: var(--cp-yellow-hot);
-  box-shadow: var(--glow-yellow-strong);
+  box-shadow: 0 0 30px rgba(255, 239, 2, 0.4);
 }
 
 .btn-cyber-cyan {
   color: var(--cp-cyan);
-  background: var(--cp-cyan-a08);
+  background: var(--cp-cyan-a12);
   border-color: var(--cp-line-cyan);
 }
 
 .btn-cyber-cyan:hover,
 .btn-cyber-cyan:focus-visible {
   color: var(--cp-cyan);
-  background: var(--cp-cyan-a16);
+  background: var(--cp-cyan-a30);
   box-shadow: var(--glow-cyan);
-}
-
-.btn-cyber-magenta {
-  color: var(--cp-magenta-hot);
-  background: var(--cp-magenta-a12);
-  border-color: var(--cp-magenta-a40);
-}
-
-.btn-cyber-magenta:hover,
-.btn-cyber-magenta:focus-visible {
-  color: var(--cp-magenta-hot);
-  box-shadow: var(--glow-magenta);
 }
 
 .btn-cyber-ghost {
   color: var(--cp-text-2);
   background: transparent;
-  border-color: var(--cp-line-soft);
+  border-color: var(--cp-line-faint);
 }
 
 .btn-cyber-ghost:hover,
 .btn-cyber-ghost:focus-visible {
-  color: var(--cp-yellow);
-  background: var(--cp-yellow-a05);
-}
-
-/* Neomilitarism accent — reserved for destructive / external case files. */
-.btn-cyber-red {
-  color: var(--cp-red-hot);
-  background: var(--cp-red-a16);
-  border-color: var(--cp-red-a40, rgba(197, 0, 60, 0.4));
-}
-
-.btn-cyber-red:hover,
-.btn-cyber-red:focus-visible {
-  color: var(--cp-red-hot);
-  box-shadow: 0 0 16px rgba(197, 0, 60, 0.4);
+  color: var(--cp-cyan);
+  background: var(--cp-cyan-a06);
+  border-color: var(--cp-line-cyan);
 }
 
 .btn-cyber-sm {
-  min-height: 30px;
+  min-height: 28px;
   padding: 0 13px;
-  font-size: 0.6rem;
+  font-size: 0.58rem;
   clip-path: var(--cut-chip);
 }
 
@@ -141,18 +123,18 @@
 }
 
 /* ==========================================================================
-   CARDS
+   CARDS â€” the red glass panel
    ========================================================================== */
 
 .cp-card {
   position: relative;
-  background: linear-gradient(160deg, var(--cp-surface-2), var(--cp-surface));
-  border: 1px solid var(--cp-line-faint);
-  clip-path: var(--cut-panel-sm);
+  background: linear-gradient(160deg, rgba(255, 92, 84, 0.055), rgba(10, 5, 6, 0.72));
+  border: 1px solid var(--cp-red-a30);
+  clip-path: var(--cut-btn);
   transition:
     border-color var(--t-med) var(--ease),
     box-shadow var(--t-med) var(--ease),
-    transform var(--t-med) var(--ease-snap);
+    background var(--t-med) var(--ease);
 }
 
 .cp-card::before {
@@ -160,20 +142,244 @@
   top: 0;
   left: 0;
   width: 2px;
-  height: 22px;
+  height: 24px;
   content: '';
-  background: var(--cp-yellow);
-  box-shadow: 0 0 10px rgba(252, 238, 10, 0.6);
-  transition: height var(--t-med) var(--ease);
+  background: var(--cp-red);
+  box-shadow: 0 0 10px rgba(255, 92, 84, 0.7);
+  transition: height var(--t-med) var(--ease), background var(--t-med) var(--ease);
 }
 
 .cp-card:hover {
-  border-color: var(--cp-line);
-  box-shadow: 0 0 22px rgba(252, 238, 10, 0.08);
+  border-color: var(--cp-red-a55);
+  background: linear-gradient(160deg, rgba(255, 92, 84, 0.09), rgba(12, 6, 7, 0.8));
+  box-shadow: 0 0 24px rgba(255, 92, 84, 0.1);
 }
 
 .cp-card:hover::before {
   height: 100%;
+}
+
+/* The information panel: slanted top-left corner, like the real one. */
+.cp-panel-slant {
+  position: relative;
+  background: linear-gradient(180deg, rgba(255, 92, 84, 0.05), rgba(8, 4, 5, 0.82));
+  border: 1px solid var(--cp-red-a30);
+  clip-path: var(--slant);
+  padding: 22px 20px 20px 24px;
+  transition: border-color var(--t-med) var(--ease);
+}
+
+.cp-panel-slant:hover {
+  border-color: var(--cp-red-a55);
+}
+
+/* The stepped banner card â€” perk categories. */
+.cp-tab-card {
+  position: relative;
+  padding: 26px 18px 16px;
+  background: linear-gradient(160deg, rgba(255, 92, 84, 0.07), rgba(10, 5, 6, 0.8));
+  border: 1px solid var(--cp-red-a30);
+  clip-path: var(--tab-top);
+  transition: border-color var(--t-med) var(--ease), background var(--t-med) var(--ease);
+}
+
+.cp-tab-card:hover {
+  border-color: var(--cp-red-a55);
+}
+
+/* ==========================================================================
+   HATCHED SQUARE â€” the CP2077 active marker
+   ========================================================================== */
+
+.hatch-box {
+  width: 18px;
+  height: 18px;
+  flex: none;
+  border: 1px solid var(--cp-cyan);
+  background: repeating-linear-gradient(45deg, var(--cp-cyan) 0 1px, transparent 1px 3px);
+  animation: hatch-drift 2.8s linear infinite;
+}
+
+.hatch-box.is-red {
+  border-color: var(--cp-red);
+  background: repeating-linear-gradient(45deg, var(--cp-red) 0 1px, transparent 1px 3px);
+}
+
+/* A small filled tag â€” the "NEW" badge in the game. */
+.cp-tag {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px 7px;
+  color: var(--cp-black);
+  background: var(--cp-yellow);
+  font-family: var(--f-mono);
+  font-size: 0.5rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  clip-path: var(--cut-chip);
+}
+
+.cp-tag.is-cyan {
+  color: var(--cp-black);
+  background: var(--cp-cyan);
+}
+
+.cp-tag.is-red {
+  color: var(--cp-text-plain);
+  background: var(--cp-red-a30);
+  border: 1px solid var(--cp-red-a55);
+}
+
+/* ==========================================================================
+   HEXAGONS â€” the perk / attribute node
+   ========================================================================== */
+
+.hex-node {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 62px;
+  height: 62px;
+  color: var(--cp-red);
+  font-family: var(--f-tech);
+  font-size: 0.62rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  transition: transform var(--t-med) var(--ease-snap), color var(--t-med) var(--ease);
+}
+
+/* The hexagon outline is a larger hexagon with a smaller one punched out,
+   so the frame follows the angled edges instead of being clipped away. */
+.hex-node::before,
+.hex-node::after {
+  position: absolute;
+  content: '';
+  clip-path: var(--hex);
+  transition: background var(--t-med) var(--ease);
+}
+
+.hex-node::before {
+  inset: 0;
+  background: var(--cp-red-a55);
+}
+
+.hex-node::after {
+  inset: 1px;
+  background: rgba(9, 4, 5, 0.92);
+}
+
+.hex-node .ico {
+  position: relative;
+  z-index: 1;
+  width: 20px;
+  height: 20px;
+  color: var(--cp-red);
+}
+
+.hex-node:hover,
+.hex-node:focus-visible {
+  color: var(--cp-cyan);
+  outline: none;
+  transform: scale(1.07);
+}
+
+.hex-node:hover::before {
+  background: var(--cp-cyan);
+}
+
+.hex-node:hover .ico {
+  filter: brightness(0) saturate(100%);
+}
+
+.hex-node.is-active {
+  color: var(--cp-cyan);
+}
+
+.hex-node.is-active::before {
+  background: var(--cp-cyan);
+  box-shadow: 0 0 26px rgba(0, 240, 255, 0.45);
+}
+
+.hex-node.is-active::after {
+  background: rgba(0, 240, 255, 0.14);
+}
+
+.hex-node.is-active .ico {
+  filter: brightness(0) saturate(100%);
+  opacity: 0.92;
+}
+
+.hex-node.is-locked {
+  color: var(--cp-text-4);
+}
+
+.hex-node.is-locked::before {
+  background: var(--cp-line-faint);
+}
+
+.hex-node.is-locked::after {
+  background: rgba(6, 4, 5, 0.94);
+}
+
+.hex-node.is-locked .ico {
+  opacity: 0.4;
+}
+
+/* ==========================================================================
+   LEVEL BADGE — the pointy-top hexagon
+   ========================================================================== */
+
+.hex-badge {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 66px;
+  height: 66px;
+  color: var(--cp-black);
+  font-family: var(--f-dots);
+  font-size: 1.5rem;
+  clip-path: var(--hex-p);
+  filter: drop-shadow(0 0 18px rgba(0, 240, 255, 0.45));
+}
+
+.hex-badge::before {
+  position: absolute;
+  inset: 0;
+  content: '';
+  clip-path: var(--hex-p);
+  background: var(--cp-cyan);
+}
+
+.hex-badge::after {
+  position: absolute;
+  inset: 1px;
+  content: '';
+  clip-path: var(--hex-p);
+  background: rgba(0, 240, 255, 0.18);
+}
+
+.hex-badge > * {
+  position: relative;
+  z-index: 1;
+}
+
+.hex-badge.is-yellow {
+  filter: drop-shadow(0 0 18px rgba(255, 239, 2, 0.45));
+}
+
+.hex-badge.is-yellow::before {
+  background: var(--cp-yellow);
+}
+
+.hex-badge.is-yellow::after {
+  background: rgba(255, 239, 2, 0.18);
+}
+
+.hex-badge-lg {
+  width: 92px;
+  height: 92px;
+  font-size: 2.1rem;
 }
 
 /* ==========================================================================
@@ -183,7 +389,7 @@
 .chip-row {
   display: flex;
   flex-wrap: wrap;
-  gap: 6px;
+  gap: 5px;
 }
 
 .chip {
@@ -192,10 +398,10 @@
   gap: 6px;
   padding: 4px 10px;
   color: var(--cp-text-2);
-  background: var(--cp-yellow-a05);
+  background: rgba(255, 92, 84, 0.05);
   border: 1px solid var(--cp-line-faint);
   font-family: var(--f-mono);
-  font-size: 0.6rem;
+  font-size: 0.58rem;
   letter-spacing: 0.08em;
   clip-path: var(--cut-chip);
   transition:
@@ -207,175 +413,35 @@
 .chip .ico {
   width: 12px;
   height: 12px;
-  color: var(--cp-yellow);
+  color: var(--cp-red);
 }
 
 .chip:hover {
-  color: var(--cp-yellow);
-  background: var(--cp-yellow-a16);
-  border-color: var(--cp-line);
+  color: var(--cp-cyan);
+  background: var(--cp-cyan-a06);
+  border-color: var(--cp-line-cyan-soft);
 }
 
 .chip.is-cyan {
-  background: var(--cp-cyan-a08);
-  border-color: var(--cp-cyan-a16);
+  background: var(--cp-cyan-a06);
+  border-color: var(--cp-cyan-a12);
 }
 
 .chip.is-cyan .ico {
   color: var(--cp-cyan);
 }
 
-/* ==========================================================================
-   METERS — the CP2077 attribute bars
-   ========================================================================== */
-
-.meter {
-  position: relative;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.meter-track {
-  position: relative;
-  flex: 1;
-  height: 7px;
-  overflow: hidden;
-  background: rgba(244, 242, 236, 0.07);
-  clip-path: polygon(0 0, 100% 0, calc(100% - 5px) 100%, 0 100%);
-}
-
-.meter-fill {
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 100%;
-  width: 0;
-  background: linear-gradient(90deg, var(--cp-yellow-deep), var(--cp-yellow));
-  box-shadow: 0 0 12px rgba(252, 238, 10, 0.6);
-  transition: width 700ms var(--ease-snap);
-}
-
-.meter-fill.is-cyan {
-  background: linear-gradient(90deg, var(--cp-cyan-deep), var(--cp-cyan));
-  box-shadow: 0 0 12px rgba(0, 240, 255, 0.6);
-}
-
-.meter-fill.is-magenta {
-  background: linear-gradient(90deg, #8a0024, var(--cp-magenta));
-  box-shadow: 0 0 12px rgba(255, 0, 68, 0.6);
-}
-
-.meter-pips {
-  display: flex;
-  gap: 3px;
-}
-
-.meter-pips i {
-  width: 7px;
-  height: 7px;
-  background: rgba(244, 242, 236, 0.1);
-  clip-path: polygon(50% 0, 100% 25%, 100% 75%, 50% 100%, 0 75%, 0 25%);
-  transition: background var(--t-med) var(--ease), box-shadow var(--t-med) var(--ease);
-}
-
-.meter-pips i.on {
-  background: var(--cp-yellow);
-  box-shadow: 0 0 8px rgba(252, 238, 10, 0.8);
-}
-
-.meter-pips.is-cyan i.on {
-  background: var(--cp-cyan);
-  box-shadow: 0 0 8px rgba(0, 240, 255, 0.8);
-}
-
-.meter-pips.is-magenta i.on {
-  background: var(--cp-magenta);
-  box-shadow: 0 0 8px rgba(255, 0, 68, 0.8);
-}
-
-/* ==========================================================================
-   HEX PIPS — level badge
-   ========================================================================== */
-
-.hex-badge {
-  position: relative;
-  display: grid;
-  place-items: center;
-  width: 68px;
-  height: 68px;
-  color: var(--cp-black);
-  background: var(--cp-yellow);
-  font-family: var(--f-dots);
-  font-size: 1.5rem;
-  clip-path: polygon(50% 0, 100% 25%, 100% 75%, 50% 100%, 0 75%, 0 25%);
-  filter: drop-shadow(0 0 16px rgba(252, 238, 10, 0.55));
-}
-
-.hex-badge.is-cyan {
-  background: var(--cp-cyan);
-  filter: drop-shadow(0 0 16px rgba(0, 240, 255, 0.55));
-}
-
-.hex-badge.is-magenta {
-  background: var(--cp-magenta);
-  color: #fff;
-  filter: drop-shadow(0 0 16px rgba(255, 0, 68, 0.55));
-}
-
-.hex-badge-lg {
-  width: 92px;
-  height: 92px;
-  font-size: 2rem;
-}
-
-/* ==========================================================================
-   TAGS
-   ========================================================================== */
-
-.tag {
-  display: inline-flex;
-  align-items: center;
-  gap: 5px;
-  padding: 3px 8px;
-  color: var(--cp-cyan);
-  background: var(--cp-cyan-a08);
-  border: 1px solid var(--cp-cyan-a16);
-  font-family: var(--f-mono);
-  font-size: 0.56rem;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  clip-path: var(--cut-chip);
-}
-
-.tag .ico {
-  width: 11px;
-  height: 11px;
-}
-
-.tag.is-yellow {
-  color: var(--cp-yellow);
-  background: var(--cp-yellow-a08);
-  border-color: var(--cp-yellow-a16);
-}
-
-.tag.is-magenta {
-  color: var(--cp-magenta-hot);
-  background: var(--cp-magenta-a12);
-  border-color: var(--cp-magenta-a40);
-}
-
-/* Project / case-file tag. Same language as .tag, slightly denser. */
+/* Project / case-file tag. */
 .gig-tag {
   display: inline-flex;
   align-items: center;
   gap: 5px;
   padding: 3px 8px;
   color: var(--cp-cyan);
-  background: var(--cp-cyan-a08);
-  border: 1px solid var(--cp-cyan-a16);
+  background: var(--cp-cyan-a06);
+  border: 1px solid var(--cp-cyan-a12);
   font-family: var(--f-mono);
-  font-size: 0.55rem;
+  font-size: 0.53rem;
   letter-spacing: 0.09em;
   text-transform: uppercase;
   white-space: nowrap;
@@ -399,7 +465,7 @@
   background: rgba(244, 242, 236, 0.04);
   border: 1px solid var(--cp-line-faint);
   font-family: var(--f-mono);
-  font-size: 0.53rem;
+  font-size: 0.52rem;
   letter-spacing: 0.09em;
   text-transform: uppercase;
   white-space: nowrap;
@@ -410,7 +476,72 @@
   width: 11px;
   height: 11px;
   flex: none;
-  color: var(--cp-yellow);
+  color: var(--cp-red);
+}
+
+.tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 3px 8px;
+  color: var(--cp-cyan);
+  background: var(--cp-cyan-a06);
+  border: 1px solid var(--cp-cyan-a12);
+  font-family: var(--f-mono);
+  font-size: 0.55rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  clip-path: var(--cut-chip);
+}
+
+.tag .ico {
+  width: 11px;
+  height: 11px;
+}
+
+/* ==========================================================================
+   METERS
+   ========================================================================== */
+
+.meter {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.meter-track {
+  position: relative;
+  flex: 1;
+  height: 6px;
+  overflow: hidden;
+  background: rgba(255, 92, 84, 0.1);
+  clip-path: polygon(0 0, 100% 0, calc(100% - 5px) 100%, 0 100%);
+}
+
+.meter-fill {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 0;
+  background: linear-gradient(90deg, var(--cp-red-deep), var(--cp-red));
+  box-shadow: 0 0 12px rgba(255, 92, 84, 0.6);
+  transition: width 700ms var(--ease-snap);
+}
+
+.meter-fill.is-cyan {
+  background: linear-gradient(90deg, var(--cp-cyan-deep), var(--cp-cyan));
+  box-shadow: 0 0 12px rgba(0, 240, 255, 0.6);
+}
+
+.meter-fill.is-yellow {
+  background: linear-gradient(90deg, var(--cp-yellow-deep), var(--cp-yellow));
+  box-shadow: 0 0 12px rgba(255, 239, 2, 0.6);
+}
+
+.meter-fill.is-magenta {
+  background: linear-gradient(90deg, #8a0024, var(--cp-magenta, #ff0044));
 }
 
 /* ==========================================================================
@@ -423,18 +554,18 @@
   gap: 7px;
   padding: 5px 11px;
   color: var(--cp-text-2);
-  background: rgba(244, 242, 236, 0.03);
+  background: rgba(255, 92, 84, 0.04);
   border: 1px solid var(--cp-line-faint);
   font-family: var(--f-mono);
-  font-size: 0.56rem;
+  font-size: 0.54rem;
   letter-spacing: 0.12em;
   text-transform: uppercase;
   clip-path: var(--cut-chip);
 }
 
 .status-pill::before {
-  width: 5px;
-  height: 5px;
+  width: 6px;
+  height: 6px;
   content: '';
   background: var(--cp-cyan);
   box-shadow: 0 0 8px currentColor;
@@ -442,11 +573,11 @@
 }
 
 .status-pill.is-warn::before {
-  background: var(--cp-amber);
+  background: var(--cp-yellow);
 }
 
 .status-pill.is-danger::before {
-  background: var(--cp-magenta);
+  background: var(--cp-red-hot);
 }
 
 .status-pill.is-good::before {
@@ -466,8 +597,8 @@
 .form-group label {
   color: var(--cp-cyan);
   font-family: var(--f-mono);
-  font-size: 0.58rem;
-  letter-spacing: 0.16em;
+  font-size: 0.56rem;
+  letter-spacing: 0.18em;
   text-transform: uppercase;
 }
 
@@ -475,11 +606,11 @@
 .form-group textarea {
   width: 100%;
   padding: 10px 12px;
-  color: var(--cp-text);
+  color: var(--cp-text-plain);
   background: rgba(0, 0, 0, 0.55);
-  border: 1px solid var(--cp-line-soft);
+  border: 1px solid var(--cp-red-a30);
   font-family: var(--f-mono);
-  font-size: 0.78rem;
+  font-size: 0.76rem;
   clip-path: var(--cut-chip);
   transition: border-color var(--t-fast) var(--ease), box-shadow var(--t-fast) var(--ease);
 }
@@ -498,12 +629,7 @@
 .form-group input:focus,
 .form-group textarea:focus {
   border-color: var(--cp-cyan);
-  box-shadow: 0 0 14px rgba(0, 240, 255, 0.2);
-  outline: none;
-}
-
-.form-group input:focus-visible,
-.form-group textarea:focus-visible {
+  box-shadow: 0 0 16px rgba(0, 240, 255, 0.22);
   outline: none;
 }
 
@@ -516,9 +642,9 @@
   padding: 12px 14px;
   color: var(--cp-cyan);
   background: rgba(0, 0, 0, 0.7);
-  border: 1px solid var(--cp-line-soft);
+  border: 1px solid var(--cp-red-a30);
   font-family: var(--f-mono);
-  font-size: 0.68rem;
+  font-size: 0.66rem;
   line-height: 1.7;
   white-space: pre-wrap;
   word-break: break-word;
@@ -539,34 +665,29 @@
   height: 1em;
   margin-left: 2px;
   vertical-align: -0.15em;
-  background: var(--cp-yellow);
+  background: var(--cp-cyan);
   animation: caret-blink 1.05s steps(2, start) infinite;
 }
 
 /* ==========================================================================
-   EMPTY STATE
+   EMPTY STATE + KEY/VALUE
    ========================================================================== */
 
 .empty-state {
-  padding: 30px;
+  padding: 28px;
   color: var(--cp-text-4);
   border: 1px dashed var(--cp-line-faint);
   font-family: var(--f-mono);
-  font-size: 0.68rem;
+  font-size: 0.66rem;
   letter-spacing: 0.14em;
   text-align: center;
   text-transform: uppercase;
-  clip-path: var(--cut-panel-sm);
+  clip-path: var(--cut-chip);
 }
-
-/* ==========================================================================
-   SCROLL REVEAL / BOOT STRIP
-   ========================================================================== */
 
 .kv-grid {
   display: grid;
-  grid-template-columns: minmax(120px, 30%) 1fr;
-  gap: 0;
+  grid-template-columns: minmax(120px, 32%) 1fr;
   border-top: 1px solid var(--cp-line-faint);
 }
 
@@ -575,16 +696,66 @@
   color: var(--cp-text-4);
   border-bottom: 1px solid var(--cp-line-faint);
   font-family: var(--f-mono);
-  font-size: 0.58rem;
+  font-size: 0.56rem;
   letter-spacing: 0.14em;
   text-transform: uppercase;
 }
 
 .kv-grid dd {
   padding: 8px 0;
-  color: var(--cp-text);
+  color: var(--cp-cyan);
   border-bottom: 1px solid var(--cp-line-faint);
   font-family: var(--f-body);
   font-size: 0.92rem;
   font-weight: 600;
+}
+
+/* ==========================================================================
+   KEY CAPS â€” the "F" / "ESC" badges
+   ========================================================================== */
+
+.keycap {
+  display: inline-grid;
+  place-items: center;
+  min-width: 22px;
+  height: 22px;
+  padding: 0 5px;
+  color: var(--cp-cyan);
+  background: transparent;
+  border: 1px solid var(--cp-cyan);
+  font-family: var(--f-mono);
+  font-size: 0.58rem;
+  clip-path: var(--cut-chip);
+}
+
+/* ==========================================================================
+   HUD CORNER BRACKETS
+   ========================================================================== */
+
+.bracket {
+  position: relative;
+}
+
+.bracket::before,
+.bracket::after {
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  content: '';
+  pointer-events: none;
+  border-color: var(--cp-red);
+  border-style: solid;
+  opacity: 0.7;
+}
+
+.bracket::before {
+  top: -1px;
+  left: -1px;
+  border-width: 1px 0 0 1px;
+}
+
+.bracket::after {
+  right: -1px;
+  bottom: -1px;
+  border-width: 0 1px 1px 0;
 }

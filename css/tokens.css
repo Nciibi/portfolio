@@ -1,117 +1,136 @@
 /* ==========================================================================
    NCIIBI_OS 5.0 — DESIGN TOKENS
-   Cyberpunk 2077 / Edgerunners screen-UI language.
+   Sampled directly from the Cyberpunk 2077 interface.
 
-   Rules of the system (from CD PROJEKT RED's UI Art Bible):
-     · Pure black is the void. Surfaces step up by luminance, not by shadow.
-     · Elevation is EMITTED LIGHT (glow), never a drop shadow.
-     · Every corner is a knife edge. Radius is zero.
-     · One dominant signal colour per view. The rest are punctuation.
-       yellow = proceed / primary action / attention
-       cyan   = system status / readouts / focus
-       magenta= stop / warn / glitch
-       red    = Neomilitarism accent, alerts only
+   The CD PROJEKT RED screen language is the "Neomilitarism" style: a hot
+   coral-red chrome carries the structure, cyan marks what is selected,
+   yellow marks what is valuable, green marks what is alive. Pure black is
+   the void and panels are glass tinted by the accent that owns them.
    ========================================================================== */
 
 :root {
-  /* --- Surfaces ---------------------------------------------------------- */
+  /* --- Surfaces: the void, and glass tinted by the owning accent -------- */
   --cp-black: #000000;
-  --cp-void: #050507;
-  --cp-surface: #0a0a0d;
-  --cp-surface-2: #101014;
-  --cp-raise: #16161c;
-  --cp-panel: rgba(10, 10, 13, 0.94);
-  --cp-panel-soft: rgba(16, 16, 20, 0.86);
-  --cp-panel-glass: rgba(6, 6, 9, 0.72);
+  --cp-void: #06060a;
+  --cp-bg-1: #0b0b10;
+  --cp-bg-2: #131318;
+  --cp-bg-3: #1c1c22;
 
-  /* --- Primary: fluorescent yellow -------------------------------------- */
-  --cp-yellow: #fcee0a;
-  --cp-yellow-hot: #fff94d;
-  --cp-yellow-deep: #c4b000;
-  --cp-yellow-a05: rgba(252, 238, 10, 0.05);
-  --cp-yellow-a08: rgba(252, 238, 10, 0.08);
-  --cp-yellow-a16: rgba(252, 238, 10, 0.16);
-  --cp-yellow-a32: rgba(252, 238, 10, 0.32);
-  --cp-yellow-a55: rgba(252, 238, 10, 0.55);
+  /* --- Chrome: coral red. This is the load-bearing colour. -------------- */
+  --cp-red: #ff5c54;
+  --cp-red-hot: #ff8078;
+  --cp-red-deep: #c4372f;
+  --cp-red-a04: rgba(255, 92, 84, 0.04);
+  --cp-red-a08: rgba(255, 92, 84, 0.08);
+  --cp-red-a14: rgba(255, 92, 84, 0.14);
+  --cp-red-a30: rgba(255, 92, 84, 0.3);
+  --cp-red-a55: rgba(255, 92, 84, 0.55);
+  --cp-red-a80: rgba(255, 92, 84, 0.8);
 
-  /* --- System: cyan ------------------------------------------------------ */
+  /* --- Selection: cyan. Only ever used for what is active. -------------- */
   --cp-cyan: #00f0ff;
-  --cp-cyan-hot: #9dfaff;
-  --cp-cyan-deep: #00a8b4;
-  --cp-cyan-a08: rgba(0, 240, 255, 0.08);
-  --cp-cyan-a16: rgba(0, 240, 255, 0.16);
-  --cp-cyan-a40: rgba(0, 240, 255, 0.4);
+  --cp-cyan-hot: #5df4fd;
+  --cp-cyan-deep: #009aa6;
+  --cp-cyan-a06: rgba(0, 240, 255, 0.06);
+  --cp-cyan-a12: rgba(0, 240, 255, 0.12);
+  --cp-cyan-a30: rgba(0, 240, 255, 0.3);
+  --cp-cyan-a60: rgba(0, 240, 255, 0.6);
 
-  /* --- Danger: magenta --------------------------------------------------- */
+  /* --- Value: yellow. Counters, points, things worth having. ------------ */
+  --cp-yellow: #ffef02;
+  --cp-yellow-hot: #fff95e;
+  --cp-yellow-deep: #b8a600;
+  --cp-yellow-a08: rgba(255, 239, 2, 0.08);
+  --cp-yellow-a16: rgba(255, 239, 2, 0.16);
+  --cp-yellow-a40: rgba(255, 239, 2, 0.4);
+
+  /* --- Status: emerald green. ------------------------------------------- */
+  --cp-green: #1bd676;
+  --cp-green-hot: #4df39c;
+  --cp-green-a16: rgba(27, 214, 118, 0.16);
+  --cp-green-a40: rgba(27, 214, 118, 0.4);
+
+  /* --- Breach: the olive + green sub-language of the netrunner screens. --- */
+  --cp-olive: #deff5e;
+  --cp-olive-a16: rgba(222, 255, 94, 0.16);
+  --cp-olive-a40: rgba(222, 255, 94, 0.4);
+  --cp-breach: #1bd676;
+  --cp-breach-deep: #0d5a38;
+  --cp-breach-panel: rgba(27, 214, 118, 0.06);
+
+  /* --- Text ---------------------------------------------------------------
+     The game runs red body copy over black. Chrome labels are red, long-form
+     prose steps down to a light neutral so paragraphs stay readable. */
+  --cp-text: #ff5c54;      /* CHROME — labels, metadata, structure */
+  --cp-text-2: #ece8e6;    /* PROSE LIGHT — card titles, headings */
+  --cp-text-3: #a9a29f;    /* PROSE MID */
+  --cp-text-4: #7e3a36;    /* QUIET CHROME */
+  --cp-text-plain: #ece8e6;
+  --cp-text-plain-2: #a9a29f;
+  --cp-text-plain-3: #6f6866;
+
+  /* --- Extra signal colours ------------------------------------------------ */
   --cp-magenta: #ff0044;
   --cp-magenta-hot: #ff5c8a;
   --cp-magenta-a12: rgba(255, 0, 68, 0.12);
-  --cp-magenta-a40: rgba(255, 0, 68, 0.4);
-
-  /* --- Neomilitarism: red ------------------------------------------------ */
-  --cp-red: #c5003c;
-  --cp-red-hot: #ff2d63;
-  --cp-red-a16: rgba(197, 0, 60, 0.16);
-
-  /* --- States ------------------------------------------------------------ */
-  --cp-green: #00e07a;
-  --cp-green-a20: rgba(0, 224, 122, 0.2);
   --cp-amber: #ff9a3c;
   --cp-amber-a20: rgba(255, 154, 60, 0.2);
 
-  /* --- Text -------------------------------------------------------------- */
-  --cp-text: #f4f2ec;
-  --cp-text-2: #b9b4ae;
-  --cp-text-3: #837d78;
-  --cp-text-4: #5c5754;
-
   /* --- Lines ------------------------------------------------------------- */
-  --cp-line: rgba(252, 238, 10, 0.22);
-  --cp-line-soft: rgba(252, 238, 10, 0.1);
-  --cp-line-faint: rgba(252, 238, 10, 0.05);
-  --cp-line-cyan: rgba(0, 240, 255, 0.4);
-  --cp-line-magenta: rgba(255, 0, 68, 0.4);
-  --cp-line-neutral: rgba(244, 242, 236, 0.1);
-  --cp-line-soft-neutral: rgba(244, 242, 236, 0.05);
+  --cp-line: rgba(255, 92, 84, 0.34);
+  --cp-line-soft: rgba(255, 92, 84, 0.16);
+  --cp-line-faint: rgba(255, 92, 84, 0.07);
+  --cp-line-cyan: rgba(0, 240, 255, 0.42);
+  --cp-line-cyan-soft: rgba(0, 240, 255, 0.16);
+  --cp-line-yellow: rgba(255, 239, 2, 0.36);
+  --cp-line-neutral: rgba(232, 228, 226, 0.09);
 
   /* --- Typography -------------------------------------------------------- */
-  --f-display: 'Saira Condensed', 'Arial Narrow', 'Helvetica Neue', sans-serif;
+  --f-display: 'Chakra Petch', 'Saira Condensed', 'Arial Narrow', sans-serif;
   --f-tech: 'Chakra Petch', 'Saira Condensed', 'Arial Narrow', sans-serif;
   --f-body: 'Rajdhani', 'Saira Condensed', 'Arial Narrow', sans-serif;
-  --f-mono: 'Share Tech Mono', ui-monospace, 'Cascadia Mono', 'Consolas', monospace;
-  --f-jp: 'Zen Kaku Gothic New', 'Noto Sans JP', 'Hiragino Kaku Gothic ProN', sans-serif;
-  --f-dots: 'Zen Dots', 'Share Tech Mono', ui-monospace, monospace;
+  --f-mono: 'Share Tech Mono', ui-monospace, 'Cascadia Mono', monospace;
+  --f-jp: 'Zen Kaku Gothic New', 'Noto Sans JP', sans-serif;
+  --f-dots: 'Zen Dots', 'Share Tech Mono', monospace;
 
   /* --- Metrics ----------------------------------------------------------- */
-  --header-height: 60px;
-  --nav-width: 248px;
-  --content-width: 1240px;
-  --gutter: 22px;
-  --radius-zero: 0;
+  --header-height: 58px;
+  --nav-width: 264px;
+  --content-width: 1300px;
+  --gutter: 26px;
 
   /* --- Motion ------------------------------------------------------------ */
   --ease: cubic-bezier(0.2, 0.8, 0.2, 1);
   --ease-snap: cubic-bezier(0.16, 1, 0.3, 1);
   --ease-glitch: cubic-bezier(0.85, 0, 0.15, 1);
   --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
-  --t-fast: 120ms;
-  --t-med: 220ms;
-  --t-slow: 420ms;
-  --t-shard: 560ms;
+  --t-fast: 110ms;
+  --t-med: 200ms;
+  --t-slow: 380ms;
+  --t-shard: 520ms;
 
-  /* --- Geometry ---------------------------------------------------------- */
-  --cut-chip: polygon(0 0, calc(100% - 6px) 0, 100% 6px, 100% 100%, 6px 100%, 0 calc(100% - 6px));
-  --cut-btn: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 10px 100%, 0 calc(100% - 10px));
-  --cut-panel: polygon(0 0, calc(100% - 16px) 0, 100% 16px, 100% 100%, 16px 100%, 0 calc(100% - 16px));
-  --cut-panel-sm: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 10px 100%, 0 calc(100% - 10px));
+  /* --- Geometry: the real shapes ---------------------------------------- */
+  /* Flat-top hexagon — the attribute / perk node. */
+  --hex: polygon(25% 0, 75% 0, 100% 50%, 75% 100%, 25% 100%, 0 50%);
+  /* Pointy-top hexagon — nav markers, status badges. */
+  --hex-p: polygon(50% 0, 100% 25%, 100% 75%, 50% 100%, 0 75%, 0 25%);
+  /* Skewed row — the character-database list item. */
+  --skew: polygon(20px 0, 100% 0, calc(100% - 20px) 100%, 0 100%);
+  --skew-sm: polygon(12px 0, 100% 0, calc(100% - 12px) 100%, 0 100%);
+  /* Stepped top — the perk category banner. */
+  --tab-top: polygon(0 15px, 15px 15px, 15px 0, 48px 0, 48px 15px, 100% 15px, 100% 100%, 0 100%);
+  /* Slanted corner — the information panel. */
+  --slant: polygon(22px 0, 100% 0, 100% 100%, 0 100%, 0 22px);
+  /* Single corner cut — buttons. */
+  --cut-btn: polygon(0 0, calc(100% - 9px) 0, 100% 9px, 100% 100%, 0 100%);
+  --cut-chip: polygon(0 0, calc(100% - 6px) 0, 100% 6px, 100% 100%, 0 100%);
 
-  /* --- Glow (elevation) -------------------------------------------------- */
-  --glow-yellow: 0 0 14px rgba(252, 238, 10, 0.26);
-  --glow-yellow-strong: 0 0 26px rgba(252, 238, 10, 0.4), 0 0 6px rgba(252, 238, 10, 0.28);
-  --glow-cyan: 0 0 14px rgba(0, 240, 255, 0.28);
-  --glow-magenta: 0 0 16px rgba(255, 0, 68, 0.38);
-  --glow-text: 0 0 20px rgba(252, 238, 10, 0.32);
-  --glow-text-soft: 0 0 12px rgba(252, 238, 10, 0.18);
+  /* --- Glow: elevation is emitted light ---------------------------------- */
+  --glow-red: 0 0 14px rgba(255, 92, 84, 0.32);
+  --glow-red-strong: 0 0 26px rgba(255, 92, 84, 0.45), 0 0 6px rgba(255, 92, 84, 0.3);
+  --glow-cyan: 0 0 16px rgba(0, 240, 255, 0.34);
+  --glow-cyan-strong: 0 0 30px rgba(0, 240, 255, 0.5);
+  --glow-yellow: 0 0 14px rgba(255, 239, 2, 0.3);
 
   /* --- Live FX controls (written by js/fx-core.js) ----------------------- */
   --fx-crt-intensity: 1;
@@ -121,9 +140,6 @@
   --fx-bloom: 1;
 }
 
-/* Reduced motion: neutralise every continuous animation globally. The
-   per-module JavaScript paths check the same media query, so the whole
-   system degrades to static composition rather than merely slowing down. */
 @media (prefers-reduced-motion: reduce) {
   :root {
     --fx-grain-opacity: 0.03;

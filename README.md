@@ -10,45 +10,62 @@ branch `main`, root folder)  ·  Source: **github.com/Nciibi/portfolio**
 
 ## The design system
 
-The interface follows the screen-UI language CD PROJEKT RED defined in the
-Cyberpunk 2077 UI Art Bible, filtered through the harder neon of Studio Trigger's
-*Cyberpunk: Edgerunners* adaptation.
+The interface is built on the **Neomilitarism** style — the sub-language CD
+PROJEKT RED defined in the Cyberpunk 2077 UI Art Bible and used for the
+in-game HUD and menus.
 
-| Rule | Where it comes from |
-| --- | --- |
-| Pure black is the void; surfaces step up by luminance, never by shadow | CP2077 |
-| Elevation is **emitted light** (glow), never a drop shadow | CP2077 |
-| Every corner is a knife edge — border-radius is zero everywhere | CP2077 |
-| One dominant signal colour per view; the rest are punctuation | CP2077 |
-| Glitch is **punctuation**, never wallpaper — it marks a state change | CP2077 + Edgerunners |
-| Hard cel-shaded edges, flat neon that stops abruptly | Edgerunners |
-| Katakana signage is a core part of the Night City language | Both |
-| A glitch is a signal fault, so it is **sparse** and **brief** | both |
+The rule that governs everything:
 
-### Colour roles
+> **Red is the default state. Cyan is what is selected. Yellow is what is
+> valuable. Green is what is alive. Magenta is what is wrong.**
 
-```
---cp-yellow  #fcee0a   PRIMARY — headline, action, attention
---cp-cyan    #00f0ff   SYSTEM  — readouts, focus rings, links
---cp-magenta #ff0044   DANGER  — glitch, errors, critical only
---cp-red     #c5003c   NEOMILITARISM — the military-system accent, alerts
---cp-green   #00e07a   ONLINE / success
-```
+Nothing is filled with yellow except the single primary action on a screen.
+Nothing is filled with red except the one selected list row. A screen has one
+dominant colour by area; the rest are punctuation.
 
-Yellow leads. Cyan reports. Magenta only ever warns. Red is the *Neomilitarism*
-sub-palette — the in-game military interface — so it is used sparingly and never
-competes with yellow for attention.
+| Role | Colour | Where it appears |
+| --- | --- | --- |
+| Chrome | `#ff5c54` | Rules, borders, labels, metadata, body copy |
+| Selection | `#00f0ff` | Active nav row, active perk, focus rings, section headers |
+| Value | `#ffef02` | The logo, counters, tier tags, the primary button |
+| Status | `#1bd676` | Street cred, online, success |
+| Breach | `#deff5e` + `#1bd676` | The netrunner terminal's olive/emerald sub-language |
+| Fault | `#ff0044` | Glitch, errors, critical only |
+
+These values were **sampled directly out of the game's own interface**
+rather than eyeballed, and the whole system follows four rules the art
+bible states:
+
+- **Pure black is the void.** Surfaces step up by luminance, never by shadow.
+- **Elevation is emitted light.** Glow replaces the drop-shadow ladder.
+- **Every corner is a knife edge.** Border radius is zero, everywhere.
+- **Glitch is punctuation, never wallpaper.** It marks a state change.
+
+### Geometry
+
+The shapes come from the game too, and they are not 45° cuts:
+
+| Shape | Used for | How it is built |
+| --- | --- | --- |
+| **Skewed parallelogram** | nav rows, list rows | `clip-path: polygon(20px 0, 100% 0, calc(100% - 20px) 100%, 0 100%)` |
+| **Flat-top hexagon** | perk / attribute nodes | `polygon(25% 0, 75% 0, 100% 50%, 75% 100%, 25% 100%, 0 50%)` |
+| **Pointy-top hexagon** | level badge | `polygon(50% 0, 100% 25%, 100% 75%, 50% 100%, 0 75%, 0 25%)` |
+| **Stepped-top banner** | perk category cards | `polygon(0 15px, 15px 15px, 15px 0, 48px 0, …)` |
+| **Slanted corner** | the information panel | `polygon(22px 0, 100% 0, 100% 100%, 0 100%, 0 22px)` |
+
+Outlines that must follow an angled edge (the nav row frame, the hexagon
+border) are drawn as a larger shape with a smaller one punched out of it —
+a clipped `border` would just be sliced away.
 
 ### Typography
 
 | Role | Face | Why |
 | --- | --- | --- |
-| Display | Saira Condensed | Tall condensed Eurostile-descended headline face |
-| Labels / UI | Chakra Petch | Angular techno face for tabs, buttons, panels |
+| Display / labels | **Chakra Petch** | Angular techno face for tabs, buttons, panels |
 | Body | **Rajdhani** | The actual Cyberpunk 2077 interface font |
-| Data | Share Tech Mono | Fixed-width readouts |
-| Katakana | Zen Kaku Gothic New | Zen Fonts — Japanese sci-fi signage |
-| Numerals | Zen Dots | Zen Fonts — codes, counters, readouts |
+| Data | **Share Tech Mono** | Fixed-width readouts |
+| Numerals | **Zen Dots** | Zen Fonts — counters, codes, readouts |
+| Katakana | **Zen Kaku Gothic New** | Zen Fonts — Japanese signage, subset to ~180 glyphs |
 
 ---
 

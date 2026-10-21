@@ -1,5 +1,5 @@
 /* ==========================================================================
-   fx.css — motion, glitch and post-processing.
+   fx.css â€” motion, glitch and post-processing.
 
    House rule borrowed from CD PROJEKT RED's UI art bible and from
    Cyberpunk: Edgerunners' use of distortion: a glitch is PUNCTUATION.
@@ -11,6 +11,38 @@
 /* ==========================================================================
    KEYFRAMES
    ========================================================================== */
+
+/* Panel entry: the game reveals a module with a shader wipe, not a fade.
+   The clip opens from the top while the block slides in from the right. */
+@keyframes panel-in {
+  0% { opacity: 0; transform: translateX(28px); clip-path: inset(0 0 100% 0); }
+  35% { opacity: 1; }
+  100% { opacity: 1; transform: translateX(0); clip-path: inset(0 0 0 0); }
+}
+
+/* Nav rows settle in one after another when the interface boots. */
+@keyframes nav-in {
+  0% { opacity: 0; transform: translateX(-16px); }
+  100% { opacity: 1; transform: translateX(0); }
+}
+
+/* The active row's frame acquires. */
+@keyframes frame-in {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+/* The hex nodes breathe very slightly, like the game's live diagrams. */
+@keyframes hex-breathe {
+  0%, 100% { filter: brightness(1); }
+  50% { filter: brightness(1.28); }
+}
+
+/* A row of data sliding into place from the right, in a short stagger. */
+@keyframes row-in {
+  0% { opacity: 0; transform: translateX(18px); }
+  100% { opacity: 1; transform: translateX(0); }
+}
 
 @keyframes top-signal {
   0% { background-position: 120% 0; }
@@ -98,6 +130,49 @@
   100% { transform: translateY(1100%); opacity: 0; }
 }
 
+/* --- Hatched marker drift — the CP2077 active-state square -------------- */
+
+@keyframes hatch-drift {
+  0% { background-position: 0 0; }
+  100% { background-position: 6px 6px; }
+}
+
+/* --- The red wash breathes, like the city's own signage ------------------- */
+
+@keyframes wash-breathe {
+  0%, 100% { opacity: 0.82; }
+  50% { opacity: 1; }
+}
+
+@keyframes binary-drift {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(-88px); }
+}
+
+@keyframes block-flicker {
+  0%, 100% { opacity: 0.5; }
+  47% { opacity: 0.5; }
+  48% { opacity: 0.62; }
+  49% { opacity: 0.44; }
+  50% { opacity: 0.5; }
+}
+
+@keyframes hex-breathe {
+  0%, 100% { filter: brightness(1); }
+  50% { filter: brightness(1.28); }
+}
+
+/* --- Row hover: a chromatic split, the way the game shears its labels ---- */
+
+.row-glitch:hover .pc-title,
+.row-glitch:hover .codex-title,
+.row-glitch:hover .exp-role,
+.row-glitch:hover .gh-repo-name {
+  text-shadow:
+    -1px 0 var(--cp-cyan),
+    1px 0 var(--cp-red);
+}
+
 /* --- Signal tear overlay --------------------------------------------------- */
 
 @keyframes tear-jitter {
@@ -182,7 +257,7 @@
 }
 
 .glitch-text::before {
-  color: var(--cp-magenta);
+  color: var(--cp-red);
   text-shadow: none;
 }
 
@@ -207,7 +282,7 @@
 }
 
 /* ==========================================================================
-   SHARD WIPE — the panel transition
+   SHARD WIPE â€” the panel transition
    ========================================================================== */
 
 .shard-layer {
@@ -274,7 +349,7 @@
   width: 100%;
   height: 2px;
   pointer-events: none;
-  background: linear-gradient(90deg, transparent, var(--cp-yellow), var(--cp-cyan), transparent);
+  background: linear-gradient(90deg, transparent, var(--cp-red), var(--cp-cyan), transparent);
   box-shadow: 0 0 22px rgba(252, 238, 10, 0.75);
   opacity: 0;
 }
@@ -293,13 +368,13 @@
   z-index: 30;
   content: '';
   pointer-events: none;
-  background: repeating-linear-gradient(0deg, rgba(255, 0, 68, 0.22) 0 2px, transparent 2px 7px);
+  background: repeating-linear-gradient(0deg, rgba(255, 92, 84, 0.24) 0 2px, transparent 2px 7px);
   mix-blend-mode: screen;
   animation: tear-jitter 90ms steps(2, end) infinite;
 }
 
 /* ==========================================================================
-   HUD RETICLE — custom targeting cursor
+   HUD RETICLE â€” custom targeting cursor
    ========================================================================== */
 
 .hud-reticle {
@@ -322,7 +397,7 @@
   left: var(--reticle-x, 0);
   width: var(--reticle-width, 0);
   height: var(--reticle-height, 0);
-  border: 1px solid var(--cp-yellow);
+  border: 1px solid var(--cp-red);
   box-shadow: 0 0 14px rgba(252, 238, 10, 0.3), inset 0 0 14px rgba(252, 238, 10, 0.08);
   clip-path: polygon(0 0, 14px 0, 14px 1px, 1px 1px, 1px 14px, 0 14px, 0 0, 100% 0, 100% 14px, calc(100% - 1px) 14px, calc(100% - 1px) 1px, calc(100% - 14px) 1px, calc(100% - 14px) 0, 100% 0, 100% 100%, calc(100% - 14px) 100%, calc(100% - 14px) calc(100% - 1px), calc(100% - 1px) calc(100% - 1px), calc(100% - 1px) calc(100% - 14px), 100% calc(100% - 14px), 100% 100%, 0 100%, 0 calc(100% - 14px), 1px calc(100% - 14px), 1px calc(100% - 1px), 14px calc(100% - 1px), 14px 100%, 0 100%);
 }
@@ -333,7 +408,7 @@
   left: var(--reticle-x, 0);
   padding: 1px 6px;
   color: var(--cp-black);
-  background: var(--cp-yellow);
+  background: var(--cp-red);
   font-family: var(--f-mono);
   font-size: 0.52rem;
   letter-spacing: 0.12em;
@@ -382,7 +457,7 @@
   animation: power-flicker 420ms steps(1, end) both;
 }
 
-/* Hover glitch on primary actions — brief, sharp, one-shot. */
+/* Hover glitch on primary actions â€” brief, sharp, one-shot. */
 .glitch-hover {
   position: relative;
 }
@@ -397,7 +472,7 @@
 }
 
 .glitch-hover:hover::before {
-  color: var(--cp-magenta);
+  color: var(--cp-red);
   animation: glitch-red 300ms steps(1, end) both;
 }
 
@@ -407,7 +482,7 @@
 }
 
 /* ==========================================================================
-   SYSTEM OVERRIDE — the Konami payload
+   SYSTEM OVERRIDE â€” the Konami payload
    ========================================================================== */
 
 .override-flash {
@@ -419,7 +494,7 @@
   pointer-events: none;
   background:
     radial-gradient(60% 60% at 50% 50%, rgba(252, 238, 10, 0.14), transparent 70%),
-    linear-gradient(0deg, rgba(255, 0, 68, 0.12), rgba(0, 240, 255, 0.1));
+    linear-gradient(0deg, rgba(255, 92, 84, 0.14), rgba(0, 240, 255, 0.1));
   mix-blend-mode: screen;
   opacity: 0;
 }
@@ -431,7 +506,7 @@
 .override-flash span {
   padding: 14px 26px;
   color: var(--cp-black);
-  background: var(--cp-yellow);
+  background: var(--cp-red);
   font-family: var(--f-tech);
   font-size: clamp(0.8rem, 2.2vw, 1.5rem);
   font-weight: 700;
@@ -460,7 +535,7 @@
 }
 
 /* ==========================================================================
-   REDUCED MOTION — collapse the whole engine
+   REDUCED MOTION â€” collapse the whole engine
    ========================================================================== */
 
 @media (prefers-reduced-motion: reduce) {
