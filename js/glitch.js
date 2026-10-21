@@ -1,5 +1,5 @@
 /* ==========================================================================
-   glitch.js — signal-fault engine.
+   glitch.js  signal-fault engine.
 
    Two cooperating techniques:
 

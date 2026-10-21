@@ -1,5 +1,5 @@
 /* ==========================================================================
-   effects.js — HUD layer: reticle, tilt, reveal, count-up, panel sweep.
+   effects.js  HUD layer: reticle, tilt, reveal, count-up, panel sweep.
    ========================================================================== */
 (function () {
   "use strict";

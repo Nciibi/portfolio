@@ -971,11 +971,22 @@
    04 — PERKS
    ========================================================================== */
 
+/* ==========================================================================
+   04 — PERKS  ·  the box tree
+   ========================================================================== */
+
 .perk-filters {
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
-  margin-bottom: 18px;
+  margin-bottom: 20px;
+}
+
+.perk-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 330px;
+  gap: 18px;
+  align-items: start;
 }
 
 .perk-filter {
@@ -987,24 +998,24 @@
   color: var(--cp-text);
   background: rgba(255, 92, 84, 0.04);
   border: 1px solid var(--cp-red-a30);
-  font-family: var(--f-tech);
-  font-size: 0.68rem;
-  font-weight: 600;
-  letter-spacing: 0.16em;
+  font-family: var(--f-display);
+  font-size: 0.82rem;
+  font-weight: 400;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
   clip-path: var(--cut-chip);
   transition:
-    color var(--t-fast) var(--ease),
-    background var(--t-fast) var(--ease),
-    border-color var(--t-fast) var(--ease),
-    box-shadow var(--t-med) var(--ease);
+    color 120ms var(--ease),
+    background 120ms var(--ease),
+    border-color 120ms var(--ease),
+    box-shadow 200ms var(--ease);
 }
 
 .perk-filter small {
   color: var(--cp-text-4);
   font-family: var(--f-mono);
-  font-size: 0.5rem;
-  letter-spacing: 0.14em;
+  font-size: 0.52rem;
+  letter-spacing: 0.12em;
 }
 
 .perk-filter:hover {
@@ -1013,66 +1024,172 @@
 }
 
 .perk-filter.active {
-  color: var(--cp-cyan);
-  background: var(--cp-cyan-a12);
-  border-color: var(--cp-cyan);
-  box-shadow: 0 0 22px rgba(0, 240, 255, 0.2);
+  color: var(--cp-black);
+  background: var(--cp-yellow);
+  border-color: var(--cp-yellow);
+  box-shadow: 0 0 20px rgba(255, 239, 2, 0.25);
 }
 
 .perk-filter.active small {
-  color: var(--cp-cyan-a60);
+  color: rgba(0, 0, 0, 0.62);
 }
 
+/* --- The tree ------------------------------------------------------------- */
 
-
-
-
-.perk-layout {
+.boxtree {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) 320px;
-  gap: 16px;
-  align-items: start;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 32px 26px;
 }
 
-.perk-trees {
-  display: grid;
-  gap: 12px;
+.perk-cell {
+  position: relative;
+  padding: 16px 18px 20px;
+  background: linear-gradient(180deg, rgba(255, 92, 84, 0.05), rgba(0, 0, 0, 0.55));
+  border: 2px dashed var(--cp-red-a30);
+  transition: border-color 200ms var(--ease), background 200ms var(--ease);
 }
 
-.perk-tree {
-  padding: 16px 18px;
-  background: linear-gradient(150deg, var(--cp-bg-3), var(--cp-bg-2));
-  border: 1px solid var(--cp-line-faint);
-  clip-path: var(--cut-panel-sm);
-  transition: border-color var(--t-med) var(--ease);
+/* the connector stem dropping out of the bottom of the cell */
+.perk-cell::after {
+  position: absolute;
+  bottom: -32px;
+  left: 50%;
+  width: 4px;
+  height: 32px;
+  margin-left: -2px;
+  content: '';
+  background: var(--cp-red-a30);
 }
 
-.perk-tree:hover {
-  border-color: var(--cp-line-soft);
-}
-
-.perk-tree.is-hidden {
+.perk-cell:nth-last-child(-n + 2)::after {
   display: none;
 }
 
-.perk-tree-head {
-  display: flex;
-  align-items: baseline;
-  justify-content: space-between;
-  gap: 12px;
-  margin-bottom: 4px;
+.perk-cell.is-resolved {
+  border-color: var(--cp-green-a40);
 }
 
-.perk-tree-head h3 {
+.perk-cell.is-resolved::after {
+  background: var(--cp-green-a40);
+}
+
+.perk-cell.is-inprogress {
+  border-color: var(--cp-yellow-a40);
+}
+
+.perk-cell.is-inprogress::after {
+  background: var(--cp-yellow-a40);
+}
+
+.perk-cell.is-pending {
+  border-color: var(--cp-red-a30);
+}
+
+.perk-cell:hover {
+  background: linear-gradient(180deg, rgba(255, 92, 84, 0.1), rgba(0, 0, 0, 0.6));
+}
+
+.perk-cell.is-hidden {
+  display: none;
+}
+
+.perk-cell-head {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding-bottom: 10px;
+  margin-bottom: 12px;
+  border-bottom: 1px solid var(--cp-line-faint);
+}
+
+.perk-cell-icon {
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  flex: none;
   color: var(--cp-cyan);
-  font-family: var(--f-tech);
-  font-size: 0.9rem;
-  font-weight: 600;
-  letter-spacing: 0.16em;
+  background: var(--cp-cyan-a12);
+  clip-path: var(--hex-p);
+}
+
+.perk-cell-icon .ico {
+  width: 18px;
+  height: 18px;
+}
+
+.perk-cell-head h3 {
+  color: var(--cp-cyan);
+  font-family: var(--f-display);
+  font-size: 1.02rem;
+  font-weight: 400;
+  letter-spacing: 0.05em;
   text-transform: uppercase;
   text-shadow: 0 0 14px rgba(0, 240, 255, 0.3);
 }
 
+.perk-cell-tier {
+  margin-left: auto;
+  padding: 2px 9px;
+  color: var(--cp-black);
+  background: var(--cp-yellow);
+  font-family: var(--f-mono);
+  font-size: 0.54rem;
+  letter-spacing: 0.12em;
+  clip-path: var(--cut-chip);
+}
+
+.perk-cell.is-pending .perk-cell-tier {
+  color: var(--cp-text-plain);
+  background: var(--cp-red-a30);
+  border: 1px solid var(--cp-red-a55);
+}
+
+.perk-cell-desc {
+  margin-bottom: 14px;
+  color: var(--cp-text-3);
+  font-size: 0.88rem;
+  line-height: 1.5;
+}
+
+.perk-nodes {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Circuit traces between the perk nodes. */
+.perk-connector {
+  position: relative;
+  width: 24px;
+  height: 12px;
+  flex: none;
+}
+
+.perk-connector::before {
+  position: absolute;
+  top: 50%;
+  right: 0;
+  left: 0;
+  height: 1px;
+  content: '';
+  background: var(--cp-red-a55);
+  box-shadow: 0 0 6px rgba(255, 92, 84, 0.5);
+}
+
+.perk-connector::after {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 4px;
+  height: 4px;
+  content: '';
+  background: var(--cp-red);
+  box-shadow: 0 0 9px rgba(255, 92, 84, 0.9);
+  transform: translate(-50%, -50%) rotate(45deg);
+}
 
 .perk-nodes:has(.hex-node.is-active) .perk-connector:has(+ .hex-node.is-active)::before {
   background: var(--cp-cyan-a60);
@@ -1084,6 +1201,38 @@
   box-shadow: 0 0 12px rgba(0, 240, 255, 0.9);
 }
 
+/* The big rotated status watermark across the cell. */
+.perk-watermark {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  z-index: 0;
+  font-family: var(--f-dots);
+  font-size: 2.6rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  color: var(--cp-green);
+  opacity: 0.1;
+  pointer-events: none;
+  transform: translate(-50%, -50%) rotate(-15deg);
+  white-space: nowrap;
+}
+
+.perk-cell.is-pending .perk-watermark {
+  color: var(--cp-red);
+}
+
+.perk-cell.is-inprogress .perk-watermark {
+  color: var(--cp-yellow);
+}
+
+.perk-cell > *:not(.perk-watermark) {
+  position: relative;
+  z-index: 1;
+}
+
+/* --- The detail pane ------------------------------------------------------ */
+
 .perk-detail {
   position: sticky;
   top: 10px;
@@ -1092,7 +1241,7 @@
   background: linear-gradient(180deg, rgba(255, 92, 84, 0.07), rgba(8, 4, 5, 0.86));
   border: 1px solid var(--cp-red-a30);
   clip-path: var(--slant);
-  transition: border-color var(--t-med) var(--ease);
+  transition: border-color 200ms var(--ease);
 }
 
 .perk-detail:hover {
@@ -1100,29 +1249,29 @@
 }
 
 .perk-detail .pd-kicker {
-  color: var(--cp-text);
+  color: var(--cp-cyan);
   font-family: var(--f-mono);
-  font-size: 0.53rem;
+  font-size: 0.55rem;
   letter-spacing: 0.18em;
   text-transform: uppercase;
 }
 
 .perk-detail h3 {
   margin-top: 6px;
-  color: var(--cp-cyan);
+  color: var(--cp-yellow);
   font-family: var(--f-display);
-  font-size: 1.5rem;
-  font-weight: 700;
-  letter-spacing: 0.02em;
+  font-size: 1.7rem;
+  font-weight: 400;
+  letter-spacing: 0.06em;
   line-height: 1.05;
   text-transform: uppercase;
-  text-shadow: var(--glow-text);
+  text-shadow: 0 0 18px rgba(255, 239, 2, 0.3);
 }
 
 .perk-detail p {
   margin-top: 10px;
-  color: var(--cp-text-3);
-  font-size: 0.92rem;
+  color: var(--cp-text-2);
+  font-size: 0.95rem;
   line-height: 1.6;
 }
 
@@ -1138,7 +1287,7 @@
   align-items: center;
   gap: 6px;
   padding: 4px 10px;
-  color: var(--cp-text-3);
+  color: var(--cp-text-2);
   border: 1px solid var(--cp-line-faint);
   font-family: var(--f-mono);
   font-size: 0.55rem;
@@ -2583,4 +2732,200 @@ kbd {
     flex-direction: row;
     align-items: center;
   }
+}
+
+/* ==========================================================================
+   THE FRAME TREATMENT
+   The game's content blocks are outlined parallelograms: a 1px coloured
+   edge that follows the angled corner. A CSS border cannot do that once
+   clip-path is applied, so the edge is drawn with a two-layer background —
+   the outer layer paints the frame, the inner layer paints the face, and
+   the clip cuts both to the same silhouette.
+   ========================================================================== */
+
+.cp-edge {
+  border: 1px solid transparent;
+  background:
+    linear-gradient(var(--edge-face, rgba(14, 14, 18, 0.94)), var(--edge-face, rgba(14, 14, 18, 0.94))) padding-box,
+    linear-gradient(var(--edge-accent, var(--cp-red-a30)), var(--edge-accent, var(--cp-red-a30))) border-box;
+  clip-path: var(--clip, var(--skew-sm));
+}
+
+.bento-card,
+.dlg-opt,
+.netlink-btn,
+.edu-card,
+.exp-card,
+.codex-entry,
+.project-card,
+.char-panel,
+.profile-readout,
+.codex-entry,
+.option-block {
+  --edge-face: rgba(14, 14, 18, 0.92);
+  --edge-accent: var(--cp-red-a30);
+  --clip: var(--skew-sm);
+  border: 1px solid transparent;
+  background:
+    linear-gradient(var(--edge-face), var(--edge-face)) padding-box,
+    linear-gradient(var(--edge-accent), var(--edge-accent)) border-box;
+  clip-path: var(--clip);
+  transition:
+    border-color 200ms var(--ease),
+    background 200ms var(--ease),
+    box-shadow 200ms var(--ease);
+}
+
+.bento-card:hover,
+.edu-card:hover,
+.exp-card:hover,
+.codex-entry:hover,
+.project-card:hover,
+.char-panel:hover {
+  --edge-accent: var(--cp-red-a55);
+  box-shadow: 0 0 26px rgba(255, 92, 84, 0.1);
+}
+
+.codex-entry:hover,
+.project-card:hover {
+  --clip: var(--skew);
+}
+
+/* The selected case file gets the cyan frame, like the game's active row. */
+.project-card.selected {
+  --edge-accent: var(--cp-cyan);
+  --edge-face: rgba(0, 240, 255, 0.06);
+  box-shadow: inset 0 0 0 1px rgba(0, 240, 255, 0.3);
+}
+
+/* The nav rail's own rows use the same silhouette. */
+.main-menu .menu-nav {
+  padding: 6px 16px 6px 8px;
+}
+
+/* ==========================================================================
+   MICRO DETAIL
+   ========================================================================== */
+
+/* The corner code chip the game stamps on every actionable block. */
+.cp-code {
+  position: absolute;
+  right: 10px;
+  bottom: -6px;
+  z-index: 2;
+  padding: 1px 5px;
+  color: var(--cp-black);
+  background: var(--cp-yellow);
+  font-family: var(--f-mono);
+  font-size: 0.5rem;
+  letter-spacing: 0.12em;
+  line-height: 1.4;
+  clip-path: var(--cut-chip);
+}
+
+.cp-code.is-cyan {
+  color: var(--cp-black);
+  background: var(--cp-cyan);
+}
+
+/* A small hatched "new" tag, exactly like the game's. */
+.cp-new {
+  display: inline-flex;
+  align-items: center;
+  padding: 1px 6px;
+  color: var(--cp-black);
+  background: var(--cp-yellow);
+  font-family: var(--f-mono);
+  font-size: 0.5rem;
+  letter-spacing: 0.16em;
+  line-height: 1.5;
+  clip-path: var(--cut-chip);
+  background-image:
+    repeating-linear-gradient(45deg, rgba(0, 0, 0, 0.16) 0 1px, transparent 1px 3px),
+    linear-gradient(var(--cp-yellow), var(--cp-yellow));
+}
+
+/* A 45 degree annotation in the gutter, like the game's build stamps. */
+.cp-stamp {
+  position: absolute;
+  color: var(--cp-red-a40);
+  font-family: var(--f-mono);
+  font-size: 0.52rem;
+  letter-spacing: 0.1em;
+  pointer-events: none;
+  transform: rotate(-45deg);
+  transform-origin: left center;
+  white-space: nowrap;
+}
+
+/* The scan line that travels across a module. */
+.cp-scan {
+  position: absolute;
+  top: -30px;
+  left: 0;
+  z-index: 3;
+  width: 3px;
+  height: calc(100% + 60px);
+  pointer-events: none;
+  background: var(--cp-cyan);
+  box-shadow: 0 0 10px 4px var(--cp-cyan);
+  animation: scannedv 9s linear infinite alternate;
+}
+
+/* ==========================================================================
+   RESPONSIVE
+   ========================================================================== */
+
+@media (max-width: 1240px) {
+  .boxtree {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .perk-cell:nth-last-child(-n + 2)::after {
+    display: block;
+  }
+
+  .perk-cell:last-child::after {
+    display: none;
+  }
+}
+
+/* ==========================================================================
+   CORNER CODE CHIPS
+   The game stamps a short build code on every actionable block. The value
+   comes from a custom property so the markup stays clean.
+   ========================================================================== */
+
+.bento-card::after {
+  content: var(--code, "R-25");
+  position: absolute;
+  top: auto;
+  right: 12px;
+  bottom: -6px;
+  width: auto;
+  height: auto;
+  padding: 1px 5px;
+  border: 0;
+  color: var(--cp-black);
+  background: var(--cp-yellow);
+  font-family: var(--f-mono);
+  font-size: 0.5rem;
+  letter-spacing: 0.12em;
+  line-height: 1.4;
+  clip-path: var(--cut-chip);
+  transition: background 160ms var(--ease);
+}
+
+.bento-card:hover::after {
+  background: var(--cp-yellow-hot);
+}
+
+.project-card .pc-open {
+  border: 0;
+}
+
+.codex-entry,
+.exp-card,
+.edu-card {
+  position: relative;
 }

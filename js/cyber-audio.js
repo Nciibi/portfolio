@@ -17,7 +17,7 @@ class CyberAudio {
   }
 
   /* The AudioContext may only be created after a user gesture. Until then
-     every sound call is a no-op — no console warnings, no wasted nodes. */
+     every sound call is a no-op  no console warnings, no wasted nodes. */
   armUnlock() {
     const unlock = () => {
       this.unlocked = true;

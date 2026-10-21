@@ -1,5 +1,5 @@
 /* ==========================================================================
-   main.js â€” renderer + router for the NCIIBI_OS interface.
+   main.js — renderer + router for the NCIIBI_OS interface.
    ========================================================================== */
 
 const renderedModules = new Set(["profile"]);
@@ -12,18 +12,18 @@ let switchToken = 0;
 let activePerkId = null;
 
 const NAV_ICONS = {
-  profile: "user",
-  character: "idcard",
-  projects: "folder",
-  perks: "chip",
-  experience: "briefcase",
-  journey: "route",
-  github: "github",
-  codex: "book",
-  netrun: "terminal",
-  contact: "signal",
-  options: "sliders",
-  exit: "power"
+  profile: "dia-user",
+  character: "dia-idcard",
+  projects: "dia-folder",
+  perks: "dia-chip",
+  experience: "dia-briefcase",
+  journey: "dia-route",
+  github: "dia-github",
+  codex: "dia-book",
+  netrun: "dia-terminal",
+  contact: "dia-signal",
+  options: "dia-sliders",
+  exit: "dia-power"
 };
 
 function prefersReducedMotion() {
@@ -125,7 +125,7 @@ function ensureModuleRendered(id) {
 }
 
 /* ==========================================================================
-   01 â€” PROFILE
+   01 — PROFILE
    ========================================================================== */
 
 function renderHeroSocials() {
@@ -181,7 +181,7 @@ function renderBento() {
     .map((item, index) => {
       const tags = (item.tags || []).map((tag) => `<span class="bento-tag">${getIcon(tag)}${escapeHtml(tag)}</span>`).join("");
       return `
-      <article class="bento-card row-glitch span-${escapeHtml(item.span || "normal")}" data-reveal style="--d:${(index * 0.05).toFixed(2)}s">
+      <article class="bento-card row-glitch span-${escapeHtml(item.span || "normal")}" data-reveal style="--d:${(index * 0.05).toFixed(2)}s;--code:'D-${String(index + 1).padStart(2, "0")}'">
         <div class="bento-kicker">${escapeHtml(item.kicker)}</div>
         <h3 class="bento-title">${escapeHtml(item.title)}</h3>
         ${item.body ? `<p class="bento-body">${escapeHtml(item.body)}</p>` : ""}
@@ -207,7 +207,7 @@ function renderEducation() {
 }
 
 /* ==========================================================================
-   02 â€” CHARACTER SHEET
+   02 — CHARACTER SHEET
    ========================================================================== */
 
 function renderCharacter() {
@@ -248,7 +248,7 @@ function renderCharacter() {
         <div class="char-level-meta">
           <div class="cl-k">LEVEL</div>
           <div class="cl-v">${escapeHtml(c.realName)}</div>
-          <div class="char-alias">${escapeHtml(c.alias)} Â· ${escapeHtml(c.title)} Â· ${escapeHtml(c.affiliation)}</div>
+          <div class="char-alias">${escapeHtml(c.alias)} · ${escapeHtml(c.title)} · ${escapeHtml(c.affiliation)}</div>
         </div>
       </div>
       <div class="char-xp">
@@ -290,7 +290,7 @@ function renderCharacter() {
 }
 
 /* ==========================================================================
-   03 â€” PROJECTS
+   03 — PROJECTS
    ========================================================================== */
 
 const projectArtworkMap = Object.freeze({
@@ -322,7 +322,7 @@ function projectCopyMarkup(project) {
       <h3>${escapeHtml(project.title)}</h3>
       <p>${escapeHtml(project.summary)}</p>
       <div class="gig-tags">${tags}</div>
-      <a class="btn-cyber btn-cyber-sm btn-cyber-red" href="${safeHref(project.url)}" target="_blank" rel="noopener">OPEN CASE FILE <span aria-hidden="true">â†—</span></a>
+      <a class="btn-cyber btn-cyber-sm btn-cyber-red" href="${safeHref(project.url)}" target="_blank" rel="noopener">OPEN CASE FILE <span aria-hidden="true">↗</span></a>
     </div>`;
 }
 
@@ -334,12 +334,12 @@ function projectCardMarkup(project, index) {
     <article class="project-card row-glitch project-select${index === 0 ? " selected" : ""}" data-project-id="${escapeHtml(project.id)}" data-hud-label="${escapeHtml(project.title)}" data-reveal style="--d:${(index * 0.07).toFixed(2)}s" role="option" aria-selected="${index === 0}" tabindex="${index === 0 ? 0 : -1}">
       <div class="project-card-visual" style="background-image: linear-gradient(180deg, rgba(5,5,7,.04) 0%, rgba(5,5,7,.28) 38%, rgba(5,5,7,.94) 100%), url('${artwork}')"></div>
       <span class="pc-ghost-index" aria-hidden="true">${idx}</span>
-      <span class="pc-open" aria-hidden="true">â†—</span>
+      <span class="pc-open" aria-hidden="true">↗</span>
       <div class="project-card-content">
         <div class="pc-meta"><span class="pc-idx">${idx}</span><span class="pc-period">${escapeHtml(project.period)}</span><span class="pc-cat">${escapeHtml(project.category)}</span></div>
         <h3 class="pc-title">${escapeHtml(project.title)}</h3>
         <p class="pc-summary">${escapeHtml(project.summary)}</p>
-        <div class="pc-footer"><div class="gig-tags">${tags}</div><div class="pc-actions"><span class="pc-likes">â™¥ ${Number(project.likes) || 0}</span><a class="btn-cyber btn-cyber-sm btn-cyber-ghost" href="${safeHref(project.url)}" target="_blank" rel="noopener">OPEN FILE <span aria-hidden="true">â†—</span></a></div></div>
+        <div class="pc-footer"><div class="gig-tags">${tags}</div><div class="pc-actions"><span class="pc-likes">♥ ${Number(project.likes) || 0}</span><a class="btn-cyber btn-cyber-sm btn-cyber-ghost" href="${safeHref(project.url)}" target="_blank" rel="noopener">OPEN FILE <span aria-hidden="true">↗</span></a></div></div>
       </div>
     </article>`;
 }
@@ -489,7 +489,7 @@ function renderProjects() {
 }
 
 /* ==========================================================================
-   04 â€” PERKS
+   04 — PERKS
    ========================================================================== */
 
 function renderPerks() {
@@ -497,25 +497,35 @@ function renderPerks() {
   const detail = document.getElementById("perk-detail");
   if (!wrap || !PORTFOLIO_DATA.skills) return;
 
-  const trees = PORTFOLIO_DATA.skills
+  const cells = PORTFOLIO_DATA.skills
     .map((group, index) => {
+      const state =
+        group.level === "PROFICIENT" ? "is-resolved" : group.level === "BEGINNER" ? "is-pending" : "is-inprogress";
+      const watermark =
+        group.level === "PROFICIENT" ? "RESOLVED" : group.level === "BEGINNER" ? "NO ACCESS" : "IN PROGRESS";
+      const locked = group.level === "BEGINNER";
       const nodes = group.items
         .map((item) => {
           const iconMarkup = getIconColored(item.name);
-          const locked = group.level === "BEGINNER";
           return `<button class="hex-node${locked ? " is-locked" : ""}" type="button" data-perk="${escapeHtml(group.id)}:${escapeHtml(item.name)}" data-hud-label="${escapeHtml(item.name)}" aria-label="${escapeHtml(item.name)}">${iconMarkup}</button>`;
         })
         .join('<span class="perk-connector" aria-hidden="true"></span>');
+
       return `
-      <section class="perk-tree" data-tree="${escapeHtml(group.id)}" data-level="${escapeHtml(group.level)}" data-reveal style="--d:${(index * 0.07).toFixed(2)}s">
-        <div class="perk-tree-head"><h3>${escapeHtml(group.category)}</h3><span class="cp-tag${group.level === "PROFICIENT" ? "" : " is-red"}">${escapeHtml(group.tier || group.level)}</span></div>
-        <p class="perk-tree-desc">${escapeHtml(group.desc)}</p>
+      <section class="perk-cell ${state}" data-tree="${escapeHtml(group.id)}" data-level="${escapeHtml(group.level)}" data-reveal style="--d:${(index * 0.07).toFixed(2)}s">
+        <div class="perk-cell-head">
+          <span class="perk-cell-icon" aria-hidden="true">${getIcon(group.id === "core" ? "dia-chip" : group.id === "software" ? "dia-folder" : group.id === "systems" ? "dia-signal" : "dia-sliders")}</span>
+          <h3>${escapeHtml(group.category)}</h3>
+          <span class="perk-cell-tier">${escapeHtml(group.tier || group.level)}</span>
+        </div>
+        <p class="perk-cell-desc">${escapeHtml(group.desc)}</p>
         <div class="perk-nodes">${nodes}</div>
+        <span class="perk-watermark" aria-hidden="true">${escapeHtml(watermark)}</span>
       </section>`;
     })
     .join("");
 
-  wrap.innerHTML = trees;
+  wrap.innerHTML = `<div class="boxtree">${cells}</div>`;
   initPerkFilters();
   initPerkNodes();
 
@@ -535,14 +545,14 @@ function initPerkFilters() {
         item.setAttribute("aria-pressed", String(active));
         item.setAttribute("tabindex", active ? "0" : "-1");
       });
-      document.querySelectorAll(".perk-tree").forEach((tree) => {
+      document.querySelectorAll(".perk-cell").forEach((tree) => {
         const visible = tree.getAttribute("data-level") === level;
         tree.classList.toggle("is-hidden", !visible);
       });
       /* If the open perk is now filtered out, open the first visible node. */
-      const visibleTree = document.querySelector('.perk-tree:not(.is-hidden)');
-      if (visibleTree && !visibleTree.contains(document.querySelector(".perk-node.is-active"))) {
-        const node = visibleTree.querySelector(".perk-node");
+      const visibleTree = document.querySelector('.perk-cell:not(.is-hidden)');
+      if (visibleTree && !visibleTree.contains(document.querySelector(".hex-node.is-active"))) {
+        const node = visibleTree.querySelector(".hex-node");
         if (node) selectPerk(node.getAttribute("data-perk"));
       }
       try {
@@ -567,7 +577,7 @@ function initPerkFilters() {
 }
 
 function initPerkNodes() {
-  document.querySelectorAll(".perk-node, .hex-node").forEach((node) => {
+  document.querySelectorAll(".hex-node").forEach((node) => {
     node.addEventListener("click", () => selectPerk(node.getAttribute("data-perk")));
     node.addEventListener("mouseenter", () => {
       const detail = document.getElementById("perk-detail");
@@ -597,7 +607,7 @@ function selectPerk(id) {
   if (!found || !detail) return;
   activePerkId = id;
 
-  document.querySelectorAll(".perk-node").forEach((node) => {
+  document.querySelectorAll(".hex-node").forEach((node) => {
     node.classList.toggle("is-active", node.getAttribute("data-perk") === id);
   });
 
@@ -618,7 +628,7 @@ function selectPerk(id) {
 }
 
 /* ==========================================================================
-   05 â€” WORK LOG
+   05 — WORK LOG
    ========================================================================== */
 
 let activeExpTab = "CAREER";
@@ -686,7 +696,7 @@ function renderExperience(tab) {
 }
 
 /* ==========================================================================
-   06 â€” THE ROAD
+   06 — THE ROAD
    ========================================================================== */
 
 function renderJourney() {
@@ -707,7 +717,7 @@ function renderJourney() {
 }
 
 /* ==========================================================================
-   08 â€” CODEX
+   08 — CODEX
    ========================================================================== */
 
 function renderCodex() {
@@ -755,7 +765,7 @@ function renderCodex() {
 }
 
 /* ==========================================================================
-   09 â€” NETRUN TERMINAL
+   09 — NETRUN TERMINAL
    ========================================================================== */
 
 function initNetrun() {
@@ -845,7 +855,7 @@ function initNetrun() {
 }
 
 /* ==========================================================================
-   10 â€” CONTACT
+   10 — CONTACT
    ========================================================================== */
 
 function renderNetlinks() {
@@ -860,7 +870,7 @@ function renderNetlinks() {
 }
 
 /* ==========================================================================
-   11 â€” OPTIONS
+   11 — OPTIONS
    ========================================================================== */
 
 function initOptionsPanel() {
@@ -917,7 +927,7 @@ function initOptionsPanel() {
 }
 
 /* ==========================================================================
-   12 â€” EXIT
+   12 — EXIT
    ========================================================================== */
 
 function initExitPanel() {
@@ -1135,7 +1145,7 @@ function initMenuTabs() {
     }
 
     const isTab = target?.closest?.("[data-menu-tab]");
-    const isWidget = target?.closest?.("button, a, input, textarea, select, [role='option'], [role='tab'], .project-card, .skill-chip, .perk-node, .codex-filter, .perk-filter");
+    const isWidget = target?.closest?.("button, a, input, textarea, select, [role='option'], [role='tab'], .project-card, .skill-chip, .hex-node, .codex-filter, .perk-filter");
     if (!isTab && isWidget) return;
     /* While a Konami sequence is in progress the arrows belong to the
        sequence, not to the navigation rail. */
@@ -1325,7 +1335,7 @@ function initMobileMenu() {
    ========================================================================== */
 
 function initAudioEvents() {
-  const interactive = ".btn-cyber, .menu-tab, .mobile-menu-toggle, .exp-tab, .perk-filter, .codex-filter, .chrome-control, .netlink-btn, .dlg-opt, .social-link, .project-card, .gh-repo, .gh-refresh, .option-row, .perk-node";
+  const interactive = ".btn-cyber, .menu-tab, .mobile-menu-toggle, .exp-tab, .perk-filter, .codex-filter, .chrome-control, .netlink-btn, .dlg-opt, .social-link, .project-card, .gh-repo, .gh-refresh, .option-row, .hex-node";
   document.body.addEventListener("pointerover", (event) => {
     if (event.pointerType && event.pointerType !== "mouse") return;
     if (event.relatedTarget && event.relatedTarget.closest && event.relatedTarget.closest(interactive) === event.target.closest(interactive)) return;
@@ -1338,7 +1348,7 @@ function initAudioEvents() {
     }
   });
   document.body.addEventListener("click", (event) => {
-    if (event.target.closest(".btn-cyber, .menu-tab, .mobile-menu-toggle, .chrome-control, .netlink-btn, .dlg-opt, .exp-tab, .perk-filter, .codex-filter, .option-row, .project-card, .gh-refresh, .perk-node")) {
+    if (event.target.closest(".btn-cyber, .menu-tab, .mobile-menu-toggle, .chrome-control, .netlink-btn, .dlg-opt, .exp-tab, .perk-filter, .codex-filter, .option-row, .project-card, .gh-refresh, .hex-node")) {
       try {
         cyberAudio.playClick();
       } catch (error) {

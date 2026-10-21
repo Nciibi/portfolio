@@ -1,5 +1,5 @@
 /* ==========================================================================
-   NCIIBI_OS 5.0 — DESIGN TOKENS
+   NCIIBI_OS 5.0  DESIGN TOKENS
    Sampled directly from the Cyberpunk 2077 interface.
 
    The CD PROJEKT RED screen language is the "Neomilitarism" style: a hot
@@ -61,8 +61,8 @@
   /* --- Text ---------------------------------------------------------------
      The game runs red body copy over black. Chrome labels are red, long-form
      prose steps down to a light neutral so paragraphs stay readable. */
-  --cp-text: #ff5c54;      /* CHROME — labels, metadata, structure */
-  --cp-text-2: #ece8e6;    /* PROSE LIGHT — card titles, headings */
+  --cp-text: #ff5c54;      /* CHROME  labels, metadata, structure */
+  --cp-text-2: #ece8e6;    /* PROSE LIGHT  card titles, headings */
   --cp-text-3: #a9a29f;    /* PROSE MID */
   --cp-text-4: #7e3a36;    /* QUIET CHROME */
   --cp-text-plain: #ece8e6;
@@ -85,13 +85,18 @@
   --cp-line-yellow: rgba(255, 239, 2, 0.36);
   --cp-line-neutral: rgba(232, 228, 226, 0.09);
 
-  /* --- Typography -------------------------------------------------------- */
-  --f-display: 'Chakra Petch', 'Saira Condensed', 'Arial Narrow', sans-serif;
-  --f-tech: 'Chakra Petch', 'Saira Condensed', 'Arial Narrow', sans-serif;
+  /* --- Typography --------------------------------------------------------
+     GameFontLibrary and Fonts In Use both identify the Cyberpunk 2077 stack
+     as Rajdhani (main) + Orbitron (secondary), with Blender  the family
+     CD PROJEKT RED licensed for the official site and for Night City
+     signage  carrying the display type. All five are self-hosted; see
+     assets/fonts/LICENCE.md. */
+  --f-display: 'Blender Pro', 'Chakra Petch', 'Arial Narrow', sans-serif;
+  --f-tech: 'Blender Pro', 'Chakra Petch', 'Arial Narrow', sans-serif;
   --f-body: 'Rajdhani', 'Saira Condensed', 'Arial Narrow', sans-serif;
   --f-mono: 'Share Tech Mono', ui-monospace, 'Cascadia Mono', monospace;
-  --f-jp: 'Zen Kaku Gothic New', 'Noto Sans JP', sans-serif;
-  --f-dots: 'Zen Dots', 'Share Tech Mono', monospace;
+  --f-jp: 'Zen Kaku Gothic New', 'Noto Sans JP', 'Hiragino Kaku Gothic ProN', sans-serif;
+  --f-dots: 'Orbitron', 'Share Tech Mono', ui-monospace, monospace;
 
   /* --- Metrics ----------------------------------------------------------- */
   --header-height: 58px;
@@ -109,21 +114,18 @@
   --t-slow: 380ms;
   --t-shard: 520ms;
 
-  /* --- Geometry: the real shapes ---------------------------------------- */
-  /* Flat-top hexagon — the attribute / perk node. */
-  --hex: polygon(25% 0, 75% 0, 100% 50%, 75% 100%, 25% 100%, 0 50%);
-  /* Pointy-top hexagon — nav markers, status badges. */
-  --hex-p: polygon(50% 0, 100% 25%, 100% 75%, 50% 100%, 0 75%, 0 25%);
-  /* Skewed row — the character-database list item. */
-  --skew: polygon(20px 0, 100% 0, calc(100% - 20px) 100%, 0 100%);
-  --skew-sm: polygon(12px 0, 100% 0, calc(100% - 12px) 100%, 0 100%);
-  /* Stepped top — the perk category banner. */
-  --tab-top: polygon(0 15px, 15px 15px, 15px 0, 48px 0, 48px 15px, 100% 15px, 100% 100%, 0 100%);
-  /* Slanted corner — the information panel. */
-  --slant: polygon(22px 0, 100% 0, 100% 100%, 0 100%, 0 22px);
-  /* Single corner cut — buttons. */
-  --cut-btn: polygon(0 0, calc(100% - 9px) 0, 100% 9px, 100% 100%, 0 100%);
+  /* --- Geometry: the real shapes ----------------------------------------
+     The full vocabulary lives in css/borders.css  these are the handful
+     that other modules reach for directly. */
   --cut-chip: polygon(0 0, calc(100% - 6px) 0, 100% 6px, 100% 100%, 0 100%);
+  --cut-btn: polygon(0 0, calc(100% - 9px) 0, 100% 9px, 100% 100%, 0 100%);
+  --cut-panel: polygon(0 0, calc(100% - 16px) 0, 100% 16px, 100% 100%, 0 100%);
+  --cut-panel-sm: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 0 100%);
+  --hex: polygon(25% 0, 75% 0, 100% 50%, 75% 100%, 25% 100%, 0 50%);
+  --hex-p: polygon(50% 0, 100% 25%, 100% 75%, 50% 100%, 0 75%, 0 25%);
+  --skew: polygon(20px 0, 100% 0, calc(100% - 20px) 100%, 0 100%);
+  --slant: polygon(22px 0, 100% 0, 100% 100%, 0 100%, 0 22px);
+  --tab-top: polygon(0 15px, 15px 15px, 15px 0, 48px 0, 48px 15px, 100% 15px, 100% 100%, 0 100%);
 
   /* --- Glow: elevation is emitted light ---------------------------------- */
   --glow-red: 0 0 14px rgba(255, 92, 84, 0.32);

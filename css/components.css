@@ -1,5 +1,5 @@
 /* ==========================================================================
-   components.css â€” the reusable vocabulary.
+   components.css — the reusable vocabulary.
 
    The rule that governs everything here: RED is the default state of the
    interface, CYAN is what is selected, YELLOW is what is valuable, GREEN
@@ -11,119 +11,8 @@
    BUTTONS
    ========================================================================== */
 
-.btn-cyber {
-  position: relative;
-  display: inline-flex;
-  align-items: center;
-  gap: 9px;
-  min-height: 38px;
-  padding: 0 20px;
-  overflow: hidden;
-  color: var(--cp-red);
-  background: rgba(255, 92, 84, 0.05);
-  border: 1px solid var(--cp-red-a30);
-  font-family: var(--f-tech);
-  font-size: 0.68rem;
-  font-weight: 600;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  clip-path: var(--cut-btn);
-  transition:
-    color var(--t-fast) var(--ease),
-    background var(--t-fast) var(--ease),
-    border-color var(--t-fast) var(--ease),
-    letter-spacing var(--t-med) var(--ease),
-    box-shadow var(--t-med) var(--ease);
-}
-
-.btn-cyber::after {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  width: 40%;
-  content: '';
-  pointer-events: none;
-  background: linear-gradient(90deg, transparent, rgba(0, 240, 255, 0.22), transparent);
-  mix-blend-mode: screen;
-  transform: translateX(-140%);
-  transition: transform var(--t-slow) var(--ease);
-}
-
-.btn-cyber:hover::after,
-.btn-cyber:focus-visible::after {
-  transform: translateX(280%);
-}
-
-.btn-cyber:hover,
-.btn-cyber:focus-visible {
-  color: var(--cp-cyan);
-  background: var(--cp-cyan-a12);
-  border-color: var(--cp-line-cyan);
-  letter-spacing: 0.22em;
-  outline: none;
-}
-
-.btn-cyber:active {
-  transform: translateY(1px);
-}
-
-/* The primary action is the one thing that gets the yellow. */
-.btn-cyber-yellow {
-  color: var(--cp-black);
-  background: var(--cp-yellow);
-  border-color: var(--cp-yellow);
-  box-shadow: 0 0 18px rgba(255, 239, 2, 0.22);
-}
-
-.btn-cyber-yellow:hover,
-.btn-cyber-yellow:focus-visible {
-  color: var(--cp-black);
-  background: var(--cp-yellow-hot);
-  border-color: var(--cp-yellow-hot);
-  box-shadow: 0 0 30px rgba(255, 239, 2, 0.4);
-}
-
-.btn-cyber-cyan {
-  color: var(--cp-cyan);
-  background: var(--cp-cyan-a12);
-  border-color: var(--cp-line-cyan);
-}
-
-.btn-cyber-cyan:hover,
-.btn-cyber-cyan:focus-visible {
-  color: var(--cp-cyan);
-  background: var(--cp-cyan-a30);
-  box-shadow: var(--glow-cyan);
-}
-
-.btn-cyber-ghost {
-  color: var(--cp-text-2);
-  background: transparent;
-  border-color: var(--cp-line-faint);
-}
-
-.btn-cyber-ghost:hover,
-.btn-cyber-ghost:focus-visible {
-  color: var(--cp-cyan);
-  background: var(--cp-cyan-a06);
-  border-color: var(--cp-line-cyan);
-}
-
-.btn-cyber-sm {
-  min-height: 28px;
-  padding: 0 13px;
-  font-size: 0.58rem;
-  clip-path: var(--cut-chip);
-}
-
-.btn-cyber-block {
-  width: 100%;
-  justify-content: center;
-}
-
 /* ==========================================================================
-   CARDS â€” the red glass panel
+   CARDS — the red glass panel
    ========================================================================== */
 
 .cp-card {
@@ -173,7 +62,7 @@
   border-color: var(--cp-red-a55);
 }
 
-/* The stepped banner card â€” perk categories. */
+/* The stepped banner card — perk categories. */
 .cp-tab-card {
   position: relative;
   padding: 26px 18px 16px;
@@ -188,7 +77,7 @@
 }
 
 /* ==========================================================================
-   HATCHED SQUARE â€” the CP2077 active marker
+   HATCHED SQUARE — the CP2077 active marker
    ========================================================================== */
 
 .hatch-box {
@@ -205,7 +94,7 @@
   background: repeating-linear-gradient(45deg, var(--cp-red) 0 1px, transparent 1px 3px);
 }
 
-/* A small filled tag â€” the "NEW" badge in the game. */
+/* A small filled tag — the "NEW" badge in the game. */
 .cp-tag {
   display: inline-flex;
   align-items: center;
@@ -231,7 +120,7 @@
 }
 
 /* ==========================================================================
-   HEXAGONS â€” the perk / attribute node
+   HEXAGONS — the perk / attribute node
    ========================================================================== */
 
 .hex-node {
@@ -243,8 +132,8 @@
   color: var(--cp-red);
   font-family: var(--f-tech);
   font-size: 0.62rem;
-  font-weight: 600;
-  letter-spacing: 0.14em;
+  font-weight: 400;
+  letter-spacing: 0.06em;
   text-transform: uppercase;
   transition: transform var(--t-med) var(--ease-snap), color var(--t-med) var(--ease);
 }
@@ -401,8 +290,8 @@
   background: rgba(255, 92, 84, 0.05);
   border: 1px solid var(--cp-line-faint);
   font-family: var(--f-mono);
-  font-size: 0.58rem;
-  letter-spacing: 0.08em;
+  font-size: 0.56rem;
+  letter-spacing: 0.06em;
   clip-path: var(--cut-chip);
   transition:
     color var(--t-fast) var(--ease),
@@ -711,7 +600,7 @@
 }
 
 /* ==========================================================================
-   KEY CAPS â€” the "F" / "ESC" badges
+   KEY CAPS — the "F" / "ESC" badges
    ========================================================================== */
 
 .keycap {

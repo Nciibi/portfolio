@@ -95,7 +95,24 @@ const ICON_SVG = {
 "d3js": '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128"><linearGradient id="d3js-plain-a" gradientUnits="userSpaceOnUse" x1="85.24" y1="97.604" x2="91.053" y2="-49.515"><stop offset="0" stop-color="#f9a03c"/><stop offset="1" stop-color="#f7974e"/></linearGradient><path fill="url(#d3js-plain-a)" d="M118.16 63.966c5.223-6.256 8.368-14.217 8.368-22.98C126.528 21.097 110.352 5 90.464 5H47.986c10.375 7 18.966 16 24.82 26h17.658c5.55 0 10.064 4.45 10.064 10s-4.515 10-10.064 10H80.047c.82 5 1.26 8.62 1.26 13.098 0 4.41-.433 8.902-1.224 12.902h10.382c5.55 0 10.064 4.95 10.064 10.5S96.013 98 90.464 98H72.92c-1.315 2-2.79 4.74-4.38 6.98C63.137 112.59 56.253 119 48.29 124h42.173c19.335 0 35.16-15.746 36.024-34.876-.017.31-.043.39-.066.698.062-.848.107-1.813.107-2.678-.002-8.766-3.148-16.92-8.37-23.178z"/><linearGradient id="d3js-plain-b" gradientUnits="userSpaceOnUse" x1="33.627" y1="97.714" x2="39.382" y2="-47.925"><stop offset="0" stop-color="#f9a03c"/><stop offset="1" stop-color="#f7974e"/></linearGradient><path fill="url(#d3js-plain-b)" d="M61.03 97.543l.003-.18c.07-.1.138-.292.207-.39.077-.118.152-.275.228-.392.002-.002 0-.03.003-.034 6.14-9.33 9.727-20.41 9.727-32.39C71.197 31.5 44.624 5 11.962 5H1v26h10.962c18.32 0 33.23 14.823 33.23 33.144 0 4.984-1.113 9.675-3.088 13.924-.006.013-.013.36-.02.374C36.79 89.782 25.283 98 11.963 98H1v26h10.962c20.396 0 38.41-10.722 49.068-26.457z"/></svg>'
 };
 
+const ICON_OUTLINE = {
+  "dia-user": '<svg class="ico" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.35" stroke-linecap="square"><path d="M12 1.7 22.3 12 12 22.3 1.7 12z"/><circle cx="12" cy="9.6" r="2.1"/><path d="M8.4 15.6a3.9 3.9 0 0 1 7.2 0"/></svg>',
+  "dia-idcard": '<svg class="ico" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.35" stroke-linecap="square"><path d="M8.4 1.7 15.6 1.7 22.3 8.4 22.3 15.6 15.6 22.3 8.4 22.3 1.7 15.6 1.7 8.4z"/><circle cx="12" cy="9.4" r="2"/><path d="M8.6 15.4a3.7 3.7 0 0 1 6.8 0"/></svg>',
+  "dia-folder": '<svg class="ico" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.35" stroke-linecap="square"><path d="M12 1.7 22.3 12 12 22.3 1.7 12z"/><path d="M8.6 10.2h2.6l1 1.3h3.6v4.2H8.6z"/></svg>',
+  "dia-chip": '<svg class="ico" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.35" stroke-linecap="square"><path d="M12 1.7 22.3 12 12 22.3 1.7 12z"/><path d="M9 9h6v6H9z"/><path d="M10.2 6.4v2.4M13.8 6.4v2.4M10.2 15.2v2.4M13.8 15.2v2.4M6.4 10.2h2.4M6.4 13.8h2.4M15.2 10.2h2.4M15.2 13.8h2.4"/></svg>',
+  "dia-briefcase": '<svg class="ico" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.35" stroke-linecap="square"><path d="M12 1.7 22.3 12 12 22.3 1.7 12z"/><path d="M7.4 10.6h9.2v5.2H7.4z"/><path d="M9.8 10.6V9.2a1 1 0 0 1 1-1h2.4a1 1 0 0 1 1 1v1.4"/></svg>',
+  "dia-route": '<svg class="ico" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.35" stroke-linecap="square"><path d="M12 1.7 22.3 12 12 22.3 1.7 12z"/><circle cx="8.4" cy="8.2" r="1.9"/><circle cx="15.6" cy="15.8" r="1.9"/><path d="M8.4 10.3v2.1a2.6 2.6 0 0 0 2.6 2.6h2.4"/></svg>',
+  "dia-github": '<svg class="ico" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.35" stroke-linecap="square"><path d="M12 1.7 22.3 12 12 22.3 1.7 12z"/><path d="M9.4 20v-2.6c-2.6.6-3.2-1.3-3.2-1.3-.4-1.1-1.1-1.4-1.1-1.4-.9-.6.1-.6.1-.6 1 .1 1.5 1 1.5 1 .9 1.5 2.3 1.1 2.9.8.1-.6.3-1.1.6-1.3-2.1-.2-4.3-1-4.3-4.6 0-1 .4-1.9 1-2.5-.1-.3-.4-1.3.1-2.6 0 0 .8-.3 2.7 1a9.2 9.2 0 0 1 4.9 0c1.9-1.3 2.7-1 2.7-1 .5 1.3.2 2.3.1 2.6.6.6 1 1.5 1 2.5 0 3.6-2.2 4.4-4.3 4.6.3.3.6.9.6 1.9V20"/></svg>',
+  "dia-book": '<svg class="ico" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.35" stroke-linecap="square"><path d="M12 1.7 22.3 12 12 22.3 1.7 12z"/><path d="M7.6 8.4h3.2v7.2H7.6zM13.2 8.4h3.2M13.2 11.2h3.2M13.2 14h3.2"/></svg>',
+  "dia-terminal": '<svg class="ico" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.35" stroke-linecap="square"><path d="M12 1.7 22.3 12 12 22.3 1.7 12z"/><path d="M7.8 9.4 10.6 12l-2.8 2.6M12.6 14.8h3.6"/></svg>',
+  "dia-signal": '<svg class="ico" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.35" stroke-linecap="square"><path d="M12 1.7 22.3 12 12 22.3 1.7 12z"/><path d="M7.4 14.2a6.4 6.4 0 0 1 9.2 0M9.4 16.2a3.4 3.4 0 0 1 5.2 0"/><circle cx="12" cy="18.4" r="1"/></svg>',
+  "dia-sliders": '<svg class="ico" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.35" stroke-linecap="square"><path d="M12 1.7 22.3 12 12 22.3 1.7 12z"/><path d="M7.4 9.4h9.2M7.4 14.6h9.2"/><path d="M10 8.2v2.4M14.4 13.4v2.4"/></svg>',
+  "dia-power": '<svg class="ico" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.35" stroke-linecap="square"><path d="M12 1.7 22.3 12 12 22.3 1.7 12z"/><path d="M12 7.4v5.2M8.6 9.2a5 5 0 1 0 6.8 0"/></svg>'
+};
+
 function icon(name, cls) {
+  const o = ICON_OUTLINE[name];
+  if (o) return o.replace('class="ico"', 'class="ico ' + (cls || "") + '"');
   const p = ICON_PATHS[name];
   if (p) return '<svg class="ico ' + (cls||'') + '" viewBox="0 0 24 24" aria-hidden="true" fill="currentColor"><path d="' + p + '"/></svg>';
   const s = ICON_SVG[name];
@@ -104,7 +121,7 @@ function icon(name, cls) {
 }
 
 /* Brand-coloured variant. Uses the official mark colour where one is known
-   (Python blue, Rust orange, React cyan…) and falls back to the interface
+   (Python blue, Rust orange, React cyan&) and falls back to the interface
    yellow for everything else. */
 function iconColored(name, cls) {
   const mark = ICON_COLORS[name];

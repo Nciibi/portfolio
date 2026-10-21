@@ -1,5 +1,5 @@
 /* ==========================================================================
-   shell.css — application shell.
+   shell.css  application shell.
 
    The Cyberpunk 2077 menu shell is: a thin status bar across the top, a
    narrow column of skewed list rows down the left, and the content stage
@@ -19,7 +19,7 @@
 }
 
 /* ==========================================================================
-   TOPBAR — status strip
+   TOPBAR  status strip
    ========================================================================== */
 
 .menu-topbar {
@@ -68,7 +68,8 @@
 
 .stat-num {
   font-family: var(--f-dots);
-  font-size: 1.35rem;
+  font-size: 1.15rem;
+  letter-spacing: 0.04em;
   line-height: 1;
 }
 
@@ -85,9 +86,9 @@
 .stat-lab {
   color: var(--cp-red);
   font-family: var(--f-tech);
-  font-size: 0.6rem;
-  font-weight: 600;
-  letter-spacing: 0.22em;
+  font-size: 0.66rem;
+  font-weight: 400;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
 }
 
@@ -119,9 +120,9 @@
 .wordmark-text {
   color: var(--cp-yellow);
   font-family: var(--f-display);
-  font-size: 1.02rem;
-  font-weight: 700;
-  letter-spacing: 0.3em;
+  font-size: 1.06rem;
+  font-weight: 400;
+  letter-spacing: 0.2em;
   text-transform: uppercase;
   text-shadow: 0 0 16px rgba(255, 239, 2, 0.4);
 }
@@ -350,8 +351,8 @@
 .rail-eyebrow {
   color: var(--cp-red-a55);
   font-family: var(--f-mono);
-  font-size: 0.53rem;
-  letter-spacing: 0.2em;
+  font-size: 0.55rem;
+  letter-spacing: 0.16em;
   text-transform: uppercase;
 }
 
@@ -371,156 +372,6 @@
 }
 
 /* --- The skewed list row --------------------------------------------------- */
-
-.menu-tab {
-  position: relative;
-  display: grid;
-  grid-template-columns: 24px 18px 1fr auto;
-  align-items: center;
-  gap: 10px;
-  padding: 9px 16px 9px 18px;
-  color: var(--cp-red);
-  font-family: var(--f-tech);
-  animation: nav-in 340ms var(--ease-snap) both;
-  animation-delay: var(--d, 0ms);
-  transition:
-    color var(--t-fast) var(--ease),
-    padding-left var(--t-med) var(--ease-snap);
-}
-
-/* the parallelogram body of the row */
-.tab-frame {
-  position: absolute;
-  inset: 0;
-  z-index: -1;
-  clip-path: var(--skew);
-  background: rgba(255, 92, 84, 0.03);
-  transition: background var(--t-med) var(--ease);
-}
-
-.menu-tab:hover {
-  color: var(--cp-text-hi);
-  padding-left: 22px;
-}
-
-.menu-tab:hover .tab-frame {
-  background: rgba(255, 92, 84, 0.09);
-}
-
-/* Selected: a 1px cyan parallelogram frame drawn as a larger cyan shape
-   with a smaller cut-out inside it. */
-.menu-tab.active {
-  color: var(--cp-cyan);
-  padding-left: 22px;
-  text-shadow: 0 0 14px rgba(0, 240, 255, 0.5);
-}
-
-.menu-tab.active .tab-frame {
-  background: var(--cp-cyan);
-  animation: frame-in 240ms var(--ease) both;
-}
-
-.menu-tab.active .tab-frame::after {
-  position: absolute;
-  inset: 1px;
-  content: '';
-  clip-path: var(--skew);
-  background: linear-gradient(90deg, rgba(0, 240, 255, 0.14), rgba(0, 0, 0, 0.9) 60%);
-}
-
-.tab-index {
-  color: var(--cp-red-a55);
-  font-family: var(--f-dots);
-  font-size: 0.58rem;
-  letter-spacing: 0.04em;
-  transition: color var(--t-fast) var(--ease);
-}
-
-.menu-tab.active .tab-index {
-  color: var(--cp-yellow);
-}
-
-.tab-icon {
-  display: grid;
-  place-items: center;
-  width: 18px;
-  height: 18px;
-  color: currentColor;
-  opacity: 0.75;
-  transition: opacity var(--t-fast) var(--ease);
-}
-
-.tab-icon .ico {
-  width: 15px;
-  height: 15px;
-}
-
-.menu-tab:hover .tab-icon {
-  opacity: 1;
-}
-
-.menu-tab.active .tab-icon {
-  opacity: 1;
-  filter: drop-shadow(0 0 6px rgba(0, 240, 255, 0.7));
-}
-
-.tab-body {
-  display: flex;
-  flex-direction: column;
-  gap: 0;
-  min-width: 0;
-}
-
-.tab-label {
-  font-size: 0.76rem;
-  font-weight: 600;
-  letter-spacing: 0.16em;
-  line-height: 1.2;
-}
-
-.tab-jp {
-  color: var(--cp-text-4);
-  font-family: var(--f-jp);
-  font-size: 0.52rem;
-  letter-spacing: 0.14em;
-  line-height: 1.25;
-  opacity: 0;
-  transform: translateX(-4px);
-  transition:
-    opacity var(--t-med) var(--ease),
-    transform var(--t-med) var(--ease);
-}
-
-.menu-tab:hover .tab-jp,
-.menu-tab.active .tab-jp,
-.menu-tab:focus-visible .tab-jp {
-  opacity: 1;
-  transform: translateX(0);
-}
-
-.menu-tab.active .tab-jp {
-  color: var(--cp-cyan-a60);
-}
-
-/* the hatched square that marks the active row */
-.tab-hatch {
-  width: 15px;
-  height: 15px;
-  flex: none;
-  border: 1px solid var(--cp-cyan);
-  background: repeating-linear-gradient(45deg, var(--cp-cyan) 0 1px, transparent 1px 3px);
-  opacity: 0;
-  transform: scale(0.6);
-  transition:
-    opacity var(--t-med) var(--ease),
-    transform var(--t-med) var(--ease-snap);
-}
-
-.menu-tab.active .tab-hatch {
-  opacity: 1;
-  transform: scale(1);
-  animation: hatch-drift 2.6s linear infinite;
-}
 
 .menu-rail-foot {
   padding: 10px 20px 0 22px;
@@ -575,7 +426,7 @@
   overflow: hidden;
 }
 
-/* The red wash bleeding down from the top edge — the signature of the
+/* The red wash bleeding down from the top edge  the signature of the
    Night City interface. */
 .stage-wash {
   position: absolute;
@@ -672,7 +523,7 @@
   animation: binary-drift 26s linear infinite;
 }
 
-/* Technical diagram blocks — the game hides schematic panels in the void. */
+/* Technical diagram blocks  the game hides schematic panels in the void. */
 .stage-blocks {
   position: absolute;
   inset: 0;
@@ -695,8 +546,9 @@
   z-index: 1;
   display: none;
   max-width: var(--content-width);
-  padding: 22px var(--gutter) 0;
-  margin: 0 auto;
+  padding: 14px var(--gutter) 0;
+  /* the top margin leaves room for the machined razor edge */
+  margin: 22px auto 0;
 }
 
 .menu-panel.active {
@@ -728,9 +580,9 @@
   position: relative;
   color: var(--cp-cyan);
   font-family: var(--f-display);
-  font-size: clamp(1.7rem, 3.4vw, 2.7rem);
-  font-weight: 700;
-  letter-spacing: 0.14em;
+  font-size: clamp(1.6rem, 3.1vw, 2.5rem);
+  font-weight: 400;
+  letter-spacing: 0.05em;
   line-height: 1;
   text-transform: uppercase;
   text-shadow: 0 0 22px rgba(0, 240, 255, 0.35);
@@ -746,29 +598,33 @@
   color: var(--cp-red-a55);
   font-family: var(--f-mono);
   font-size: 0.62rem;
-  letter-spacing: 0.2em;
+  letter-spacing: 0.16em;
   text-transform: uppercase;
 }
 
 /* the ticked rule under every panel header */
+/* The stepped rule the game draws under every heading: a ten pixel band
+   that drops to a hairline after 85px. */
 .panel-rule {
   position: absolute;
   right: 0;
   bottom: -1px;
   left: 0;
-  height: 1px;
-  background: linear-gradient(90deg, var(--cp-red-a80) 0 18%, var(--cp-red-a30) 40%, transparent 82%);
+  height: 10px;
+  background: var(--cp-red);
+  clip-path: var(--rule-clip);
+  opacity: 0.9;
 }
 
 .panel-rule::after {
   position: absolute;
-  top: -3px;
-  left: 0;
-  width: 30px;
+  top: 0;
+  left: 96px;
+  width: 26px;
   height: 7px;
   content: '';
   background: repeating-linear-gradient(90deg, var(--cp-red) 0 1px, transparent 1px 5px);
-  opacity: 0.9;
+  opacity: 0.85;
 }
 
 /* --- Section headings ------------------------------------------------------ */
@@ -795,9 +651,9 @@
 .subsection-heading h2 {
   color: var(--cp-cyan);
   font-family: var(--f-tech);
-  font-size: 0.84rem;
-  font-weight: 600;
-  letter-spacing: 0.2em;
+  font-size: 0.9rem;
+  font-weight: 400;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
   text-shadow: 0 0 14px rgba(0, 240, 255, 0.3);
 }

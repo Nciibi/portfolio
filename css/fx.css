@@ -1,49 +1,202 @@
 /* ==========================================================================
-   fx.css â€” motion, glitch and post-processing.
+   fx.css  motion.
 
-   House rule borrowed from CD PROJEKT RED's UI art bible and from
-   Cyberpunk: Edgerunners' use of distortion: a glitch is PUNCTUATION.
-   It marks a state change, an error, an unstable signal. It is never
-   wallpaper. Every effect below is therefore either triggered by a state
-   change or, when continuous, deliberately rare and low amplitude.
+   House rule borrowed from CD PROJEKT RED: a glitch is PUNCTUATION. It
+   marks a state change, an error, an unstable signal. It is never
+   wallpaper, and it is never random noise. Every keyframe set below has a
+   specific job, and the durations are deliberately unequal so a column of
+   rows never pulses in unison.
    ========================================================================== */
 
 /* ==========================================================================
    KEYFRAMES
    ========================================================================== */
 
-/* Panel entry: the game reveals a module with a shader wipe, not a fade.
-   The clip opens from the top while the block slides in from the right. */
+/* --- Panel entry: the module wipes open from the top and slides in ----- */
 @keyframes panel-in {
-  0% { opacity: 0; transform: translateX(28px); clip-path: inset(0 0 100% 0); }
-  35% { opacity: 1; }
+  0% { opacity: 0; transform: translateX(26px); clip-path: inset(0 0 100% 0); }
+  30% { opacity: 1; }
   100% { opacity: 1; transform: translateX(0); clip-path: inset(0 0 0 0); }
 }
 
-/* Nav rows settle in one after another when the interface boots. */
-@keyframes nav-in {
-  0% { opacity: 0; transform: translateX(-16px); }
-  100% { opacity: 1; transform: translateX(0); }
+/* --- The button tear: seven clipped states with lateral shims ----------- */
+@keyframes btn-glitch {
+  0% { clip-path: var(--btn-clip-1); }
+  2%, 8% { clip-path: var(--btn-clip-2); transform: translate(-5%, 0); }
+  6% { clip-path: var(--btn-clip-2); transform: translate(5%, 0); }
+  9% { clip-path: var(--btn-clip-2); transform: translate(0, 0); }
+  10% { clip-path: var(--btn-clip-3); transform: translate(5%, 0); }
+  13% { clip-path: var(--btn-clip-3); transform: translate(0, 0); }
+  14%, 21% { clip-path: var(--btn-clip-4); transform: translate(5%, 0); }
+  25% { clip-path: var(--btn-clip-5); transform: translate(5%, 0); }
+  30% { clip-path: var(--btn-clip-5); transform: translate(-5%, 0); }
+  35%, 45% { clip-path: var(--btn-clip-6); transform: translate(-5%, 0); }
+  40% { clip-path: var(--btn-clip-6); transform: translate(5%, 0); }
+  50% { clip-path: var(--btn-clip-6); transform: translate(0, 0); }
+  55% { clip-path: var(--btn-clip-7); transform: translate(5%, 0); }
+  60% { clip-path: var(--btn-clip-7); transform: translate(0, 0); }
+  31%, 61%, 100% { clip-path: var(--btn-clip-4); }
 }
 
-/* The active row's frame acquires. */
-@keyframes frame-in {
-  0% { opacity: 0; }
-  100% { opacity: 1; }
+/* --- The button's own skew on hover ------------------------------------- */
+@keyframes btn-skew {
+  0% { transform: skew(0deg); }
+  60% { transform: skew(0deg); }
+  61% { transform: skew(10deg); }
+  70% { transform: skew(10deg); }
+  71% { transform: skew(0deg); }
+  100% { transform: skew(0deg); }
 }
 
-/* The hex nodes breathe very slightly, like the game's live diagrams. */
-@keyframes hex-breathe {
-  0%, 100% { filter: brightness(1); }
-  50% { filter: brightness(1.28); }
+/* --- The bar that drops out of the top edge ----------------------------- */
+@keyframes btn-bar {
+  0% { background-position: 0 -120%; }
+  10% { background-position: 0 -120%; }
+  11% { background-position: 0 10px; }
+  29% { background-position: 0 10px; }
+  30% { background-position: 0 -120%; }
+  50% { background-position: 0 -120%; }
+  51% { background-position: 0 55px; }
+  90% { background-position: 0 55px; }
+  91% { background-position: 0 -120%; }
+  100% { background-position: 0 -120%; }
 }
 
-/* A row of data sliding into place from the right, in a short stagger. */
-@keyframes row-in {
-  0% { opacity: 0; transform: translateX(18px); }
-  100% { opacity: 1; transform: translateX(0); }
+/* --- The corner code tag jumping ---------------------------------------- */
+@keyframes btn-tag {
+  0% { right: 45px; }
+  10% { right: 45px; }
+  11% { right: 35px; }
+  20% { transform: skew(0deg); }
+  21% { transform: skew(-10deg); }
+  40% { transform: skew(-10deg); }
+  41% { transform: skew(0deg); }
+  49% { right: 35px; }
+  50% { right: 55px; }
+  60% { right: 55px; }
+  61% { right: 35px; }
+  70% { transform: skew(0deg); }
+  71% { transform: skew(10deg); }
+  80% { transform: skew(10deg); }
+  81% { transform: skew(0deg); }
+  100% { right: 35px; }
 }
 
+/* --- Heading: the type skews and the rule tears in sympathy -------------- */
+@keyframes h1glitched {
+  0% { transform: skew(-20deg); left: -4px; }
+  10% { transform: skew(-20deg); left: -4px; }
+  11% { transform: skew(0deg); left: 2px; }
+  50% { transform: skew(0deg); }
+  51% { transform: skew(10deg); }
+  59% { transform: skew(10deg); }
+  60% { transform: skew(0deg); }
+  100% { transform: skew(0deg); }
+}
+
+@keyframes h1beforeglitched {
+  0%, 50% { clip-path: var(--rule-clip); }
+  51%, 60% {
+    clip-path: polygon(0 0, 85px 0, 90px 5px, 40% 5px, calc(40% - 30px) 0,
+      calc(40% + 30px) 0, calc(45% - 15px) 5px, 100% 5px, 100% 6px,
+      calc(45% - 14px) 6px, calc(40% + 29px) 1px, calc(40% - 29px) 1px,
+      calc(40% + 1px) 6px, 85px 6px, 80px 10px, 0 10px);
+  }
+  100% { clip-path: var(--rule-clip); }
+}
+
+/* --- List row jitter, deliberately out of phase row to row --------------- */
+@keyframes liglitched {
+  0% { transform: skew(-3deg); margin-left: -2px; }
+  10% { transform: skew(3deg); margin-left: inherit; }
+  11% { transform: skew(0deg); margin-left: 2px; }
+  50% { transform: skew(0deg); margin-left: inherit; }
+  51% { transform: skew(3deg); margin-left: 5px; }
+  59% { transform: skew(-3deg); margin-left: 5px; }
+  60% { transform: skew(0deg); margin-left: inherit; }
+  100% { transform: skew(0deg); }
+}
+
+/* --- Separator tear ------------------------------------------------------ */
+@keyframes hr-tear {
+  0% { transform: skew(0deg); clip-path: polygon(0 7px, 100% 7px, 100% 8px, 0 8px); margin-left: 0; }
+  15% { transform: skew(0deg); clip-path: polygon(0 7px, 100% 7px, 100% 8px, 0 8px); margin-left: 0; }
+  16% {
+    transform: skew(20deg);
+    clip-path: polygon(1px 0, 0 0, 8px 14px, 13px 14px, 22px 7px, 42px 6px, 49px 2px, 100% 2px,
+      100% 0, 42px 0, 35px 5px, 22px 6px, 13px 13px, 9px 13px);
+    margin-left: -20px;
+  }
+  20% {
+    transform: skew(-20deg);
+    clip-path: polygon(1px 0, 0 0, 8px 14px, 13px 14px, 22px 7px, 42px 6px, 49px 2px, 100% 2px,
+      100% 0, 42px 0, 35px 5px, 22px 6px, 13px 13px, 9px 13px);
+    margin-left: 20px;
+  }
+  21% { transform: skew(0deg); clip-path: polygon(0 7px, 100% 7px, 100% 8px, 0 8px); margin-left: 0; }
+  65% { transform: skew(0deg); clip-path: polygon(0 7px, 100% 7px, 100% 8px, 0 8px); margin-left: 0; }
+  66% {
+    transform: skew(20deg);
+    clip-path: polygon(1px 0, 0 0, 8px 14px, 13px 14px, 22px 7px, 42px 6px, 49px 2px, 100% 2px,
+      100% 0, 42px 0, 35px 5px, 22px 6px, 13px 13px, 9px 13px);
+    margin-left: -5px;
+    transform: scaleX(-1);
+  }
+  70% {
+    transform: skew(40deg);
+    clip-path: polygon(1px 0, 0 0, 8px 14px, 13px 14px, 22px 7px, 42px 6px, 49px 2px, 100% 2px,
+      100% 0, 42px 0, 35px 5px, 22px 6px, 13px 13px, 9px 13px);
+    margin-left: 20px;
+    transform: scaleX(-1);
+  }
+  71% { transform: skew(0deg); clip-path: polygon(0 7px, 100% 7px, 100% 8px, 0 8px); margin-left: 0; transform: scaleX(0); }
+  100% { transform: skew(0deg); clip-path: polygon(0 7px, 100% 7px, 100% 8px, 0 8px); margin-left: 0; }
+}
+
+/* --- Scan sweeps --------------------------------------------------------- */
+@keyframes scannedh {
+  0% { top: -27px; }
+  50% {}
+  51% {}
+  100% { top: calc(100% + 12px); }
+}
+
+@keyframes scannedv {
+  0% { left: 0; }
+  50% {}
+  51% {}
+  100% { left: 100%; }
+}
+
+/* --- Link underline travels ---------------------------------------------- */
+@keyframes scanneda {
+  0% { bottom: -1px; }
+  100% { bottom: calc(100% + 1px); }
+}
+
+/* --- Image flicker ------------------------------------------------------- */
+@keyframes img-flicker {
+  0% { filter: blur(0) brightness(100%) contrast(100%); }
+  2% { filter: blur(0.05rem) brightness(120%) contrast(120%); }
+  4% { filter: blur(0.1rem) brightness(150%) contrast(150%); }
+  6% { filter: blur(0.2rem) brightness(170%) contrast(170%); }
+  8% { filter: blur(0) brightness(100%) contrast(100%); }
+  10%, 60% { filter: blur(0) brightness(100%) contrast(100%); }
+  62% { filter: blur(0.05rem) brightness(60%) contrast(100%); }
+  64% { filter: blur(0.1rem) brightness(40%) contrast(100%); }
+  66%, 72% { filter: blur(0) brightness(100%) contrast(100%); }
+  68% { filter: blur(0.05rem) brightness(60%) contrast(100%); }
+  70% { filter: blur(0.1rem) brightness(40%) contrast(100%); }
+  100% { filter: blur(0) brightness(100%) contrast(100%); }
+}
+
+/* --- The blinking cursor after a heading --------------------------------- */
+@keyframes hxafter {
+  0%, 50% { opacity: 1; }
+  51%, 100% { opacity: 0; }
+}
+
+/* --- Ambient background life --------------------------------------------- */
 @keyframes top-signal {
   0% { background-position: 120% 0; }
   100% { background-position: -120% 0; }
@@ -59,19 +212,35 @@
   100% { background-position: 0 62px; }
 }
 
-@keyframes glow-breathe {
-  0%, 100% { opacity: 0.7; }
-  50% { opacity: 1; }
-}
-
 @keyframes rain-fall {
   0% { transform: translateY(-8%); }
   100% { transform: translateY(8%); }
 }
 
-@keyframes panel-in {
-  0% { opacity: 0; transform: translateY(16px) scale(0.995); filter: blur(2px); }
-  100% { opacity: 1; transform: none; filter: none; }
+@keyframes wash-breathe {
+  0%, 100% { opacity: 0.82; }
+  50% { opacity: 1; }
+}
+
+@keyframes binary-drift {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(-88px); }
+}
+
+@keyframes block-flicker {
+  0%, 47%, 50%, 100% { opacity: 0.5; }
+  48% { opacity: 0.62; }
+  49% { opacity: 0.44; }
+}
+
+@keyframes hatch-drift {
+  0% { background-position: 0 0; }
+  100% { background-position: 6px 6px; }
+}
+
+@keyframes hex-breathe {
+  0%, 100% { filter: brightness(1); }
+  50% { filter: brightness(1.28); }
 }
 
 @keyframes caret-blink {
@@ -79,7 +248,87 @@
   50%, 100% { opacity: 0; }
 }
 
-/* --- Chromatic text glitch (asymmetric 6 / 5 step cadence) ---------------- */
+/* --- Entry choreography --------------------------------------------------- */
+@keyframes nav-in {
+  0% { opacity: 0; transform: translateX(-16px); }
+  100% { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes frame-in {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+@keyframes row-in {
+  0% { opacity: 0; transform: translateX(18px); }
+  100% { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes exp-refresh {
+  0% { opacity: 0; transform: translateY(10px); filter: blur(3px); }
+  100% { opacity: 1; transform: none; filter: none; }
+}
+
+/* --- Shard wipe between modules ------------------------------------------ */
+@keyframes shard-sweep {
+  0% { transform: translateX(-420%) skewX(-14deg); opacity: 0; }
+  16% { opacity: 1; }
+  84% { opacity: 1; }
+  100% { transform: translateX(420%) skewX(-14deg); opacity: 0; }
+}
+
+/* --- The Konami override -------------------------------------------------- */
+@keyframes override-flash {
+  0% { opacity: 0; }
+  4% { opacity: 1; }
+  8% { opacity: 0.25; }
+  12% { opacity: 1; }
+  30% { opacity: 0.6; }
+  100% { opacity: 0; }
+}
+
+@keyframes override-text {
+  0%, 100% { transform: translateX(0) skewX(0); }
+  6% { transform: translateX(-8px) skewX(-8deg); }
+  12% { transform: translateX(6px) skewX(4deg); }
+  18% { transform: translateX(-3px) skewX(-2deg); }
+  26% { transform: translateX(0) skewX(0); }
+}
+
+/* ==========================================================================
+   CHROMATIC TEXT
+   ========================================================================== */
+
+.glitch-text {
+  position: relative;
+}
+
+.glitch-text::before,
+.glitch-text::after {
+  position: absolute;
+  inset: 0;
+  content: attr(data-text);
+  pointer-events: none;
+  opacity: 0;
+}
+
+.glitch-text::before {
+  color: var(--cp-magenta, #ff0044);
+}
+
+.glitch-text::after {
+  color: var(--cp-cyan);
+}
+
+.glitch-text.is-glitching::before {
+  opacity: 0.9;
+  animation: glitch-red 420ms steps(1, end) both;
+}
+
+.glitch-text.is-glitching::after {
+  opacity: 0.9;
+  animation: glitch-blue 420ms steps(1, end) both;
+}
 
 @keyframes glitch-red {
   0%, 100% { clip-path: inset(0 0 100% 0); transform: translate(0, 0); }
@@ -102,279 +351,104 @@
   78% { clip-path: inset(50% 0 34% 0); transform: translate(-2px, -1px); }
 }
 
-/* --- The idle title jitter: a rare, low-amplitude signal wobble ----------- */
-
-@keyframes title-idle {
-  0%, 92%, 100% { transform: translate(0, 0); }
-  93% { transform: translate(-1px, 0); }
-  94% { transform: translate(1px, 0); }
-  95% { transform: translate(0, 0); }
-  96% { transform: translate(-1px, 0); }
-  97% { transform: translate(0, 0); }
-}
-
-/* --- Shard wipe ------------------------------------------------------------ */
-
-@keyframes shard-sweep {
-  0% { transform: translateX(-420%) skewX(-14deg); opacity: 0; }
-  16% { opacity: 1; }
-  84% { opacity: 1; }
-  100% { transform: translateX(420%) skewX(-14deg); opacity: 0; }
-}
-
-/* --- Vertical scan sweep on panel entry ------------------------------------ */
-
-@keyframes scan-sweep {
-  0% { transform: translateY(-10%); opacity: 0; }
-  8% { opacity: 1; }
-  100% { transform: translateY(1100%); opacity: 0; }
-}
-
-/* --- Hatched marker drift — the CP2077 active-state square -------------- */
-
-@keyframes hatch-drift {
-  0% { background-position: 0 0; }
-  100% { background-position: 6px 6px; }
-}
-
-/* --- The red wash breathes, like the city's own signage ------------------- */
-
-@keyframes wash-breathe {
-  0%, 100% { opacity: 0.82; }
-  50% { opacity: 1; }
-}
-
-@keyframes binary-drift {
-  0% { transform: translateY(0); }
-  100% { transform: translateY(-88px); }
-}
-
-@keyframes block-flicker {
-  0%, 100% { opacity: 0.5; }
-  47% { opacity: 0.5; }
-  48% { opacity: 0.62; }
-  49% { opacity: 0.44; }
-  50% { opacity: 0.5; }
-}
-
-@keyframes hex-breathe {
-  0%, 100% { filter: brightness(1); }
-  50% { filter: brightness(1.28); }
-}
-
-/* --- Row hover: a chromatic split, the way the game shears its labels ---- */
-
-.row-glitch:hover .pc-title,
-.row-glitch:hover .codex-title,
-.row-glitch:hover .exp-role,
-.row-glitch:hover .gh-repo-name {
-  text-shadow:
-    -1px 0 var(--cp-cyan),
-    1px 0 var(--cp-red);
-}
-
-/* --- Signal tear overlay --------------------------------------------------- */
-
-@keyframes tear-jitter {
-  0% { transform: translateY(0); }
-  50% { transform: translateY(-2px); }
-  100% { transform: translateY(2px); }
-}
-
-/* --- Element shake --------------------------------------------------------- */
-
-@keyframes fx-shake {
-  0%, 100% { transform: translate(0, 0); }
-  20% { transform: translate(-2px, 1px); }
-  40% { transform: translate(2px, -1px); }
-  60% { transform: translate(-1px, -1px); }
-  80% { transform: translate(1px, 1px); }
-}
-
-/* --- Power flicker --------------------------------------------------------- */
-
-@keyframes power-flicker {
-  0%, 100% { opacity: 1; }
-  8% { opacity: 0.35; }
-  16% { opacity: 1; }
-  22% { opacity: 0.6; }
-  30% { opacity: 1; }
-}
-
-/* --- HUD reticle ------------------------------------------------------------ */
-
-@keyframes reticle-spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
-}
-
-@keyframes reticle-blink {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.35; }
-}
-
-/* --- Breach protocol loader (GitHub sync) ----------------------------------- */
-
-@keyframes breach-spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
-}
-
-@keyframes breach-pulse {
-  0%, 100% { opacity: 0.35; transform: scale(0.94); }
-  50% { opacity: 1; transform: scale(1); }
-}
-
-/* --- Hex level badge draw --------------------------------------------------- */
-
-@keyframes hex-draw {
-  0% { clip-path: polygon(50% 0, 100% 25%, 100% 75%, 50% 100%, 0 75%, 0 25%); }
-  100% { clip-path: polygon(50% 0, 100% 25%, 100% 75%, 50% 100%, 0 75%, 0 25%); }
-}
-
-/* --- Ticker ----------------------------------------------------------------- */
-
-@keyframes ticker-scroll {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
-}
-
 /* ==========================================================================
-   GLITCH TEXT
+   APPLIED EFFECTS
    ========================================================================== */
 
-.glitch-text {
+/* A heading that tears, with its rule tearing in sympathy. */
+.cp-title.is-glitched {
+  animation: h1glitched 1.3s linear infinite;
+}
+
+.cp-title.is-glitched::before {
+  animation: h1beforeglitched 1.8s linear infinite;
+}
+
+/* Rows in a list jitter out of phase with each other. */
+.cp-jitter {
+  animation: liglitched 900ms linear infinite;
+}
+
+.cp-jitter:nth-child(3n + 1) { animation-duration: 450ms; }
+.cp-jitter:nth-child(5n + 2) { animation-duration: 700ms; animation-timing-function: ease-out; }
+.cp-jitter:nth-child(2n + 2) { animation-duration: 1350ms; animation-timing-function: ease-in-out; }
+.cp-jitter:nth-child(4n + 4) { animation-duration: 1200ms; animation-timing-function: ease-in; }
+
+/* A machined separator. */
+.cp-hr {
   position: relative;
+  height: 12px;
+  margin: 26px 0;
+  background: var(--cp-red);
+  clip-path: polygon(0 7px, 100% 7px, 100% 8px, 0 8px);
 }
 
-.glitch-text::before,
-.glitch-text::after {
+.cp-hr.is-glitched {
+  animation: hr-tear 3s linear infinite;
+}
+
+/* A scan line travelling across a panel. */
+.cp-scan-h,
+.cp-scan-v {
   position: absolute;
-  inset: 0;
-  content: attr(data-text);
+  z-index: 3;
   pointer-events: none;
-  opacity: 0;
+  background: var(--cp-cyan);
+  box-shadow: 0 0 10px 4px var(--cp-cyan);
 }
 
-.glitch-text::before {
-  color: var(--cp-red);
-  text-shadow: none;
-}
-
-.glitch-text::after {
-  color: var(--cp-cyan);
-  text-shadow: none;
-}
-
-.glitch-text.is-glitching::before {
-  opacity: 0.9;
-  animation: glitch-red 420ms steps(1, end) both;
-}
-
-.glitch-text.is-glitching::after {
-  opacity: 0.9;
-  animation: glitch-blue 420ms steps(1, end) both;
-}
-
-/* Rare idle wobble on the panel headline only. */
-.panel-title.glitch-text {
-  animation: title-idle 7.5s steps(1, end) infinite;
-}
-
-/* ==========================================================================
-   SHARD WIPE â€” the panel transition
-   ========================================================================== */
-
-.shard-layer {
-  position: absolute;
-  inset: 0;
-  z-index: 60;
-  pointer-events: none;
-  overflow: hidden;
-}
-
-.shard {
-  position: absolute;
-  top: -14%;
-  bottom: -14%;
+.cp-scan-h {
+  top: -30px;
   left: 0;
-  width: 30%;
-  background: linear-gradient(
-    90deg,
-    transparent 0%,
-    rgba(252, 238, 10, 0.12) 38%,
-    rgba(255, 255, 255, 0.6) 50%,
-    rgba(255, 0, 68, 0.3) 62%,
-    transparent 100%
-  );
-  opacity: 0;
-  transform: translateX(-420%) skewX(-14deg);
-}
-
-.shard:nth-child(2n) {
-  background: linear-gradient(
-    90deg,
-    transparent 0%,
-    rgba(0, 240, 255, 0.16) 38%,
-    rgba(255, 255, 255, 0.68) 50%,
-    rgba(252, 238, 10, 0.22) 62%,
-    transparent 100%
-  );
-}
-
-.shard:nth-child(3n) {
-  background: linear-gradient(
-    90deg,
-    transparent 0%,
-    rgba(255, 0, 68, 0.24) 38%,
-    rgba(255, 255, 255, 0.64) 50%,
-    rgba(0, 240, 255, 0.2) 62%,
-    transparent 100%
-  );
-}
-
-.shard.is-active {
-  animation: shard-sweep 520ms var(--ease-glitch) both;
-}
-
-/* ==========================================================================
-   SCAN SWEEP
-   ========================================================================== */
-
-.scan-sweep {
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: 45;
   width: 100%;
-  height: 2px;
-  pointer-events: none;
-  background: linear-gradient(90deg, transparent, var(--cp-red), var(--cp-cyan), transparent);
-  box-shadow: 0 0 22px rgba(252, 238, 10, 0.75);
-  opacity: 0;
+  height: 3px;
+  animation: scannedh 3s linear infinite alternate;
 }
 
-.scan-sweep.is-active {
-  animation: scan-sweep 900ms var(--ease) both;
+.cp-scan-v {
+  top: -30px;
+  left: 0;
+  width: 3px;
+  height: calc(100% + 55px);
+  animation: scannedv 9s linear infinite alternate;
 }
 
-/* ==========================================================================
-   SIGNAL TEAR OVERLAY (stage-level, during a filter burst)
-   ========================================================================== */
+/* A link whose underline travels. */
+.cp-link {
+  position: relative;
+  display: inline-block;
+  color: inherit;
+  text-decoration: none;
+}
 
-.menu-stage.is-glitching::after {
+.cp-link::after {
   position: absolute;
-  inset: 0;
-  z-index: 30;
+  bottom: -1px;
+  left: 0;
+  width: 100%;
+  height: 1.5px;
   content: '';
-  pointer-events: none;
-  background: repeating-linear-gradient(0deg, rgba(255, 92, 84, 0.24) 0 2px, transparent 2px 7px);
-  mix-blend-mode: screen;
-  animation: tear-jitter 90ms steps(2, end) infinite;
+  background: var(--cp-cyan);
+  box-shadow: 0 0 8px 3px var(--cp-cyan);
+}
+
+.cp-link:hover::after {
+  animation: scanneda 900ms linear infinite alternate;
+}
+
+/* An image that flickers like a dying display. */
+.cp-flicker {
+  animation: img-flicker 5s linear infinite;
+}
+
+/* The blinking cursor after a heading. */
+.cp-caret::after {
+  content: '_';
+  animation: hxafter 900ms linear infinite;
 }
 
 /* ==========================================================================
-   HUD RETICLE â€” custom targeting cursor
+   HUD RETICLE
    ========================================================================== */
 
 .hud-reticle {
@@ -397,9 +471,8 @@
   left: var(--reticle-x, 0);
   width: var(--reticle-width, 0);
   height: var(--reticle-height, 0);
-  border: 1px solid var(--cp-red);
+  border: 1px solid var(--cp-yellow);
   box-shadow: 0 0 14px rgba(252, 238, 10, 0.3), inset 0 0 14px rgba(252, 238, 10, 0.08);
-  clip-path: polygon(0 0, 14px 0, 14px 1px, 1px 1px, 1px 14px, 0 14px, 0 0, 100% 0, 100% 14px, calc(100% - 1px) 14px, calc(100% - 1px) 1px, calc(100% - 14px) 1px, calc(100% - 14px) 0, 100% 0, 100% 100%, calc(100% - 14px) 100%, calc(100% - 14px) calc(100% - 1px), calc(100% - 1px) calc(100% - 1px), calc(100% - 1px) calc(100% - 14px), 100% calc(100% - 14px), 100% 100%, 0 100%, 0 calc(100% - 14px), 1px calc(100% - 14px), 1px calc(100% - 1px), 14px calc(100% - 1px), 14px 100%, 0 100%);
 }
 
 .hud-reticle-label {
@@ -408,7 +481,7 @@
   left: var(--reticle-x, 0);
   padding: 1px 6px;
   color: var(--cp-black);
-  background: var(--cp-red);
+  background: var(--cp-yellow);
   font-family: var(--f-mono);
   font-size: 0.52rem;
   letter-spacing: 0.12em;
@@ -430,8 +503,7 @@
 }
 
 .fx-no-bloom {
-  --glow-yellow: 0 0 8px rgba(252, 238, 10, 0.16);
-  --glow-text: 0 0 10px rgba(252, 238, 10, 0.18);
+  --glow-red: 0 0 8px rgba(255, 92, 84, 0.16);
 }
 
 /* CSS-only CRT fallback for machines without WebGL, or the "low" tier. */
@@ -450,41 +522,32 @@
    ========================================================================== */
 
 .fx-shake {
-  animation: fx-shake 240ms steps(2, end) both;
+  animation: btn-skew 240ms steps(2, end) both;
 }
 
 .is-power-flicker {
   animation: power-flicker 420ms steps(1, end) both;
 }
 
-/* Hover glitch on primary actions â€” brief, sharp, one-shot. */
-.glitch-hover {
-  position: relative;
+@keyframes power-flicker {
+  0%, 100% { opacity: 1; }
+  8% { opacity: 0.35; }
+  16% { opacity: 1; }
+  22% { opacity: 0.6; }
+  30% { opacity: 1; }
 }
 
-.glitch-hover:hover::before,
-.glitch-hover:hover::after {
-  position: absolute;
-  inset: 0;
-  content: attr(data-text);
-  pointer-events: none;
-  opacity: 0.75;
+/* Row hover: a chromatic split, the way the game shears its labels. */
+.row-glitch:hover .pc-title,
+.row-glitch:hover .codex-title,
+.row-glitch:hover .exp-role,
+.row-glitch:hover .gh-repo-name {
+  text-shadow:
+    -1px 0 var(--cp-cyan),
+    1px 0 var(--cp-red);
 }
 
-.glitch-hover:hover::before {
-  color: var(--cp-red);
-  animation: glitch-red 300ms steps(1, end) both;
-}
-
-.glitch-hover:hover::after {
-  color: var(--cp-cyan);
-  animation: glitch-blue 300ms steps(1, end) both;
-}
-
-/* ==========================================================================
-   SYSTEM OVERRIDE â€” the Konami payload
-   ========================================================================== */
-
+/* The override flash. */
 .override-flash {
   position: fixed;
   inset: 0;
@@ -493,8 +556,8 @@
   place-items: center;
   pointer-events: none;
   background:
-    radial-gradient(60% 60% at 50% 50%, rgba(252, 238, 10, 0.14), transparent 70%),
-    linear-gradient(0deg, rgba(255, 92, 84, 0.14), rgba(0, 240, 255, 0.1));
+    radial-gradient(60% 60% at 50% 50%, rgba(255, 92, 84, 0.14), transparent 70%),
+    linear-gradient(0deg, rgba(0, 240, 255, 0.1), rgba(255, 239, 2, 0.08));
   mix-blend-mode: screen;
   opacity: 0;
 }
@@ -506,36 +569,18 @@
 .override-flash span {
   padding: 14px 26px;
   color: var(--cp-black);
-  background: var(--cp-red);
-  font-family: var(--f-tech);
-  font-size: clamp(0.8rem, 2.2vw, 1.5rem);
-  font-weight: 700;
+  background: var(--cp-yellow);
+  font-family: var(--f-display);
+  font-size: clamp(0.9rem, 2.4vw, 1.6rem);
   letter-spacing: 0.28em;
   text-transform: uppercase;
-  clip-path: var(--cut-btn);
-  box-shadow: 0 0 60px rgba(252, 238, 10, 0.6);
+  clip-path: var(--btn-clip);
+  box-shadow: 0 0 60px rgba(255, 239, 2, 0.6);
   animation: override-text 2.2s steps(1, end) both;
 }
 
-@keyframes override-flash {
-  0% { opacity: 0; }
-  4% { opacity: 1; }
-  8% { opacity: 0.25; }
-  12% { opacity: 1; }
-  30% { opacity: 0.6; }
-  100% { opacity: 0; }
-}
-
-@keyframes override-text {
-  0%, 100% { transform: translateX(0) skewX(0); }
-  6% { transform: translateX(-8px) skewX(-8deg); }
-  12% { transform: translateX(6px) skewX(4deg); }
-  18% { transform: translateX(-3px) skewX(-2deg); }
-  26% { transform: translateX(0) skewX(0); }
-}
-
 /* ==========================================================================
-   REDUCED MOTION â€” collapse the whole engine
+   REDUCED MOTION  collapse the whole engine
    ========================================================================== */
 
 @media (prefers-reduced-motion: reduce) {
@@ -549,11 +594,17 @@
     display: none;
   }
 
-  .panel-title.glitch-text {
-    animation: none;
-  }
-
-  .hud-reticle {
-    display: none;
+  .cp-jitter,
+  .cp-hr.is-glitched,
+  .cp-title.is-glitched,
+  .cp-title.is-glitched::before,
+  .cp-flicker,
+  .cp-caret::after,
+  .cp-scan-h,
+  .cp-scan-v,
+  .cp-link:hover::after,
+  .btn-cyber:hover::before,
+  .btn-cyber:hover::after {
+    animation: none !important;
   }
 }

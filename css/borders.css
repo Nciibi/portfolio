@@ -1,0 +1,495 @@
+/* ==========================================================================
+   borders.css  the border system.
+
+   A CSS `border` cannot follow a clipped edge: `clip-path` slices the border
+   away with everything else. The game builds its frames the other way round 
+   a second, larger clipped shape sits behind the first and the difference
+   between the two reads as a border that hugs the angled edges exactly.
+
+   This file defines the whole vocabulary: the clip shapes, the 7 hover-glitch
+   states, the double-layer frame, the nav row, and the heading rules.
+   ========================================================================== */
+
+:root {
+  /* Frame thickness and the two tones a frame is made of. */
+  --bd: 3px;
+  --bd-accent: var(--cp-red);
+  --bd-face: #000;
+
+  /* The signature button silhouette: a 45 degree chamfer on the bottom left
+     and a rectangular notch bitten out of the bottom edge. */
+  --btn-cut: 1.1rem;
+  --btn-clip: polygon(
+    0 0,
+    100% 0,
+    100% 100%,
+    95% 100%,
+    95% 90%,
+    80% 90%,
+    80% 100%,
+    var(--btn-cut) 100%,
+    0 calc(100% - var(--btn-cut))
+  );
+
+  /* The seven states the button tears through on hover. */
+  --btn-clip-1: polygon(0 2%, 100% 2%, 100% 95%, 95% 95%, 95% 90%, 85% 90%, 85% 95%, 8% 95%, 0 70%);
+  --btn-clip-2: polygon(0 78%, 100% 78%, 100% 100%, 95% 100%, 95% 90%, 85% 90%, 85% 100%, 8% 100%, 0 78%);
+  --btn-clip-3: polygon(0 44%, 100% 44%, 100% 54%, 95% 54%, 95% 54%, 85% 54%, 85% 54%, 8% 54%, 0 54%);
+  --btn-clip-4: polygon(0 0, 100% 0, 100% 0, 95% 0, 95% 0, 85% 0, 85% 0, 8% 0, 0 0);
+  --btn-clip-5: polygon(0 0, 100% 0, 100% 0, 95% 0, 95% 0, 85% 0, 85% 0, 8% 0, 0 0);
+  --btn-clip-6: polygon(0 40%, 100% 40%, 100% 85%, 95% 85%, 95% 85%, 85% 85%, 85% 85%, 8% 85%, 0 70%);
+  --btn-clip-7: polygon(0 63%, 100% 63%, 100% 80%, 95% 80%, 95% 80%, 85% 80%, 85% 80%, 8% 80%, 0 70%);
+
+  /* The nav row: skewed, with a heavy left rule and a kicked-out corner. */
+  --nav-clip: polygon(0% 0%, 100% 0%, 100% 100%, 40% calc(100% - 9px), 0% 100%, 1% 62%);
+  --nav-skew: -15deg;
+
+  /* The heading rule: a ten pixel band that steps down and keeps going. */
+  --rule-clip: polygon(0 0, 85px 0, 90px 5px, 100% 5px, 100% 6px, 85px 6px, 80px 10px, 0 10px);
+  --rule-clip-h2: polygon(0 5px, 35px 5px, 40px 0, 85px 0, 90px 5px, 100% 5px, 100% 6px, 85px 6px, 80px 10px, 20px 10px, 15px 6px, 0 6px);
+  --rule-clip-h3: polygon(0 5px, 10px 5px, 15px 0, 40px 0, 45px 5px, 100% 5px, 100% 6px, 31px 6px, 27px 2px, 15px 2px, 8px 10px, 0 10px);
+  --rule-clip-h4: polygon(0 3px, 15px 3px, 20px 0, 80px 0, 85px 3px, 100% 3px, 100% 4px, 85px 4px, 80px 7px, 20px 7px, 15px 4px, 0 4px);
+
+  /* The angled image frame. */
+  --img-clip: polygon(
+    0 25px,
+    26px 0,
+    calc(60% - 25px) 0,
+    60% 25px,
+    100% 25px,
+    100% calc(100% - 10px),
+    calc(100% - 15px) calc(100% - 10px),
+    calc(80% - 10px) calc(100% - 10px),
+    calc(80% - 15px) 100%,
+    10px 100%,
+    0 calc(100% - 10px)
+  );
+
+  /* The list bullet: a chevron. */
+  --bullet-clip: polygon(50% 0, 100% 50%, 20% 100%, 30% 50%);
+
+  /* The pentagon list counter. */
+  --counter-clip: polygon(0 0, 60% 0, 100% 40%, 100% 100%, 0 100%);
+}
+
+/* ==========================================================================
+   THE FRAME
+   Every bordered element is a positioned box with two clipped layers: the
+   ::before is the border (offset), the ::after is the face (punched out).
+   ========================================================================== */
+
+.cp-frame {
+  position: relative;
+  border: 0;
+  background: transparent;
+  isolation: isolate;
+}
+
+.cp-frame::before,
+.cp-frame::after {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  content: '';
+  pointer-events: none;
+  clip-path: var(--clip, var(--btn-clip));
+  transition: background-color 140ms var(--ease);
+}
+
+.cp-frame::before {
+  background: var(--frame-accent, var(--bd-accent));
+  transform: translate(var(--frame-offset, var(--bd)), 0);
+}
+
+.cp-frame::after {
+  background: var(--frame-face, var(--bd-face));
+}
+
+.cp-frame > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* ==========================================================================
+   BUTTONS
+   ========================================================================== */
+
+.btn-cyber {
+  --clip: var(--btn-clip);
+  --frame-accent: var(--cp-red);
+  --frame-face: rgba(0, 0, 0, 0.9);
+  --frame-offset: 3px;
+
+  position: relative;
+  isolation: isolate;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 42px;
+  padding: 0 22px;
+  overflow: visible;
+  color: var(--cp-red);
+  font-family: var(--f-display);
+  font-size: 0.86rem;
+  font-weight: 400;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  border: 0;
+  background: transparent;
+  transition:
+    color 140ms var(--ease),
+    transform 140ms var(--ease);
+}
+
+.btn-cyber > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* The frame: a border shape behind a face shape, both clipped. */
+.btn-cyber::before,
+.btn-cyber::after {
+  position: absolute;
+  inset: 0;
+  content: '';
+  pointer-events: none;
+  clip-path: var(--clip, var(--btn-clip));
+}
+
+.btn-cyber::before {
+  z-index: -2;
+  background: var(--frame-accent, var(--cp-red));
+  transform: translate(var(--frame-offset, 3px), 0);
+}
+
+.btn-cyber::after {
+  z-index: -1;
+  background-color: var(--frame-face, rgba(0, 0, 0, 0.9));
+  background-image: linear-gradient(var(--frame-accent, var(--cp-red)), var(--frame-accent, var(--cp-red)));
+  background-size: 100% 12px;
+  background-repeat: no-repeat;
+  background-position: 0 -120%;
+}
+
+.btn-cyber:hover,
+.btn-cyber:focus-visible {
+  color: var(--cp-yellow);
+  outline: none;
+}
+
+/* the hover tear */
+.btn-cyber:hover::before,
+.btn-cyber:focus-visible::before {
+  animation: btn-glitch 4s infinite;
+}
+
+/* the button's own skew on hover */
+.btn-cyber:hover,
+.btn-cyber:focus-visible {
+  animation: btn-skew 900ms var(--ease) infinite;
+}
+
+.btn-cyber:hover::after,
+.btn-cyber:focus-visible::after {
+  animation: btn-bar 900ms var(--ease) infinite;
+}
+
+/* the code chip in the corner */
+.btn-cyber .btn-tag {
+  position: absolute;
+  right: 8px;
+  bottom: -7px;
+  z-index: 2;
+  padding: 1px 4px;
+  color: var(--cp-black);
+  background: var(--cp-yellow);
+  font-family: var(--f-mono);
+  font-size: 0.5rem;
+  letter-spacing: 0.12em;
+  line-height: 1.4;
+  clip-path: var(--cut-chip);
+  transition: right 200ms var(--ease);
+}
+
+.btn-cyber:hover .btn-tag,
+.btn-cyber:focus-visible .btn-tag {
+  animation: btn-tag 900ms var(--ease) infinite;
+}
+
+.btn-cyber-yellow {
+  --frame-accent: var(--cp-yellow);
+  --frame-face: var(--cp-yellow);
+  color: var(--cp-black);
+}
+
+.btn-cyber-yellow:hover,
+.btn-cyber-yellow:focus-visible {
+  color: var(--cp-black);
+}
+
+.btn-cyber-yellow::before {
+  background: var(--cp-yellow);
+}
+
+.btn-cyber-cyan {
+  --frame-accent: var(--cp-cyan);
+  color: var(--cp-cyan);
+}
+
+.btn-cyber-ghost {
+  --frame-accent: var(--cp-red-a30);
+  --frame-offset: 2px;
+  color: var(--cp-text-2);
+}
+
+/* Neomilitarism accent — external case files and destructive actions. */
+.btn-cyber-red {
+  --frame-accent: var(--cp-red);
+  color: var(--cp-red);
+}
+
+.btn-cyber-red:hover,
+.btn-cyber-red:focus-visible {
+  color: var(--cp-red-hot);
+}
+
+.btn-cyber-cyan {
+  --frame-accent: var(--cp-cyan);
+  color: var(--cp-cyan);
+}
+
+.btn-cyber-sm {
+  min-height: 30px;
+  padding: 0 14px;
+  font-size: 0.62rem;
+}
+
+.btn-cyber-block {
+  width: 100%;
+  justify-content: center;
+}
+
+/* ==========================================================================
+   NAV ROW
+   The row is skewed; the content is skewed back so the type stays upright.
+   ========================================================================== */
+
+.menu-tab {
+  position: relative;
+  display: grid;
+  grid-template-columns: 24px 20px 1fr auto;
+  align-items: center;
+  gap: 10px;
+  padding: 7px 14px 9px 16px;
+  color: var(--cp-red);
+  background: transparent;
+  border-left: 4px solid var(--cp-red-a55);
+  border-bottom: 4px solid rgba(0, 0, 0, 0.9);
+  font-family: var(--f-display);
+  font-size: 0.88rem;
+  font-weight: 400;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  clip-path: var(--nav-clip);
+  animation: nav-in 340ms var(--ease-snap) both;
+  animation-delay: var(--d, 0ms);
+  transition:
+    color 200ms var(--ease),
+    background-color 200ms var(--ease),
+    border-left-color 200ms var(--ease);
+}
+
+/* the row's own face */
+.tab-frame {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  clip-path: var(--nav-clip);
+  background: transparent;
+  transition: background 200ms var(--ease);
+}
+
+.menu-tab:hover {
+  color: var(--cp-black);
+  background: transparent;
+  border-left-color: var(--cp-yellow);
+}
+
+.menu-tab:hover .tab-frame {
+  background: var(--cp-yellow);
+}
+
+.menu-tab.active {
+  color: var(--cp-cyan);
+  background: transparent;
+  border-left-color: var(--cp-cyan);
+  border-bottom-color: rgba(0, 240, 255, 0.25);
+}
+
+.menu-tab.active .tab-frame {
+  background: var(--cp-cyan-a06);
+}
+
+.tab-index {
+  color: inherit;
+  opacity: 0.7;
+  font-family: var(--f-dots);
+  font-size: 0.6rem;
+  letter-spacing: 0.04em;
+}
+
+.tab-icon {
+  display: grid;
+  place-items: center;
+  width: 20px;
+  height: 20px;
+  color: inherit;
+}
+
+.tab-icon .ico {
+  width: 17px;
+  height: 17px;
+}
+
+.tab-body {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  min-width: 0;
+}
+
+.tab-label {
+  font-size: 0.88rem;
+  font-weight: 400;
+  letter-spacing: 0.05em;
+  line-height: 1.15;
+}
+
+.tab-jp {
+  color: var(--cp-cyan);
+  font-family: var(--f-jp);
+  font-size: 0.52rem;
+  letter-spacing: 0.16em;
+  line-height: 1.25;
+  opacity: 0;
+  transform: translateX(-4px);
+  transition: opacity 200ms var(--ease), transform 200ms var(--ease);
+}
+
+.menu-tab:hover .tab-jp {
+  color: rgba(0, 0, 0, 0.7);
+}
+
+.menu-tab:hover .tab-jp,
+.menu-tab.active .tab-jp,
+.menu-tab:focus-visible .tab-jp {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.menu-tab.active .tab-jp {
+  color: var(--cp-cyan-a60);
+}
+
+/* the hatched square that marks the active row */
+.tab-hatch {
+  width: 16px;
+  height: 16px;
+  flex: none;
+  border: 1px solid var(--cp-cyan);
+  background: repeating-linear-gradient(45deg, var(--cp-cyan) 0 1px, transparent 1px 3px);
+  opacity: 0;
+  transform: scale(0.6);
+  transition: opacity 200ms var(--ease), transform 200ms var(--ease-snap);
+}
+
+.menu-tab.active .tab-hatch {
+  opacity: 1;
+  transform: scale(1);
+  animation: hatch-drift 2.8s linear infinite;
+}
+
+/* ==========================================================================
+   HEADING RULES
+   ========================================================================== */
+
+.cp-title {
+  position: relative;
+  display: block;
+  padding-bottom: 14px;
+}
+
+.cp-title::before {
+  position: absolute;
+  bottom: 0;
+  left: 2px;
+  width: 100%;
+  height: 10px;
+  content: '';
+  background: var(--cp-red);
+  clip-path: var(--rule-clip);
+}
+
+.cp-title.is-h2::before {
+  clip-path: var(--rule-clip-h2);
+}
+
+.cp-title.is-h3::before {
+  clip-path: var(--rule-clip-h3);
+}
+
+.cp-title.is-h4::before {
+  clip-path: var(--rule-clip-h4);
+}
+
+/* ==========================================================================
+   CHEVRON BULLETS + PENTAGON COUNTERS
+   ========================================================================== */
+
+.cp-bullet {
+  position: relative;
+  padding-left: 22px;
+}
+
+.cp-bullet::before {
+  position: absolute;
+  top: 0.35em;
+  left: 0;
+  width: 12px;
+  height: 12px;
+  content: '';
+  background: var(--cp-red);
+  clip-path: var(--bullet-clip);
+}
+
+.cp-counter {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 26px;
+  height: 26px;
+  color: var(--cp-black);
+  background: var(--cp-red);
+  font-family: var(--f-dots);
+  font-size: 0.72rem;
+  clip-path: var(--counter-clip);
+}
+
+/* ==========================================================================
+   ANGLED IMAGE FRAME
+   ========================================================================== */
+
+.cp-img-frame {
+  position: relative;
+  padding: 5px 5px 16px 5px;
+  background: #000;
+  clip-path: var(--img-clip);
+}
+
+.cp-img-frame img {
+  display: block;
+  width: 100%;
+  height: auto;
+  clip-path: polygon(0 0, 0 100%, 100% 100%, 100% 10px, calc(100% - 20px) 0);
+}
